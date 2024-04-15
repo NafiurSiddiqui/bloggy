@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-//            $table->foreignId('category_id');
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id');
+            $table->foreignId('subcategory_id');
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('excerpt');

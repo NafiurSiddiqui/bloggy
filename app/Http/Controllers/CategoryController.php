@@ -12,7 +12,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.category.index', [
+            //TODO: Check if this starts a N + 1 query.
+//            'categories' => Category::all()
+        ]);
+
     }
 
     /**

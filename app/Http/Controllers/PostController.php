@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index(): View
     {
         return view('index', [
-            'posts' => Post::with('user')->latest()->get(),
+            'posts' => Post::with('author','category')->latest()->get(),
             'post_count' => Post::count(),
         ]);
     }
@@ -40,7 +40,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show', [
+            'post' => $post,
+        ]);
     }
 
     /**
