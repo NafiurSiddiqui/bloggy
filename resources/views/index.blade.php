@@ -30,6 +30,7 @@
 
         <section>
             <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
+                <h1 class="text-2xl">All Posts</h1>
                 <p>There are {{$post_count}} posts here</p>
                 @foreach ($posts as $post)
 {{--                    @props(['post'])--}}
