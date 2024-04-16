@@ -23,7 +23,7 @@ class Post extends Model
 
     public function subcategory(): BelongsTo
     {
-        return $this->belongsTo(SubCategory::class);
+        return $this->belongsTo(Subcategory::class);
     }
 
 }

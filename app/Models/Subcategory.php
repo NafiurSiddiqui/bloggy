@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SubCategory extends Model
+class Subcategory extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class SubCategory extends Model
      *
      * @var string
      */
-    protected $table = 'subcategories';
+//    protected $table = 'subcategories';
 
     public function category(): BelongsTo
     {
