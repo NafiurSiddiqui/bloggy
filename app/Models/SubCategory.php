@@ -11,9 +11,21 @@ class SubCategory extends Model
 {
     use HasFactory;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'subcategories';
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function posts():HasMany
+    {
+        return $this->hasMany(Post::class);
     }
 
 }
