@@ -12,9 +12,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index', [
+        return view('categories.index', [
             //TODO: Check if this starts a N + 1 query.
 //            'categories' => Category::all()
+        //Does not make sense to render all categories here. This is equal to the Posts.
         ]);
 
     }
@@ -40,7 +41,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('categories.show', [
+            'category' => $category,
+        ]);
     }
 
     /**
