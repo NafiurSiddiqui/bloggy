@@ -7,7 +7,7 @@
                     {{-- <img src="/storage/{{ $post->thumbnail }}" alt="" class="rounded-xl"> --}}
                     <img src="{{$post->thumbnail}}" alt="" class="rounded-xl">
                     <x-category-label :category="$post->category"/>
-                    <x-category-label :subcategory="$post->subcategory"/>
+                    <x-category-label :category="$post->category" :subcategory="$post->subcategory"/>
                     <h1 class="font-bold text-3xl lg:text-4xl mb-10">
                         {{ $post->title }}
                     </h1>

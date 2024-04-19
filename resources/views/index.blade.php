@@ -16,6 +16,8 @@
                 <p>There are {{$post_count}} posts here</p>
                 @foreach ($posts as $post)
                     {{--                    @props(['post'])--}}
+
+{{--                @dd($post);--}}
                     <article
                         class="transition-colors duration-300 hover:bg-gray-100   rounded-xl borderTest "
                     >
@@ -46,7 +48,8 @@
                                     </div>
 
                                     <x-category-label :category="$post->category"/>
-                                    <x-category-label :subcategory="$post->subcategory"/>
+                                    <x-category-label :category="$post->category" :subcategory="$post->subcategory"/>
+
 
                                 </header>
 

@@ -20,6 +20,7 @@ class SubcategoryFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'slug' => $this->faker->slug(),
+//            'category_id'=> \App\Models\Category::factory()
         ];
     }
 }

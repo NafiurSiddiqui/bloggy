@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,12 +18,14 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $category = Category::factory()->create();
+        $subcategory = Subcategory::factory()->create(['category_id' => $category->id]);
         return [
             'user_id' => \App\Models\User::factory([
                 'role'=>'editor'
             ]),
-            'category_id'=> \App\Models\Category::factory(),
-            'subcategory_id'=> \App\Models\Subcategory::factory(),
+            'category_id'=> $category->id,
+            'subcategory_id'=> $subcategory->id,
             'title' => $this->faker->sentence,
             'slug' => $this->faker->unique()->slug,
             'excerpt' => $this->faker->text,

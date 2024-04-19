@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SubCategory;
+use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SubcategoryController extends Controller
 {
@@ -34,9 +36,13 @@ class SubcategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SubCategory $subCategory)
+    public function show( Category $category, Subcategory $subcategory): View
     {
-        //
+
+        return view('subcategories.show', [
+            'category' => $category,
+            'subcategory' => $subcategory
+        ]);
     }
 
     /**
