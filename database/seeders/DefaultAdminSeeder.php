@@ -16,7 +16,7 @@ class DefaultAdminSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'admin',
-            'email' => 'admin.bloggy@example.com',
+            'email' => 'admin.bloggy@xyz.com',
             'password' => bcrypt('secret'),
             'role' => 'admin',
         ]);
