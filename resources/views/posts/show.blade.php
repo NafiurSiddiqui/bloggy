@@ -46,15 +46,21 @@
                     </div>
                 </div>
 
-{{--                <section class="col-span-8 col-start-5 mt-10 space-y-4">--}}
+                <section class="col-span-8 col-start-5 mt-10 space-y-4">
 
 {{--                    @include ('posts._add-comment-form')--}}
+                    @php
 
-{{--                    @foreach ($post->comments as $comment)--}}
-{{--                        <x-post-comment :comment="$comment" />--}}
-{{--                    @endforeach--}}
+                        $comments = [
+                            'first' => 'first comment',
+                            'second' => 'second comment'
+                            ]
+                     @endphp
+                    @foreach ($comments as $comment)
+                        <x-post-comment :comment="$comment" />
+                    @endforeach
 
-{{--                </section>--}}
+                </section>
             </article>
         </main>
     </section>
