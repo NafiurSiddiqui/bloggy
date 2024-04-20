@@ -6,10 +6,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use Illuminate\Support\Facades\Route;
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
 Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category');
