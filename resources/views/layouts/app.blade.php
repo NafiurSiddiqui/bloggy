@@ -14,14 +14,8 @@
 
 </head>
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-{{--<nav class="flex justify-between">--}}
-{{--    <h1 class="font-bold text-2xl">Katya's Bloggy 💕 </h1>--}}
-{{--    <ul class="borderTest flex justify-between gap-1">--}}
-{{--        <li>All Posts</li>--}}
-{{--        <li>Topics</li>--}}
-{{--    </ul>--}}
-{{--</nav>--}}
 @include('layouts.navigation')
+
 <main>
     {{$slot}}
 </main>

@@ -13,7 +13,7 @@
 {{--            TODO: Delete the development Admin btn below--}}
                 @if(request()->routeIs('home'))
                     <a class="border-2 px-4 py-1 content-center h-8 " href={{route('dashboard')}} >
-                        Got to Admin
+                        Go to Admin
                     </a>
                 @endif
 
@@ -25,9 +25,16 @@
                     </x-nav-link>
                 @endguest
                 @auth
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+
+                        @if(request()->routeIs('home'))
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                {{ __('Dashboard') }}
+                            </x-nav-link>
+                        @elseif(request()->routeIs('dashboard'))
+                            <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                                {{ __('Client-side') }}
+                            </x-nav-link>
+                        @endif
                 @endauth
                 </div>
             </div>
@@ -104,9 +111,7 @@
                         <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-responsive-nav-link>
-
                     @elseif(request()->routeIs('dashboard'))
-
                         <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('Client-side') }}
                         </x-responsive-nav-link>
