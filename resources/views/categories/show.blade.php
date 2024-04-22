@@ -1,4 +1,4 @@
-<x-layout>
+<x-app-layout>
     <h1 class="font-semibold">Category:
         <span>{{$category->name}}</span>
     </h1>
@@ -12,4 +12,4 @@
            <p>{{$post->author->name}}</p>
         </div>
     @endforeach
-</x-layout>
+</x-app-layout>
