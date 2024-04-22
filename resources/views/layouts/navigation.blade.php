@@ -4,15 +4,13 @@
         <div class="flex justify-between h-16">
             <div class="flex justify-between w-full">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" class="font-bold text-2xl">
+                <div class="shrink-0 flex items-center font-bold text-2xl">
                         Bloggy
-                    </a>
                 </div>
 
 {{--            TODO: Delete the development Admin btn below--}}
                 @if(request()->routeIs('home'))
-                    <a class="border-2 px-4 py-1 content-center h-8 " href={{route('dashboard')}} >
+                    <a class="border-2 px-4 py-1 content-center h-8 " href={{route('admin')}} >
                         Go to Admin
                     </a>
                 @endif
@@ -27,10 +25,10 @@
                 @auth
 
                         @if(request()->routeIs('home'))
-                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                                 {{ __('Dashboard') }}
                             </x-nav-link>
-                        @elseif(request()->routeIs('dashboard'))
+                        @elseif(request()->routeIs('admin'))
                             <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                                 {{ __('Client-side') }}
                             </x-nav-link>
@@ -108,10 +106,10 @@
 
                 <div class="mt-3 space-y-1">
                     @if(request()->routeIs('home'))
-                        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-responsive-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                             {{ __('Dashboard') }}
                         </x-responsive-nav-link>
-                    @elseif(request()->routeIs('dashboard'))
+                    @elseif(request()->routeIs('admin'))
                         <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('Client-side') }}
                         </x-responsive-nav-link>
