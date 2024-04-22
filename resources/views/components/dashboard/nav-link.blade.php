@@ -1,14 +1,8 @@
 @props(['route','active'])
 
-{{--@php--}}
-
-{{--$classes = ($active ?? false)--}}
-{{--            ? ''--}}
-{{--@endphp--}}
 
 <li>
-    <a href="{{isset($route)? route($route): '#'}}" class="hover:text-gray-400 focus:outline-none focus:text-gray-300 p-2 {{isset($active) ? 'bg-rose-400':''}}">{{$slot}}</a>
-
+    <a href="{{isset($route)? $route: '#'}}" class="hover:text-gray-400 focus:outline-none focus:text-gray-300 p-2 {{isset($active) && $active ? 'bg-rose-400':''}}">{{$slot}}</a>
 </li>
 
 
