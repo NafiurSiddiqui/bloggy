@@ -10,35 +10,13 @@
 {{--        </h2>--}}
 {{--    </x-slot>--}}
 
-
-{{--    <div class="">--}}
-{{--        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">--}}
-{{--            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">--}}
-{{--                <div class="p-6 text-gray-900 dark:text-gray-100">--}}
-{{--                    {{ __("You're logged in!") }}--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--    <div class="borderTest h-screen grid grid-cols-2">--}}
-{{--        <aside class="borderTest">--}}
-{{--            <ul>--}}
-{{--                <li>Dashboard</li>--}}
-{{--            </ul>--}}
-{{--        </aside>--}}
-{{--        <section>--}}
-{{--            Dashboard content--}}
-{{--        </section>--}}
-{{--    </div>--}}
-
     <div class="flex min-h-screen ">
         <aside class="flex flex-col w-64 bg-gray-800 dark:bg-gray-900 text-white px-4 py-6">
-
             <ul class="space-y-2">
-                <li>
-                    <a href="#" class="hover:text-gray-400 focus:outline-none focus:text-gray-300 p-2">Dashboard</a>
-                </li>
-                <li>
+                <x-dashboard.nav-link route="dashboard">
+                    Dashboard
+                </x-dashboard.nav-link>
+                    <li>
                     <a href="#" class="hover:text-gray-400 focus:outline-none focus:text-gray-300 p-2">Settings</a>
                 </li>
             </ul>
