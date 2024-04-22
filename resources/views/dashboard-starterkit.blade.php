@@ -1,17 +1,9 @@
 <x-app-layout>
-
-    <x-slot:title>
-        Dashboard
-    </x-slot:title>
-
-    <x-slot:header>
-        <h2>Dashboard</h2>
-    </x-slot:header>
-{{--    <x-slot name="header">--}}
-{{--        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">--}}
-{{--            {{ __('Dashboard') }}--}}
-{{--        </h2>--}}
-{{--    </x-slot>--}}
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
 
 
 
