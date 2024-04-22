@@ -1,7 +1,7 @@
 @props(['post'])
 
 <article
-    class="transition-colors duration-300 hover:bg-gray-100   rounded-xl borderTest "
+    class="transition-colors duration-300 hover:bg-gray-100  dark:hover:bg-gray-900 rounded-xl borderTest "
 >
     <div class="py-6 px-5">
         <div>
@@ -55,7 +55,7 @@
 
                 <div>
                     <a href="/posts/{{ $post->slug }}"
-                       class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8">Read
+                       class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8 dark:bg-gray-800 dark:hover:bg-gray-700">Read
                         More</a>
                 </div>
             </footer>
