@@ -39,22 +39,14 @@
 
 {{--                    <x-primary-button>Publish</x-primary-button>--}}
 
-{{--                    <button class="border-2 text-sm px-8 py-1 rounded ">Save as Draft</button>--}}
 
                     <x-secondary-button>Save as Draft</x-secondary-button>
                 </div>
             </x-panel>
 
-
-{{--            <div class="flex justify-end">--}}
-{{--                <x-form.button>--}}
-{{--                    Publish--}}
-{{--                </x-form.button>--}}
-{{--            </div>--}}
             @error('body')
             <span class="text-red-500 text-xs">{{ $message }}</span>
             @enderror
-
         </form>
 
 </x-dashboard.dashboard-layout>
