@@ -11,7 +11,7 @@
     {{--    </x-slot>--}}
 
     <div class="flex min-h-screen ">
-        <aside class="flex flex-col w-64 bg-gray-800 dark:bg-gray-900 text-white px-4 py-6">
+        <aside class="flex flex-col w-64 bg-gray-200 dark:bg-gray-900 text-white px-4 py-6">
             <ul class="space-y-2">
                 <x-dashboard.nav-link route="admin" :active="request()->is('admin')">
                     Dashboard
@@ -24,9 +24,7 @@
             </ul>
         </aside>
         <section class="flex-grow p-4">
-            @if(request()->is('dashboard/create-post'))
-                @include('admin.create')
-            @endif
+
         </section>
     </div>
 
