@@ -38,7 +38,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //AUTH
+
+        //validate
+
+        //store
+
+        //redirect
+        dd(request()->all());
     }
 
     /**

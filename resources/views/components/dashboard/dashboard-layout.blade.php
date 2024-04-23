@@ -17,7 +17,7 @@
                     Dashboard
                 </x-dashboard.nav-link>
 
-                <x-dashboard.nav-link route="admin/create" :active="request()->is('admin/create')">
+                <x-dashboard.nav-link route="admin/posts/create" :active="request()->is('admin/posts/create')">
                     Create post
                 </x-dashboard.nav-link>
 

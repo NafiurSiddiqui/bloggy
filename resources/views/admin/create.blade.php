@@ -2,7 +2,7 @@
 
         <h1>Create A Post</h1>
 
-        <form action="/admin/posts" method="post" enctype="multipart/form-data">
+        <form action="/admin/posts/store" method="post" enctype="multipart/form-data">
             @csrf
             <x-form.input name="title" required />
             <x-form.input name="slug" required />

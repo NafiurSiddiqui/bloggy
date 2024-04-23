@@ -32,8 +32,10 @@ Route::get('/categories/{category:slug}/{subcategory:slug}', [SubcategoryControl
 Route::middleware('auth')->group(function () {
 
     Route::view('admin', 'admin.dashboard')->name('admin');
-    Route::get('admin/create', [PostController::class, 'create'])->name('admin.create');
+    Route::get('admin/posts/create', [PostController::class, 'create'])->name('admin.posts.create');
+    Route::post('admin/posts/store', [PostController::class, 'store'])->name('admin.posts.store');
 
+//    PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
