@@ -9,7 +9,7 @@
                 </div>
 
 {{--            TODO: Delete the development Admin btn below--}}
-                @if(request()->routeIs('home'))
+                @if(request()->routeIs('home.*'))
                     <a class="border-2 px-4 py-1 content-center h-8 " href={{route('admin')}} >
                         Go to Admin
                     </a>
@@ -24,11 +24,11 @@
                 @endguest
                 @auth
 
-                        @if(request()->routeIs('home'))
+                        @if(request()->is('/'))
                             <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                                 {{ __('Dashboard') }}
                             </x-nav-link>
-                        @elseif(request()->routeIs('admin'))
+                        @elseif(request()->routeIs('admin') || request()->routeIs('admin.*'))
                             <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                                 {{ __('Client-side') }}
                             </x-nav-link>
@@ -109,7 +109,8 @@
                         <x-responsive-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                             {{ __('Dashboard') }}
                         </x-responsive-nav-link>
-                    @elseif(request()->routeIs('admin'))
+                    @elseif(request()->routeIs('admin') || request()->routeIs('admin.*'))
+
                         <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('Client-side') }}
                         </x-responsive-nav-link>

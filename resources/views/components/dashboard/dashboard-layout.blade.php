@@ -11,15 +11,24 @@
     {{--    </x-slot>--}}
 
     <div class="flex min-h-screen ">
-        <aside class="hidden lg:flex flex-col w-64 bg-gray-200 dark:bg-gray-900 text-white px-4 py-6">
+        <aside class=" lg:flex flex-col w-64 bg-gray-200 dark:bg-gray-900 text-white px-4 py-6">
             <ul class="space-y-2">
-                <x-dashboard.nav-link route="admin" :active="request()->is('admin')">
+                <x-dashboard.nav-link route="/admin" :active="request()->is('admin')">
                     Dashboard
                 </x-dashboard.nav-link>
 
                 <x-dashboard.nav-link route="admin/post/create" :active="request()->is('admin/post/create')">
                     Create post
                 </x-dashboard.nav-link>
+
+                <x-dashboard.nav-link route="admin/categories" :active="request()->is('admin/categories')">
+                    Categories
+                </x-dashboard.nav-link>
+
+                <x-dashboard.nav-link route="admin/subcategories" :active="request()->is('admin/subcategories')">
+                    Subcategories
+                </x-dashboard.nav-link>
+
 
             </ul>
         </aside>
