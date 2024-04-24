@@ -32,8 +32,9 @@ Route::get('/categories/{category:slug}/{subcategory:slug}', [SubcategoryControl
 Route::middleware('auth')->group(function () {
 
     Route::view('/admin', 'admin.dashboard')->name('admin');
-    Route::get('admin/post/create', [PostController::class, 'create'])->name('admin.post.create');
-    Route::post('admin/post/store', [PostController::class, 'store'])->name('admin.post.store');
+    Route::get('/admin/post/create', [PostController::class, 'create'])->name('admin.post.create');
+    Route::post('/admin/post/store', [PostController::class, 'store'])->name('admin.post.store');
+    Route::get('/admin/categories',[CategoryController::class,'index'])->name('admin.categories');
 
 //    PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
