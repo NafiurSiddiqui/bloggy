@@ -1,8 +1,8 @@
 <x-dashboard.dashboard-layout>
 
-        <h1>Create A Post</h1>
+        <h1 class="font-semibold text-xl text-gray-500">Create A Post</h1>
 
-        <form action="/admin/posts/store" method="post" enctype="multipart/form-data">
+        <form action="/admin/post/store" method="post" enctype="multipart/form-data" class="max-w-xl">
             @csrf
             <x-form.input name="title" required />
             <x-form.input name="slug" required />
@@ -15,14 +15,16 @@
                 <x-form.input name="thumbnail_alt_txt" label="Alt Txt" requried />
             </x-panel>
 
-            <x-panel class="px-2 py-3 my-8 ">
+            <x-panel class="px-2 py-3 my-8">
                 <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Select Categories</h2>
-                <div>
-                    <select>
-                        <option>---</option>
-                    </select>
+
+                <div class="flex justify-start space-x-4">
+                    <x-dashboard.category-dropdown />
+                    <x-dashboard.subcategory-dropdown />
                 </div>
             </x-panel>
+
+
             <x-panel class="px-2 py-3 my-8 ">
                 <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Post Type</h2>
                <div class="flex space-x-4">
@@ -30,6 +32,7 @@
                    <x-form.checkbox name="is_hot" label="Hot"/>
                </div>
             </x-panel>
+
             <x-panel class="px-2 py-3 my-8 ">
                 <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">SEO fields</h2>
                 <x-form.input name="meta_title"  required/>
