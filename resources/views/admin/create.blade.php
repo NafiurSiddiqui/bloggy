@@ -10,9 +10,18 @@
             <x-form.textarea name="body" required />
 
             <x-panel class="px-2 py-3 my-8 ">
-                <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Post Thumbnail</h2>
+                <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Select Thumbnail</h2>
                 <x-form.input name="thumbnail" type="file" required />
                 <x-form.input name="thumbnail_alt_txt" label="Alt Txt" requried />
+            </x-panel>
+
+            <x-panel class="px-2 py-3 my-8 ">
+                <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Select Categories</h2>
+                <div>
+                    <select>
+                        <option>---</option>
+                    </select>
+                </div>
             </x-panel>
             <x-panel class="px-2 py-3 my-8 ">
                 <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Post Type</h2>
