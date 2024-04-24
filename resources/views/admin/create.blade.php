@@ -1,6 +1,6 @@
 <x-dashboard.dashboard-layout>
 
-        <h1 class="font-semibold text-xl text-gray-500">Create A Post</h1>
+        <x-slot:heading>Create a Post</x-slot:heading>
 
         <form action="/admin/post/store" method="post" enctype="multipart/form-data" class="max-w-xl">
             @csrf

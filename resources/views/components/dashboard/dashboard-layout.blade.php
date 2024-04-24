@@ -17,22 +17,18 @@
                     Dashboard
                 </x-dashboard.nav-link>
 
-                <x-dashboard.nav-link route="admin/post/create" :active="request()->is('admin/post/create')">
+                <x-dashboard.nav-link route="/admin/post/create" :active="request()->is('admin/post/create')">
                     Create post
                 </x-dashboard.nav-link>
 
-                <x-dashboard.nav-link route="admin/categories" :active="request()->is('admin/categories')">
+                <x-dashboard.nav-link route="/admin/categories" :active="request()->is('admin/categories')">
                     Categories
                 </x-dashboard.nav-link>
-
-                <x-dashboard.nav-link route="admin/subcategories" :active="request()->is('admin/subcategories')">
-                    Subcategories
-                </x-dashboard.nav-link>
-
-
             </ul>
         </aside>
         <section class="flex-grow p-4 ">
+            <h1 class="font-semibold text-xl text-gray-500">{{$heading ?? 'Default heading'}}</h1>
+
             {{ $slot }}
         </section>
     </div>

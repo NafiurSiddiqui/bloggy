@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -39,13 +41,30 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //AUTH
-
+        if(Auth::guest()){
+            return redirect()->route('login');
+        }
         //validate
+        $attributes = request()->validate([
+            'title' => 'required',
+            'slug' => ['required', Rule::unique('posts', 'slug')],
+            'description' => 'required',
+            'body' => 'required',
+            'thumbnail' => ['required', 'image'],
+            'thumbnail_alt_txt' => 'required',
+            'category_id'=>['required', Rule::exists('categories', 'id')],
+            'subcategory_id'=>['required', Rule::exists('subcategories', 'id')],
 
+        ]);
+//        $path = $request->file('thumbnail')->store('thumbnail');
+//        return 'Successful!'. $path;
+        if($request->file('thumbnail')->isValid()){
+            return request()->file('thumbnail')->extension();
+        }
         //store
 
         //redirect
-        dd(request()->all());
+
     }
 
     /**

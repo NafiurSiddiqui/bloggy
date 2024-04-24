@@ -1,3 +1,3 @@
 <x-dashboard.dashboard-layout>
-    <h1>Hola amgioes!</h1>
+    <x-slot:heading>Dashboard</x-slot:heading>
 </x-dashboard.dashboard-layout>

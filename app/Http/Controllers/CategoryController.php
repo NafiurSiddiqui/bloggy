@@ -12,9 +12,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index', [
+        return view('admin.categories.index', [
             //TODO: Check if this starts a N + 1 query.
-//            'categories' => Category::all()
+            'categories' => Category::all()
         //Does not make sense to render all categories here. This is equal to the Posts.
         ]);
 
