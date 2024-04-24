@@ -19,15 +19,21 @@ return new class extends Migration
             $table->foreignId('subcategory_id');
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('excerpt');
+            $table->text('description');
             $table->text('body');
-            $table->string('thumbnail')->nullable();
+            $table->string('thumbnail');
+            $table->string('thumbnail_alt_txt');
             $table->timestamp('published_at')->nullable();
             //draft state
-            $table->boolean('draft')->default(false);
+            $table->boolean('is_draft')->default(false);
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_hot')->default(false);
             //meta stuff
+            $table->string('meta_title');
+            $table->string('meta_description');
+            $table->string('og_thumbnail');
+            $table->string('og_title');
+
         });
     }
 
