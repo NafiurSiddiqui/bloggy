@@ -17,14 +17,14 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id');
             $table->foreignId('subcategory_id');
-            $table->string('title');
+            $table->string('title')->unique();
             $table->string('slug')->unique();
             $table->text('description');
             $table->text('body');
             $table->string('thumbnail');
             $table->string('thumbnail_alt_txt');
-            $table->timestamp('published_at')->nullable();
-            //draft state
+            //post state
+            $table->boolean('is_published')->default(false);
             $table->boolean('is_draft')->default(false);
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_hot')->default(false);
