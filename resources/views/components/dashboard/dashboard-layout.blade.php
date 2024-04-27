@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <x-slot:title>
         Dashboard
     </x-slot:title>
@@ -26,7 +25,7 @@
                 </x-dashboard.nav-link>
             </ul>
         </aside>
-        <section class="flex-grow p-4 ">
+        <section class="flex-grow p-4 relative">
             <h1 class="font-semibold text-xl text-gray-500">{{$heading ?? 'Default heading'}}</h1>
 
             {{ $slot }}
