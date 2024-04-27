@@ -28,13 +28,18 @@ class PostFactory extends Factory
             'subcategory_id'=> $subcategory->id,
             'title' => $this->faker->sentence,
             'slug' => $this->faker->unique()->slug,
-            'excerpt' => $this->faker->text,
+            'description' => $this->faker->text,
             'body' => $this->faker->paragraph,
             'thumbnail' => $this->faker->imageUrl(),
-            'published_at' => $this->faker->dateTime(),
-            'draft' => $this->faker->boolean,
+            'thumbnail_alt_txt' => $this->faker->text,
+            'is_published' => $this->faker->boolean,
+            'is_draft' => $this->faker->boolean,
             'is_featured' => $this->faker->boolean,
             'is_hot' => $this->faker->boolean,
+            'meta_title' => $this->faker->sentence,
+            'meta_description' => $this->faker->text,
+            'og_thumbnail' => $this->faker->imageUrl(),
+            'og_title' => $this->faker->sentence,
         ];
     }
 }

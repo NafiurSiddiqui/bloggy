@@ -2,8 +2,21 @@
 
         <x-slot:heading>Create a Post</x-slot:heading>
 
-        <form action="/admin/post/store" method="post" enctype="multipart/form-data" class="max-w-xl">
+        @if(isset($category_is_empty))
+            <p>Category is empty dude</p>
+            <x-form.button link href="/admin/categories">Create a category and Subcategory first</x-form.button>
+        @else
+        <form action="/admin/post/store" method="post" enctype="multipart/form-data" class="max-w-xl" >
             @csrf
+            @if ($errors->any())
+                <div class="bg-rose-400 ">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <x-form.input name="title" required />
             <x-form.input name="slug" required />
             <x-form.textarea name="description" required />
@@ -32,20 +45,20 @@
                    <x-form.checkbox name="is_hot" label="Hot"/>
                </div>
             </x-panel>
-
+            {{-- SEO --}}
             <x-panel class="px-2 py-3 my-8 ">
                 <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">SEO fields</h2>
                 <x-form.input name="meta_title"  required/>
                 <x-form.input name="meta_description"  required/>
-                <x-form.input name="og_thumbnail" type="file"  required/>
-                <x-form.input name="og_title"  required/>
+                <x-form.input name="og_thumbnail" type="file"  />
+                <x-form.input name="og_title"  />
             </x-panel>
 
-{{--            Need category and subcategory dropdown. This is where you may need to create the blade class component --}}
-            <x-panel class="px-2 py-3 my-8 ">
+
+            <x-panel class="px-2 py-3 my-8">
                 <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Actions</h2>
                 <div>
-                    <x-form.button>
+                    <x-form.button >
                         Publish
                     </x-form.button>
 
@@ -59,6 +72,6 @@
             @error('body')
             <span class="text-red-500 text-xs">{{ $message }}</span>
             @enderror
-        </form>
-
+        </form >
+       @endif
 </x-dashboard.dashboard-layout>
