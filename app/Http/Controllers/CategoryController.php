@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -33,7 +34,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate
+        $attributes = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:categories' ],
+            'slug' => ['required', 'string', 'max:255', 'unique:categories'],
+        ]);
+        //store
+        Category::create($attributes);
+
+        return redirect('/admin/categories')->with('success', 'Category created!');
     }
 
     /**
