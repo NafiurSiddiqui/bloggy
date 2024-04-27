@@ -17,6 +17,8 @@
 <div class="space-y-4">
     <x-panel>
         <h2 class="bg-gray-100 px-2 font-bold text-gray-600">Categories</h2>
+
+        {{--                        Right now, if there is error on submit, it redirects back to the categories page, should not be like that --}}
         @if($categories_are_empty)
             <div class="space-y-4 my-2">
                 <p>No categories created yet</p>
@@ -34,6 +36,20 @@
                 </x-modal>
             </div>
         @else
+            <div class="my-2 flex justify-end">
+                <x-modal btn-label="create a category" >
+                    <x-panel>
+                        <form action="/admin/categories/store" method="post">
+                            @csrf
+                            <x-form.input name="name"/>
+                            <x-form.input name="slug"/>
+                            <x-form.button>
+                                Submit
+                            </x-form.button>
+                        </form>
+                    </x-panel>
+                </x-modal>
+            </div>
             <p>Render table</p>
         @endif
     </x-panel>
@@ -42,9 +58,37 @@
         @if($subcategories_are_empty)
             <div class="space-y-4 my-2">
                 <p>No Subcategories created yet</p>
-                <x-modal btn-label="create a subcategory">Subcategory Form</x-modal>
+                <x-modal btn-label="create a subcategory">
+                    <x-panel>
+                    <form action="/admin/subcategories/store" method="post">
+                        @csrf
+                        <x-form.input name="name"/>
+                        <x-form.input name="slug"/>
+                        <x-dashboard.category-dropdown />
+                        <x-form.button>
+                            Submit
+                        </x-form.button>
+                    </form>
+                    </x-panel>
+                </x-modal>
             </div>
         @else
+            <div class="my-2 flex justify-end">
+                <x-modal btn-label="create a subcategory">
+                    <x-panel>
+{{--                        Right now, if there is error on submit, it redirects back to the categories page, should not be like that --}}
+                        <form action="/admin/subcategories/store" method="post">
+                            @csrf
+                            <x-form.input name="name"/>
+                            <x-form.input name="slug"/>
+                            <x-dashboard.category-dropdown />
+                            <x-form.button>
+                                Submit
+                            </x-form.button>
+                        </form>
+                    </x-panel>
+                </x-modal>
+            </div>
             <p>Render table</p>
         @endif
     </x-panel>

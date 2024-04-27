@@ -30,7 +30,18 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate
+        $attributes = request()->validate([
+            'category_id' => ['required', 'exists:categories,id'],
+            'name' => ['required', 'max:255', 'unique:subcategories,name'],
+            'slug' => ['required', 'max:255', 'unique:subcategories,slug'],
+        ]);
+
+//        dd($attributes);
+        //store
+        Subcategory::create($attributes);
+
+        return redirect('/admin/categories')->with('success', 'Subcategory created!');
     }
 
     /**

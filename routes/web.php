@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/post/store', [PostController::class, 'store'])->name('admin.post.store');
     Route::get('/admin/categories',[CategoryController::class,'index'])->name('admin.categories');
     Route::post('/admin/categories/store',[CategoryController::class,'store'])->name('admin.categories.store');
+    Route::post('/admin/subcategories/store',[SubcategoryController::class,'store'])->name('admin.subcategories.store');
 
 //    PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
