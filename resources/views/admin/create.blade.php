@@ -4,7 +4,10 @@
 
         @if(isset($category_is_empty))
             <p>Category is empty dude</p>
-            <x-form.button link href="/admin/categories">Create a category and Subcategory first</x-form.button>
+            <a href="/admin/categories" class="underline hover:text-blue-500 my-4 block">Let's quickly create a category and subcategory first</a>
+            <x-panel>
+                This is to ensure data integrity of the posts and their relationships.
+            </x-panel>
         @else
         <form action="/admin/post/store" method="post" enctype="multipart/form-data" class="max-w-xl" >
             @csrf
