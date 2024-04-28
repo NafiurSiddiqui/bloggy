@@ -2,7 +2,7 @@
 
         <x-slot:heading>Create a Post</x-slot:heading>
 
-        @if(isset($category_is_empty))
+        @if(isset($category_is_empty) && $category_is_empty)
             <p>Category is empty dude</p>
             <a href="/admin/categories" class="underline hover:text-blue-500 my-4 block">Let's quickly create a category and subcategory first</a>
             <x-panel>
