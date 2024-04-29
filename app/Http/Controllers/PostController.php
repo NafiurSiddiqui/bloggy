@@ -33,9 +33,7 @@ class PostController extends Controller
      */
     public function create(): View
     {
-        return view('admin.create', [
-            'category_is_empty' => Category::all()->isEmpty()
-        ]);
+        return view('admin.create');
     }
 
     /**
