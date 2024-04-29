@@ -14,9 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.categories.index', [
-            //TODO: Check if this starts a N + 1 query.
-            'categories' => Category::all()
-        //Does not make sense to render all categories here. This is equal to the Posts.
+            'categories' => Category::with('subcategories','posts')->orderBy('created_at','desc')->simplePaginate(1)
         ]);
 
     }
