@@ -116,13 +116,6 @@
                         {{ __('Sub-categories') }}
                     </x-responsive-nav-link>
 
-
-
-
-{{--                        <x-dashboard.nav-link route="/admin/subcategories" :active="request()->is('admin/subcategories')">--}}
-{{--                            Sub-categories--}}
-{{--                        </x-dashboard.nav-link>--}}
-                </div>
                 <div class="px-4">
                     <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
