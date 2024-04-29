@@ -23,14 +23,23 @@
                 <x-dashboard.nav-link route="/admin/categories" :active="request()->is('admin/categories')">
                     Categories
                 </x-dashboard.nav-link>
+
+                <x-dashboard.nav-link route="/admin/subcategories" :active="request()->is('admin/subcategories')">
+                    Sub-categories
+                </x-dashboard.nav-link>
             </ul>
         </aside>
         <section class="flex-grow p-4 relative">
             <h1 class="font-semibold text-xl text-gray-500">{{$heading ?? 'Default heading'}}</h1>
-
             {{ $slot }}
         </section>
     </div>
 
 
+    @if (session()->has('success'))
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+             class="bg-green-500 text-white fixed right-3 bottom-3 p-4 rounded">
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
 </x-app-layout>

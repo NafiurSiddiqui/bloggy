@@ -12,17 +12,17 @@ class SubcategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        return view('admin.subcategories.index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('admin.subcategories.create');
     }
 
     /**
@@ -30,7 +30,8 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //validate
+//        dd($request->all());
+//        validate
         $attributes = request()->validate([
             'category_id' => ['required', 'exists:categories,id'],
             'name' => ['required', 'max:255', 'unique:subcategories,name'],
@@ -40,8 +41,13 @@ class SubcategoryController extends Controller
 //        dd($attributes);
         //store
         Subcategory::create($attributes);
+//
+//        return response()->json([
+//            'success' => true,
+//            'message' => 'Subcategory created successfully!'
+//        ]);
 
-        return redirect('/admin/categories')->with('success', 'Subcategory created!');
+        return redirect('/admin/subcategories')->with('success', 'Subcategory created!');
     }
 
     /**

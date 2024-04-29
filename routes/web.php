@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/categories',[CategoryController::class,'index'])->name('admin.categories');
     Route::get('/admin/categories/create',[CategoryController::class,'create'])->name('admin.categories.create');
     Route::post('/admin/categories/store',[CategoryController::class,'store'])->name('admin.categories.store');
+    Route::get('/admin/subcategories',[SubcategoryController::class,'index'])->name('admin.subcategories');
+    Route::get('/admin/subcategories/create',[SubcategoryController::class,'create'])->name('admin.subcategories.create');
     Route::post('/admin/subcategories/store',[SubcategoryController::class,'store'])->name('admin.subcategories.store');
 
 //    PROFILE
