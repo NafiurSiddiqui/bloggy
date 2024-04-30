@@ -9,7 +9,6 @@
             @method('PATCH')
             <x-form.input name="name" :value="old('name', $subcategory->name)" />
             <x-form.input name="slug" :value="old('slug', $subcategory->slug)"/>
-{{--            <x-dashboard.category-dropdown />--}}
 
             @php
                 $categories = \App\Models\Category::all();
