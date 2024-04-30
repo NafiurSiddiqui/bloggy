@@ -79,7 +79,7 @@ class SubcategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subcategory $subcategory)
+    public function update(Request $request, Subcategory $subcategory): RedirectResponse
     {
         //validate
         $attributes = request()->validate([
@@ -101,8 +101,9 @@ class SubcategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubCategory $subCategory)
+    public function destroy(Subcategory $subcategory): RedirectResponse
     {
-        //
+        $subcategory->delete();
+        return redirect('/admin/subcategories')->with('success', 'Subcategory deleted!');
     }
 }

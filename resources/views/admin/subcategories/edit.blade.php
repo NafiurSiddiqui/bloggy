@@ -27,5 +27,10 @@
             </div>
            <x-form.action-buttons edit cancel-href="/admin/subcategories" submit-label="Update" />
         </form>
+
+        <form action="/admin/subcategories/{{$subcategory->id}}" method="POST" id="form-delete" class="hidden">
+            @csrf
+            @method('DELETE')
+        </form>
     </x-panel>
 </x-dashboard.dashboard-layout>
