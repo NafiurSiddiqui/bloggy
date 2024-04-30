@@ -4,7 +4,7 @@
     </x-slot:heading>
 
     <x-panel>
-{{--        <h2 class="bg-gray-100 px-2 font-bold text-gray-600">Sub-Categories</h2>--}}
+
 
         @if($subcategories_are_empty)
             <div class="space-y-4 my-2">

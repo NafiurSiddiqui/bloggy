@@ -8,14 +8,15 @@
             @csrf
             <x-form.input name="name" />
             <x-form.input name="slug"/>
-            <div class="flex justify-end items-center space-x-3">
-                <x-secondary-button class="mt-4" link href="/admin/categories">
-                    Cancel
-                </x-secondary-button>
-                <x-form.button>
-                    Save
-                </x-form.button>
-            </div>
+            <x-form.action-buttons cancel-href="/admin/categories" submit-label="Save" />
+{{--            <div class="flex justify-end items-center space-x-3">--}}
+{{--                <x-secondary-button class="mt-4" link href="/admin/categories">--}}
+{{--                    Cancel--}}
+{{--                </x-secondary-button>--}}
+{{--                <x-form.button>--}}
+{{--                    Save--}}
+{{--                </x-form.button>--}}
+{{--            </div>--}}
         </form>
     </x-panel>
 </x-dashboard.dashboard-layout>
