@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Subcategory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class SubcategoryController extends Controller
@@ -14,7 +16,9 @@ class SubcategoryController extends Controller
      */
     public function index(): View
     {
-        return view('admin.subcategories.index');
+        return view('admin.subcategories.index',[
+            'subcategories' => Subcategory::all()
+        ]);
     }
 
     /**
@@ -28,7 +32,7 @@ class SubcategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 //        dd($request->all());
 //        validate
@@ -65,17 +69,33 @@ class SubcategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubCategory $subCategory)
+    public function edit(Subcategory $subcategory): View
     {
-        //
+        return view('admin.subcategories.edit',[
+            'subcategory' => $subcategory
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SubCategory $subCategory)
+    public function update(Request $request, Subcategory $subcategory)
     {
-        //
+        //validate
+        $attributes = request()->validate([
+            'category_id' => ['required', 'exists:categories,id'],
+            'name' => ['required', 'max:255', Rule::unique('subcategories','name')->ignore($subcategory->id)],
+            'slug' => ['required', 'max:255', Rule::unique('subcategories','slug')->ignore($subcategory->id)],
+        ]);
+        //check if category_id is dirty
+
+        //if dirty, update, else just update the fields that is dirty
+
+        //Gemini recommended not to do above checks
+
+        $subcategory->update($attributes);
+
+        return redirect('/admin/subcategories')->with('success', 'Subcategory updated!');
     }
 
     /**

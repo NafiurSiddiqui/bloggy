@@ -20,7 +20,7 @@
                     Create a Subcategory
                 </x-secondary-button>
             </div>
-            <p class="bg-gray-100 p-2">Render table</p>
+            <x-dashboard.table :items="$subcategories" is_subcategories edit-href="admin/subcategories" />
         @endif
     </x-panel>
 </x-dashboard.dashboard-layout>

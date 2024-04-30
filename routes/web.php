@@ -45,6 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/subcategories',[SubcategoryController::class,'index'])->name('admin.subcategories');
     Route::get('/admin/subcategories/create',[SubcategoryController::class,'create'])->name('admin.subcategories.create');
     Route::post('/admin/subcategories/store',[SubcategoryController::class,'store'])->name('admin.subcategories.store');
+    Route::get('/admin/subcategories/{subcategory}/edit',[SubcategoryController::class,'edit'])->name('admin.subcategories.edit');
+    Route::patch('/admin/subcategories/{subcategory}',[SubcategoryController::class,'update'])->name('admin.subcategories.update');
+    Route::delete('admin/subcategories/{subcategory}',[SubcategoryController::class,'destroy'])->name('admin.subcategories.destroy');
 
 //    PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
