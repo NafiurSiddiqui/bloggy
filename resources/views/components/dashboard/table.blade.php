@@ -1,4 +1,4 @@
-@props(['items'])
+@props(['items', 'is_subcategories'=> false,'edit-href'=>''])
 
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -21,7 +21,7 @@
                 Update at
             </th>
             <th scope="col" class="px-6 py-3">
-                Subcategories count
+                {{$is_subcategories ? 'Category': 'Subcategories count'}}
             </th>
             <th scope="col" class="px-6 py-3">
                 Posts count
@@ -50,13 +50,14 @@
                     {{$item->updated_at->diffForHumans()}}
                 </td>
                 <td class="px-6 py-4">
-                    {{$item->subcategories->count()}}
+{{--                    {{$item->subcategories->count()}}--}}
+                    {{$is_subcategories? $item->category->name :$item->subcategories->count() }}
                 </td>
                 <td class="px-6 py-4">
                     {{$item->posts->count()}}
                 </td>
                 <td class="px-6 py-4 flex space-y-2  lg:space-y-0 flex-col lg:flex-row ">
-                    <a href="/admin/categories/{{$item->id}}/edit" class=" font-medium w-full text-blue-600 dark:text-blue-500 hover:underline hover:text-blue-600">Edit</a>
+                    <a href="/{{$editHref}}/{{$item->id}}/edit" class=" font-medium w-full text-blue-600 dark:text-blue-500 hover:underline hover:text-blue-600">Edit</a>
 
                 </td>
             </tr>

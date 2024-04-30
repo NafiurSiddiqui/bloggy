@@ -22,7 +22,7 @@
                 </x-secondary-button>
             </div>
 
-            <x-dashboard.table :items="$categories" />
+            <x-dashboard.table :items="$categories" edit-href="admin/categories" />
 
         @endif
 
