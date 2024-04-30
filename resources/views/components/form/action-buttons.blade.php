@@ -1,6 +1,6 @@
 @props(['edit'=> false,'submit-label'=>'Submit', 'cancel-href'=>''])
 
-<div {{$attributes->merge(['class'=>'flex justify-end items-center space-x-3'])}}>
+<div class='flex {{$edit? 'justify-between':'justify-end'}} items-center space-x-3 mt-6'>
     @if($edit)
         <button type="submit" form="form-delete" class="mt-4  font-medium  text-rose-400 dark:text-rose-500 hover:underline hover:text-rose-600">Delete</button>
     @endif

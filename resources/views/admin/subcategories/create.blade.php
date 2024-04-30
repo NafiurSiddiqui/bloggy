@@ -9,9 +9,7 @@
             <x-form.input name="name"/>
             <x-form.input name="slug"/>
             <x-dashboard.category-dropdown />
-            <x-form.button >
-                Submit
-            </x-form.button>
+            <x-form.action-buttons cancel-href="/admin/subcategories" submit-label="Save" />
         </form>
     </x-panel>
 </x-dashboard.dashboard-layout>

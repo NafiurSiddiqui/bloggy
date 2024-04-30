@@ -1,6 +1,6 @@
 <x-dashboard.dashboard-layout>
     <x-slot:heading>
-        Edit Category: {{$category->title}}
+        Edit Category: {{$category->name}}
     </x-slot:heading>
 
     <x-panel>
@@ -12,7 +12,6 @@
             <x-form.action-buttons
                 edit
                 cancel-href="/admin/categories"    submit-label="Update"
-                class="justify-between"
             />
         </form>
 
