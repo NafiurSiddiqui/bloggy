@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -23,7 +24,7 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.categories.create');
     }
@@ -31,7 +32,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         //validate
         $attributes = $request->validate([
@@ -47,7 +48,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Category $category): View
     {
         return view('categories.show', [
             'category' => $category,
@@ -57,9 +58,11 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Category $category): View
     {
-        //
+        return view('admin.categories.edit', [
+            'category' => $category,
+        ]);
     }
 
     /**
@@ -67,14 +70,23 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        //validate
+        $attributes = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:categories' ],
+            'slug' => ['required', 'string', 'max:255', 'unique:categories'],
+        ]);
+        //store
+        $category->update($attributes);
+
+        return redirect('/admin/categories')->with('success', 'Category updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): RedirectResponse
     {
-        //
+        $category->delete();
+        return redirect('/admin/categories')->with('success', 'Category deleted!');
     }
 }

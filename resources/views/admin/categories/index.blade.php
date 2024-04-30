@@ -78,8 +78,8 @@
                                {{$category->posts->count()}}
                            </td>
                            <td class="px-6 py-4 flex space-y-2  lg:space-y-0 flex-col lg:flex-row ">
-                               <a href="#" class=" font-medium w-full text-blue-600 dark:text-blue-500 hover:underline hover:text-blue-600">Edit</a>
-                               <a href="#" class="  font-medium w-full text-rose-400 dark:text-rose-500 hover:underline hover:text-rose-600">Delete</a>
+                               <a href="/admin/categories/{{$category->id}}/edit" class=" font-medium w-full text-blue-600 dark:text-blue-500 hover:underline hover:text-blue-600">Edit</a>
+
                            </td>
                        </tr>
                    @endforeach

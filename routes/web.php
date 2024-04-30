@@ -34,9 +34,14 @@ Route::middleware('auth')->group(function () {
     Route::view('/admin', 'admin.dashboard')->name('admin');
     Route::get('/admin/post/create', [PostController::class, 'create'])->name('admin.post.create');
     Route::post('/admin/post/store', [PostController::class, 'store'])->name('admin.post.store');
+//    CATEGORIES
     Route::get('/admin/categories',[CategoryController::class,'index'])->name('admin.categories');
     Route::get('/admin/categories/create',[CategoryController::class,'create'])->name('admin.categories.create');
     Route::post('/admin/categories/store',[CategoryController::class,'store'])->name('admin.categories.store');
+    Route::get('/admin/categories/{category}/edit',[CategoryController::class,'edit'])->name('admin.categories.edit');
+    Route::patch('/admin/categories/{category}',[CategoryController::class,'update'])->name('admin.categories.update');
+    Route::delete('admin/categories/{category}',[CategoryController::class,'destroy'])->name('admin.categories.destroy');
+//    SUBCATEGORIES
     Route::get('/admin/subcategories',[SubcategoryController::class,'index'])->name('admin.subcategories');
     Route::get('/admin/subcategories/create',[SubcategoryController::class,'create'])->name('admin.subcategories.create');
     Route::post('/admin/subcategories/store',[SubcategoryController::class,'store'])->name('admin.subcategories.store');
