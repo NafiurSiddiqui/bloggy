@@ -16,9 +16,6 @@
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
 @include('layouts.navigation')
 
-{{--@php--}}
-{{-- echo $hasCategories;--}}
-{{--@endphp--}}
 
 <main >
     {{$slot}}
