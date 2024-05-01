@@ -13,6 +13,25 @@ class Post extends Model
 
 //    protected $guarded = [];
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'description',
+        'body',
+        'thumbnail',
+        'thumbnail_alt_txt',
+        'category_id',
+        'subcategory_id',
+        'is_published',
+        'is_draft',
+        'is_featured',
+        'is_hot',
+        'meta_title',
+        'meta_description',
+        'og_thumbnail',
+        'og_title'
+    ];
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');

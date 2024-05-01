@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -32,8 +33,8 @@ Route::get('/categories/{category:slug}/{subcategory:slug}', [SubcategoryControl
 Route::middleware('auth')->group(function () {
 
     Route::view('/admin', 'admin.dashboard')->name('admin');
-    Route::get('/admin/post/create', [PostController::class, 'create'])->name('admin.post.create');
-    Route::post('/admin/post/store', [PostController::class, 'store'])->name('admin.post.store');
+    Route::get('/admin/post/create', [AdminPostController::class, 'create'])->name('admin.post.create');
+    Route::post('/admin/post/store', [AdminPostController::class, 'store'])->name('admin.post.store');
 //    CATEGORIES
     Route::get('/admin/categories',[CategoryController::class,'index'])->name('admin.categories');
     Route::get('/admin/categories/create',[CategoryController::class,'create'])->name('admin.categories.create');

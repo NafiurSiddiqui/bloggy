@@ -26,8 +26,8 @@ return new class extends Migration
             //post state
             $table->boolean('is_published')->default(false);
             $table->boolean('is_draft')->default(false);
-            $table->boolean('is_featured')->default(false);
-            $table->boolean('is_hot')->default(false);
+            $table->tinyText('is_featured')->default('off');
+            $table->tinyText('is_hot')->default('off');
             //meta stuff
             $table->string('meta_title');
             $table->string('meta_description');
