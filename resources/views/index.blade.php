@@ -1,6 +1,6 @@
 <x-app-layout>
     <main class="borderTest">
-            @if($featured)
+            @if(isset($featured) && $featured)
             <section>
                 Featured Posts
 {{--                {{count($featured)}}--}}
@@ -10,7 +10,7 @@
 
             </section>
             @endif
-        @if($hot)
+        @if(isset($hot) && $hot)
         <section>
             Hot
             @foreach($hot as $post)
@@ -18,8 +18,7 @@
             @endforeach
         </section>
         @endif
-        @if($posts)
-
+        @if(isset($posts) && $posts)
         <section>
             <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
                 <h1 class="text-2xl font-bold">All Posts</h1>
@@ -28,13 +27,14 @@
                     <x-post-card :post="$post"/>
 
             </div>
-            @endforeach
-
+                @endforeach
         </section>
+                @else
+            <p>No posts yet. stay tuned for upcoming posts.</p>
         @endif
 
 
-        <aside>
+        <aside class="borderTest">
             Trending Posts?
         </aside>
 
