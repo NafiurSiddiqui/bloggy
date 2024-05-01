@@ -26,13 +26,13 @@ return new class extends Migration
             //post state
             $table->boolean('is_published')->default(false);
             $table->boolean('is_draft')->default(false);
-            $table->tinyText('is_featured');
-            $table->tinyText('is_hot');
+            $table->tinyText('is_featured')->nullable();
+            $table->tinyText('is_hot')->nullable();
             //meta stuff
             $table->string('meta_title');
             $table->string('meta_description');
-            $table->string('og_thumbnail');
-            $table->string('og_title');
+            $table->string('og_thumbnail')->nullable();
+            $table->string('og_title')->nullable();
 
         });
     }

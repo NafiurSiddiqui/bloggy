@@ -14,6 +14,7 @@ class Post extends Model
 //    protected $guarded = [];
 
     protected $fillable = [
+        'user_id',
         'title',
         'slug',
         'description',

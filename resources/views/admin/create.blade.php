@@ -61,12 +61,9 @@
             <x-panel class="px-2 py-3 my-8">
                 <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Actions</h2>
                 <div>
-                    <x-form.button >
+                    <x-form.button value="publish">
                         Publish
                     </x-form.button>
-
-{{--                    <x-primary-button>Publish</x-primary-button>--}}
-
 
                     <x-secondary-button>Save as Draft</x-secondary-button>
                 </div>

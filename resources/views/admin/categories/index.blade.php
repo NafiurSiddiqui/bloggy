@@ -9,7 +9,7 @@
         <x-panel>
             <div class="space-y-4 my-2">
                 <p>No categories created yet</p>
-                <x-secondary-button href="/admin/categories/create">
+                <x-secondary-button link href="/admin/categories/create">
                     Create a Category
                 </x-secondary-button>
             </div>

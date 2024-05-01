@@ -25,7 +25,7 @@ class AdminPostController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-//        dd(request()->all());
+//        dd(request()->getRequestUri() == '/admin/post/store/draft');
 //        //AUTH
 //        if(Auth::guest()){
 //            return redirect()->route('login');
@@ -41,8 +41,8 @@ class AdminPostController extends Controller
             'thumbnail_alt_txt' => ['required', 'max:100'],
             'category_id'=>['required', 'exists:categories,id' ],
             'subcategory_id'=>['required', 'exists:subcategories,id' ],
-            'is_published'=> ['nullable'],
-            'is_draft'=> ['nullable', 'boolean'],
+//            'is_published'=> ['nullable'],
+//            'is_draft'=> ['nullable', 'boolean'],
             'is_featured'=> ['nullable'],
             'is_hot'=>  ['nullable'],
             'meta_title'=>['required', 'max:255'],
@@ -58,14 +58,10 @@ class AdminPostController extends Controller
 //        }
 
         //associate user_id and store file
-        $attributes['user_id'] = Auth::id();
+        $attributes['user_id'] = auth()->id();
         $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
 
-//        if(!$attributes['is_draft']){
-//            dd('should be published');
-//        }else{
-//            dd('should not be published');
-//        }
+
 //        dd($attributes);
 //        //store
         Post::create($attributes);
