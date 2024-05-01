@@ -3,7 +3,7 @@
         <x-slot:heading>Create a Post</x-slot:heading>
 
         @if(isset($categories_are_empty) && $categories_are_empty)
-            <p>Category is empty dude</p>
+            <p class="mt-2 text-gray-600">Whoops! Categories are empty. On the first run of the application this is expected. No worries!</p>
             <a href="/admin/categories" class="underline hover:text-blue-500 my-4 block">Let's quickly create a category and subcategory first</a>
             <x-panel>
                 This is to ensure data integrity of the posts and their relationships.
