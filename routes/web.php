@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/posts',[AdminPostController::class, 'index'])->name('admin.posts');
     Route::get('/admin/post/create', [AdminPostController::class, 'create'])->name('admin.post.create');
     Route::post('/admin/post/store', [AdminPostController::class, 'store'])->name('admin.post.store');
+    Route::get('/admin/post/{post:slug}/edit', [AdminPostController::class, 'edit'])->name('admin.post.edit');
+    Route::post('/admin/post/{post:slug}/update', [AdminPostController::class, 'update'])->name('admin.post.update');
 //    CATEGORIES
     Route::get('/admin/categories',[CategoryController::class,'index'])->name('admin.categories');
     Route::get('/admin/categories/create',[CategoryController::class,'create'])->name('admin.categories.create');

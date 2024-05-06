@@ -1,2 +1,1 @@
-
-    <x-dashboard.dropdown :items="$subcategories" type="subcategory"/>
+<x-dashboard.dropdown :items="$subcategories" type="subcategory" />

@@ -3,7 +3,6 @@
             @if(isset($featured) && $featured)
             <section>
                 Featured Posts
-{{--                {{count($featured)}}--}}
                 @foreach($featured as $post)
                     <x-post-card :post="$post" />
                 @endforeach

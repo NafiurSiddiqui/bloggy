@@ -15,7 +15,7 @@ class AdminPostController extends Controller
     public function index(): View
     {
         return view('admin.posts.index', [
-            'posts' => Post::latest()->simplePaginate(2),
+            'posts' => Post::latest()->simplePaginate(10),
         ]);
     }
 
@@ -63,12 +63,14 @@ class AdminPostController extends Controller
         Post::create($attributes);
 //
         //redirect
-        return redirect('/admin')->with('success', 'Post created!');
+        return redirect('/admin/posts')->with('success', 'Post created!');
     }
 
-    public function edit(Post $post)
+    public function edit(Post $post): View
     {
-        //
+        return view('admin.posts.edit', [
+            'post' => $post,
+        ]);
     }
 
 
@@ -78,9 +80,10 @@ class AdminPostController extends Controller
     }
 
 
-    public function destroy(Post $post)
+    public function destroy(Post $post): RedirectResponse
     {
-        //
+        $post->delete();
+        return redirect('/admin/posts')->with('success', 'Post deleted!');
     }
 
 }

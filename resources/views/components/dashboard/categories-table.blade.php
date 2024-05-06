@@ -41,7 +41,7 @@
                 {{--                               </div>--}}
                 {{--                           </td>--}}
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $item->name }}
+                    {{ $item->title }}
                 </th>
                 <td class="px-6 py-4">
                     {{$item->created_at->diffForHumans()}}
@@ -51,7 +51,7 @@
                 </td>
                 <td class="px-6 py-4">
 {{--                    {{$item->subcategories->count()}}--}}
-                    {{$is_subcategories? $item->category->name :$item->subcategories->count() }}
+                    {{$is_subcategories? $item->category->title :$item->subcategories->count() }}
                 </td>
                 <td class="px-6 py-4">
                     {{$item->posts->count()}}
