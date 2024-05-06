@@ -104,6 +104,10 @@
                         {{ __('Dashboard') }}
                     </x-responsive-nav-link>
 
+                    <x-responsive-nav-link :href="route('admin.posts')" :active="request()->is('admin.posts')">
+                        {{__('All Posts')}}
+                    </x-responsive-nav-link>
+
                     <x-responsive-nav-link :href="route('admin.post.create')" :active="request()->routeIs('admin.post.create')">
                         {{ __('Create a Post') }}
                     </x-responsive-nav-link>

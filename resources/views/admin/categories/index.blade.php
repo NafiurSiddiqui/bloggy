@@ -24,11 +24,9 @@
 
             <x-dashboard.categories-table :items="$categories" edit-href="admin/categories" />
 
-        @endif
+        <x-pagination-holder :item="$categories" />
+    @endif
 
-    <div class="mt-4">
-        {{$categories->links()}}
-    </div>
 
 </div>
 

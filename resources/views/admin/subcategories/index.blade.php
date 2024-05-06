@@ -18,6 +18,8 @@
                 </x-secondary-button>
             </div>
             <x-dashboard.categories-table :items="$subcategories" is_subcategories edit-href="admin/subcategories" />
-        @endif
+        <x-pagination-holder :item="$subcategories" />
+    @endif
+
 
 </x-dashboard.dashboard-layout>

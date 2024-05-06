@@ -17,7 +17,7 @@ class SubcategoryController extends Controller
     public function index(): View
     {
         return view('admin.subcategories.index',[
-            'subcategories' => Subcategory::all()
+            'subcategories' => Subcategory::with('posts','category')->latest()->simplePaginate(10),
         ]);
     }
 
