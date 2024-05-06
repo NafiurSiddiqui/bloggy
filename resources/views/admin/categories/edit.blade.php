@@ -1,6 +1,6 @@
 <x-dashboard.dashboard-layout>
     <x-slot:heading>
-        Edit Category: {{$category->name}}
+        Edit Category: {{$category->title}}
     </x-slot:heading>
 
     <x-panel>
