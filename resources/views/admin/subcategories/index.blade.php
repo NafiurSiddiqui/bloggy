@@ -3,7 +3,7 @@
         Sub-Categories
     </x-slot:heading>
 
-    <x-panel>
+
 
 
         @if($subcategories_are_empty)
@@ -20,7 +20,7 @@
                     Create a Subcategory
                 </x-secondary-button>
             </div>
-            <x-dashboard.table :items="$subcategories" is_subcategories edit-href="admin/subcategories" />
+            <x-dashboard.categories-table :items="$subcategories" is_subcategories edit-href="admin/subcategories" />
         @endif
-    </x-panel>
+
 </x-dashboard.dashboard-layout>
