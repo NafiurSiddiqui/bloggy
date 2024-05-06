@@ -33,6 +33,7 @@ Route::get('/categories/{category:slug}/{subcategory:slug}', [SubcategoryControl
 Route::middleware('auth')->group(function () {
 
     Route::view('/admin', 'admin.dashboard')->name('admin');
+    Route::get('/admin/posts',[AdminPostController::class, 'index'])->name('admin.posts');
     Route::get('/admin/post/create', [AdminPostController::class, 'create'])->name('admin.post.create');
     Route::post('/admin/post/store', [AdminPostController::class, 'store'])->name('admin.post.store');
 //    CATEGORIES

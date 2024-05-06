@@ -5,7 +5,8 @@
 >
     <div class="py-6 px-5">
         <div>
-            <img src="{{$post->thumbnail}}" alt="text">
+            <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="text">
+
         </div>
 
         <div class="mt-8 flex flex-col justify-between">

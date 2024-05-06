@@ -8,30 +8,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use PhpParser\Node\Scalar\String_;
 
 class AdminPostController extends Controller
 {
     public function index(): View
     {
         return view('admin.posts.index', [
-            'posts' => Post::all()
+            'posts' => Post::latest()->simplePaginate(2),
         ]);
     }
 
     public function create(): View
     {
-        return view('admin.create');
+        return view('admin.posts.create',[
+            'posts'=> Post::all()->sortByDesc('created_at')
+        ]);
     }
 
     public function store(Request $request): RedirectResponse
     {
-//        dd(request()->getRequestUri() == '/admin/post/store/draft');
-//        //AUTH
-//        if(Auth::guest()){
-//            return redirect()->route('login');
-//        }
-
-        //validate
+//        validate
         $attributes = request()->validate([
             'title' => ['required','max:255','unique:posts'],
             'slug' => ['required', 'unique:posts'],
@@ -41,8 +38,6 @@ class AdminPostController extends Controller
             'thumbnail_alt_txt' => ['required', 'max:100'],
             'category_id'=>['required', 'exists:categories,id' ],
             'subcategory_id'=>['required', 'exists:subcategories,id' ],
-//            'is_published'=> ['nullable'],
-//            'is_draft'=> ['nullable', 'boolean'],
             'is_featured'=> ['nullable'],
             'is_hot'=>  ['nullable'],
             'meta_title'=>['required', 'max:255'],
@@ -51,13 +46,14 @@ class AdminPostController extends Controller
             'og_title'=>['nullable', 'max:255'],
 
         ]);
-//        $path = $request->file('thumbnail')->store('thumbnail');
+//        $path = $request->file('thumbnail')->store('thumbnails');
+//
 //        return 'Successful!'. $path;
 //        if($request->file('thumbnail')->isValid()){
 //            return request()->file('thumbnail')->extension();
 //        }
 
-        //associate user_id and store file
+//        associate user_id and store file
         $attributes['user_id'] = auth()->id();
         $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
 
