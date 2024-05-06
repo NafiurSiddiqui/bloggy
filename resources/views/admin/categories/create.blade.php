@@ -6,7 +6,7 @@
     <x-panel>
         <form action="/admin/categories/store" method="post">
             @csrf
-            <x-form.input name="name" />
+            <x-form.input name="title" />
             <x-form.input name="slug"/>
             <x-form.action-buttons cancel-href="/admin/categories" submit-label="Save" />
 {{--            <div class="flex justify-end items-center space-x-3">--}}

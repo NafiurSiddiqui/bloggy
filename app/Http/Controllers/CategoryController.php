@@ -34,9 +34,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+//        dd($request->all());
         //validate
         $attributes = $request->validate([
-            'name' => ['required', 'string', 'max:255', 'unique:categories' ],
+            'title' => ['required', 'string', 'max:255', 'unique:categories' ],
             'slug' => ['required', 'string', 'max:255', 'unique:categories'],
         ]);
         //store
@@ -68,11 +69,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category $category):RedirectResponse
     {
         //validate
         $attributes = $request->validate([
-            'name' => ['required', 'string', 'max:255', 'unique:categories' ],
+            'title' => ['required', 'string', 'max:255', 'unique:categories' ],
             'slug' => ['required', 'string', 'max:255', 'unique:categories'],
         ]);
         //store

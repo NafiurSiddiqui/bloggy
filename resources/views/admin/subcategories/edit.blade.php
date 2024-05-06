@@ -7,7 +7,7 @@
         <form  class="subcategory-form" action="/admin/subcategories/{{$subcategory->id}}" method="post" >
             @csrf
             @method('PATCH')
-            <x-form.input name="name" :value="old('name', $subcategory->name)" />
+            <x-form.input name="title" :value="old('name', $subcategory->title)" />
             <x-form.input name="slug" :value="old('slug', $subcategory->slug)"/>
 
             @php

@@ -7,7 +7,7 @@
         <form action="/admin/categories/{{$category->id}}" method="post">
             @csrf
             @method('PATCH')
-            <x-form.input name="name" :value="old('name',$category->name)"/>
+            <x-form.input name="title" :value="old('name',$category->title)"/>
             <x-form.input name="slug" :value="old('slug',$category->slug)"/>
             <x-form.action-buttons
                 edit

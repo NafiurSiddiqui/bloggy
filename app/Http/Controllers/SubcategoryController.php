@@ -38,7 +38,7 @@ class SubcategoryController extends Controller
 //        validate
         $attributes = request()->validate([
             'category_id' => ['required', 'exists:categories,id'],
-            'name' => ['required', 'max:255', 'unique:subcategories,name'],
+            'title' => ['required', 'max:255', 'unique:subcategories,title'],
             'slug' => ['required', 'max:255', 'unique:subcategories,slug'],
         ]);
 
@@ -84,7 +84,7 @@ class SubcategoryController extends Controller
         //validate
         $attributes = request()->validate([
             'category_id' => ['required', 'exists:categories,id'],
-            'name' => ['required', 'max:255', Rule::unique('subcategories','name')->ignore($subcategory->id)],
+            'title' => ['required', 'max:255', Rule::unique('subcategories','name')->ignore($subcategory->id)],
             'slug' => ['required', 'max:255', Rule::unique('subcategories','slug')->ignore($subcategory->id)],
         ]);
         //check if category_id is dirty
