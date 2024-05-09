@@ -56,6 +56,11 @@
             <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">SEO fields</h2>
             <x-form.input name="meta_title" :value="old('meta_title', $post->meta_title)" />
             <x-form.input name="meta_description" :value="old('meta_title', $post->meta_description)" />
+            {{-- @dd($post->og_thumbnail) --}}
+            @if ($post->og_thumbnail)
+                <img src="{{ asset('storage/' . $post->og_thumbnail) }}"
+                    alt="{{ $post->thumbnail_alt_txt ?? 'thumbnail' }}" class="my-8">
+            @endif
             <x-form.input name="og_thumbnail" type="file" />
             <x-form.input name="og_title" :value="old('og_title', $post->og_title)" />
         </x-panel>
@@ -63,13 +68,15 @@
 
         <x-panel class="px-2 py-3 my-8">
             <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Actions</h2>
-            <div>
+            {{-- <div>
                 <x-form.button value="publish">
                     Update
                 </x-form.button>
 
                 <x-secondary-button>Save as Draft</x-secondary-button>
-            </div>
+            </div> --}}
+            <x-form.action-buttons edit secondary-btn-href="#" submit-label="Update"
+                secondary-btn-label='Save as Draft' />
         </x-panel>
 
         @error('body')

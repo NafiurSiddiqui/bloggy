@@ -21,47 +21,42 @@ class AdminPostController extends Controller
 
     public function create(): View
     {
-        return view('admin.posts.create',[
-            'posts'=> Post::all()->sortByDesc('created_at')
+        return view('admin.posts.create', [
+            'posts' => Post::all()->sortByDesc('created_at')
         ]);
     }
 
     public function store(Request $request): RedirectResponse
     {
-//        validate
+        //validate
         $attributes = request()->validate([
-            'title' => ['required','max:255','unique:posts'],
+            'title' => ['required', 'max:255', 'unique:posts'],
             'slug' => ['required', 'unique:posts'],
             'description' => ['required', 'max:255'],
             'body' => 'required',
             'thumbnail' => ['required', 'image'],
             'thumbnail_alt_txt' => ['required', 'max:100'],
-            'category_id'=>['required', 'exists:categories,id' ],
-            'subcategory_id'=>['required', 'exists:subcategories,id' ],
-            'is_featured'=> ['nullable'],
-            'is_hot'=>  ['nullable'],
-            'meta_title'=>['required', 'max:255'],
-            'meta_description'=>['required', 'max:255'],
-            'og_thumbnail'=>['nullable', 'image'],
-            'og_title'=>['nullable', 'max:255'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'subcategory_id' => ['required', 'exists:subcategories,id'],
+            'is_featured' => ['nullable'],
+            'is_hot' =>  ['nullable'],
+            'meta_title' => ['required', 'max:255'],
+            'meta_description' => ['required', 'max:255'],
+            'og_thumbnail' => ['nullable', 'image'],
+            'og_title' => ['nullable', 'max:255'],
 
         ]);
-//        $path = $request->file('thumbnail')->store('thumbnails');
-//
-//        return 'Successful!'. $path;
-//        if($request->file('thumbnail')->isValid()){
-//            return request()->file('thumbnail')->extension();
-//        }
 
-//        associate user_id and store file
+        //associate user_id and store file
         $attributes['user_id'] = auth()->id();
         $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+        if (isset($attributes['og_thumbnail'])) {
+            $attributes['og_thumbnail'] = request()->file('og_thumbnail')->store('thumbnails');
+        }
 
-
-//        dd($attributes);
-//        //store
+        //store
         Post::create($attributes);
-//
+
         //redirect
         return redirect('/admin/posts')->with('success', 'Post created!');
     }
@@ -76,7 +71,45 @@ class AdminPostController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        //
+
+        //validate
+        $attributes = request()->validate([
+            'title' => ['required', 'max:255',  Rule::unique('posts', 'title')->ignore($post->id)],
+            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],
+            'description' => ['required', 'max:255'],
+            'body' => 'required',
+            'thumbnail' => ['image'],
+            'thumbnail_alt_txt' => ['max:100'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'subcategory_id' => ['required', 'exists:subcategories,id'],
+            'is_featured' => ['nullable'],
+            'is_hot' =>  ['nullable'],
+            'meta_title' => ['required', 'max:255'],
+            'meta_description' => ['required', 'max:255'],
+            'og_thumbnail' => ['nullable', 'image'],
+            'og_title' => ['nullable', 'max:255'],
+
+        ]);
+
+        /**
+         * checkboxes when turned off, they are not included in the request payload, hence we manually set a default value if not turned on.
+         * Make sure the value is always either 'on' or 'off' for integrity.
+         */
+        $attributes['is_featured'] = $request->has('is_featured') ? 'on' : 'off';
+        $attributes['is_hot'] = $request->has('is_hot') ? 'on' : 'off';
+
+        if (isset($attributes['thumbnail'])) {
+            $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+        }
+        if (isset($attributes['og_thumbnail'])) {
+            $attributes['og_thumbnail'] = request()->file('og_thumbnail')->store('thumbnails');
+        }
+
+        //store
+        $post->update($attributes);
+
+        //redirect
+        return redirect('/admin/posts')->with('success', 'Post Updated!');
     }
 
 
@@ -85,5 +118,4 @@ class AdminPostController extends Controller
         $post->delete();
         return redirect('/admin/posts')->with('success', 'Post deleted!');
     }
-
 }

@@ -10,7 +10,7 @@
             <x-form.input name="title" :value="old('name', $subcategory->title)" />
             <x-form.input name="slug" :value="old('slug', $subcategory->slug)" />
             <x-dashboard.category-dropdown :subcategory="$subcategory" />
-            <x-form.action-buttons edit cancel-href="/admin/subcategories" submit-label="Update" />
+            <x-form.action-buttons edit secondary-btn-href="/admin/subcategories" submit-label="Update" />
         </form>
 
         <form action="/admin/subcategories/{{ $subcategory->id }}" method="POST" id="form-delete" class="hidden">
