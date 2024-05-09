@@ -4,7 +4,7 @@
 @if ($subcategories->isEmpty())
     <div>
         <p>No item yet!</p>
-        <x-secondary-button>Create a Subcatyegory</x-secondary-button>
+        <x-secondary-button>Create a Subcategory</x-secondary-button>
     </div>
 @else
     <div class="my-4">

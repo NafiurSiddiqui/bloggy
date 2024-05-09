@@ -7,6 +7,7 @@
     <form action="/admin/post/{{ $post->slug }}" method="post" enctype="multipart/form-data" class="max-w-xl">
         @csrf
         @method('PATCH')
+        {{-- TODO: Remove the test errors below --}}
         @if ($errors->any())
             <div class="bg-rose-400 ">
                 <ul>
@@ -16,18 +17,19 @@
                 </ul>
             </div>
         @endif
-        <x-form.input name="title" required :value="old('title', $post->title)" />
-        <x-form.input name="slug" required :value="old('slug', $post->slug)" />
-        <x-form.textarea name="description" required>
+        <x-form.input name="title" :value="old('title', $post->title)" />
+        <x-form.input name="slug" :value="old('slug', $post->slug)" />
+        <x-form.textarea name="description">
             {{ old('description', $post->description) }}
         </x-form.textarea>
-        <x-form.textarea name="body" required>
+        <x-form.textarea name="body">
             {{ old('body', $post->body) }}
         </x-form.textarea>
 
         <x-panel class="px-2 py-3 my-8 ">
             <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Select Thumbnail</h2>
-            <x-form.input name="thumbnail" type="file" required :value="old('thumbnail', $post->thumbnail)" />
+            <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->thumbnail_alt_txt ?? 'Thumbnail' }}">
+            <x-form.input name="thumbnail" type="file" :value="old('thumbnail', $post->thumbnail)" />
             <x-form.input name="thumbnail_alt_txt" label="Alt Txt" requried :value="old('thumbnail_alt_txt', $post->thumbnail_alt_txt)" />
         </x-panel>
 
@@ -52,10 +54,10 @@
         {{-- SEO --}}
         <x-panel class="px-2 py-3 my-8 ">
             <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">SEO fields</h2>
-            <x-form.input name="meta_title" required />
-            <x-form.input name="meta_description" required />
+            <x-form.input name="meta_title" :value="old('meta_title', $post->meta_title)" />
+            <x-form.input name="meta_description" :value="old('meta_title', $post->meta_description)" />
             <x-form.input name="og_thumbnail" type="file" />
-            <x-form.input name="og_title" />
+            <x-form.input name="og_title" :value="old('og_title', $post->og_title)" />
         </x-panel>
 
 
@@ -63,7 +65,7 @@
             <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Actions</h2>
             <div>
                 <x-form.button value="publish">
-                    Publish
+                    Update
                 </x-form.button>
 
                 <x-secondary-button>Save as Draft</x-secondary-button>
