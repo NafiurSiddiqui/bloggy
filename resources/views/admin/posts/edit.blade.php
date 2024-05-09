@@ -44,8 +44,9 @@
         <x-panel class="px-2 py-3 my-8 ">
             <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Post Type</h2>
             <div class="flex space-x-4">
-                <x-form.checkbox name="is_featured" label="Featured" />
-                <x-form.checkbox name="is_hot" label="Hot" />
+
+                <x-form.checkbox name="is_featured" label="Featured" :post="$post" />
+                <x-form.checkbox name="is_hot" label="Hot" :post="$post" />
             </div>
         </x-panel>
         {{-- SEO --}}

@@ -19,7 +19,7 @@
                         {{ ucwords($subcategory->title) }}</option>
                 @else
                     <option value="{{ $subcategory->id }}"
-                        {{ old('subcategory_id', $subcategory->id) == $subcategory->id ? 'selected' : '' }}>
+                        {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
                         {{ ucwords($subcategory->title) }}</option>
                 @endif
             @endforeach
