@@ -9,9 +9,8 @@
             @method('PATCH')
             <x-form.input name="title" :value="old('name', $category->title)" />
             <x-form.input name="slug" :value="old('slug', $category->slug)" />
-            <x-form.action-buttons edit secondary-btn-href="/admin/categories" submit-label="Update" />
+            <x-form.action-buttons edit secondary-btn-href="/admin/categories" submit-label="Update" type="category" />
         </form>
-
         <form action="/admin/categories/{{ $category->id }}" method="POST" id="form-delete" class="hidden">
             @csrf
             @method('DELETE')

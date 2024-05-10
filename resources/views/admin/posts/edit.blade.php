@@ -42,7 +42,6 @@
             </div>
         </x-panel>
 
-
         <x-panel class="px-2 py-3 my-8 ">
             <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Post Type</h2>
             <div class="flex space-x-4">
@@ -51,6 +50,7 @@
                 <x-form.checkbox name="is_hot" label="Hot" :post="$post" />
             </div>
         </x-panel>
+
         {{-- SEO --}}
         <x-panel class="px-2 py-3 my-8 ">
             <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">SEO fields</h2>
@@ -68,20 +68,21 @@
 
         <x-panel class="px-2 py-3 my-8">
             <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Actions</h2>
-            {{-- <div>
-                <x-form.button value="publish">
-                    Update
-                </x-form.button>
 
-                <x-secondary-button>Save as Draft</x-secondary-button>
-            </div> --}}
-            <x-form.action-buttons edit secondary-btn-href="#" submit-label="Update"
-                secondary-btn-label='Save as Draft' />
+            <x-form.action-buttons edit secondary-btn-href="#" submit-label="Update" secondary-btn-label='Save as Draft'
+                type="post" />
         </x-panel>
 
         @error('body')
             <span class="text-red-500 text-xs">{{ $message }}</span>
         @enderror
+    </form>
+
+
+    <form @submit.prevent="console.log('prevented')" id="form-delete" class="hidden"
+        action="/admin/post/{{ $post->slug }}" method="post">
+        @csrf
+        @method('Delete')
     </form>
 
 </x-dashboard.dashboard-layout>
