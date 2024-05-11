@@ -1,13 +1,13 @@
-<x-layout>
+<x-app-layout>
 
     <section class="px-6 py-8 ">
         <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
             <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
                 <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
                     {{-- <img src="/storage/{{ $post->thumbnail }}" alt="" class="rounded-xl"> --}}
-                    <img src="{{$post->thumbnail}}" alt="" class="rounded-xl">
-                    <x-category-label :category="$post->category"/>
-                    <x-category-label :category="$post->category" :subcategory="$post->subcategory"/>
+                    <img src="{{ $post->thumbnail }}" alt="" class="rounded-xl">
+                    <x-category-label :category="$post->category" />
+                    <x-category-label :category="$post->category" :subcategory="$post->subcategory" />
                     <h1 class="font-bold text-3xl lg:text-4xl mb-10">
                         {{ $post->title }}
                     </h1>
@@ -28,16 +28,13 @@
                 <div class="col-span-8">
                     <div class="lg:flex justify-between mb-6">
                         <a href="/"
-                           class="transition-colors duration-300 relative inline-flex items-center text-lg hover:text-blue-500">
-                     <
+                            class="transition-colors duration-300 relative inline-flex items-center text-lg hover:text-blue-500">
+                            < Back to Posts </a>
 
-                            Back to Posts
-                        </a>
+                                {{--                        <div class="space-x-2"> --}}
 
-{{--                        <div class="space-x-2">--}}
-
-{{--                            <x-category-button :category="$post->category" />--}}
-{{--                        </div>--}}
+                                {{--                            <x-category-button :category="$post->category" /> --}}
+                                {{--                        </div> --}}
                     </div>
 
 
@@ -48,14 +45,14 @@
 
                 <section class="col-span-8 col-start-5 mt-10 space-y-4">
 
-{{--                    @include ('posts._add-comment-form')--}}
+                    {{--                    @include ('posts._add-comment-form') --}}
                     @php
 
                         $comments = [
                             'first' => 'first comment',
-                            'second' => 'second comment'
-                            ]
-                     @endphp
+                            'second' => 'second comment',
+                        ];
+                    @endphp
                     @foreach ($comments as $comment)
                         <x-post-comment :comment="$comment" />
                     @endforeach
@@ -64,10 +61,10 @@
             </article>
         </main>
     </section>
-</x-layout>
+    </x-layout>
 
 
-{{-- You can choose either way of defining your dynamic image path here
+    {{-- You can choose either way of defining your dynamic image path here
     - the latter include full url
     - the former include relative url
      --}}

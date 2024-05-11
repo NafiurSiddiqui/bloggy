@@ -5,13 +5,18 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category');
 Route::get('/categories/{category:slug}/{subcategory:slug}', [SubcategoryController::class, 'show'])->name('subcategory');
-
+Route::get('/author/{author:id}/posts', function (string $id) {
+    return view('posts.author.index', [
+        'posts' => Post::where('user_id', $id)->get()
+    ]);
+});
 
 
 
