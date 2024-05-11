@@ -28,6 +28,7 @@ class AdminPostController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        // dd(request()->all());
         //validate
         $attributes = request()->validate([
             'title' => ['required', 'max:255', 'unique:posts'],
@@ -39,6 +40,8 @@ class AdminPostController extends Controller
             'category_id' => ['required', 'exists:categories,id'],
             'subcategory_id' => ['required', 'exists:subcategories,id'],
             'is_featured' => ['nullable'],
+            'is_published' => ['boolean'],
+            'is_draft' => ['boolean'],
             'is_hot' =>  ['nullable'],
             'meta_title' => ['required', 'max:255'],
             'meta_description' => ['required', 'max:255'],
@@ -53,6 +56,8 @@ class AdminPostController extends Controller
         if (isset($attributes['og_thumbnail'])) {
             $attributes['og_thumbnail'] = request()->file('og_thumbnail')->store('thumbnails');
         }
+
+
 
         //store
         Post::create($attributes);

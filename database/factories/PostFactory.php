@@ -22,10 +22,10 @@ class PostFactory extends Factory
         $subcategory = Subcategory::factory()->create(['category_id' => $category->id]);
         return [
             'user_id' => \App\Models\User::factory([
-                'role'=>'editor'
+                'role' => 'editor'
             ]),
-            'category_id'=> $category->id,
-            'subcategory_id'=> $subcategory->id,
+            'category_id' => $category->id,
+            'subcategory_id' => $subcategory->id,
             'title' => $this->faker->sentence,
             'slug' => $this->faker->unique()->slug,
             'description' => $this->faker->text,
@@ -34,8 +34,9 @@ class PostFactory extends Factory
             'thumbnail_alt_txt' => $this->faker->text,
             'is_published' => $this->faker->boolean,
             'is_draft' => $this->faker->boolean,
-            'is_featured' => $this->faker->randomElement(['on','off']),
-            'is_hot' => $this->faker->randomElement(['on','off']),
+            'is_unpublished' => $this->faker->boolean,
+            'is_featured' => $this->faker->randomElement(['on', 'off']),
+            'is_hot' => $this->faker->randomElement(['on', 'off']),
             'meta_title' => $this->faker->sentence,
             'meta_description' => $this->faker->text,
             'og_thumbnail' => $this->faker->imageUrl(),
