@@ -1,9 +1,9 @@
-@props(['submit'])
+@props(['submit', 'label'])
 
 @if (isset($submit))
     <button type="submit" form="form-delete"
-        class="border border-rose-200 dark:text-rose-500 font-medium hover:text-rose-600  ms-3 px-4 rounded text-rose-400">Delete</button>
+        {{ $attributes->merge(['class' => 'border border-rose-200 dark:text-rose-500 font-medium hover:text-rose-600  ms-3 px-4 rounded text-rose-400']) }}>{{ $label ?? 'Delete' }}</button>
 @else
     <span
-        {{ $attributes->merge(['class' => 'font-medium  text-rose-400 dark:text-rose-500 hover:underline hover:text-rose-600 cursor-pointer']) }}>Delete</span>
+        {{ $attributes->merge(['class' => 'mt-4 font-medium  text-rose-400 dark:text-rose-500 hover:underline hover:text-rose-600 cursor-pointer']) }}>{{ $label ?? 'Delete' }}</span>
 @endif
