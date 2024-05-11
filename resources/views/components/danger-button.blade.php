@@ -1,3 +1,9 @@
-<button {{ $attributes->merge(['type' => 'submit', 'class' => 'inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150']) }}>
-    {{ $slot }}
-</button>
+@props(['submit'])
+
+@if (isset($submit))
+    <button type="submit" form="form-delete"
+        class="border border-rose-200 dark:text-rose-500 font-medium hover:text-rose-600  ms-3 px-4 rounded text-rose-400">Delete</button>
+@else
+    <span
+        {{ $attributes->merge(['class' => 'font-medium  text-rose-400 dark:text-rose-500 hover:underline hover:text-rose-600 cursor-pointer']) }}>Delete</span>
+@endif
