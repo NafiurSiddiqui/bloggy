@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
@@ -44,6 +45,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/post/{post:slug}/edit', [AdminPostController::class, 'edit'])->name('admin.post.edit');
     Route::patch('/admin/post/{post:slug}', [AdminPostController::class, 'update'])->name('admin.post.update');
     Route::delete('/admin/post/{post:slug}', [AdminPostController::class, 'destroy'])->name('admin.post.delete');
+    Route::delete('/admin/posts/delete-all', function () {
+
+        //delete all posts
+        DB::table('posts')->truncate();
+
+        return redirect('/admin/posts')->with('success', 'All posts have been deleted!');
+    });
     //    CATEGORIES
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
     Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
