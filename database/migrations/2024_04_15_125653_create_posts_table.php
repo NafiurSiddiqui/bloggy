@@ -26,6 +26,7 @@ return new class extends Migration
             //post state
             $table->boolean('is_published')->default(false);
             $table->boolean('is_draft')->default(false);
+            $table->boolean('is_unpublished')->default(false);
             $table->string('is_featured')->default('off');
             $table->string('is_hot')->default('off');
             //meta stuff
@@ -33,7 +34,6 @@ return new class extends Migration
             $table->string('meta_description');
             $table->string('og_thumbnail')->nullable();
             $table->string('og_title')->nullable();
-
         });
     }
 
