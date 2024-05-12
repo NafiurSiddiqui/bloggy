@@ -80,7 +80,7 @@
     </div>
 </div>
 
-<script>
+{{-- <script>
     const bulkDeleteCheckbox = document.getElementById('bulk_delete');
     const selectColumnHeader = document.querySelector('.select-column');
     const selectRow = document.querySelector('.bulk-delete-selection');
@@ -95,4 +95,4 @@
             .add('hidden');
 
     });
-</script>
+</script> --}}

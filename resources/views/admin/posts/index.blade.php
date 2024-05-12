@@ -12,9 +12,14 @@
                 </form>
                 <x-modal-delete message="You sure want to delete all posts?" />
             </div>
-            <div>
-                <input type="checkbox" name="bulk_delete" id="bulk_delete">
-                <label for="bulk_delete">Bulk Delete</label>
+            <div class="multiple-selection-btns text-gray-400">
+                <input type="checkbox" name="bulk_delete" id="bulk_delete" class="hidden">
+                <label for="bulk_delete"
+                    class="bulk-delete-btn cursor-pointer border border-gray-300 px-4 py-2 rounded">
+                    <i class="fa-solid fa-list-check"></i>
+                    Multiple
+                    Selection
+                </label>
             </div>
         </div>
         <section class="mt-4 mb-8">
