@@ -33,45 +33,50 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach ($posts as $post)
-                            <tr>
-                                <td class="bulk-delete-selection px-6 py-4 whitespace-nowrap hidden">
-                                    <input type="checkbox" name="bulk_delete_selection" id="bulk_delete_selection"
-                                        value="{{ $post->id }}">
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <x-text-link href="/posts/{{ $post->slug }}">
-                                        {{ $post->title }}
-                                    </x-text-link>
-                                </td>
+                    <form id="delete-multiple-posts" action="{{ route('posts.delete.multiple') }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete these shits</button>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($posts as $post)
+                                <tr>
+                                    <td class="bulk-delete-selection px-6 py-4 whitespace-nowrap hidden">
+                                        <input type="checkbox" name="bulk_delete_selection[]" id="bulk_delete_selection"
+                                            class="post-delete-checkbox" value="{{ $post->id }}">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <x-text-link href="/posts/{{ $post->slug }}">
+                                            {{ $post->title }}
+                                        </x-text-link>
+                                    </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $post->slug }}</div>
-                                </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">{{ $post->slug }}</div>
+                                    </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-6 py-4 whitespace-nowrap">
 
-                                    <x-text-link href="/categories/{{ $post->category->slug }}">
-                                        {{ $post->category->title }}
-                                    </x-text-link>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <x-status-label :post="$post" />
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <x-text-link href="/categories/{{ $post->category->slug }}">
+                                            {{ $post->category->title }}
+                                        </x-text-link>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <x-status-label :post="$post" />
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 
-                                    <x-text-link href="/author/{{ $post->author->id }}/posts">
-                                        {{ $post->author->name }}
-                                    </x-text-link>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="/admin/post/{{ $post->slug }}/edit"
-                                        class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
+                                        <x-text-link href="/author/{{ $post->author->id }}/posts">
+                                            {{ $post->author->name }}
+                                        </x-text-link>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="/admin/post/{{ $post->slug }}/edit"
+                                            class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </form>
                 </table>
             </div>
         </div>

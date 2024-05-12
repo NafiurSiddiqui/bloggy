@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
@@ -46,12 +47,25 @@ Route::middleware('auth')->group(function () {
     Route::patch('/admin/post/{post:slug}', [AdminPostController::class, 'update'])->name('admin.post.update');
     Route::delete('/admin/post/{post:slug}', [AdminPostController::class, 'destroy'])->name('admin.post.delete');
     Route::delete('/admin/posts/delete-all', function () {
-
         //delete all posts
         DB::table('posts')->truncate();
-
         return redirect('/admin/posts')->with('success', 'All posts have been deleted!');
     });
+    Route::delete('/admin/posts/delete-selected-posts', function () {
+
+        $selectedIds = request()->input('bulk_delete_selection');
+
+        if (empty($selectedIds)) {
+            // Handle no items selected scenario
+            return redirect()->back()->with('message', 'No items selected for deletion');
+        }
+        // Delete the items using the selected IDs
+        Post::whereIn('id', $selectedIds)->delete();
+
+        return redirect()->back()->with('success', 'Selected items deleted successfully');
+    })->name('posts.delete.multiple');
+
+
     //    CATEGORIES
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
     Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
