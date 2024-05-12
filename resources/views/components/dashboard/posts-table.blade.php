@@ -37,7 +37,8 @@
                         @foreach ($posts as $post)
                             <tr>
                                 <td class="bulk-delete-selection px-6 py-4 whitespace-nowrap hidden">
-                                    <input type="checkbox" name="bulk_delete_selection" id="bulk_delete_selection">
+                                    <input type="checkbox" name="bulk_delete_selection" id="bulk_delete_selection"
+                                        value="{{ $post->id }}">
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <x-text-link href="/posts/{{ $post->slug }}">
@@ -70,9 +71,6 @@
                                 </td>
                             </tr>
                         @endforeach
-
-
-                        <!-- More people... -->
                     </tbody>
                 </table>
             </div>
