@@ -11,7 +11,7 @@ Alpine.start();
 //for handling multiple selection for bulk delete
 const bulkDeleteCheckbox = document.getElementById("bulk_delete");
 const selectColumnHeader = document.querySelector(".select-column");
-const selectRow = document.querySelector(".bulk-delete-selection");
+const selectAllRows = document.querySelectorAll(".bulk-delete-selection");
 const iconMultipleSelection = document.querySelector(
     ".multiple-selection-btns"
 );
@@ -23,12 +23,16 @@ bulkDeleteCheckbox.addEventListener("change", () => {
 
     if (bulkDeleteIsChecked) {
         selectColumnHeader.classList.remove("hidden");
-        selectRow.classList.remove("hidden");
+        selectAllRows.forEach((element) => {
+            element.classList.remove("hidden");
+        });
         iconMultipleSelection.classList.add("text-blue-500");
         bulkDeleteBtn.classList.add("shadow");
     } else {
         selectColumnHeader.classList.add("hidden");
-        selectRow.classList.add("hidden");
+        selectAllRows.forEach((element) => {
+            element.classList.add("hidden");
+        });
         iconMultipleSelection.classList.remove("text-blue-500");
         bulkDeleteBtn.classList.remove("shadow");
     }

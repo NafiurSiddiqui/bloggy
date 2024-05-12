@@ -79,20 +79,3 @@
         </div>
     </div>
 </div>
-
-{{-- <script>
-    const bulkDeleteCheckbox = document.getElementById('bulk_delete');
-    const selectColumnHeader = document.querySelector('.select-column');
-    const selectRow = document.querySelector('.bulk-delete-selection');
-    let bulkDeleteIsChecked = false;
-
-    bulkDeleteCheckbox.addEventListener('change', () => {
-
-        bulkDeleteIsChecked = bulkDeleteCheckbox.checked;
-        bulkDeleteIsChecked ? selectColumnHeader.classList.remove('hidden') : selectColumnHeader.classList
-            .add('hidden');
-        bulkDeleteIsChecked ? selectRow.classList.remove('hidden') : selectRow.classList
-            .add('hidden');
-
-    });
-</script> --}}
