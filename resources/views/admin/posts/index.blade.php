@@ -19,14 +19,11 @@
                     Multiple
                     Selection
                 </label>
-                {{-- <div :class="{ 'inline-block': show, 'hidden': !show }">
-                    <x-danger-button button-only label="Delete Selected" class="delete-selected-posts-btn" />
-
-                </div> --}}
+                <button type="submit" form="delete-multiple-posts">Delete these shits</button>
             </div>
-            <section class="mt-4 mb-8">
-                <x-dashboard.posts-table :posts="$posts" />
-            </section>
+
+            <x-dashboard.posts-table :posts="$posts" />
+
             <x-pagination-holder :item="$posts" />
         @elseif(isset($categories_are_empty) && $categories_are_empty)
             <p class="mt-2 text-gray-600">No posts yet.</p>
