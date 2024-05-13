@@ -15,7 +15,7 @@
     </div>
 @else
     <div class="my-4">
-        <x-form.label name="category" />
+        <x-form.label label-for="category" />
         <select name="category_id" id="category_id" class="rounded-md w-32" title="Select a category for the post">
 
             <option value="---">---</option>

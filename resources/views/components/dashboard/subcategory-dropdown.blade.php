@@ -8,7 +8,7 @@
     </div>
 @else
     <div class="my-4">
-        <x-form.label name="subcategory" />
+        <x-form.label label-for="subcategory" />
         <select name="subcategory_id" id="subcategory_id" class="rounded-md w-32" title="Select a subcategory for the post">
 
             <option value="---">---</option>
