@@ -19,8 +19,10 @@
         </div> --}}
 
 
-        <x-dashboard.index-actions type="post" multiple-delete-form-action-path="delete-multiple-posts"
-            delete-form-action-path="/admin/posts/delete-all" path-to-creation="/admin/post/create" />
+        <x-dashboard.index-actions singular-type="post" plural-type="posts"
+            multiple-delete-form-action-path="delete-multiple-posts" delete-form-action-path="/admin/posts/delete-all"
+            path-to-creation="/admin/post/create" />
+
         <x-dashboard.posts-table :posts="$posts" />
 
         <x-pagination-holder :item="$posts" />
