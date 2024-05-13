@@ -11,13 +11,15 @@
                     {{ __('Dashboard') }}
                 </x-dashboard.nav-link>
 
+                <x-dashboard.nav-link route="/admin/post/create" :active="request()->is('admin/post/create')">
+                    Create post
+                </x-dashboard.nav-link>
+
                 <x-dashboard.nav-link route="/admin/posts" :active="request()->is('admin.posts')">
                     All Posts
                 </x-dashboard.nav-link>
 
-                <x-dashboard.nav-link route="/admin/post/create" :active="request()->is('admin/post/create')">
-                    Create post
-                </x-dashboard.nav-link>
+
 
                 <x-dashboard.nav-link route="/admin/categories" :active="request()->is('admin/categories')">
                     Categories
