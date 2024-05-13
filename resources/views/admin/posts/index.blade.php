@@ -2,7 +2,7 @@
     <x-slot:heading>All Posts</x-slot:heading>
 
     @if (isset($posts) && count($posts) > 0)
-        <div class="my-4 gap-8 flex justify-between md:justify-end lg:justify-end flex-wrap">
+        <div class="my-4 mb-8 gap-8 flex justify-between md:justify-end lg:justify-end flex-wrap">
             <div>
                 <form id="form-delete" action="/admin/posts/delete-all" method="post">
                     @csrf
@@ -12,7 +12,7 @@
                 </form>
                 <x-modal-delete message="You sure want to delete all posts?" />
             </div>
-            <div class="multiple-selection-btns text-gray-400" x-data="{ show: false }">
+            <div class="delete-selected-posts-btns text-gray-400 hidden" x-data="{ show: false }">
                 <x-danger-button label="Delete Selected Posts" />
                 <x-modal-delete message="You sure want to delete these posts?" form="delete-multiple-posts" />
             </div>
@@ -33,3 +33,23 @@
         </a>
     @endif
 </x-dashboard.dashboard-layout>
+
+<script>
+    const postCheckBoxes = document.querySelectorAll('.post-delete-checkbox');
+    const submitBtn = document.querySelector('.delete-selected-posts-btns');
+
+
+    function checkAnyCheckbox() {
+        // Loop through all postCheckBoxes
+        for (const checkbox of postCheckBoxes) {
+            if (checkbox.checked) {
+                submitBtn.classList.remove('hidden');
+                return; // Exit the loop if at least one checkbox is checked
+            }
+        }
+        submitBtn.classList.add('hidden');
+    }
+
+    // Add event listener to each checkbox for change
+    postCheckBoxes.forEach(checkbox => checkbox.addEventListener('change', checkAnyCheckbox));;
+</script>
