@@ -2,7 +2,7 @@
     <x-slot:heading>All Posts</x-slot:heading>
 
     @if (isset($posts) && count($posts) > 0)
-        <div class="my-4 mb-8 gap-8 flex justify-between md:justify-end lg:justify-end flex-wrap">
+        {{-- <div class="my-4 mb-8 gap-8 flex justify-between md:justify-end lg:justify-end flex-wrap">
             <div>
                 <form id="form-delete" action="/admin/posts/delete-all" method="post">
                     @csrf
@@ -16,7 +16,11 @@
                 <x-danger-button label="Delete Selected Posts" />
                 <x-modal-delete message="You sure want to delete these posts?" form="delete-multiple-posts" />
             </div>
-        </div>
+        </div> --}}
+
+
+        <x-dashboard.index-actions type="post" multiple-delete-form-action-path="delete-multiple-posts"
+            delete-form-action-path="/admin/posts/delete-all" path-to-creation="/admin/post/create" />
         <x-dashboard.posts-table :posts="$posts" />
 
         <x-pagination-holder :item="$posts" />
