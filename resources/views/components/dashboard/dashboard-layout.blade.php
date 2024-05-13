@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot:title>
-        {{ __('Dashboard') }}--}}
+        {{ __('Dashboard') }}
     </x-slot:title>
 
 

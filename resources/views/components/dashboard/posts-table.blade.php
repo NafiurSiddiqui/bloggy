@@ -4,6 +4,7 @@
 
     <x-table>
         <tr>
+            <x-th>Select</x-th>
             <x-th>Title</x-th>
             <x-th>Category</x-th>
             <x-th>Author</x-th>
@@ -21,7 +22,7 @@
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach ($posts as $post)
                     <tr>
-                        <x-td class="bulk-delete-selection hidden">
+                        <x-td>
                             <input type="checkbox" name="bulk_delete_selection[]" id="bulk_delete_selection"
                                 class="post-delete-checkbox" value="{{ $post->id }}">
                         </x-td>
