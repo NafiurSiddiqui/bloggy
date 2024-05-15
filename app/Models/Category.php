@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Category extends Model
 {
@@ -16,6 +16,11 @@ class Category extends Model
      * @var array
      */
     protected $fillable = ['title', 'slug'];
+
+    public function scopeUncategorized(Builder $query)
+    {
+        $query->where('slug', 'uncategorized');
+    }
 
 
     public function posts(): HasMany
