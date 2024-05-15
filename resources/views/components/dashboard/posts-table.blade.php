@@ -25,8 +25,7 @@
                 @foreach ($posts as $post)
                     <tr>
                         <x-td>
-                            {{-- <input type="checkbox" name="bulk_delete_selection[]" id="bulk_delete_selection"
-                                class="post-delete-checkbox" value="{{ $post->id }}"> --}}
+
                             <x-form.checkbox input-name="bulk_delete_selection[]" id="bulk_delete_selection"
                                 class="post-delete-checkbox" value="{{ $post->id }}" checkbox-only />
                         </x-td>
@@ -37,9 +36,15 @@
                         </x-td>
 
                         <x-td>
-                            <x-text-link href="/categories/{{ $post->category->slug }}">
-                                {{ $post->category->title }}
-                            </x-text-link>
+                            @if ($post->category)
+                                <x-text-link href="/categories/{{ $post->category->slug }}">
+                                    {{ $post->category->title }}
+                                </x-text-link>
+                            @else
+                                <x-text-link href="/categories/uncategorized">
+                                    uncategorized
+                                </x-text-link>
+                            @endif
 
                         </x-td>
                         <x-td>
