@@ -84,24 +84,32 @@ Route::middleware('auth')->group(function () {
             return redirect()->back()->with('error', 'No items selected for deletion');
         }
 
-        //check if uncategorized cateogory exists inside 'categories' db
-        $uncategorizedExist = App\Models\Category::where('title', 'uncategorized')->exists();
 
-        if ($uncategorizedExist) {
-            //find the id of the 'uncategorized' cat
-            $uncategorizedId = App\Models\Category::where('title', 'uncategorized')->first()->id;
+
+        if (Category::uncategorized()->exists()) {
+
+
+            // //find the id of the 'uncategorized' cat
+            // $uncategorizedId = Category::where('title', 'uncategorized')->first()->id;
+
             //update the posts related to these selected IDs to category_slug = 'uncategorized'
-            Post::whereIn('category_id', $selectedIds)->update(['category_id' => $uncategorizedId]);
+            Post::whereIn('category_id', $selectedIds)
+                ->update([
+                    'category_id' => Category::uncategorized()->first()->id
+                ]);
         } else {
+            dd('something got fucked up!');
             //create a new category with title = 'uncategorized'
             $test = Category::create([
-                'title' => 'uncategorized',
+                'title' => 'Uncategorized',
                 'slug' => 'uncategorized'
             ]);
-            $uncategorizedId = App\Models\Category::where('title', 'uncategorized')->first()->id;
-            dd($uncategorizedId);
+
             //update the posts related to all these selected IDs to category_slug = 'uncategorized'
-            Post::whereIn('category_id', $selectedIds)->update(['category_id' => $uncategorizedId]);
+            Post::whereIn('category_id', $selectedIds)
+                ->update([
+                    'category_id' => Category::uncategorized()->first()->id
+                ]);
         }
 
 
@@ -112,8 +120,18 @@ Route::middleware('auth')->group(function () {
     })->name('admin.categories.delete.selected');
 
     Route::delete('/admin/categories', function () {
+
+        //truncate categories database except the row where title is 'uncategorized'
+        if (Category::uncategorized()->exists()) {
+
+            DB::table('categories')->where('slug', '!=', 'uncategorized')->delete();
+        } else {
+            dd('one of the scenario where you make sure uncateorized is created!');
+            DB::table('categories')->truncate();
+        }
+
         //delete all categories
-        DB::table('categories')->truncate();
+        // DB::table('categories')->truncate();
         return redirect('/admin/categories')->with('success', 'All categories have been deleted!');
     })->name('admin.categories.delete.all');
 
