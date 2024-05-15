@@ -43,7 +43,7 @@ class CategoryController extends Controller
         Category::create($attributes);
 
 
-        return back()->with('success', 'Category created!');
+        return redirect('/admin/categories')->with('success', 'Category created!');
     }
 
     /**
