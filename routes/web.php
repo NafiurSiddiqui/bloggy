@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
         //delete all posts
         DB::table('posts')->truncate();
         return redirect('/admin/posts')->with('success', 'All posts have been deleted!');
-    });
+    })->name('admin.posts.delete.all');
     Route::delete('/admin/posts/delete-selected-posts', function () {
 
         $selectedIds = request()->input('bulk_delete_selection');
@@ -111,11 +111,11 @@ Route::middleware('auth')->group(function () {
         return redirect()->back()->with('success', 'Selected categories deleted successfully');
     })->name('admin.categories.delete.selected');
 
-    Route::delete('/admin/categories/delete-all', function () {
+    Route::delete('/admin/categories', function () {
         //delete all categories
         DB::table('categories')->truncate();
         return redirect('/admin/categories')->with('success', 'All categories have been deleted!');
-    });
+    })->name('admin.categories.delete.all');
 
     //    SUBCATEGORIES
     Route::get('/admin/subcategories', [SubcategoryController::class, 'index'])->name('admin.subcategories');
