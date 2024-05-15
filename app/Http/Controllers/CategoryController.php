@@ -16,9 +16,8 @@ class CategoryController extends Controller
     public function index(): View
     {
         return view('admin.categories.index', [
-            'categories' => Category::with('subcategories','posts')->orderBy('created_at','desc')->simplePaginate(10)
+            'categories' => Category::with('subcategories', 'posts')->orderBy('created_at', 'desc')->simplePaginate(10)
         ]);
-
     }
 
     /**
@@ -34,16 +33,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-//        dd($request->all());
+        //        dd($request->all());
         //validate
         $attributes = $request->validate([
-            'title' => ['required', 'string', 'max:255', 'unique:categories' ],
+            'title' => ['required', 'string', 'max:255', 'unique:categories'],
             'slug' => ['required', 'string', 'max:255', 'unique:categories'],
         ]);
         //store
         Category::create($attributes);
 
-        return redirect('/admin/categories')->with('success', 'Category created!');
+        // return redirect('/admin/categories')->with('success', 'Category created!');
+        return back()->with('success', 'Category created!');
     }
 
     /**
@@ -69,11 +69,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category):RedirectResponse
+    public function update(Request $request, Category $category): RedirectResponse
     {
         //validate
         $attributes = $request->validate([
-            'title' => ['required', 'string', 'max:255', 'unique:categories' ],
+            'title' => ['required', 'string', 'max:255', 'unique:categories'],
             'slug' => ['required', 'string', 'max:255', 'unique:categories'],
         ]);
         //store
