@@ -21,10 +21,19 @@
                     Create a Category
                 </x-secondary-button>
             </div> --}}
-
+            <div>
+                <form action="{{ route('admin.categories.delete.all') }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    {{-- <x-danger-button x-data="" x-on:click="$dispatch('open-modal','confirm-delete')"
+                        label="Delete All" /> --}}
+                    <button type="submit">Delete All</button>
+                </form>
+                {{-- <x-modal-delete message="You sure want to delete all {{ $pluralType }} ?" /> --}}
+            </div>
             <x-dashboard.index-actions singular-type="category" plural-type="categories"
                 multiple-delete-form-action-path="delete-multiple-categories"
-                delete-form-action-path="/admin/categories/delete-all" path-to-creation="/admin/categories/create" />
+                delete-form-action-route="admin.categories.delete.all" path-to-creation="/admin/categories/create" />
 
 
             <x-dashboard.categories-table :items="$categories" edit-href="admin/categories" />
