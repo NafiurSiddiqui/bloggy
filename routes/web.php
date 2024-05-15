@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
@@ -63,7 +64,7 @@ Route::middleware('auth')->group(function () {
         Post::whereIn('id', $selectedIds)->delete();
 
         return redirect()->back()->with('success', 'Selected items deleted successfully');
-    })->name('posts.delete.multiple');
+    })->name('posts.delete.selected');
 
 
     //    CATEGORIES
@@ -73,6 +74,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
     Route::patch('/admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
     Route::delete('admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+
+    Route::delete('/admin/categoires/delete-selected', function () {
+        $selectedIds = request()->input('bulk_delete_selection');
+
+        if (empty($selectedIds)) {
+
+            return redirect()->back()->with('message', 'No items selected for deletion');
+        }
+
+        //update the posts related to all these selected IDs to category_slug = 'uncategorized'
+
+        Post::whereIn('category_id', $selectedIds)->update(['category_id' => 1]);
+
+        // Delete the items using the selected IDs
+        Category::whereIn('id', $selectedIds)->delete();
+
+        return redirect()->back()->with('success', 'Selected categories deleted successfully');
+    })->name('admin.categories.delete.selected');
+    Route::delete('/admin/categories/delete-all', function () {
+        //delete all categories
+        DB::table('categories')->truncate();
+        return redirect('/admin/categories')->with('success', 'All categories have been deleted!');
+    });
+
     //    SUBCATEGORIES
     Route::get('/admin/subcategories', [SubcategoryController::class, 'index'])->name('admin.subcategories');
     Route::get('/admin/subcategories/create', [SubcategoryController::class, 'create'])->name('admin.subcategories.create');

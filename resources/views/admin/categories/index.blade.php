@@ -21,9 +21,11 @@
                     Create a Category
                 </x-secondary-button>
             </div> --}}
+
             <x-dashboard.index-actions singular-type="category" plural-type="categories"
                 multiple-delete-form-action-path="delete-multiple-categories"
                 delete-form-action-path="/admin/categories/delete-all" path-to-creation="/admin/categories/create" />
+
 
             <x-dashboard.categories-table :items="$categories" edit-href="admin/categories" />
 

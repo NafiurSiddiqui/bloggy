@@ -3,19 +3,21 @@
 <div class="relative overflow-x-auto shadow-md ">
 
     <x-table>
-        <tr>
-            <x-th>Select</x-th>
-            <x-th>Title</x-th>
-            <x-th>Category</x-th>
-            <x-th>Author</x-th>
-            <x-th>Status</x-th>
-            <x-th>Published At</x-th>
-            <x-th>Action</x-th>
 
-        </tr>
-        </thead>
+        <x-slot:thead>
+            <tr>
+                <x-th>Select</x-th>
+                <x-th>Title</x-th>
+                <x-th>Category</x-th>
+                <x-th>Author</x-th>
+                <x-th>Status</x-th>
+                <x-th>Published At</x-th>
+                <x-th>Action</x-th>
 
-        <form id="delete-multiple-posts" action="{{ route('posts.delete.multiple') }}" method="post">
+            </tr>
+        </x-slot:thead>
+
+        <form id="delete-multiple-posts" action="{{ route('posts.delete.selected') }}" method="post">
             @csrf
             @method('DELETE')
 
