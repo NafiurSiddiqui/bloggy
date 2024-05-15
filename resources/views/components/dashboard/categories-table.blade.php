@@ -58,7 +58,8 @@
                         </x-td>
                         <x-td>
 
-                            {{ $is_subcategories ? $item->category->title : $item->subcategories->count() }}
+                            {{ $is_subcategories ? ($item->category != null ? $item->category->title : 'uncategoriezed') : $item->subcategories->count() }}
+
                         </x-td>
                         <x-td>
                             {{ $item->posts->count() }}

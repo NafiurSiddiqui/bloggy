@@ -10,8 +10,8 @@
 
 @if ($categories->isEmpty())
     <div>
-        <p>No item yet!</p>
-        <x-secondary-button>Create a Category</x-secondary-button>
+        <p class="mt-4 mb-2 text-sm font-semibold text-gray-400">No Categories yet</p>
+        <x-secondary-button link href="/admin/categories/create">Create a Category</x-secondary-button>
     </div>
 @else
     <div class="my-4">
@@ -21,11 +21,12 @@
             <option value="---">---</option>
             @foreach ($categories as $category)
                 @if (isset($post))
-                    <option value="{{ $category->id }}" {{ $post->category->id == $category->id ? 'selected' : '' }}>
+                    <option value="{{ $category ?? $category->id }}"
+                        {{ $post->category?->id == $category->id ? 'selected' : '' }}>
                         {{ ucwords($category->title) }}</option>
                 @elseif (isset($subcategory))
                     <option value="{{ $category->id }}"
-                        {{ $subcategory->category->id == $category->id ? 'selected' : '' }}>
+                        @if ($subcategory->category != null) {{ $subcategory->category->id == $category->id ? 'selected' : '' }} @endif>
                         {{ ucwords($category->title) }}</option>
                 @else
                     <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
