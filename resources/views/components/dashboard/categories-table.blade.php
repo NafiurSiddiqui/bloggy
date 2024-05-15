@@ -13,7 +13,7 @@
                     Created At
                 </x-th>
                 <x-th>
-                    Update at
+                    Updated at
                 </x-th>
                 <x-th>
                     {{ $is_subcategories ? 'Category' : 'Subcategories count' }}
@@ -37,15 +37,16 @@
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <x-td>
-                            {{-- <div class="flex items-center">
-                            <input id="checkbox-table-1" type="checkbox"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="checkbox-table-1" class="sr-only">checkbox</label>
-                        </div> --}}
 
-                            <x-form.checkbox input-name="bulk_delete_selection[]" id="bulk_delete_selection"
-                                class="{{ $is_subcategories ? 'subcategory' : 'category' }}-delete-checkbox"
-                                value="{{ $item->id }}" checkbox-only />
+                            @if ($item->title == 'Uncategorized')
+                                <x-form.checkbox input-name="bulk_delete_selection" id="bulk_delete_selection"
+                                    class="{{ $is_subcategories ? 'subcategory' : 'category' }}-delete-checkbox !bg-gray-100 !border-gray-300 !cursor-auto"
+                                    checkbox-only disabled />
+                            @else
+                                <x-form.checkbox input-name="bulk_delete_selection[]" id="bulk_delete_selection"
+                                    class="{{ $is_subcategories ? 'subcategory' : 'category' }}-delete-checkbox"
+                                    value="{{ $item->id }}" checkbox-only />
+                            @endif
                         </x-td>
                         <x-td>
                             {{ $item->title }}
@@ -65,8 +66,10 @@
                             {{ $item->posts->count() }}
                         </x-td>
                         <x-td>
-                            <a href="/{{ $editHref }}/{{ $item->id }}/edit"
-                                class=" font-medium w-full text-blue-600 dark:text-blue-500 hover:underline hover:text-blue-600">Edit</a>
+                            @unless ($item->slug == 'uncategorized')
+                                <a href="/{{ $editHref }}/{{ $item->id }}/edit"
+                                    class=" font-medium w-full text-blue-600 dark:text-blue-500 hover:underline hover:text-blue-600">Edit</a>
+                            @endunless
 
                         </x-td>
                     </tr>
