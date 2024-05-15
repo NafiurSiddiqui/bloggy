@@ -33,7 +33,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        //        dd($request->all());
+
         //validate
         $attributes = $request->validate([
             'title' => ['required', 'string', 'max:255', 'unique:categories'],
@@ -42,7 +42,7 @@ class CategoryController extends Controller
         //store
         Category::create($attributes);
 
-        // return redirect('/admin/categories')->with('success', 'Category created!');
+
         return back()->with('success', 'Category created!');
     }
 
