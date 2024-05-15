@@ -76,22 +76,41 @@ Route::middleware('auth')->group(function () {
     Route::delete('admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
 
     Route::delete('/admin/categoires/delete-selected', function () {
+
         $selectedIds = request()->input('bulk_delete_selection');
 
         if (empty($selectedIds)) {
 
-            return redirect()->back()->with('message', 'No items selected for deletion');
+            return redirect()->back()->with('error', 'No items selected for deletion');
         }
 
-        //update the posts related to all these selected IDs to category_slug = 'uncategorized'
+        //check if uncategorized cateogory exists inside 'categories' db
+        $uncategorizedExist = App\Models\Category::where('title', 'uncategorized')->exists();
 
-        Post::whereIn('category_id', $selectedIds)->update(['category_id' => 1]);
+        if ($uncategorizedExist) {
+            //find the id of the 'uncategorized' cat
+            $uncategorizedId = App\Models\Category::where('title', 'uncategorized')->first()->id;
+            //update the posts related to these selected IDs to category_slug = 'uncategorized'
+            Post::whereIn('category_id', $selectedIds)->update(['category_id' => $uncategorizedId]);
+        } else {
+            //create a new category with title = 'uncategorized'
+            $test = Category::create([
+                'title' => 'uncategorized',
+                'slug' => 'uncategorized'
+            ]);
+            $uncategorizedId = App\Models\Category::where('title', 'uncategorized')->first()->id;
+            dd($uncategorizedId);
+            //update the posts related to all these selected IDs to category_slug = 'uncategorized'
+            Post::whereIn('category_id', $selectedIds)->update(['category_id' => $uncategorizedId]);
+        }
+
 
         // Delete the items using the selected IDs
         Category::whereIn('id', $selectedIds)->delete();
 
         return redirect()->back()->with('success', 'Selected categories deleted successfully');
     })->name('admin.categories.delete.selected');
+
     Route::delete('/admin/categories/delete-all', function () {
         //delete all categories
         DB::table('categories')->truncate();
