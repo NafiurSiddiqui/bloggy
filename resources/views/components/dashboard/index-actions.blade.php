@@ -7,7 +7,7 @@
 ])
 
 {{-- similar actiona bar for admin/posts, admin/categories, admin/subcategories --}}
-
+{{-- @dd($multipleDeleteFormActionPath) --}}
 
 <div class="my-4 mb-8 gap-8 flex justify-between md:justify-end lg:justify-end flex-wrap">
     <div>
@@ -21,7 +21,8 @@
     </div>
     <div class="delete-selected-{{ $pluralType }}-btns text-gray-400 hidden" x-data="{ show: false }">
         <x-danger-button label="Delete Selected {{ $pluralType }}" />
-        <x-modal-delete message="You sure want to delete these {{ $pluralType }}?" :form="$multipleDeleteFormActionPath" />
+        <x-modal-delete message="You sure want to delete these {{ $pluralType }}?"
+            form-id="{{ $multipleDeleteFormActionPath }}" />
     </div>
     <x-secondary-button link href="{{ $pathToCreation }}">
         Create a {{ $singularType }}
