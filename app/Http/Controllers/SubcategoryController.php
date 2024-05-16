@@ -16,8 +16,8 @@ class SubcategoryController extends Controller
      */
     public function index(): View
     {
-        return view('admin.subcategories.index',[
-            'subcategories' => Subcategory::with('posts','category')->latest()->simplePaginate(10),
+        return view('admin.subcategories.index', [
+            'subcategories' => Subcategory::with('posts', 'category')->latest()->simplePaginate(10),
         ]);
     }
 
@@ -34,22 +34,22 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-//        dd($request->all());
-//        validate
+
+        //        validate
         $attributes = request()->validate([
             'category_id' => ['required', 'exists:categories,id'],
             'title' => ['required', 'max:255', 'unique:subcategories,title'],
             'slug' => ['required', 'max:255', 'unique:subcategories,slug'],
         ]);
 
-//        dd($attributes);
+        //        dd($attributes);
         //store
         Subcategory::create($attributes);
-//
-//        return response()->json([
-//            'success' => true,
-//            'message' => 'Subcategory created successfully!'
-//        ]);
+        //
+        //        return response()->json([
+        //            'success' => true,
+        //            'message' => 'Subcategory created successfully!'
+        //        ]);
 
         return redirect('/admin/subcategories')->with('success', 'Subcategory created!');
     }
@@ -57,7 +57,7 @@ class SubcategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show( Category $category, Subcategory $subcategory): View
+    public function show(Category $category, Subcategory $subcategory): View
     {
 
         return view('subcategories.show', [
@@ -71,7 +71,7 @@ class SubcategoryController extends Controller
      */
     public function edit(Subcategory $subcategory): View
     {
-        return view('admin.subcategories.edit',[
+        return view('admin.subcategories.edit', [
             'subcategory' => $subcategory
         ]);
     }
@@ -81,17 +81,14 @@ class SubcategoryController extends Controller
      */
     public function update(Request $request, Subcategory $subcategory): RedirectResponse
     {
+
         //validate
         $attributes = request()->validate([
             'category_id' => ['required', 'exists:categories,id'],
-            'title' => ['required', 'max:255', Rule::unique('subcategories','name')->ignore($subcategory->id)],
-            'slug' => ['required', 'max:255', Rule::unique('subcategories','slug')->ignore($subcategory->id)],
+            'title' => ['required', 'max:255', Rule::unique('subcategories', 'title')->ignore($subcategory->id)],
+            'slug' => ['required', 'max:255', Rule::unique('subcategories', 'slug')->ignore($subcategory->id)],
         ]);
-        //check if category_id is dirty
 
-        //if dirty, update, else just update the fields that is dirty
-
-        //Gemini recommended not to do above checks
 
         $subcategory->update($attributes);
 

@@ -14,8 +14,8 @@
             <option value="---">---</option>
             @foreach ($subcategories as $subcategory)
                 @if (isset($post))
-                    <option value="{{ $subcategory->id }}"
-                        {{ $post->subcategory->id == $subcategory->id ? 'selected' : '' }}>
+                    <option value="{{ $subcategory ? $subcategory->id : null }}"
+                        {{ $post->subcategory?->id == $subcategory->id ? 'selected' : '' }}>
                         {{ ucwords($subcategory->title) }}</option>
                 @else
                     <option value="{{ $subcategory->id }}"

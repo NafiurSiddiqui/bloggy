@@ -28,7 +28,9 @@
         </x-slot:thead>
 
         {{-- <button form="delete-multiple-categories">Delete Selected</button> --}}
-        <form id="delete-multiple-categories" action="{{ route('admin.categories.delete.selected') }}" method="post">
+        <form id="delete-multiple-{{ $is_subcategories ? 'subcategories' : 'categories' }}"
+            action="{{ $is_subcategories ? route('admin.subcategories.delete.selected') : route('admin.categories.delete.selected') }}"
+            method="post">
             @csrf
             @method('DELETE')
             {{-- <button type="submit">Delete Selected</button> --}}

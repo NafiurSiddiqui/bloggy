@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Subcategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -119,7 +120,7 @@ Route::middleware('auth')->group(function () {
         return redirect()->back()->with('success', 'Selected categories deleted successfully');
     })->name('admin.categories.delete.selected');
 
-    Route::delete('/admin/categories', function () {
+    Route::delete('/admin/categories/delete-all', function () {
 
         //truncate categories database except the row where title is 'uncategorized'
         if (Category::uncategorized()->exists()) {
@@ -139,10 +140,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/subcategories', [SubcategoryController::class, 'index'])->name('admin.subcategories');
     Route::get('/admin/subcategories/create', [SubcategoryController::class, 'create'])->name('admin.subcategories.create');
     Route::post('/admin/subcategories/store', [SubcategoryController::class, 'store'])->name('admin.subcategories.store');
+    Route::delete('/admin/subcategories/delete-selected', function () {
+
+        $selectedIds = request()->input('bulk_delete_selection');
+        // dd($selectedIds);
+
+        if (empty($selectedIds)) {
+            return redirect()->back()->with('error', 'No items selected for deletion');
+        }
+
+        // Delete the items using the selected IDs
+        Subcategory::whereIn('id', $selectedIds)->delete();
+
+        return redirect()->back()->with('success', 'Selected subcategories deleted successfully');
+    })->name('admin.subcategories.delete.selected');
+    Route::delete('/admin/subcategories', function () {
+
+
+        //delete all categories
+        DB::table('subcategories')->truncate();
+        return redirect('/admin/subcategories')->with('success', 'All subcategories have been deleted!');
+    })->name('admin.subcategories.delete.all');
     Route::get('/admin/subcategories/{subcategory}/edit', [SubcategoryController::class, 'edit'])->name('admin.subcategories.edit');
     Route::patch('/admin/subcategories/{subcategory}', [SubcategoryController::class, 'update'])->name('admin.subcategories.update');
     Route::delete('admin/subcategories/{subcategory}', [SubcategoryController::class, 'destroy'])->name('admin.subcategories.destroy');
-
     //    PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

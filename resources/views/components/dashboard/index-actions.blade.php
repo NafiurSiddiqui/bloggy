@@ -7,7 +7,7 @@
 ])
 
 {{-- similar actiona bar for admin/posts, admin/categories, admin/subcategories --}}
-{{-- @dd($deleteFormActionPath) --}}
+{{-- @dd($pluralType) --}}
 
 <div class="my-4 mb-8 gap-8 flex justify-between md:justify-end lg:justify-end flex-wrap">
     <div class="delete-all-container">
@@ -35,15 +35,15 @@
     document.addEventListener("DOMContentLoaded", function() {
         const categoriesTable = document.getElementById('categories_table')?.querySelectorAll(
             'table > tbody > tr');
-        const subcateogories = document.getElementById('subcategories_table')?.querySelectorAll(
-            'table > tbody > tr');
+        // const subcateogories = document.getElementById('subcategories_table')?.querySelectorAll(
+        //     'table > tbody > tr');
         const uncategorizedRow = document.getElementById("table-row-uncategorized");
         const deleteAllContainer = document.querySelector('.delete-all-container');
 
 
         categoriesTable?.length === 1 && uncategorizedRow ? deleteAllContainer.classList.add('hidden') : null;
 
-        subcateogories?.length === 1 && uncategorizedRow ? deleteAllContainer.classList.add('hidden') : null;
+        // subcateogories?.length === 1 && uncategorizedRow ? deleteAllContainer.classList.add('hidden') : null;
 
     });
 </script>
