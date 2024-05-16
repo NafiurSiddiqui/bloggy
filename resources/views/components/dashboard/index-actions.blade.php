@@ -30,21 +30,20 @@
 </div>
 
 <script>
-    //target dom  where classname matches either 'subcategories_table' or 'categories_table'
+    //Disable delete all if only uncategoriezed category exists
 
-
-
-    // document.addEventListener('DOMcontentLoaded', function(e) {
-    //     // const t = document.getElementById('table-row-uncategorized');
-    //     console.log(document.getElementById('table-row-uncategorized'));
-    // });
     document.addEventListener("DOMContentLoaded", function() {
-        const table = document.getElementById('categories_table').querySelectorAll('table > tbody > tr');
+        const categoriesTable = document.getElementById('categories_table')?.querySelectorAll(
+            'table > tbody > tr');
+        const subcateogories = document.getElementById('subcategories_table')?.querySelectorAll(
+            'table > tbody > tr');
         const uncategorizedRow = document.getElementById("table-row-uncategorized");
         const deleteAllContainer = document.querySelector('.delete-all-container');
 
 
-        table.length === 1 && uncategorizedRow ? deleteAllContainer.classList.add('hidden') : null;
+        categoriesTable?.length === 1 && uncategorizedRow ? deleteAllContainer.classList.add('hidden') : null;
+
+        subcateogories?.length === 1 && uncategorizedRow ? deleteAllContainer.classList.add('hidden') : null;
 
     });
 </script>

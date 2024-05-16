@@ -2,7 +2,7 @@
 
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <x-table class="{{ $is_subcategories ? 'subcategories_table' : 'category_table' }}">
+    <x-table id="{{ $is_subcategories ? 'subcategories_table' : 'categories_table' }}">
         <x-slot:thead>
             <tr>
                 <x-th>Select</x-th>
@@ -34,8 +34,7 @@
             {{-- <button type="submit">Delete Selected</button> --}}
             <tbody>
                 @foreach ($items as $item)
-                    <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <x-tr>
                         <x-td>
 
                             @if ($item->title == 'Uncategorized')
@@ -48,7 +47,7 @@
                                     value="{{ $item->id }}" checkbox-only />
                             @endif
                         </x-td>
-                        <x-td>
+                        <x-td id="table-row-uncategorized">
                             {{ $item->title }}
                         </x-td>
                         <x-td>
@@ -72,7 +71,7 @@
                             @endunless
 
                         </x-td>
-                    </tr>
+                    </x-tr>
                 @endforeach
 
             </tbody>
