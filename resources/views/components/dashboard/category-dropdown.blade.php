@@ -11,14 +11,14 @@
 
 
 @if ($categories->isEmpty())
-    <div>
+    <div class=" dark:bg-gray-800 dark:text-gray-200">
         <p class="mt-4 mb-2 text-sm font-semibold text-gray-400">No Categories yet</p>
         <x-secondary-button link href="/admin/categories/create">Create a Category</x-secondary-button>
     </div>
 @else
     <div class="my-4">
         <x-form.label label-for="category" />
-        <select name="category_id" id="category_id" class="rounded-md w-32 dark:text-gray-700"
+        <select name="category_id" id="category_id" class="rounded-md w-32   dark:bg-gray-800 dark:text-gray-200"
             title="Select a category for the post">
 
             <option value="---">---</option>
