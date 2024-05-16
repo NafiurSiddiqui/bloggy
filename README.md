@@ -14,3 +14,4 @@ Made with 💚
 
 -   Seed the `initAppSeeder`
     -   This creates a default admin, a default `uncategorized` category, and a default `uncategorized` subcategory.
+-   Show `cookies policies`, you are using sessions storage for UI functionality.
