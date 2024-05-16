@@ -1,7 +1,7 @@
 @props(['items', 'is_subcategories' => false, 'edit-href' => ''])
 
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg rounded-md">
     <x-table id="{{ $is_subcategories ? 'subcategories_table' : 'categories_table' }}">
         <x-slot:thead>
             <tr>

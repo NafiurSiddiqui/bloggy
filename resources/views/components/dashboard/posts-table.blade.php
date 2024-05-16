@@ -1,6 +1,6 @@
 @props(['posts'])
 
-<div class="relative overflow-x-auto shadow-md ">
+<div class="relative overflow-x-auto shadow-md rounded-md ">
 
     <x-table>
 
