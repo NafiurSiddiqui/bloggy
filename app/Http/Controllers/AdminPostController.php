@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use PhpParser\Node\Scalar\String_;
@@ -28,7 +30,14 @@ class AdminPostController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        // dd(request()->all());
+        // dd(request()->input('subcategory_id') === "---");
+
+        $subcategoryIdValidator = function (string $attribute, mixed $value, Closure $fail) {
+            if ($value !== "---" && !Validator::make(['subcategory_id' => $value], ['subcategory_id' => 'exists:subcategory'])->passes()) {
+                $fail('The subcategory ID must be a valid existing subcategory or "---".');
+            }
+        };
+
         //validate
         $attributes = request()->validate([
             'title' => ['required', 'max:255', 'unique:posts'],
@@ -38,7 +47,17 @@ class AdminPostController extends Controller
             'thumbnail' => ['required', 'image'],
             'thumbnail_alt_txt' => ['required', 'max:100'],
             'category_id' => ['required', 'exists:categories,id'],
-            'subcategory_id' => ['required', 'exists:subcategories,id'],
+            // 'subcategory_id' => ['nullable', 'exists:subcategories,id'],
+            'subcategory_id' => ['nullable', function (string $attribute, mixed $value, Closure $fail) {
+                if (!is_numeric($value)) {
+                    // Allow "---" or any other non-numeric value
+                    return true;
+                } else {
+
+                    // Validate numeric values for existence
+                    Validator::make(['subcategory_id' => $value], ['subcategory_id' => 'exists:subcategory']);
+                }
+            }],
             'is_featured' => ['nullable'],
             'is_published' => ['boolean'],
             'is_draft' => ['boolean'],
@@ -50,13 +69,14 @@ class AdminPostController extends Controller
 
         ]);
 
+
         //associate user_id and store file
+        $attributes['subcategory_id'] = request()->input('subcategory_id') === "---" ? null : request()->input('subcategory_id');
         $attributes['user_id'] = auth()->id();
         $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         if (isset($attributes['og_thumbnail'])) {
             $attributes['og_thumbnail'] = request()->file('og_thumbnail')->store('thumbnails');
         }
-
 
 
         //store
@@ -77,6 +97,8 @@ class AdminPostController extends Controller
     public function update(Request $request, Post $post)
     {
 
+        // dd(request()->all());
+        // dd(request()->input('subcategory_id') === "---");
         //validate
         $attributes = request()->validate([
             'title' => ['required', 'max:255',  Rule::unique('posts', 'title')->ignore($post->id)],
@@ -86,7 +108,16 @@ class AdminPostController extends Controller
             'thumbnail' => ['image'],
             'thumbnail_alt_txt' => ['max:100'],
             'category_id' => ['required', 'exists:categories,id'],
-            'subcategory_id' => ['required', 'exists:subcategories,id'],
+            'subcategory_id' => ['nullable', function (string $attribute, mixed $value, Closure $fail) {
+                if (!is_numeric($value)) {
+                    // Allow "---" or any other non-numeric value
+                    return true;
+                } else {
+
+                    // Validate numeric values for existence
+                    Validator::make(['subcategory_id' => $value], ['subcategory_id' => 'exists:subcategory']);
+                }
+            }],
             'is_featured' => ['nullable'],
             'is_hot' =>  ['nullable'],
             'meta_title' => ['required', 'max:255'],
@@ -100,6 +131,9 @@ class AdminPostController extends Controller
          * checkboxes when turned off, they are not included in the request payload, hence we manually set a default value if not turned on.
          * Make sure the value is always either 'on' or 'off' for integrity.
          */
+
+        // dd(request()->input('subcategory_id') === "---");
+        $attributes['subcategory_id'] = request()->input('subcategory_id') === "---" ? null : request()->input('subcategory_id');
         $attributes['is_featured'] = $request->has('is_featured') ? 'on' : 'off';
         $attributes['is_hot'] = $request->has('is_hot') ? 'on' : 'off';
 

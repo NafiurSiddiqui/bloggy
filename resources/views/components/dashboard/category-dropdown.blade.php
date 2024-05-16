@@ -8,6 +8,8 @@
     - This is for the reusability of this component
     --}}
 
+
+
 @if ($categories->isEmpty())
     <div>
         <p class="mt-4 mb-2 text-sm font-semibold text-gray-400">No Categories yet</p>
@@ -21,7 +23,7 @@
             <option value="---">---</option>
             @foreach ($categories as $category)
                 @if (isset($post))
-                    <option value="{{ $category ?? $category->id }}"
+                    <option value="{{ $category ? $category->id : null }}"
                         {{ $post->category?->id == $category->id ? 'selected' : '' }}>
                         {{ ucwords($category->title) }}</option>
                 @elseif (isset($subcategory))
