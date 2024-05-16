@@ -10,7 +10,7 @@
 {{-- @dd($deleteFormActionPath) --}}
 
 <div class="my-4 mb-8 gap-8 flex justify-between md:justify-end lg:justify-end flex-wrap">
-    {{-- <div>
+    <div>
         <form id="form-delete" action="{{ route($deleteFormActionRoute) }}" method="post">
             @csrf
             @method('DELETE')
@@ -18,7 +18,7 @@
                 label="Delete All" />
         </form>
         <x-modal-delete message="You sure want to delete all {{ $pluralType }} ?" />
-    </div> --}}
+    </div>
     <div class="delete-selected-{{ $pluralType }}-btns text-gray-400 hidden" x-data="{ show: false }">
         <x-danger-button label="Delete Selected {{ $pluralType }}" />
         <x-modal-delete message="You sure want to delete these {{ $pluralType }}?"
