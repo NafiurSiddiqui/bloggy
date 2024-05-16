@@ -40,7 +40,7 @@
     @endif
 </x-dashboard.dashboard-layout>
 
-<script>
+{{-- <script>
     const postCheckBoxes = document.querySelectorAll('.post-delete-checkbox');
     const submitBtn = document.querySelector('.delete-selected-posts-btns');
 
@@ -58,4 +58,71 @@
 
     // Add event listener to each checkbox for change
     postCheckBoxes.forEach(checkbox => checkbox.addEventListener('change', checkAnyCheckbox));;
+</script> --}}
+
+<script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const postCheckBoxes = document.querySelectorAll('.post-delete-checkbox');
+    //     const submitBtn = document.querySelector('.delete-selected-posts-btns');
+    //     console.log(postCheckBoxes);
+    //     const anyChecked = sessionStorage.getItem('some_posts_selected') === 'true';
+
+    //     if (anyChecked) {
+    //         submitBtn.classList.remove('hidden');
+    //     } else {
+    //         submitBtn.classList.add('hidden');
+    //     }
+
+    //     // Add event listener to each checkbox for change
+    //     postCheckBoxes.forEach(checkbox => checkbox.addEventListener('change', function() {
+    //         sessionStorage.setItem('some_posts_selected', [...postCheckBoxes].some(box => box
+    //             .checked));
+
+    //         if (this.checked) {
+    //             submitBtn.classList.remove('hidden');
+    //         } else {
+    //             // Check if any other checkbox is checked
+    //             if (![...postCheckBoxes].some(box => box.checked)) {
+    //                 submitBtn.classList.add('hidden');
+    //             }
+    //         }
+    //     }));
+    // });
+
+    window.addEventListener('load', function() {
+        const categoryCheckboxes = document.querySelectorAll('.post-delete-checkbox');
+        const submitBtn = document.querySelector('.delete-selected-posts-btns');
+        const POSTS_SESSION_ITEM = 'some_posts_selected';
+
+        let someAreChecked = [...categoryCheckboxes].some(input => input.checked);
+
+        const anyChecked = sessionStorage.getItem(POSTS_SESSION_ITEM) === 'true';
+
+        if (anyChecked && someAreChecked) {
+            submitBtn.classList.remove('hidden');
+            console.log('says checked');
+        } else {
+            submitBtn.classList.add('hidden');
+            console.log('the fuck!');
+            sessionStorage.removeItem(POSTS_SESSION_ITEM);
+        }
+
+        // Add event listener to each checkbox for change
+        categoryCheckboxes.forEach(checkbox => checkbox.addEventListener('change', function() {
+            sessionStorage.setItem(POSTS_SESSION_ITEM, [...categoryCheckboxes].some(
+                box => box
+                .checked));
+
+            if (this.checked) {
+                submitBtn.classList.remove('hidden');
+            } else {
+                // Check if any other checkbox is checked
+                if (![...categoryCheckboxes].some(box => box.checked)) {
+                    submitBtn.classList.add('hidden');
+                    sessionStorage.removeItem(POSTS_SESSION_ITEM);
+                }
+            }
+        }));
+
+    })
 </script>

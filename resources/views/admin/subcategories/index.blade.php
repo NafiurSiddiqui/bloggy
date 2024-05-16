@@ -30,21 +30,39 @@
 
 
 <script>
-    const subCategoryCheckBoxes = document.querySelectorAll('.subcategory-delete-checkbox');
-    const submitBtn = document.querySelector('.delete-selected-subcategories-btns');
+    window.addEventListener('load', function() {
+        const subCategoryCheckBoxes = document.querySelectorAll('.subcategory-delete-checkbox');
+        const submitBtn = document.querySelector('.delete-selected-subcategories-btns');
+        const SUBCATEGORIES_SESSION_ITEM = 'some_subcategories_selected';
+        let someAreChecked = [...subCategoryCheckBoxes].some(input => input.checked);
 
+        const anyChecked = sessionStorage.getItem(SUBCATEGORIES_SESSION_ITEM) === 'true';
 
-    function checkAnyCheckbox() {
-        // Loop through all postCheckBoxes
-        for (const checkbox of subCategoryCheckBoxes) {
-            if (checkbox.checked) {
-                submitBtn.classList.remove('hidden');
-                return; // Exit the loop if at least one checkbox is checked
-            }
+        if (anyChecked && someAreChecked) {
+            submitBtn.classList.remove('hidden');
+            console.log('says checked');
+        } else {
+            submitBtn.classList.add('hidden');
+            console.log('the fuck!');
+            sessionStorage.removeItem(SUBCATEGORIES_SESSION_ITEM);
         }
-        submitBtn.classList.add('hidden');
-    }
 
-    // Add event listener to each checkbox for change
-    subCategoryCheckBoxes.forEach(checkbox => checkbox.addEventListener('change', checkAnyCheckbox));
+        // Add event listener to each checkbox for change
+        subCategoryCheckBoxes.forEach(checkbox => checkbox.addEventListener('change', function() {
+            sessionStorage.setItem(SUBCATEGORIES_SESSION_ITEM, [...subCategoryCheckBoxes].some(
+                box => box
+                .checked));
+
+            if (this.checked) {
+                submitBtn.classList.remove('hidden');
+            } else {
+                // Check if any other checkbox is checked
+                if (![...subCategoryCheckBoxes].some(box => box.checked)) {
+                    submitBtn.classList.add('hidden');
+                    sessionStorage.removeItem(SUBCATEGORIES_SESSION_ITEM);
+                }
+            }
+        }));
+
+    })
 </script>
