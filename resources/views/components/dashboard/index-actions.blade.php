@@ -10,7 +10,7 @@
 {{-- @dd($deleteFormActionPath) --}}
 
 <div class="my-4 mb-8 gap-8 flex justify-between md:justify-end lg:justify-end flex-wrap">
-    <div>
+    <div class="delete-all-container">
         <form id="form-delete" action="{{ route($deleteFormActionRoute) }}" method="post">
             @csrf
             @method('DELETE')
@@ -28,3 +28,23 @@
         Create a {{ $singularType }}
     </x-secondary-button>
 </div>
+
+<script>
+    //target dom  where classname matches either 'subcategories_table' or 'categories_table'
+
+
+
+    // document.addEventListener('DOMcontentLoaded', function(e) {
+    //     // const t = document.getElementById('table-row-uncategorized');
+    //     console.log(document.getElementById('table-row-uncategorized'));
+    // });
+    document.addEventListener("DOMContentLoaded", function() {
+        const table = document.getElementById('categories_table').querySelectorAll('table > tbody > tr');
+        const uncategorizedRow = document.getElementById("table-row-uncategorized");
+        const deleteAllContainer = document.querySelector('.delete-all-container');
+
+
+        table.length === 1 && uncategorizedRow ? deleteAllContainer.classList.add('hidden') : null;
+
+    });
+</script>

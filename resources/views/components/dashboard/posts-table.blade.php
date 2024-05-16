@@ -23,7 +23,7 @@
 
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach ($posts as $post)
-                    <tr>
+                    <x-tr>
                         <x-td>
 
                             <x-form.checkbox input-name="bulk_delete_selection[]" id="bulk_delete_selection"
@@ -63,7 +63,7 @@
                             <a href="/admin/post/{{ $post->slug }}/edit"
                                 class="text-indigo-600 hover:text-indigo-900">Edit</a>
                         </x-td>
-                    </tr>
+                    </x-tr>
                 @endforeach
             </tbody>
         </form>
