@@ -2,7 +2,7 @@
 
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <x-table>
+    <x-table class="{{ $is_subcategories ? 'subcategories_table' : 'category_table' }}">
         <x-slot:thead>
             <tr>
                 <x-th>Select</x-th>
