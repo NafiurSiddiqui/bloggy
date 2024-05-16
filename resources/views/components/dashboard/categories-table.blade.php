@@ -35,12 +35,12 @@
             <tbody>
                 @foreach ($items as $item)
                     <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
                         <x-td>
 
                             @if ($item->title == 'Uncategorized')
                                 <x-form.checkbox input-name="bulk_delete_selection" id="bulk_delete_selection"
-                                    class="{{ $is_subcategories ? 'subcategory' : 'category' }}-delete-checkbox !bg-gray-100 !border-gray-300 !cursor-auto"
+                                    class="{{ $is_subcategories ? 'subcategory' : 'category' }}-delete-checkbox    !cursor-auto"
                                     checkbox-only disabled />
                             @else
                                 <x-form.checkbox input-name="bulk_delete_selection[]" id="bulk_delete_selection"
