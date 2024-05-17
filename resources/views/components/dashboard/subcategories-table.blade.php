@@ -13,7 +13,7 @@
                     created
                 </x-th>
                 <x-th>
-                    subcategories
+                    Categories
                 </x-th>
                 <x-th>
                     Posts
