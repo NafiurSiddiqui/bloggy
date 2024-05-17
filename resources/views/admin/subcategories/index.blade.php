@@ -12,12 +12,6 @@
             </x-secondary-button>
         </div>
     @else
-        {{-- <div class="my-2 flex justify-end">
-            <x-secondary-button link href="/admin/subcategories/create">
-                Create a Subcategory
-            </x-secondary-button>
-        </div> --}}
-
         <x-dashboard.index-actions singular-type="subcategory" plural-type="subcategories"
             multiple-delete-form-action-path="delete-multiple-subcategories"
             delete-form-action-route="admin.subcategories.delete.all" path-to-creation="/admin/subcategories/create" />

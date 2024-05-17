@@ -32,36 +32,6 @@
 
 
 <script>
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     const categoryCheckBoxes = document.querySelectorAll('.category-delete-checkbox');
-    //     console.log(categoryCheckBoxes);
-    //     const submitBtn = document.querySelector('.delete-selected-categories-btns');
-
-    //     const anyChecked = sessionStorage.getItem('some_categories_selected') === 'true';
-
-    //     if (anyChecked) {
-    //         submitBtn.classList.remove('hidden');
-    //     } else {
-    //         submitBtn.classList.add('hidden');
-    //     }
-
-    //     // Add event listener to each checkbox for change
-    //     categoryCheckBoxes.forEach(checkbox => checkbox.addEventListener('change', function() {
-    //         sessionStorage.setItem('some_categories_selected', [...categoryCheckBoxes].some(box =>
-    //             box
-    //             .checked));
-
-    //         if (this.checked) {
-    //             submitBtn.classList.remove('hidden');
-    //         } else {
-    //             // Check if any other checkbox is checked
-    //             if (![...categoryCheckBoxes].some(box => box.checked)) {
-    //                 submitBtn.classList.add('hidden');
-    //             }
-    //         }
-    //     }));
-    // });
-
     window.addEventListener('load', function() {
         const categoryCheckboxes = document.querySelectorAll('.category-delete-checkbox');
         const submitBtn = document.querySelector('.delete-selected-categories-btns');
