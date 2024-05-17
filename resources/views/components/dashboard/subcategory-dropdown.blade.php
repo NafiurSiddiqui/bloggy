@@ -9,7 +9,8 @@
 @else
     <div class="my-4">
         <x-form.label label-for="subcategory" />
-        <select name="subcategory_id" id="subcategory_id" class="rounded-md w-32" title="Select a subcategory for the post">
+        <select name="subcategory_id" id="subcategory_id" class="rounded-md w-32 dark:bg-gray-800 dark:text-gray-200"
+            title="Select a subcategory for the post">
 
             <option value="---">---</option>
             @foreach ($subcategories as $subcategory)
