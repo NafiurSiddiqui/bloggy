@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class SubcategoryController extends Controller
 {
@@ -16,8 +17,30 @@ class SubcategoryController extends Controller
      */
     public function index(): View
     {
+        //check if query has a certain value
+        // $query = request()->query('category');
+        //return all the subcategories that has a prarent of the query value
+        // $subcategories = Subcategory::where('parent_id', $query)->get();
+        $filter = request()->query->has('filter');
+
+        if ($filter) {
+
+            $res = QueryBuilder::for(Category::class)
+                ->allowedFilters(['slug'])
+                ->with('subcategories')
+                ->get();
+
+            // dd($res);
+        }
+
         return view('admin.subcategories.index', [
             'subcategories' => Subcategory::with('posts', 'category')->latest()->simplePaginate(10),
+            'category' => $filter ? QueryBuilder::for(Category::class)
+                ->allowedFilters(['slug'])
+                ->with('subcategories')
+                ->latest()
+                ->simplePaginate(10) : null,
+
         ]);
     }
 

@@ -52,7 +52,7 @@
                             {{ $category->updated_at->diffForHumans() }}
                         </x-td>
                         <x-td>
-                            <x-text-link href="/admin/subcategories/?category={{ $category->slug }}">
+                            <x-text-link href="/admin/subcategories?filter[slug]={{ $category->slug }}">
                                 {{ $category->subcategories->count() }}
                             </x-text-link>
 

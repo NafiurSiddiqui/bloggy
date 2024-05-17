@@ -38,7 +38,7 @@
 
             <div class="flex justify-start space-x-4">
                 <x-dashboard.category-dropdown :post="$post" />
-                <x-dashboard.subcategory-dropdown :post="$post" subacategory />
+                <x-dashboard.subcategory-dropdown :post="$post" />
             </div>
         </x-panel>
 

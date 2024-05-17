@@ -13,13 +13,28 @@
         </div>
     @else
         <div>
-            Need filter here
+            <div>
+                Filter by-
+                {{-- <select name="category-filter" id="category-filter"
+                    class="rounded-md w-32   dark:bg-gray-800 dark:text-gray-200"> --}}
+                {{-- <option value="all" selected>All</option> --}}
+
+                <x-category-filter />
+
+
+                {{-- </select> --}}
+
+
+            </div>
+
+
+            <x-secondary-button link href="/admin/subcategories">Reset Filter</x-secondary-button>
         </div>
         <x-dashboard.index-actions singular-type="subcategory" plural-type="subcategories"
             multiple-delete-form-action-path="delete-multiple-subcategories"
             delete-form-action-route="admin.subcategories.delete.all" path-to-creation="/admin/subcategories/create" />
 
-        <x-dashboard.subcategories-table :subcategories="$subcategories" edit-href="admin/subcategories" />
+        <x-dashboard.subcategories-table :subcategories="$subcategories" :category="$category" edit-href="admin/subcategories" />
         <x-pagination-holder :item="$subcategories" />
     @endif
 </x-dashboard.dashboard-layout>
