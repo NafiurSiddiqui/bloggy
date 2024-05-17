@@ -12,7 +12,7 @@
                     created
                 </x-th>
                 <x-th>
-                    category
+                    subcategories
                 </x-th>
                 <x-th>
                     Posts
@@ -52,7 +52,7 @@
                             {{ $category->updated_at->diffForHumans() }}
                         </x-td>
                         <x-td>
-                            <x-text-link href="/categories/{{ $category->slug }}">
+                            <x-text-link href="/admin/subcategories/?category={{ $category->slug }}">
                                 {{ $category->subcategories->count() }}
                             </x-text-link>
 
