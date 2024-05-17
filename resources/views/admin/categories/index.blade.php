@@ -20,7 +20,7 @@
                 delete-form-action-route="admin.categories.delete.all" path-to-creation="/admin/categories/create" />
 
 
-            <x-dashboard.categories-table :items="$categories" edit-href="admin/categories" />
+            <x-dashboard.categories-table :categories="$categories" edit-href="admin/categories" />
 
             <x-pagination-holder :item="$categories" />
         @endif

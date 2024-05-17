@@ -16,7 +16,7 @@
             multiple-delete-form-action-path="delete-multiple-subcategories"
             delete-form-action-route="admin.subcategories.delete.all" path-to-creation="/admin/subcategories/create" />
 
-        <x-dashboard.categories-table :items="$subcategories" is_subcategories edit-href="admin/subcategories" />
+        <x-dashboard.subcategories-table :subcategories="$subcategories" edit-href="admin/subcategories" />
         <x-pagination-holder :item="$subcategories" />
     @endif
 </x-dashboard.dashboard-layout>
