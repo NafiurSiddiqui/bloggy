@@ -1,4 +1,5 @@
-@props(['subcategories', 'edit-href' => ''])
+@props(['subcategories', 'category', 'edit-href' => ''])
+
 
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg rounded-md">
@@ -31,46 +32,89 @@
             @method('DELETE')
 
             <tbody>
-                @foreach ($subcategories as $subcategory)
-                    <x-tr>
-                        <x-td>
+                @if ($category)
+                    @foreach ($category[0]->subcategories as $subcategory)
+                        <x-tr>
+                            <x-td>
 
-                            @if ($subcategory->title == 'Uncategorized')
-                                <x-form.checkbox input-name="bulk_delete_selection" id="bulk_delete_selection"
-                                    class="subcategory-delete-checkbox    !cursor-auto" checkbox-only disabled />
-                            @else
-                                <x-form.checkbox input-name="bulk_delete_selection[]" id="bulk_delete_selection"
-                                    class="subcategory-delete-checkbox" value="{{ $subcategory->id }}" checkbox-only />
-                            @endif
-                        </x-td>
-                        <x-td id="table-row-uncategorized">
+                                @if ($subcategory->title == 'Uncategorized')
+                                    <x-form.checkbox input-name="bulk_delete_selection" id="bulk_delete_selection"
+                                        class="subcategory-delete-checkbox    !cursor-auto" checkbox-only disabled />
+                                @else
+                                    <x-form.checkbox input-name="bulk_delete_selection[]" id="bulk_delete_selection"
+                                        class="subcategory-delete-checkbox" value="{{ $subcategory->id }}"
+                                        checkbox-only />
+                                @endif
+                            </x-td>
+                            <x-td id="table-row-uncategorized">
 
-                            <x-text-link href="/subcategories/{{ $subcategory->slug }}">
-                                {{ $subcategory->title }}
-                            </x-text-link>
-                        </x-td>
+                                <x-text-link href="/subcategories/{{ $subcategory->slug }}">
+                                    {{ $subcategory->title }}
+                                </x-text-link>
+                            </x-td>
 
-                        <x-td>
-                            {{ $subcategory->updated_at->diffForHumans() }}
-                        </x-td>
-                        <x-td>
-                            <x-text-link href="/subcategories/{{ $subcategory->slug }}">
-                                {{ $subcategory->category != null ? $subcategory->category->title : 'uncategoriezed' }}
-                            </x-text-link>
+                            <x-td>
+                                {{ $subcategory->updated_at->diffForHumans() }}
+                            </x-td>
+                            <x-td>
+                                <x-text-link href="/subcategories/{{ $subcategory->slug }}">
+                                    {{ $subcategory->category != null ? $subcategory->category->title : 'uncategoriezed' }}
+                                </x-text-link>
+                            </x-td>
+                            <x-td>
+                                {{ $subcategory->posts->count() }}
+                            </x-td>
+                            <x-td>
+                                @unless ($subcategory->slug == 'uncategorized')
+                                    <a href="/{{ $editHref }}/{{ $subcategory->id }}/edit"
+                                        class=" font-medium w-full text-blue-600 dark:text-blue-500 hover:underline hover:text-blue-600">Edit</a>
+                                @endunless
 
-                        </x-td>
-                        <x-td>
-                            {{ $subcategory->posts->count() }}
-                        </x-td>
-                        <x-td>
-                            @unless ($subcategory->slug == 'uncategorized')
-                                <a href="/{{ $editHref }}/{{ $subcategory->id }}/edit"
-                                    class=" font-medium w-full text-blue-600 dark:text-blue-500 hover:underline hover:text-blue-600">Edit</a>
-                            @endunless
+                            </x-td>
+                        </x-tr>
+                    @endforeach
+                @else
+                    @foreach ($subcategories as $subcategory)
+                        <x-tr>
+                            <x-td>
 
-                        </x-td>
-                    </x-tr>
-                @endforeach
+                                @if ($subcategory->title == 'Uncategorized')
+                                    <x-form.checkbox input-name="bulk_delete_selection" id="bulk_delete_selection"
+                                        class="subcategory-delete-checkbox    !cursor-auto" checkbox-only disabled />
+                                @else
+                                    <x-form.checkbox input-name="bulk_delete_selection[]" id="bulk_delete_selection"
+                                        class="subcategory-delete-checkbox" value="{{ $subcategory->id }}"
+                                        checkbox-only />
+                                @endif
+                            </x-td>
+                            <x-td id="table-row-uncategorized">
+
+                                <x-text-link href="/subcategories/{{ $subcategory->slug }}">
+                                    {{ $subcategory->title }}
+                                </x-text-link>
+                            </x-td>
+
+                            <x-td>
+                                {{ $subcategory->updated_at->diffForHumans() }}
+                            </x-td>
+                            <x-td>
+                                <x-text-link href="/subcategories/{{ $subcategory->slug }}">
+                                    {{ $subcategory->category != null ? $subcategory->category->title : 'uncategoriezed' }}
+                                </x-text-link>
+                            </x-td>
+                            <x-td>
+                                {{ $subcategory->posts->count() }}
+                            </x-td>
+                            <x-td>
+                                @unless ($subcategory->slug == 'uncategorized')
+                                    <a href="/{{ $editHref }}/{{ $subcategory->id }}/edit"
+                                        class=" font-medium w-full text-blue-600 dark:text-blue-500 hover:underline hover:text-blue-600">Edit</a>
+                                @endunless
+
+                            </x-td>
+                        </x-tr>
+                    @endforeach
+                @endif
 
             </tbody>
         </form>

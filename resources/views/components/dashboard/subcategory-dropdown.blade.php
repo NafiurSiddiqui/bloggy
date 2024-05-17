@@ -9,8 +9,7 @@
 @else
     <div class="my-4">
         <x-form.label label-for="subcategory" />
-        <select name="subcategory_id" id="subcategory_id" class="rounded-md w-32 dark:bg-gray-800 dark:text-gray-200"
-            title="Select a subcategory for the post">
+        <x-select>
 
             <option value="---">---</option>
             @foreach ($subcategories as $subcategory)
@@ -24,7 +23,7 @@
                         {{ ucwords($subcategory->title) }}</option>
                 @endif
             @endforeach
-        </select>
+        </x-select>
 
         <x-form.error name="subcategory_id" />
     </div>
