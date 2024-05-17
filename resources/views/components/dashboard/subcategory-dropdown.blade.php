@@ -9,7 +9,7 @@
 @else
     <div class="my-4">
         <x-form.label label-for="subcategory" />
-        <x-select>
+        <x-select for-name="subcategory_id" for-id="subcategory_id" for-title="Select a subcategory">
 
             <option value="---">---</option>
             @foreach ($subcategories as $subcategory)

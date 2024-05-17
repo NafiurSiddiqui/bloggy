@@ -18,9 +18,8 @@
 @else
     <div class="my-4">
         <x-form.label label-for="category" />
-        {{-- <select name="category_id" id="category_id" class="rounded-md w-32   dark:bg-gray-800 dark:text-gray-200"
-            title="Select a category for the post"> --}}
-        <x-select>
+
+        <x-select for-name="category_id" for-id="category_id" for-title="Select a category">
             <option value="---">---</option>
             @foreach ($categories as $category)
                 @if (isset($post))
