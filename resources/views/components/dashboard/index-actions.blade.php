@@ -9,7 +9,7 @@
 {{-- similar actiona bar for admin/posts, admin/categories, admin/subcategories --}}
 {{-- @dd($pluralType) --}}
 
-<div class="my-4 mb-8 gap-8 flex justify-between md:justify-end lg:justify-end flex-wrap">
+<div class="my-4 mb-8 gap-8 flex justify-between md:justify-end items-center flex-wrap">
     <div class="delete-all-container">
         <form id="form-delete" action="{{ route($deleteFormActionRoute) }}" method="post">
             @csrf
