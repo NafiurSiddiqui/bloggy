@@ -3,7 +3,7 @@
     <x-select onchange="submitFormWithSelectedUrl()" for-name="category_filter" for-id="category_filter"
         for-title="filter by categories">
         <option value="all">
-            <a href="/admin/subcategories">All</a>
+            All
         </option>
 
         @foreach ($categories as $category)
