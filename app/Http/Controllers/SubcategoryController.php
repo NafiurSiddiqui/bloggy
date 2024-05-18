@@ -21,17 +21,9 @@ class SubcategoryController extends Controller
         // $query = request()->query('category');
         //return all the subcategories that has a prarent of the query value
         // $subcategories = Subcategory::where('parent_id', $query)->get();
-        $filter = request()->query->has('filter');
-
-        if ($filter) {
-
-            $res = QueryBuilder::for(Category::class)
-                ->allowedFilters(['slug'])
-                ->with('subcategories')
-                ->get();
-
-            // dd($res);
-        }
+        $filter = request()->has('filter');
+        // dd($filter);
+        // dd(request('filter')['slug']);
 
         return view('admin.subcategories.index', [
             'subcategories' => Subcategory::with('posts', 'category')->latest()->simplePaginate(10),
@@ -40,6 +32,7 @@ class SubcategoryController extends Controller
                 ->with('subcategories')
                 ->latest()
                 ->simplePaginate(10) : null,
+
 
         ]);
     }

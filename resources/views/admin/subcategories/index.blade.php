@@ -12,21 +12,16 @@
             </x-secondary-button>
         </div>
     @else
-        <div>
-            <div>
-                Filter by-
-                {{-- <select name="category-filter" id="category-filter"
+        <div class="flex items-end gap-2 ">
+
+            {{-- <select name="category-filter" id="category-filter"
                     class="rounded-md w-32   dark:bg-gray-800 dark:text-gray-200"> --}}
-                {{-- <option value="all" selected>All</option> --}}
+            {{-- <option value="all" selected>All</option> --}}
 
-                <x-category-filter />
-
-
-                {{-- </select> --}}
+            <x-category-filter />
 
 
-            </div>
-
+            {{-- </select> --}}
 
             <x-secondary-button link href="/admin/subcategories">Reset Filter</x-secondary-button>
         </div>
