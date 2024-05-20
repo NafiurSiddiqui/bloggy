@@ -45,9 +45,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/posts', [AdminPostController::class, 'index'])->name('admin.posts');
     Route::get('/admin/post/create', [AdminPostController::class, 'create'])->name('admin.post.create');
     Route::post('/admin/post/store', [AdminPostController::class, 'store'])->name('admin.post.store');
-    Route::get('/admin/post/{post:slug}/edit', [AdminPostController::class, 'edit'])->name('admin.post.edit');
-    Route::patch('/admin/post/{post:slug}', [AdminPostController::class, 'update'])->name('admin.post.update');
-    Route::delete('/admin/post/{post:slug}', [AdminPostController::class, 'destroy'])->name('admin.post.delete');
     Route::delete('/admin/posts/delete-all', function () {
         //delete all posts
         DB::table('posts')->truncate();
@@ -66,7 +63,9 @@ Route::middleware('auth')->group(function () {
 
         return redirect()->back()->with('success', 'Selected items deleted successfully');
     })->name('posts.delete.selected');
-
+    Route::get('/admin/post/{post:slug}/edit', [AdminPostController::class, 'edit'])->name('admin.post.edit');
+    Route::patch('/admin/post/{post:slug}', [AdminPostController::class, 'update'])->name('admin.post.update');
+    Route::delete('/admin/post/{post:slug}', [AdminPostController::class, 'destroy'])->name('admin.post.delete');
 
     //    CATEGORIES
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
