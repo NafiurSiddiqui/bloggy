@@ -1,29 +1,20 @@
 <x-dashboard.dashboard-layout>
     <x-slot:heading>All Posts</x-slot:heading>
 
+
+
+    <div>
+        <div class="flex items-end gap-2 ">
+            <x-category-filter formAction="/admin/posts" isPostsPage />
+            <x-secondary-button link href="/admin/posts">Reset Filter</x-secondary-button>
+        </div>
+    </div>
     @if (isset($posts) && count($posts) > 0)
-        {{-- <div class="my-4 mb-8 gap-8 flex justify-between md:justify-end lg:justify-end flex-wrap">
-            <div>
-                <form id="form-delete" action="/admin/posts/delete-all" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <x-danger-button x-data="" x-on:click="$dispatch('open-modal','confirm-delete')"
-                        label="Delete All" />
-                </form>
-                <x-modal-delete message="You sure want to delete all posts?" />
-            </div>
-            <div class="delete-selected-posts-btns text-gray-400 hidden" x-data="{ show: false }">
-                <x-danger-button label="Delete Selected Posts" />
-                <x-modal-delete message="You sure want to delete these posts?" form="delete-multiple-posts" />
-            </div>
-        </div> --}}
-
-
         <x-dashboard.index-actions singular-type="post" plural-type="posts"
             multiple-delete-form-action-path="delete-multiple-posts" delete-form-action-route="admin.posts.delete.all"
             path-to-creation="/admin/post/create" />
 
-        <x-dashboard.posts-table :posts="$posts" />
+        <x-dashboard.posts-table :posts="$posts" :filteredByCategory="$categories" />
 
         <x-pagination-holder :item="$posts" />
     @elseif(isset($categories_are_empty) && $categories_are_empty)

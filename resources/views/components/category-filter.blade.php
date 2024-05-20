@@ -1,4 +1,8 @@
-<form action="/admin/subcategories" id="filterByCategory" name="filterByCategory" method="get">
+@props(['formAction', 'isPostsPage' => false])
+
+
+<form action="{{ $formAction }}" id="filterByCategory" name="filterByCategory" method="get"
+    data-is-posts-page={{ $isPostsPage }}>
     <x-form.label label-for="filterByCategory" label="Filter by Category" />
     <x-select onchange="submitFormWithSelectedUrl()" for-name="category_filter" for-id="category_filter"
         for-title="filter by categories">
@@ -17,12 +21,16 @@
 
 <script>
     function submitFormWithSelectedUrl() {
+
         var form = document.getElementById('filterByCategory');
         var select = document.getElementById('category_filter');
         var selectedValue = select.options[select.selectedIndex].value;
-        // console.log(select);
+        const isPostsPage = form.dataset.isPostsPage;
+
+
         // Construct the URL with the correct query parameter format
-        var url = selectedValue === 'all' ? '/admin/subcategories' : '/admin/subcategories?filter[slug]=' +
+        var url = selectedValue === 'all' ? '/admin/subcategories' : (isPostsPage ?
+                '/admin/posts?filter[slug]=' : '/admin/subcategories?filter[slug]=') +
             encodeURIComponent(selectedValue);
 
         // Redirect to the constructed URL

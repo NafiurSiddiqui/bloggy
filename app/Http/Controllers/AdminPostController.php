@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Closure;
 use Illuminate\Http\RedirectResponse;
@@ -11,13 +12,23 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use PhpParser\Node\Scalar\String_;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class AdminPostController extends Controller
 {
     public function index(): View
     {
+        //check if filter
+        $filter = request()->has('filter');
+
         return view('admin.posts.index', [
             'posts' => Post::latest()->simplePaginate(10),
+            'categories' => $filter ?
+                QueryBuilder::for(Category::class)
+                ->allowedFilters(['slug'])
+                ->with('posts')
+                ->latest()
+                ->simplePaginate(10) : null
         ]);
     }
 

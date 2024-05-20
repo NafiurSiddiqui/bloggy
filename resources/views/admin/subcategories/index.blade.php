@@ -13,16 +13,7 @@
         </div>
     @else
         <div class="flex items-end gap-2 ">
-
-            {{-- <select name="category-filter" id="category-filter"
-                    class="rounded-md w-32   dark:bg-gray-800 dark:text-gray-200"> --}}
-            {{-- <option value="all" selected>All</option> --}}
-
-            <x-category-filter />
-
-
-            {{-- </select> --}}
-
+            <x-category-filter formAction="/admin/subcategories" />
             <x-secondary-button link href="/admin/subcategories">Reset Filter</x-secondary-button>
         </div>
         <x-dashboard.index-actions singular-type="subcategory" plural-type="subcategories"
