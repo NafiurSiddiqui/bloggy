@@ -7,11 +7,10 @@ use App\Models\Post;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
-use PhpParser\Node\Scalar\String_;
+
 use Spatie\QueryBuilder\QueryBuilder;
 
 class AdminPostController extends Controller
