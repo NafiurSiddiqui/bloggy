@@ -26,8 +26,6 @@
         var select = document.getElementById('category_filter');
         var selectedValue = select.options[select.selectedIndex].value;
         const isPostsPage = form.dataset.isPostsPage;
-
-
         // Construct the URL with the correct query parameter format
         var url = selectedValue === 'all' ? '/admin/subcategories' : (isPostsPage ?
                 '/admin/posts?filter[slug]=' : '/admin/subcategories?filter[slug]=') +
