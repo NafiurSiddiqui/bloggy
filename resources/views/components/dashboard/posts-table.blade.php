@@ -47,14 +47,14 @@
                             @endif
 
                         </x-td>
-                        <x-td>
-                            <x-status-label :post="$post" />
-                        </x-td>
-                        <x-td>
 
+                        <x-td>
                             <x-text-link href="/author/{{ $post->author->id }}/posts">
                                 {{ $post->author->name }}
                             </x-text-link>
+                        </x-td>
+                        <x-td>
+                            <x-status-label :post="$post" />
                         </x-td>
                         <x-td>
                             {{ $post->updated_at->diffForHumans() }}
