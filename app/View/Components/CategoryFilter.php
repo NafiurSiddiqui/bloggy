@@ -22,19 +22,9 @@ class CategoryFilter extends Component
      */
     public function render(): View|Closure|string
     {
-        // $filterByCategory = request('filter') && request()->query('filter')['slug'];
-        // dd($filter);
+
         $filter = request()->query('filter');
-        $filterByCategory = null;
 
-        if (isset($filter['slug'])) {
-            $filterByCategory = true;
-        } else {
-
-            $filterByCategory = false;
-        }
-
-        // dd($filterByCategory);
 
         return view('components.category-filter', [
             'categories' => \App\Models\Category::all(),
