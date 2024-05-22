@@ -10,6 +10,7 @@
             <form action="/admin/posts" method="get">
                 <x-category-filter />
                 <x-dashboard.status-filter />
+                Need filter for author
                 <button type="submit">Submit</button>
             </form>
             <x-secondary-button link href="/admin/posts">Reset Filter</x-secondary-button>
