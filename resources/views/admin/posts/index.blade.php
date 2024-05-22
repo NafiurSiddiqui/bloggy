@@ -2,10 +2,16 @@
     <x-slot:heading>All Posts</x-slot:heading>
 
 
-
+    {{-- @if ($postsByStatus != null)
+        @dd($postsByStatus)
+    @endif --}}
     <div>
         <div class="flex items-end gap-2 ">
-            <x-category-filter formAction="/admin/posts" isPostsPage />
+            <form action="/admin/posts" method="get">
+                <x-category-filter />
+                <x-dashboard.status-filter />
+                <button type="submit">Submit</button>
+            </form>
             <x-secondary-button link href="/admin/posts">Reset Filter</x-secondary-button>
         </div>
     </div>
@@ -13,8 +19,13 @@
         <x-dashboard.index-actions singular-type="post" plural-type="posts"
             multiple-delete-form-action-path="delete-multiple-posts" delete-form-action-route="admin.posts.delete.all"
             path-to-creation="/admin/post/create" />
-
+        {{-- 
+        @if (isset($postsByStatus) && $postsByStatus != null)
+  
+            <x-dashboard.posts-table :posts="$postsByStatus" :filteredByCategory="$categories" />
+        @else --}}
         <x-dashboard.posts-table :posts="$posts" :filteredByCategory="$categories" />
+        {{-- @endif --}}
 
         <x-pagination-holder :item="$posts" />
     @elseif(isset($categories_are_empty) && $categories_are_empty)
@@ -44,10 +55,10 @@
 
         if (anyChecked && someAreChecked) {
             submitBtn.classList.remove('hidden');
-            console.log('says checked');
+            // console.log('says checked');
         } else {
             submitBtn.classList.add('hidden');
-            console.log('the fuck!');
+            // console.log('the fuck!');
             sessionStorage.removeItem(POSTS_SESSION_ITEM);
         }
 

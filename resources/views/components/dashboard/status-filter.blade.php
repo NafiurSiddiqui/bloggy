@@ -1,38 +1,20 @@
-{{-- @props(['formAction', 'isPostsPage' => false]) --}}
+@props(['formAction', 'isPostsPage' => false])
 
+{{-- @foreach ($status as $stat)
+    Name: {{ $stat['title'] }}
+@endforeach --}}
 
-<form action="#" id="filterByStatus" name="filterByStatus" method="get" data-is-posts-page={{ $isPostsPage }}>
-    <x-form.label label-for="filterByStatus" label="Filter by Category" />
-    <x-select onchange="submitFormWithSelectedUrl()" for-name="category_filter" for-id="category_filter"
-        for-title="filter by categories">
-        <option value="all">
-            All
+{{-- <form id="filterByStatus" name="filterByStatus" method="get"> --}}
+<x-form.label label-for="status_filter" label="Filter by status" />
+<x-select for-name="status_filter" for-id="status_filter" for-title="filter by status">
+    <option value="">
+        All
+    </option>
+
+    @foreach ($status as $stat)
+        <option value="{{ $stat['slug'] }}" {{ request()->input('status_filter') === $stat['slug'] ? 'selected' : '' }}>
+            {{ $stat['title'] }}
         </option>
-
-        @foreach ($categories as $category)
-            <option value="{{ $category?->slug }}" {{ $currentCategory?->slug == $category->slug ? 'selected' : '' }}>
-                {{ $category->title }}
-            </option>
-        @endforeach
-    </x-select>
-</form>
-
-
-<script>
-    function submitFormWithSelectedUrl() {
-
-        var form = document.getElementById('filterByStatus');
-        var select = document.getElementById('category_filter');
-        var selectedValue = select.options[select.selectedIndex].value;
-        const isPostsPage = form.dataset.isPostsPage;
-
-
-        // Construct the URL with the correct query parameter format
-        var url = selectedValue === 'all' ? '/admin/subcategories' : (isPostsPage ?
-                '/admin/posts?filter[slug]=' : '/admin/subcategories?filter[slug]=') +
-            encodeURIComponent(selectedValue);
-
-        // Redirect to the constructed URL
-        window.location.href = url;
-    }
-</script>
+    @endforeach
+</x-select>
+{{-- </form> --}}

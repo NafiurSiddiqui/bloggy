@@ -22,10 +22,21 @@ class StatusFilter extends Component
     public function render(): View|Closure|string
     {
         return view('components.dashboard.status-filter', [
-            //get all the posts from the 'posts' table where 'is_published' column has 1 or true.
-            'published' => \App\Models\Post::where('is_published', 1)->simplePaginate(10),
-            'draft' => \App\Models\Post::where('is_draft', 1)->simplePaginate(10),
-            'is_unpublished' => \App\Models\Post::where('is_unpublished')->simplePaginate(10)
+
+            'status' => [
+                'published' => [
+                    'title' => 'Published',
+                    'slug' => 'is_published'
+                ],
+                'draft' => [
+                    'title' => 'Draft',
+                    'slug' => 'is_draft'
+                ],
+                'unpublished' => [
+                    'title' => 'unpublished',
+                    'slug' => 'is_unpublished'
+                ]
+            ]
 
         ]);
     }

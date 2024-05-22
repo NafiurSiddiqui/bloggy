@@ -70,7 +70,10 @@
                     @endforeach
                 </tbody>
             @else
+                {{-- @dd($posts) --}}
+
                 <tbody class="bg-white divide-y divide-gray-200">
+
                     @foreach ($posts as $post)
                         <x-tr>
                             <x-td>

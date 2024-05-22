@@ -6,7 +6,8 @@ use App\Models\Category;
 use App\Models\Post;
 use Closure;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
@@ -17,17 +18,43 @@ class AdminPostController extends Controller
 {
     public function index(): View
     {
-        //check if filter
-        $filter = request()->has('filter');
+
+        $categoryFilter = request()->input('filter.slug');
+        $statusFilter = request()->input('status_filter');
+
+        $filteredCategories = $categoryFilter && $categoryFilter !== '' ?
+            QueryBuilder::for(Category::class)
+            ->allowedFilters(['slug'])
+            ->with('posts')
+            ->latest()
+            ->simplePaginate(10) : null;
+        $filteredStatus = $statusFilter && $statusFilter != '' ?
+            Post::where($statusFilter, 1)
+            ->latest()
+            ->simplePaginate(10) : null;
+        // dd($categoryFilter);
+
+        //if both filters are set
+        if ($categoryFilter && $statusFilter) {
+
+            //return all the posts for the selected CATEGORY value, 
+            //include only the posts whose status == 1.
+            // $$filteredCategories = QueryBuilder::for(Post::where($statusFilter, 1))
+            //     ->allowedFilters(['slug'])
+            //     ->with('posts')
+            //     ->latest()
+            //     ->simplePaginate(10);
+            $filteredCategories = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($statusFilter) {
+                $query->where($statusFilter, 1);
+            })->get();
+            // dd($filteredCategories);
+        }
+
 
         return view('admin.posts.index', [
             'posts' => Post::latest()->simplePaginate(10),
-            'categories' => $filter ?
-                QueryBuilder::for(Category::class)
-                ->allowedFilters(['slug'])
-                ->with('posts')
-                ->latest()
-                ->simplePaginate(10) : null
+            'categories' => $filteredCategories,
+            'postsByStatus' => $filteredStatus
         ]);
     }
 
