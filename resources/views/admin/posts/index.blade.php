@@ -19,13 +19,12 @@
         <x-dashboard.index-actions singular-type="post" plural-type="posts"
             multiple-delete-form-action-path="delete-multiple-posts" delete-form-action-route="admin.posts.delete.all"
             path-to-creation="/admin/post/create" />
-        {{-- 
+
         @if (isset($postsByStatus) && $postsByStatus != null)
-  
             <x-dashboard.posts-table :posts="$postsByStatus" :filteredByCategory="$categories" />
-        @else --}}
-        <x-dashboard.posts-table :posts="$posts" :filteredByCategory="$categories" />
-        {{-- @endif --}}
+        @else
+            <x-dashboard.posts-table :posts="$posts" :filteredByCategory="$categories" />
+        @endif
 
         <x-pagination-holder :item="$posts" />
     @elseif(isset($categories_are_empty) && $categories_are_empty)
