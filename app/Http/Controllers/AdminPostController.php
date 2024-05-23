@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
+use App\View\Components\Dashboard\AdminFilter;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 
@@ -21,6 +23,8 @@ class AdminPostController extends Controller
 
         $categoryFilter = request()->input('filter.slug');
         $statusFilter = request()->input('status_filter');
+        $adminFilter = request()->input('admin_filter'); //gets the id
+        // dd($adminFilter);
 
         $filteredCategories = $categoryFilter && $categoryFilter !== '' ?
             QueryBuilder::for(Category::class)
@@ -32,29 +36,46 @@ class AdminPostController extends Controller
             Post::where($statusFilter, 1)
             ->latest()
             ->simplePaginate(10) : null;
-        // dd($categoryFilter);
 
-        //if both filters are set
+        $filteredAdmins = $adminFilter && $adminFilter != null ?
+            User::where('id', $adminFilter)
+            ->with('posts')
+            ->latest()
+            ->simplePaginate(10) : null;
+        $searchFor = request()->input('search');
+
+        // dd($searchFor);
+
+        //if both all filters are set
         if ($categoryFilter && $statusFilter) {
 
             //return all the posts for the selected CATEGORY value, 
             //include only the posts whose status == 1.
-            // $$filteredCategories = QueryBuilder::for(Post::where($statusFilter, 1))
-            //     ->allowedFilters(['slug'])
-            //     ->with('posts')
-            //     ->latest()
-            //     ->simplePaginate(10);
             $filteredCategories = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($statusFilter) {
                 $query->where($statusFilter, 1);
             })->get();
             // dd($filteredCategories);
         }
 
+        if ($categoryFilter && $statusFilter && $filteredAdmins) {
+
+            //return all the posts for the selected CATEGORY value, 
+            //include only the posts whose status == 1.
+            $filteredCategories = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($statusFilter, $adminFilter) {
+                $query->where($statusFilter, 1)
+                    ->whereHas('author', function ($query) use ($adminFilter) {
+                        $query->where('id', $adminFilter);
+                    });
+            })->get();
+        }
+
 
         return view('admin.posts.index', [
             'posts' => Post::latest()->simplePaginate(10),
             'categories' => $filteredCategories,
-            'postsByStatus' => $filteredStatus
+            'postsByStatus' => $filteredStatus,
+            'postsByAdmins' => $filteredAdmins,
+
         ]);
     }
 

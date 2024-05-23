@@ -2,20 +2,33 @@
     <x-slot:heading>All Posts</x-slot:heading>
 
 
-    {{-- @if ($postsByStatus != null)
-        @dd($postsByStatus)
+    {{-- @if ($postsByAdmins != null)
+        @dd($postsByAdmins[0]->posts)
     @endif --}}
-    <div>
+    <x-panel>
         <div class="flex items-end gap-2 ">
-            <form action="/admin/posts" method="get">
-                <x-category-filter />
-                <x-dashboard.status-filter />
-                Need filter for author
-                <button type="submit">Submit</button>
+            <form action="/admin/posts">
+                <label for="search" sr-only />
+                <input type="search" name="search" id="search" placeholder="search..." class="">
             </form>
-            <x-secondary-button link href="/admin/posts">Reset Filter</x-secondary-button>
+
+            <form action="/admin/posts" method="get">
+                <fieldset class="flex flex-wrap gap-4">
+                    <legend>Filter by -</legend>
+
+                    <x-category-filter />
+                    <x-dashboard.status-filter />
+                    <x-dashboard.admin-filter />
+                </fieldset>
+
+
+                <div class="mt-4">
+                    <x-secondary-button type="submit">Filter</x-secondary-button>
+                    <x-secondary-button link href="/admin/posts">Reset Filter</x-secondary-button>
+                </div>
+            </form>
         </div>
-    </div>
+    </x-panel>
     @if (isset($posts) && count($posts) > 0)
         <x-dashboard.index-actions singular-type="post" plural-type="posts"
             multiple-delete-form-action-path="delete-multiple-posts" delete-form-action-route="admin.posts.delete.all"
@@ -23,6 +36,8 @@
 
         @if (isset($postsByStatus) && $postsByStatus != null)
             <x-dashboard.posts-table :posts="$postsByStatus" :filteredByCategory="$categories" />
+        @elseif (isset($postsByAdmins) && $postsByAdmins != null)
+            <x-dashboard.posts-table :postsByAdmin="$postsByAdmins" :filteredByCategory="$categories" />
         @else
             <x-dashboard.posts-table :posts="$posts" :filteredByCategory="$categories" />
         @endif

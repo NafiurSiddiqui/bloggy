@@ -6,7 +6,8 @@
         </option>
 
         @foreach ($authors as $author)
-            <option value="{{ $author['id'] }}">
+            <option value="{{ $author['id'] }}"
+                {{ request()->input('admin_filter') == $author['id'] ? 'selected' : '' }}>
                 {{ $author['name'] }}
             </option>
         @endforeach
