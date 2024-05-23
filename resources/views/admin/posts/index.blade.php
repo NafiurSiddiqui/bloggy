@@ -38,6 +38,8 @@
             <x-dashboard.posts-table :posts="$postsByStatus" :filteredByCategory="$categories" />
         @elseif (isset($postsByAdmins) && $postsByAdmins != null)
             <x-dashboard.posts-table :postsByAdmin="$postsByAdmins" :filteredByCategory="$categories" />
+            {{-- @elseif (isset($postsBySearch) && $postsBySearch != null)
+            <x-dashboard.posts-table :posts="$postsBySearch" :filteredByCategory="$categories" /> --}}
         @else
             <x-dashboard.posts-table :posts="$posts" :filteredByCategory="$categories" />
         @endif

@@ -11,7 +11,7 @@ class Post extends Model
 {
     use HasFactory;
 
-//    protected $guarded = [];
+    //    protected $guarded = [];
 
     protected $fillable = [
         'user_id',
@@ -33,6 +33,22 @@ class Post extends Model
         'og_title'
     ];
 
+    public function scopeFilter($query, array $filters): void //
+    {
+
+        // dd($filters[0]);
+
+        $query->when(
+            $filters['search'] ?? false,
+            fn ($query, $search) =>
+            $query->where(
+                fn ($query) =>
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('body', 'like', '%' . $search . '%')
+            )
+        );
+    }
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -47,5 +63,4 @@ class Post extends Model
     {
         return $this->belongsTo(Subcategory::class);
     }
-
 }

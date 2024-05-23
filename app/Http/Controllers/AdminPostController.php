@@ -42,9 +42,9 @@ class AdminPostController extends Controller
             ->with('posts')
             ->latest()
             ->simplePaginate(10) : null;
-        $searchFor = request()->input('search');
+        $termSearchedFor = request('search');
 
-        // dd($searchFor);
+        // dd($termSearchedFor);
 
         //if both all filters are set
         if ($categoryFilter && $statusFilter) {
@@ -69,12 +69,27 @@ class AdminPostController extends Controller
             })->get();
         }
 
+        $postsSearchedFor = Post::where('title', 'like', '%' . $termSearchedFor . '%')
+            ->orWhere('body', 'like', '%' . $termSearchedFor . '%');
 
+        // $postsSearchedFor =
+        //     Post::when(
+        //         $termSearchedFor ?? false,
+        //         fn ($query, $search) =>
+        //         $query->where(
+        //             fn ($query) =>
+        //             $query->where('title', 'like', '%' . $search . '%')
+        //                 ->orWhere('body', 'like', '%' . $search . '%')
+        //         )
+        //     );
+
+        // dd($postsSearchedFor);
         return view('admin.posts.index', [
-            'posts' => Post::latest()->simplePaginate(10),
+            'posts' => Post::latest()->filter(['search'])->simplePaginate(10),
             'categories' => $filteredCategories,
             'postsByStatus' => $filteredStatus,
             'postsByAdmins' => $filteredAdmins,
+            'postsBySearch' => $postsSearchedFor
 
         ]);
     }
