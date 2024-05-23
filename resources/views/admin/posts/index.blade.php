@@ -33,18 +33,7 @@
         <x-dashboard.index-actions singular-type="post" plural-type="posts"
             multiple-delete-form-action-path="delete-multiple-posts" delete-form-action-route="admin.posts.delete.all"
             path-to-creation="/admin/post/create" />
-
-        @if (isset($postsByStatus) && $postsByStatus != null)
-            <x-dashboard.posts-table :posts="$postsByStatus" :filteredByCategory="$categories" />
-        @elseif (isset($postsByAdmins) && $postsByAdmins != null)
-            <x-dashboard.posts-table :postsByAdmin="$postsByAdmins" :filteredByCategory="$categories" />
-            {{-- @elseif (isset($postsBySearch) && $postsBySearch != null)
-            <x-dashboard.posts-table :posts="$postsBySearch" :filteredByCategory="$categories" /> --}}
-        @else
-            <x-dashboard.posts-table :posts="$posts" :filteredByCategory="$categories" />
-        @endif
-
-        <x-pagination-holder :item="$posts" />
+        <x-dashboard.posts-table :posts="$posts" />
     @elseif(isset($categories_are_empty) && $categories_are_empty)
         <p class="mt-2 text-gray-600">No posts yet.</p>
         <a href="/admin/categories" class="underline hover:text-blue-500 my-4 block">Let's quickly create a category
@@ -53,6 +42,8 @@
         <x-panel>
             This is to ensure data integrity of the posts and their relationships.
         </x-panel>
+    @elseif(request()->query() > 0)
+        <p class="rounded mt-4 text-center py-4 font-semibold text-gray-500 border-2"> Nothing found </p>
     @else
         <a href="/admin/post/create" class="underline hover:text-blue-500 my-4 block">Let's create a fresh post!
         </a>

@@ -47,6 +47,12 @@ class Post extends Model
                     ->orWhere('body', 'like', '%' . $search . '%')
             )
         );
+
+        // if ($filters['search'] ?? false) {
+        //     $query
+        //         ->where('title', 'like', '%' . request('serach') . '%')
+        //         ->orWhere('body', 'like', '%' . request('serach') . '%');
+        // }
     }
 
     public function author(): BelongsTo

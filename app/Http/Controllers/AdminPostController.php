@@ -21,75 +21,81 @@ class AdminPostController extends Controller
     public function index(): View
     {
 
+        $posts = Post::latest()->get();
+
         $categoryFilter = request()->input('filter.slug');
         $statusFilter = request()->input('status_filter');
         $adminFilter = request()->input('admin_filter'); //gets the id
         // dd($adminFilter);
 
-        $filteredCategories = $categoryFilter && $categoryFilter !== '' ?
+        $filteredCategory = $categoryFilter && $categoryFilter !== '' ?
             QueryBuilder::for(Category::class)
             ->allowedFilters(['slug'])
             ->with('posts')
             ->latest()
-            ->simplePaginate(10) : null;
-        $filteredStatus = $statusFilter && $statusFilter != '' ?
+            ->simplePaginate(10) : $posts;
+
+        $posts = $categoryFilter ? $filteredCategory[0]->posts : $posts;
+
+        $posts = $statusFilter && $statusFilter != '' ?
             Post::where($statusFilter, 1)
             ->latest()
-            ->simplePaginate(10) : null;
+            ->simplePaginate(10) : $posts;
 
-        $filteredAdmins = $adminFilter && $adminFilter != null ?
+
+        $filteredAuthors = $adminFilter && $adminFilter != null ?
             User::where('id', $adminFilter)
             ->with('posts')
             ->latest()
-            ->simplePaginate(10) : null;
-        $termSearchedFor = request('search');
+            ->simplePaginate(10) : $posts;
 
-        // dd($termSearchedFor);
+        $posts = $adminFilter ? $filteredAuthors[0]->posts : $posts;
+        $termSearchedFor = request('search');
 
         //if both all filters are set
         if ($categoryFilter && $statusFilter) {
 
-            //return all the posts for the selected CATEGORY value, 
-            //include only the posts whose status == 1.
-            $filteredCategories = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($statusFilter) {
+
+            $posts = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($statusFilter) {
                 $query->where($statusFilter, 1);
             })->get();
-            // dd($filteredCategories);
         }
 
-        if ($categoryFilter && $statusFilter && $filteredAdmins) {
+        if ($categoryFilter && $adminFilter) {
+            $result = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($adminFilter) {
+                $query->where('user_id', $adminFilter);
+            })->get();
 
-            //return all the posts for the selected CATEGORY value, 
-            //include only the posts whose status == 1.
-            $filteredCategories = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($statusFilter, $adminFilter) {
+            $posts = $result[0]->posts;
+        }
+
+        if ($adminFilter && $statusFilter) {
+
+            $result = User::where('id', $adminFilter)->with('posts', function ($query) use ($statusFilter) {
+                $query->where($statusFilter, 1);
+            })->get();
+
+            $posts = $result[0]->posts;
+        }
+
+        if ($categoryFilter && $statusFilter && $adminFilter) {
+
+
+            $result = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($statusFilter, $adminFilter) {
                 $query->where($statusFilter, 1)
                     ->whereHas('author', function ($query) use ($adminFilter) {
                         $query->where('id', $adminFilter);
                     });
             })->get();
+
+            $posts = $result[0]->posts;
         }
 
-        $postsSearchedFor = Post::where('title', 'like', '%' . $termSearchedFor . '%')
-            ->orWhere('body', 'like', '%' . $termSearchedFor . '%');
 
-        // $postsSearchedFor =
-        //     Post::when(
-        //         $termSearchedFor ?? false,
-        //         fn ($query, $search) =>
-        //         $query->where(
-        //             fn ($query) =>
-        //             $query->where('title', 'like', '%' . $search . '%')
-        //                 ->orWhere('body', 'like', '%' . $search . '%')
-        //         )
-        //     );
 
-        // dd($postsSearchedFor);
         return view('admin.posts.index', [
-            'posts' => Post::latest()->filter(['search'])->simplePaginate(10),
-            'categories' => $filteredCategories,
-            'postsByStatus' => $filteredStatus,
-            'postsByAdmins' => $filteredAdmins,
-            'postsBySearch' => $postsSearchedFor
+            // 'posts' => Post::latest()->filter(['search'])->get(),
+            'posts' => $posts
 
         ]);
     }
