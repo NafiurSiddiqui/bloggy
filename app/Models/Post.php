@@ -35,9 +35,6 @@ class Post extends Model
 
     public function scopeFilter($query, array $filters): void //
     {
-
-        // dd($filters[0]);
-
         $query->when(
             $filters['search'] ?? false,
             fn ($query, $search) =>
@@ -48,11 +45,24 @@ class Post extends Model
             )
         );
 
-        // if ($filters['search'] ?? false) {
-        //     $query
-        //         ->where('title', 'like', '%' . request('serach') . '%')
-        //         ->orWhere('body', 'like', '%' . request('serach') . '%');
-        // }
+        $query->when(
+            $filters['search'] ?? false,
+            fn ($query, $search) =>
+            $query->orWhereHas('author', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            })
+        );
+
+        $query->when(
+            $filters['search'] ?? false,
+            fn ($query, $search) =>
+            $query->orWhereHas('category', function ($query) use ($search) {
+                $query->where('title', $search);
+            })
+        );
+
+        // Additional filtering by author name
+
     }
 
     public function author(): BelongsTo

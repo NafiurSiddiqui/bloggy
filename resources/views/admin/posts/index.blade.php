@@ -1,7 +1,7 @@
 <x-dashboard.dashboard-layout>
     <x-slot:heading>All Posts</x-slot:heading>
 
-
+    {{-- @dd($posts) --}}
     {{-- @if ($postsByAdmins != null)
         @dd($postsByAdmins[0]->posts)
     @endif --}}

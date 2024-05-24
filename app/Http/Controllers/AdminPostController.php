@@ -91,10 +91,16 @@ class AdminPostController extends Controller
             $posts = $result[0]->posts;
         }
 
+        if ($termSearchedFor) {
+
+            $posts = Post::latest()->filter(request(['search']))->get();
+        }
+
 
 
         return view('admin.posts.index', [
             // 'posts' => Post::latest()->filter(['search'])->get(),
+            // 'posts' => $termSearchedFor ? Post::latest()->filter([$termSearchedFor])->get() : $posts
             'posts' => $posts
 
         ]);
