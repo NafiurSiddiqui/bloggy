@@ -17,22 +17,43 @@ class SubcategoryController extends Controller
      */
     public function index(): View
     {
-        //check if query has a certain value
-        // $query = request()->query('category');
-        //return all the subcategories that has a prarent of the query value
-        // $subcategories = Subcategory::where('parent_id', $query)->get();
-        $filter = request()->has('filter');
-        // dd($filter);
-        // dd(request('filter')['slug']);
 
-        return view('admin.subcategories.index', [
-            'subcategories' => Subcategory::with('posts', 'category')->latest()->simplePaginate(10),
-            'category' => $filter ? QueryBuilder::for(Category::class)
+        $subcategories = QueryBuilder::for(Subcategory::class)
+            ->allowedSorts(['title', 'updated_at'])
+            ->simplePaginate(10)
+            ->withQueryString();
+
+        $filter = request()->has('filter');
+
+
+
+        $paginationFilter = null;
+        //for filter
+        if ($filter) {
+            $filteredResponse = QueryBuilder::for(Category::class)
                 ->allowedFilters(['slug'])
                 ->with('subcategories')
                 ->latest()
-                ->simplePaginate(10) : null,
+                ->simplePaginate(10)
+                ->withQueryString();
 
+            // dd($res);
+            $paginationFilter = $filteredResponse;
+            $subcategories = $filteredResponse[0]->subcategories;
+        }
+        if ($filter && request('filter')['slug'] == null) {
+
+            $subcategories = QueryBuilder::for(Subcategory::class)
+                ->allowedSorts(['title', 'updated_at'])
+                ->simplePaginate(10)
+                ->withQueryString();
+        }
+
+
+        return view('admin.subcategories.index', [
+
+            'subcategories' => $subcategories,
+            'paginationFilter' => $paginationFilter
 
         ]);
     }
@@ -58,14 +79,9 @@ class SubcategoryController extends Controller
             'slug' => ['required', 'max:255', 'unique:subcategories,slug'],
         ]);
 
-        //        dd($attributes);
+
         //store
         Subcategory::create($attributes);
-        //
-        //        return response()->json([
-        //            'success' => true,
-        //            'message' => 'Subcategory created successfully!'
-        //        ]);
 
         return redirect('/admin/subcategories')->with('success', 'Subcategory created!');
     }

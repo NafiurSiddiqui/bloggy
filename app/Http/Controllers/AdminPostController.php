@@ -21,15 +21,12 @@ class AdminPostController extends Controller
     public function index(): View
     {
 
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->simplePaginate(10);
         $categoryFilter = request()->input('filter.slug');
         $statusFilter = request()->input('status_filter');
         $adminFilter = request()->input('admin_filter'); //gets the id
         $sortable = request('sort');
-        $sortIsAsc = request('dir') == 'asc';
 
-
-        // dd($sortAuthorByName);
 
         $filteredCategory = $categoryFilter && $categoryFilter !== '' ?
             QueryBuilder::for(Category::class)
@@ -61,13 +58,13 @@ class AdminPostController extends Controller
 
             $posts = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($statusFilter) {
                 $query->where($statusFilter, 1);
-            })->get();
+            })->simplePaginate(10);
         }
 
         if ($categoryFilter && $adminFilter) {
             $result = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($adminFilter) {
                 $query->where('user_id', $adminFilter);
-            })->get();
+            })->simplePaginate(10);
 
             $posts = $result[0]->posts;
         }
@@ -76,43 +73,31 @@ class AdminPostController extends Controller
 
             $result = User::where('id', $adminFilter)->with('posts', function ($query) use ($statusFilter) {
                 $query->where($statusFilter, 1);
-            })->get();
+            })->simplePaginate(10);
 
             $posts = $result[0]->posts;
         }
 
         if ($categoryFilter && $statusFilter && $adminFilter) {
-
-
             $result = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($statusFilter, $adminFilter) {
                 $query->where($statusFilter, 1)
                     ->whereHas('author', function ($query) use ($adminFilter) {
                         $query->where('id', $adminFilter);
                     });
-            })->get();
+            })->simplePaginate(10);
 
             $posts = $result[0]->posts;
         }
 
         if ($termSearchedFor) {
-
-            $posts = Post::latest()->filter(request(['search']))->get();
+            $posts = Post::latest()->filter(request(['search']))->simplePaginate(10);
         }
 
-
-        if ($sortable && $sortIsAsc) {
-            $posts =
-                QueryBuilder::for(Post::class)
-                ->allowedSorts($sortable)
-                ->get();
-        } elseif ($sortable && !$sortIsAsc) {
-            // dd('not asc');
-            $posts =
-                QueryBuilder::for(Post::class)
-                ->allowedSorts($sortable)
-                ->get();
+        if ($sortable) {
+            $posts = QueryBuilder::for(Post::class)
+                ->allowedSorts(['title', 'updated_at'])
+                ->simplePaginate(10);
         }
-
 
 
 

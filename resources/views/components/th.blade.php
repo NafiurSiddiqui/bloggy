@@ -1,4 +1,4 @@
-@props(['sort-by', 'th-title'])
+@props(['sort-by', 'th-title', 'page'])
 
 @php
     $sortAsc = isset($sortBy) && request()->has('sort') && request('dir') == 'asc';
@@ -14,11 +14,13 @@
     class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider hover:bg-gray-100 hover:text-gray-500 cursor-pointer border-x border-x-gray-200">
     <div class="{{ isset($sortBy) ? '' : 'py-3' }} px-2 flex justify-between">
         @if ($sortAsc)
-            <a href="/admin/posts/?sort=-{{ $sortBy }}&dir=desc" class=" py-3 w-full inline-block h-9 text-center">
+            <a href="/admin/{{ $page }}/?sort=-{{ $sortBy }}&dir=desc"
+                class=" py-3 w-full inline-block h-9 text-center">
                 {{ $thTitle }}
             </a>
         @elseif(isset($sortBy))
-            <a href="/admin/posts/?sort={{ $sortBy }}&dir=asc" class=" py-3 w-full inline-block  h-9 text-center">
+            <a href="/admin/{{ $page }}/?sort={{ $sortBy }}&dir=asc"
+                class=" py-3 w-full inline-block  h-9 text-center">
                 {{ $thTitle }}
             </a>
         @else

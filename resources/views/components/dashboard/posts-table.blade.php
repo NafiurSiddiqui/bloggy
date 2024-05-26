@@ -8,13 +8,13 @@
 
         <x-slot:thead>
             <tr>
-                <x-th th-title="Select" />
-                <x-th sort-by="title" th-title="title" />
-                <x-th th-title="category" />
-                <x-th th-title="Author" />
-                <x-th th-title="Status" />
-                <x-th sort-by="updated_at" th-title="Published" />
-                <x-th th-title="Actions" />
+                <x-th th-title="Select" page="posts" />
+                <x-th sort-by="title" th-title="title" page="posts" />
+                <x-th th-title="category" page="posts" />
+                <x-th th-title="Author" page="posts" />
+                <x-th th-title="Status" page="posts" />
+                <x-th sort-by="updated_at" th-title="Published" page="posts" />
+                <x-th th-title="Actions" page="posts" />
 
             </tr>
         </x-slot:thead>

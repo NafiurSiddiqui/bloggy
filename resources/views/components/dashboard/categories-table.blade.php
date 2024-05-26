@@ -4,22 +4,13 @@
     <x-table id="'categories_table'">
         <x-slot:thead>
             <tr>
-                <x-th>Select</x-th>
-                <x-th>
-                    title
-                </x-th>
-                <x-th>
-                    created
-                </x-th>
-                <x-th>
-                    subcategories
-                </x-th>
-                <x-th>
-                    Posts
-                </x-th>
-                <x-th>
-                    Action
-                </x-th>
+                <x-th th-title="Select" page="categories" />
+                <x-th sort-by="title" th-title="title" page="categories" />
+                <x-th sort-by="updated_at" th-title="created" page="categories" />
+                <x-th th-title="subcategories" page="categories" />
+                <x-th th-title="Posts" page="categories" />
+                <x-th th-title="Action" page="categories" />
+
             </tr>
         </x-slot:thead>
 

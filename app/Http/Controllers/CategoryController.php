@@ -6,17 +6,37 @@ use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     */
+
+
+
     public function index(): View
     {
+        $categories = QueryBuilder::for(Category::class)
+            ->allowedSorts(['title', 'updated_at'])
+            ->with('subcategories', 'posts')
+            ->simplePaginate(10);
+
+        $sortCategoryDesc = request('dir') == 'desc';
+
+
+        if ($sortCategoryDesc) {
+
+            $categories = QueryBuilder::for(Category::class)
+                ->allowedSorts(request('sort'))
+                ->with('subcategories', 'posts')
+                ->simplePaginate(10);
+        }
+
+
+
         return view('admin.categories.index', [
-            'categories' => Category::with('subcategories', 'posts')->orderBy('created_at', 'desc')->simplePaginate(10)
+
+            'categories' => $categories
         ]);
     }
 
