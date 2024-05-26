@@ -10,10 +10,10 @@
             <tr>
                 <x-th th-title="Select" />
                 <x-th sort-by="title" th-title="title" />
-                <x-th th-title="Category" />
+                <x-th th-title="category" />
                 <x-th th-title="Author" />
                 <x-th th-title="Status" />
-                <x-th th-title="Published" />
+                <x-th sort-by="updated_at" th-title="Published" />
                 <x-th th-title="Actions" />
 
             </tr>

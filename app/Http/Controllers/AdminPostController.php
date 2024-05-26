@@ -22,13 +22,14 @@ class AdminPostController extends Controller
     {
 
         $posts = Post::latest()->get();
-
         $categoryFilter = request()->input('filter.slug');
         $statusFilter = request()->input('status_filter');
         $adminFilter = request()->input('admin_filter'); //gets the id
         $sortable = request('sort');
         $sortIsAsc = request('dir') == 'asc';
 
+
+        // dd($sortAuthorByName);
 
         $filteredCategory = $categoryFilter && $categoryFilter !== '' ?
             QueryBuilder::for(Category::class)
@@ -98,16 +99,6 @@ class AdminPostController extends Controller
             $posts = Post::latest()->filter(request(['search']))->get();
         }
 
-        // if ($sortable && $sortIsAsc) {
-        //     $posts =
-        //         QueryBuilder::for(Post::class)
-        //         ->allowedSorts($sortable)
-        //         ->get();
-        // } elseif ($sortable && !$sortIsAsc) {
-        //     QueryBuilder::for(Post::class)
-        //         ->allowedSorts("-" . $sortable)
-        //         ->get();
-        // }
 
         if ($sortable && $sortIsAsc) {
             $posts =
@@ -127,7 +118,6 @@ class AdminPostController extends Controller
 
         return view('admin.posts.index', [
             // 'posts' => Post::latest()->filter(['search'])->get(),
-            // 'posts' => $termSearchedFor ? Post::latest()->filter([$termSearchedFor])->get() : $posts
             'posts' => $posts
 
         ]);

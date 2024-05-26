@@ -24,8 +24,11 @@
         @else
             {{ $thTitle }}
         @endif
-        <div class ="flex flex-col items-center justify-center text-gray-400">
-            <i class="fa-solid fa-sort"></i>
-        </div>
+
+        @if (isset($sortBy))
+            <div class ="flex flex-col items-center justify-center text-gray-400">
+                <i class="fa-solid fa-sort"></i>
+            </div>
+        @endif
     </div>
 </th>
