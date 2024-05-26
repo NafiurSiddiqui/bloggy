@@ -37,7 +37,7 @@ class SubcategoryController extends Controller
                 ->simplePaginate(10)
                 ->withQueryString();
 
-            // dd($res);
+
             $paginationFilter = $filteredResponse;
             $subcategories = $filteredResponse[0]->subcategories;
         }
