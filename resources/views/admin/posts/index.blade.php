@@ -1,20 +1,16 @@
 <x-dashboard.dashboard-layout>
     <x-slot:heading>All Posts</x-slot:heading>
 
-    {{-- @dd($posts) --}}
-    {{-- @if ($postsByAdmins != null)
-        @dd($postsByAdmins[0]->posts)
-    @endif --}}
     <x-panel>
-        <div class="flex items-end gap-2 ">
+        <div class="flex flex-col gap-2 ">
             <form action="/admin/posts">
-                <label for="search" sr-only />
-                <input type="search" name="search" id="search" placeholder="search..." class="">
+
+                <x-searchbar />
             </form>
 
-            <form action="/admin/posts" method="get">
+            <form action="/admin/posts" method="get" class="border border-gray-200 rounded p-2">
                 <fieldset class="flex flex-wrap gap-4">
-                    <legend>Filter by -</legend>
+                    <legend class="text-gray-400 font-semibold">Filter by -</legend>
 
                     <x-category-filter />
                     <x-dashboard.status-filter />
@@ -22,9 +18,9 @@
                 </fieldset>
 
 
-                <div class="mt-4">
+                <div class="mt-4 border py-2">
                     <x-secondary-button type="submit">Filter</x-secondary-button>
-                    <x-secondary-button link href="/admin/posts">Reset Filter</x-secondary-button>
+                    <x-secondary-button link href="/admin/posts">Reset</x-secondary-button>
                 </div>
             </form>
         </div>
