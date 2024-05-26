@@ -33,9 +33,13 @@ class AdminPostController extends Controller
             ->allowedFilters(['slug'])
             ->with('posts')
             ->latest()
-            ->simplePaginate(10) : $posts;
+            ->simplePaginate(10)
+            ->withQueryString()
+            : $posts;
 
+        $filteredPagination = null;
         $posts = $categoryFilter ? $filteredCategory[0]->posts : $posts;
+        $filteredPagination = $filteredCategory;
 
         $posts = $statusFilter && $statusFilter != '' ?
             Post::where($statusFilter, 1)
@@ -103,8 +107,8 @@ class AdminPostController extends Controller
 
         return view('admin.posts.index', [
             // 'posts' => Post::latest()->filter(['search'])->get(),
-            'posts' => $posts
-
+            'posts' => $posts,
+            'filteredPagination' => $filteredPagination
         ]);
     }
 
