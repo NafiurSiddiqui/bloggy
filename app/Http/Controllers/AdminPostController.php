@@ -26,7 +26,9 @@ class AdminPostController extends Controller
         $categoryFilter = request()->input('filter.slug');
         $statusFilter = request()->input('status_filter');
         $adminFilter = request()->input('admin_filter'); //gets the id
-        // dd($adminFilter);
+        $sortable = request('sort');
+        $sortIsAsc = request('dir') == 'asc';
+
 
         $filteredCategory = $categoryFilter && $categoryFilter !== '' ?
             QueryBuilder::for(Category::class)
@@ -95,6 +97,31 @@ class AdminPostController extends Controller
 
             $posts = Post::latest()->filter(request(['search']))->get();
         }
+
+        // if ($sortable && $sortIsAsc) {
+        //     $posts =
+        //         QueryBuilder::for(Post::class)
+        //         ->allowedSorts($sortable)
+        //         ->get();
+        // } elseif ($sortable && !$sortIsAsc) {
+        //     QueryBuilder::for(Post::class)
+        //         ->allowedSorts("-" . $sortable)
+        //         ->get();
+        // }
+
+        if ($sortable && $sortIsAsc) {
+            $posts =
+                QueryBuilder::for(Post::class)
+                ->allowedSorts($sortable)
+                ->get();
+        } elseif ($sortable && !$sortIsAsc) {
+            // dd('not asc');
+            $posts =
+                QueryBuilder::for(Post::class)
+                ->allowedSorts($sortable)
+                ->get();
+        }
+
 
 
 
