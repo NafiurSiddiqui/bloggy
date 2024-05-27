@@ -26,7 +26,7 @@ class PostFactory extends Factory
             ]),
             'category_id' => $category->id,
             'subcategory_id' => $subcategory->id,
-            'title' => $this->faker->sentence,
+            'title' => $this->faker->unique()->sentence,
             'slug' => $this->faker->unique()->slug,
             'description' => $this->faker->text,
             'body' => $this->faker->paragraph,
@@ -39,8 +39,8 @@ class PostFactory extends Factory
             'is_hot' => $this->faker->randomElement(['on', 'off']),
             'meta_title' => $this->faker->sentence,
             'meta_description' => $this->faker->text,
-            'og_thumbnail' => $this->faker->imageUrl(),
-            'og_title' => $this->faker->sentence,
+            'og_thumbnail' => $this->faker->optional()->imageUrl(),
+            'og_title' => $this->faker->optional()->sentence,
         ];
     }
 }
