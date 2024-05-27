@@ -30,7 +30,8 @@
             multiple-delete-form-action-path="delete-multiple-posts" delete-form-action-route="admin.posts.delete.all"
             path-to-creation="/admin/post/create" />
         <x-dashboard.posts-table :posts="$posts" />
-        <x-pagination-holder :item="$filteredPagination ?? $posts" />
+        {{-- <x-pagination-holder :item="$filteredPagination ?? $posts" /> --}}
+        <x-pagination-holder :item="$posts" />
     @elseif(isset($categories_are_empty) && $categories_are_empty)
         <p class="mt-2 text-gray-600">No posts yet.</p>
         <a href="/admin/categories" class="underline hover:text-blue-500 my-4 block">Let's quickly create a category
@@ -45,6 +46,11 @@
         <a href="/admin/post/create" class="underline hover:text-blue-500 my-4 block">Let's create a fresh post!
         </a>
     @endif
+
+    @if (session()->has('emptyResult'))
+        <x-toast-notification type-message message="{{ session('emptyResult') }}" />
+    @endif
+
 </x-dashboard.dashboard-layout>
 
 

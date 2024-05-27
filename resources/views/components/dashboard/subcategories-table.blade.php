@@ -6,7 +6,6 @@
     <x-table id="subcategories_table">
         <x-slot:thead>
             <tr>
-
                 <x-th th-title="Select" page="subcategories" />
                 <x-th sort-by="title" th-title="title" page="subcategories" />
                 <x-th sort-by="updated_at" th-title="created" page="subcategories" />

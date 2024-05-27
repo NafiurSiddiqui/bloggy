@@ -23,15 +23,14 @@
     </form>
 @else
     <div>
-        <x-form.label label-for="filter[slug]" label="Category" />
-        <x-select for-name="filter[slug]" for-id="filter[slug]" for-title="filter by categories">
+        <x-form.label label-for="category_filter" label="Category" />
+        <x-select for-name="category_filter" for-id="category_filter" for-title="filter by categories">
             <option value="">
                 All
             </option>
 
             @foreach ($categories as $category)
-                <option value="{{ $category?->slug }}"
-                    {{ $currentCategory?->slug == $category->slug ? 'selected' : '' }}>
+                <option value="{{ $category?->id }}" {{ $currentCategory?->id == $category->id ? 'selected' : '' }}>
                     {{ $category->title }}
                 </option>
             @endforeach
