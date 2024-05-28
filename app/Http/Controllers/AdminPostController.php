@@ -112,12 +112,19 @@ class AdminPostController extends Controller
 
         if ($adminFilter && $statusFilter) {
 
-            $result = User::where('id', $adminFilter)->with('posts', function ($query) use ($statusFilter) {
-                $query->where($statusFilter, 1);
-            })->simplePaginate(10)
+            //give me all the posts WHERE id === $adminFilter AND $statusFilter == 1
+            $result = Post::where('user_id', $adminFilter)
+                ->where($statusFilter, 1)
+                ->latest()
+                ->simplePaginate(10)
                 ->withQueryString();
 
-            $posts = $result[0]->posts->simplePaginate(10)->withQueryString();
+            if ($adminFilter && $result->isNotEmpty()) {
+                $posts = $result;
+            } elseif ($adminFilter && $result->isEmpty()) {
+                //flash message
+                session()->now('emptyResult', 'No posts found for this query');
+            }
         }
 
         if ($categoryFilter && $statusFilter && $adminFilter) {
