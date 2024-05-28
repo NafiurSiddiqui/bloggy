@@ -65,10 +65,10 @@
         const anyChecked = sessionStorage.getItem(POSTS_SESSION_ITEM) === 'true';
 
         if (anyChecked && someAreChecked) {
-            submitBtn.classList.remove('hidden');
+            submitBtn?.classList.remove('hidden');
             // console.log('says checked');
         } else {
-            submitBtn.classList.add('hidden');
+            submitBtn?.classList.add('hidden');
             // console.log('the fuck!');
             sessionStorage.removeItem(POSTS_SESSION_ITEM);
         }
