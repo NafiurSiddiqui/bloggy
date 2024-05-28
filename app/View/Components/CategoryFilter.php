@@ -23,12 +23,12 @@ class CategoryFilter extends Component
     public function render(): View|Closure|string
     {
 
-        $filter = request()->query('filter');
 
+        $filter = request('category_filter');
 
         return view('components.category-filter', [
             'categories' => \App\Models\Category::all(),
-            'currentCategory' => isset($filter['slug']) ? Category::firstWhere('slug', request('filter')['slug']) : null
+            'currentCategory' => isset($filter) ? Category::firstWhere('id', $filter) : null
         ]);
     }
 }
