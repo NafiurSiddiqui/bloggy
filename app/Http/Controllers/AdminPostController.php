@@ -42,11 +42,6 @@ class AdminPostController extends Controller
             ->withQueryString()
             : $posts;
 
-        // dd($filteredCategory);
-
-
-        // dd($filteredCategory); //same issue, you just get a category, better to try Post where category_id == request->category_id
-        // $posts = $categoryFilter && $filteredCategory->isNotEmpty() ? $filteredCategory : [];
 
 
         //if category_filter AND input->category_id is not empty
@@ -97,12 +92,22 @@ class AdminPostController extends Controller
         }
 
         if ($categoryFilter && $adminFilter) {
-            $result = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($adminFilter) {
-                $query->where('user_id', $adminFilter);
-            })->simplePaginate(10)
+
+            //query for all the posts where (category_id == categoryFilter AND  WHERE user_id == $adminFilter)
+            $result = Post::where('category_id', $categoryFilter)
+                ->where(
+                    'user_id',
+                    $adminFilter
+                )->latest()
+                ->simplePaginate(10)
                 ->withQueryString();
 
-            $posts = $result[0]->posts->simplePaginate(10)->withQueryString();
+            if ($categoryFilter && $result->isNotEmpty()) {
+                $posts = $result;
+            } elseif ($categoryFilter && $result->isEmpty()) {
+                //flash message
+                session()->now('emptyResult', 'No posts found for this query');
+            }
         }
 
         if ($adminFilter && $statusFilter) {
