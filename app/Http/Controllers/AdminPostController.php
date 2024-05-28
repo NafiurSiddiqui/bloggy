@@ -24,7 +24,7 @@ class AdminPostController extends Controller
         $posts = Post::latest()->simplePaginate(10)->withQueryString();
         $categoryFilter = request()->input('category_filter');
         $statusFilter = request()->input('status_filter');
-        $adminFilter = request()->input('admin_filter'); //gets the id
+        $authorFilter = request()->input('admin_filter'); //gets the id
         $sortable = request('sort');
 
         $filteredCategory = $categoryFilter && $categoryFilter !== '' ?
@@ -36,12 +36,12 @@ class AdminPostController extends Controller
 
 
         //CATEGORY FILTER
-        if ((!$adminFilter && !$statusFilter) && $filteredCategory) {
+        if ((!$authorFilter && !$statusFilter) && $filteredCategory) {
 
             if ($categoryFilter && $filteredCategory->isNotEmpty()) {
 
                 $posts = $filteredCategory;
-            } elseif ($categoryFilter && $filteredCategory->isEmpty() && !$adminFilter && !$statusFilter) {
+            } elseif ($categoryFilter && $filteredCategory->isEmpty() && !$authorFilter && !$statusFilter) {
                 dd('the fug?');
                 //flash message
                 session()->now('emptyResult', 'No posts found in this category');
@@ -57,18 +57,18 @@ class AdminPostController extends Controller
             : $posts;
 
         //ADMIN FILTER
-        $filteredAuthors = $adminFilter && $adminFilter != null ?
-            Post::where('user_id', $adminFilter)
+        $filteredAuthors = $authorFilter && $authorFilter != null ?
+            Post::where('user_id', $authorFilter)
             ->with('category')
             ->latest()
             ->simplePaginate(10)
             ->withQueryString()
             : $posts;
 
-        $posts = ($adminFilter && $filteredAuthors->isNotEmpty()) ? $filteredAuthors : $posts;
+        $posts = ($authorFilter && $filteredAuthors->isNotEmpty()) ? $filteredAuthors : $posts;
 
         //MULTIPLE FILTER
-        if ($categoryFilter && $statusFilter && !$adminFilter) {
+        if ($categoryFilter && $statusFilter && !$authorFilter) {
 
             $result = Post::where('category_id', $categoryFilter)->where(
                 $statusFilter,
@@ -80,19 +80,19 @@ class AdminPostController extends Controller
             if (($categoryFilter && $statusFilter) && $result->isNotEmpty()) {
 
                 $posts = $filteredCategory;
-            } elseif (($categoryFilter && $statusFilter && !$adminFilter) && $result->isEmpty() && !$adminFilter) {
+            } elseif (($categoryFilter && $statusFilter && !$authorFilter) && $result->isEmpty() && !$authorFilter) {
                 //flash message
                 session()->now('emptyResult', 'No posts found for your query');
             }
         }
 
-        if ($categoryFilter && $adminFilter && !$statusFilter) {
+        if ($categoryFilter && $authorFilter && !$statusFilter) {
 
-            //query for all the posts where (category_id == categoryFilter AND  WHERE user_id == $adminFilter)
+            //query for all the posts where (category_id == categoryFilter AND  WHERE user_id == $authorFilter)
             $result = Post::where('category_id', $categoryFilter)
                 ->where(
                     'user_id',
-                    $adminFilter
+                    $authorFilter
                 )->latest()
                 ->simplePaginate(10)
                 ->withQueryString();
@@ -106,29 +106,29 @@ class AdminPostController extends Controller
             }
         }
 
-        if ($adminFilter && $statusFilter && !$categoryFilter) {
+        if ($authorFilter && $statusFilter && !$categoryFilter) {
 
-            //give me all the posts WHERE id === $adminFilter AND $statusFilter == 1
-            $result = Post::where('user_id', $adminFilter)
+            //give me all the posts WHERE id === $authorFilter AND $statusFilter == 1
+            $result = Post::where('user_id', $authorFilter)
                 ->where($statusFilter, 1)
                 ->latest()
                 ->simplePaginate(10)
                 ->withQueryString();
 
-            if ($adminFilter && $result->isNotEmpty()) {
+            if ($authorFilter && $result->isNotEmpty()) {
 
                 $posts = $result;
-            } elseif ($adminFilter && $result->isEmpty()) {
+            } elseif ($authorFilter && $result->isEmpty()) {
                 //flash message
                 session()->now('emptyResult', 'No posts found for this query');
             }
         }
 
-        if ($categoryFilter && $statusFilter && $adminFilter) {
+        if ($categoryFilter && $statusFilter && $authorFilter) {
 
             $result = Post::where('category_id', $categoryFilter)
                 ->where($statusFilter, 1)
-                ->where('user_id', $adminFilter)
+                ->where('user_id', $authorFilter)
                 ->latest()
                 ->simplePaginate(10)
                 ->withQueryString();
@@ -146,16 +146,168 @@ class AdminPostController extends Controller
         $termSearchedFor = request('search');
 
         if ($termSearchedFor) {
-            $posts = Post::latest()->filter(request(['search']))->simplePaginate(10)
+            $result = Post::latest()
+                ->filter(request(['search']))
+                ->simplePaginate(10)
                 ->withQueryString();
+
+
+            if ($result->isNotEmpty()) {
+                $posts = $result;
+            } elseif ($result->isEmpty()) {
+                $posts = Post::latest()->simplePaginate(10)->withQueryString();
+                //flash message
+                session()->now('emptyResult', "Nothing found. Hope you did not search for status.Try filter then.");
+            }
         }
 
         //SORTING
         if ($sortable) {
-            $posts = QueryBuilder::for(Post::class)
-                ->allowedSorts(['title', 'updated_at'])
-                ->simplePaginate(10)
-                ->withQueryString();
+            // dd('Makes it to the sort');
+
+            if (!$authorFilter && !$categoryFilter && !$statusFilter) {
+                dd('should execute this block');
+                $posts = QueryBuilder::for(Post::class)
+                    ->allowedSorts(['title', 'updated_at'])
+                    ->where('user_id', $authorFilter)
+                    ->simplePaginate(10)
+                    ->withQueryString();
+            }
+
+            if ($categoryFilter) {
+                $result = QueryBuilder::for(Post::class)
+                    ->allowedSorts(['title', 'updated_at'])
+                    ->where('category_id', $categoryFilter)
+                    ->simplePaginate(10)
+                    ->withQueryString();
+
+                if ($result->isNotEmpty()) {
+                    $posts = $result;
+                } elseif ($result->isEmpty()) {
+                    $posts = QueryBuilder::for(Post::class)
+                        ->allowedSorts(['title', 'updated_at'])
+                        ->simplePaginate(10)
+                        ->withQueryString();
+                    session()->now('emptyResult', 'Could not sort with filtered category');
+                }
+                // dd('should be sorted with category');
+            }
+
+            if ($authorFilter) {
+                $result = QueryBuilder::for(Post::class)
+                    ->allowedSorts(['title', 'updated_at'])
+                    ->where('user_id', $authorFilter)
+                    ->simplePaginate(10)
+                    ->withQueryString();
+
+                if ($result->isNotEmpty()) {
+                    $posts = $result;
+                } elseif ($result->isEmpty()) {
+                    $posts = QueryBuilder::for(Post::class)
+                        ->allowedSorts(['title', 'updated_at'])
+                        ->simplePaginate(10)
+                        ->withQueryString();
+                    session()->now('emptyResult', 'Could not sort with filtered Author');
+                }
+            }
+            if ($statusFilter) {
+                $result = QueryBuilder::for(Post::class)
+                    ->allowedSorts(['title', 'updated_at'])
+                    ->where($statusFilter, 1)
+                    ->simplePaginate(10)
+                    ->withQueryString();
+
+                if ($result->isNotEmpty()) {
+                    $posts = $result;
+                } elseif ($result->isEmpty()) {
+                    $posts = QueryBuilder::for(Post::class)
+                        ->allowedSorts(['title', 'updated_at'])
+                        ->simplePaginate(10)
+                        ->withQueryString();
+                    session()->now('emptyResult', 'Could not sort with filtered Author');
+                }
+            }
+
+            if ($categoryFilter && $statusFilter) {
+                $result = QueryBuilder::for(Post::class)
+                    ->allowedSorts(['title', 'updated_at'])
+                    ->where('category_id', $categoryFilter)
+                    ->where($statusFilter, 1)
+                    ->simplePaginate(10)
+                    ->withQueryString();
+
+                if ($result->isNotEmpty()) {
+                    $posts = $result;
+                } elseif ($result->isEmpty()) {
+                    $posts = QueryBuilder::for(Post::class)
+                        ->allowedSorts(['title', 'updated_at'])
+                        ->simplePaginate(10)
+                        ->withQueryString();
+                    session()->now('emptyResult', 'Could not sort with filtered category');
+                }
+                // dd('should be sorted with category');
+            }
+
+            if ($categoryFilter && $authorFilter) {
+                $result = QueryBuilder::for(Post::class)
+                    ->allowedSorts(['title', 'updated_at'])
+                    ->where('category_id', $categoryFilter)
+                    ->where('user_id', $authorFilter)
+                    ->simplePaginate(10)
+                    ->withQueryString();
+
+                if ($result->isNotEmpty()) {
+                    $posts = $result;
+                } elseif ($result->isEmpty()) {
+                    $posts = QueryBuilder::for(Post::class)
+                        ->allowedSorts(['title', 'updated_at'])
+                        ->simplePaginate(10)
+                        ->withQueryString();
+                    session()->now('emptyResult', 'Could not sort with filtered category and author');
+                }
+                // dd('should be sorted with category');
+            }
+
+            if ($statusFilter && $authorFilter) {
+                $result = QueryBuilder::for(Post::class)
+                    ->allowedSorts(['title', 'updated_at'])
+                    ->where($statusFilter, 1)
+                    ->where('user_id', $authorFilter)
+                    ->simplePaginate(10)
+                    ->withQueryString();
+
+                if ($result->isNotEmpty()) {
+                    $posts = $result;
+                } elseif ($result->isEmpty()) {
+                    $posts = QueryBuilder::for(Post::class)
+                        ->allowedSorts(['title', 'updated_at'])
+                        ->simplePaginate(10)
+                        ->withQueryString();
+                    session()->now('emptyResult', 'Could not sort with filtered category and author');
+                }
+                // dd('should be sorted with category');
+            }
+
+            if ($statusFilter && $authorFilter && $categoryFilter) {
+                $result = QueryBuilder::for(Post::class)
+                    ->allowedSorts(['title', 'updated_at'])
+                    ->where($statusFilter, 1)
+                    ->where('user_id', $authorFilter)
+                    ->where('category_id', $categoryFilter)
+                    ->simplePaginate(10)
+                    ->withQueryString();
+
+                if ($result->isNotEmpty()) {
+                    $posts = $result;
+                } elseif ($result->isEmpty()) {
+                    $posts = QueryBuilder::for(Post::class)
+                        ->allowedSorts(['title', 'updated_at'])
+                        ->simplePaginate(10)
+                        ->withQueryString();
+                    session()->now('emptyResult', 'Zoink! Could not sort with the filtered items.');
+                }
+                // dd('should be sorted with category');
+            }
         }
 
         return view('admin.posts.index', [
@@ -172,7 +324,7 @@ class AdminPostController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(): RedirectResponse
     {
         // dd(request()->input('subcategory_id') === "---");
 

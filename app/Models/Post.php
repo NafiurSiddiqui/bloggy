@@ -53,6 +53,7 @@ class Post extends Model
             })
         );
 
+
         $query->when(
             $filters['search'] ?? false,
             fn ($query, $search) =>
@@ -60,9 +61,6 @@ class Post extends Model
                 $query->where('title', $search);
             })
         );
-
-        // Additional filtering by author name
-
     }
 
     public function author(): BelongsTo
