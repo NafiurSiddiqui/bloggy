@@ -26,15 +26,6 @@ class AdminPostController extends Controller
         $statusFilter = request()->input('status_filter');
         $adminFilter = request()->input('admin_filter'); //gets the id
         $sortable = request('sort');
-        // dd($posts);
-        // $filteredCategory = $categoryFilter && $categoryFilter !== '' ?
-        //     QueryBuilder::for(Category::class)
-        //     ->allowedFilters(['slug'])
-        //     ->with('posts')
-        //     ->latest()
-        //     ->simplePaginate(10)
-        //     ->withQueryString()
-        //     : $posts;
 
         $filteredCategory = $categoryFilter && $categoryFilter !== '' ?
             Post::where('category_id', $categoryFilter)
@@ -44,23 +35,20 @@ class AdminPostController extends Controller
 
 
 
-        //if category_filter AND input->category_id is not empty
-        //return the filtered_category_query via $posts
+        //CATEGORY FILTER
+        if ((!$adminFilter && !$statusFilter) && $filteredCategory) {
 
-        //what if category_id is empty? suppposedly  it should return all posts and won't make it to the block
-        //what if the $filteredCategory returned empty result?
-        // show user that there is no posts OR flash an emptyResult message.
+            if ($categoryFilter && $filteredCategory->isNotEmpty()) {
 
-
-        if ($categoryFilter && $filteredCategory->isNotEmpty()) {
-            $posts = $filteredCategory;
-        } elseif ($categoryFilter && $filteredCategory->isEmpty()) {
-            //flash message
-            session()->now('emptyResult', 'No posts found in this category');
+                $posts = $filteredCategory;
+            } elseif ($categoryFilter && $filteredCategory->isEmpty() && !$adminFilter && !$statusFilter) {
+                dd('the fug?');
+                //flash message
+                session()->now('emptyResult', 'No posts found in this category');
+            }
         }
 
-        // $filteredPagination = $filteredCategory;
-        // dd($posts);
+        //STATUS FILTER
         $posts = $statusFilter && $statusFilter != '' ?
             Post::where($statusFilter, 1)
             ->latest()
@@ -68,7 +56,7 @@ class AdminPostController extends Controller
             ->withQueryString()
             : $posts;
 
-
+        //ADMIN FILTER
         $filteredAuthors = $adminFilter && $adminFilter != null ?
             Post::where('user_id', $adminFilter)
             ->with('category')
@@ -79,19 +67,26 @@ class AdminPostController extends Controller
 
         $posts = ($adminFilter && $filteredAuthors->isNotEmpty()) ? $filteredAuthors : $posts;
 
-        // dd($posts, $adminFilter);
+        //MULTIPLE FILTER
+        if ($categoryFilter && $statusFilter && !$adminFilter) {
 
-        $termSearchedFor = request('search');
-        //if both all filters are set
-        if ($categoryFilter && $statusFilter) {
-
-            $posts = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($statusFilter) {
-                $query->where($statusFilter, 1);
-            })->simplePaginate(10)
+            $result = Post::where('category_id', $categoryFilter)->where(
+                $statusFilter,
+                1
+            )->latest()
+                ->simplePaginate(10)
                 ->withQueryString();
+
+            if (($categoryFilter && $statusFilter) && $result->isNotEmpty()) {
+
+                $posts = $filteredCategory;
+            } elseif (($categoryFilter && $statusFilter && !$adminFilter) && $result->isEmpty() && !$adminFilter) {
+                //flash message
+                session()->now('emptyResult', 'No posts found for your query');
+            }
         }
 
-        if ($categoryFilter && $adminFilter) {
+        if ($categoryFilter && $adminFilter && !$statusFilter) {
 
             //query for all the posts where (category_id == categoryFilter AND  WHERE user_id == $adminFilter)
             $result = Post::where('category_id', $categoryFilter)
@@ -103,6 +98,7 @@ class AdminPostController extends Controller
                 ->withQueryString();
 
             if ($categoryFilter && $result->isNotEmpty()) {
+
                 $posts = $result;
             } elseif ($categoryFilter && $result->isEmpty()) {
                 //flash message
@@ -110,7 +106,7 @@ class AdminPostController extends Controller
             }
         }
 
-        if ($adminFilter && $statusFilter) {
+        if ($adminFilter && $statusFilter && !$categoryFilter) {
 
             //give me all the posts WHERE id === $adminFilter AND $statusFilter == 1
             $result = Post::where('user_id', $adminFilter)
@@ -120,6 +116,7 @@ class AdminPostController extends Controller
                 ->withQueryString();
 
             if ($adminFilter && $result->isNotEmpty()) {
+
                 $posts = $result;
             } elseif ($adminFilter && $result->isEmpty()) {
                 //flash message
@@ -128,32 +125,38 @@ class AdminPostController extends Controller
         }
 
         if ($categoryFilter && $statusFilter && $adminFilter) {
-            $result = Category::where('slug', $categoryFilter)->with('posts', function ($query) use ($statusFilter, $adminFilter) {
-                $query->where($statusFilter, 1)
-                    ->whereHas('author', function ($query) use ($adminFilter) {
-                        $query->where('id', $adminFilter);
-                    });
-            })->simplePaginate(10)
+
+            $result = Post::where('category_id', $categoryFilter)
+                ->where($statusFilter, 1)
+                ->where('user_id', $adminFilter)
+                ->latest()
+                ->simplePaginate(10)
                 ->withQueryString();
 
-            $posts = $result[0]->posts->simplePaginate(10)->withQueryString();
+            if ($result->isNotEmpty()) {
+                $posts = $result;
+            } elseif ($result->isEmpty()) {
+                $posts = Post::latest()->simplePaginate(10)->withQueryString();
+                //flash message
+                session()->now('emptyResult', 'No posts found for your query');
+            }
         }
+
+        //SEARCH ENGINE
+        $termSearchedFor = request('search');
 
         if ($termSearchedFor) {
             $posts = Post::latest()->filter(request(['search']))->simplePaginate(10)
                 ->withQueryString();
         }
 
+        //SORTING
         if ($sortable) {
             $posts = QueryBuilder::for(Post::class)
                 ->allowedSorts(['title', 'updated_at'])
                 ->simplePaginate(10)
                 ->withQueryString();
         }
-
-        // $posts->appends(request()->query());
-        // $filteredPagination->appends(request()->query());
-
 
         return view('admin.posts.index', [
             // 'posts' => Post::latest()->filter(['search'])->get(),
