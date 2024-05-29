@@ -405,7 +405,7 @@ class AdminPostController extends Controller
     }
 
 
-    public function update(Request $request, Post $post)
+    public function update(Post $post)
     {
 
         $categoryValidator = function (string $attribute, mixed $value, Closure $fail) {
