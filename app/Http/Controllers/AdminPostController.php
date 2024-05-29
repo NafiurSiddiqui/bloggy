@@ -8,7 +8,7 @@ use App\Models\User;
 use App\View\Components\Dashboard\AdminFilter;
 use Closure;
 use Illuminate\Http\RedirectResponse;
-
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -326,34 +326,36 @@ class AdminPostController extends Controller
 
     public function store(): RedirectResponse
     {
-        // dd(request()->input('subcategory_id') === "---");
 
-        $subcategoryIdValidator = function (string $attribute, mixed $value, Closure $fail) {
-            if ($value !== "---" && !Validator::make(['subcategory_id' => $value], ['subcategory_id' => 'exists:subcategory'])->passes()) {
-                $fail('The subcategory ID must be a valid existing subcategory or "---".');
+        $categoryValidator = function (string $attribute, mixed $value, Closure $fail) {
+            if (!is_numeric($value)) {
+                // Allow "---" or any other non-numeric value
+                return true;
+            } else {
+                // Validate numeric values for existence
+                Validator::make(['category_id' => $value], ['category_id' => 'exists:categories,id']);
+            }
+        };
+        $subcategoryValidator = function (string $attribute, mixed $value, Closure $fail) {
+            if (!is_numeric($value)) {
+                // Allow "---" or any other non-numeric value
+                return true;
+            } else {
+                // Validate numeric values for existence
+                Validator::make(['subcategory_id' => $value], ['subcategory_id' => 'exists:subcategory']);
             }
         };
 
         //validate
         $attributes = request()->validate([
             'title' => ['required', 'max:255', 'unique:posts'],
-            'slug' => ['required', 'unique:posts'],
+            'slug' => ['nullable', 'unique:posts'],
             'description' => ['required', 'max:255'],
             'body' => 'required',
             'thumbnail' => ['required', 'image'],
             'thumbnail_alt_txt' => ['required', 'max:100'],
-            'category_id' => ['required', 'exists:categories,id'],
-            // 'subcategory_id' => ['nullable', 'exists:subcategories,id'],
-            'subcategory_id' => ['nullable', function (string $attribute, mixed $value, Closure $fail) {
-                if (!is_numeric($value)) {
-                    // Allow "---" or any other non-numeric value
-                    return true;
-                } else {
-
-                    // Validate numeric values for existence
-                    Validator::make(['subcategory_id' => $value], ['subcategory_id' => 'exists:subcategory']);
-                }
-            }],
+            'category_id' => ['nullable', $categoryValidator],
+            'subcategory_id' => ['nullable', $subcategoryValidator],
             'is_featured' => ['nullable'],
             'is_published' => ['boolean'],
             'is_draft' => ['boolean'],
@@ -365,6 +367,14 @@ class AdminPostController extends Controller
 
         ]);
 
+        //check if a category by slug 'uncategorized' exist in database
+        $uncategorizedCategory = Category::where('slug', 'uncategorized')->firstOrCreate([
+            'title' => 'Uncategorized',
+            'slug' => 'uncategorized'
+        ]);
+
+        $attributes['category_id'] = request()->input('category_id') === "---" ?   $uncategorizedCategory->id : request()->input('category_id');
+
 
         //associate user_id and store file
         $attributes['subcategory_id'] = request()->input('subcategory_id') === "---" ? null : request()->input('subcategory_id');
@@ -373,6 +383,11 @@ class AdminPostController extends Controller
         if (isset($attributes['og_thumbnail'])) {
             $attributes['og_thumbnail'] = request()->file('og_thumbnail')->store('thumbnails');
         }
+
+
+
+        //auto generate title to slug
+        $attributes['slug'] = request('slug') ? Str::slug(request('slug'), '-') : Str::slug($attributes['title'], '-');
 
 
         //store
@@ -393,8 +408,24 @@ class AdminPostController extends Controller
     public function update(Request $request, Post $post)
     {
 
-        // dd(request()->all());
-        // dd(request()->input('subcategory_id') === "---");
+        $categoryValidator = function (string $attribute, mixed $value, Closure $fail) {
+            if (!is_numeric($value)) {
+                // Allow "---" or any other non-numeric value
+                return true;
+            } else {
+                // Validate numeric values for existence
+                Validator::make(['category_id' => $value], ['category_id' => 'exists:categories,id']);
+            }
+        };
+        $subcategoryValidator = function (string $attribute, mixed $value, Closure $fail) {
+            if (!is_numeric($value)) {
+                // Allow "---" or any other non-numeric value
+                return true;
+            } else {
+                // Validate numeric values for existence
+                Validator::make(['subcategory_id' => $value], ['subcategory_id' => 'exists:subcategory']);
+            }
+        };
         //validate
         $attributes = request()->validate([
             'title' => ['required', 'max:255',  Rule::unique('posts', 'title')->ignore($post->id)],
@@ -403,17 +434,8 @@ class AdminPostController extends Controller
             'body' => 'required',
             'thumbnail' => ['image'],
             'thumbnail_alt_txt' => ['max:100'],
-            'category_id' => ['required', 'exists:categories,id'],
-            'subcategory_id' => ['nullable', function (string $attribute, mixed $value, Closure $fail) {
-                if (!is_numeric($value)) {
-                    // Allow "---" or any other non-numeric value
-                    return true;
-                } else {
-
-                    // Validate numeric values for existence
-                    Validator::make(['subcategory_id' => $value], ['subcategory_id' => 'exists:subcategory']);
-                }
-            }],
+            'category_id' => ['nullable', $categoryValidator],
+            'subcategory_id' => ['nullable', $subcategoryValidator],
             'is_featured' => ['nullable'],
             'is_hot' =>  ['nullable'],
             'meta_title' => ['required', 'max:255'],
@@ -428,10 +450,17 @@ class AdminPostController extends Controller
          * Make sure the value is always either 'on' or 'off' for integrity.
          */
 
-        // dd(request()->input('subcategory_id') === "---");
+        //check if a category by slug 'uncategorized' exist in database
+        $uncategorizedCategory = Category::where('slug', 'uncategorized')->firstOrCreate([
+            'title' => 'Uncategorized',
+            'slug' => 'uncategorized'
+        ]);
+
+        $attributes['category_id'] = request()->input('category_id') === "---" ?   $uncategorizedCategory->id : request()->input('category_id');
+
         $attributes['subcategory_id'] = request()->input('subcategory_id') === "---" ? null : request()->input('subcategory_id');
-        $attributes['is_featured'] = $request->has('is_featured') ? 'on' : 'off';
-        $attributes['is_hot'] = $request->has('is_hot') ? 'on' : 'off';
+        $attributes['is_featured'] = request('is_featured') ? 'on' : 'off';
+        $attributes['is_hot'] = request('is_hot') ? 'on' : 'off';
 
         if (isset($attributes['thumbnail'])) {
             $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
