@@ -3,7 +3,8 @@
 <script>
     tinymce.init({
         selector: 'textarea#tinyeditor', // Replace this CSS selector to match the placeholder element for TinyMCE
-        plugins: 'code table lists',
-        toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+        plugins: 'code image fullscreen link anchor lists media',
+        toolbar: 'undo redo | blocks |image | link | anchor | bold italic | fullscreen | alignleft aligncenter alignright | indent outdent | bullist numlist  | code | media '
     });
+    //! NEED SOCIAL MEDIA POSTS EMBEDDER
 </script>

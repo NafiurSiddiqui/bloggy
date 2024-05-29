@@ -19,6 +19,8 @@ Made with 💚
 ## EDITOR
 
 -   [TinyMce](https://www.tiny.cloud/) Ediotr's free plan is used. Which allows you to load the editor 1,000 times per month.
+-   `TinyMce` editor also allows you to use plugins. [visit](https://www.tiny.cloud/docs/tinymce/latest/plugins/) here in order to take a look a the number of plugins they offer.
+-   We have used freemium open-source [image](https://www.tiny.cloud/docs/tinymce/latest/image/) plugin to enable image upload. **DO NOT** upload svgs, since they are vulnerable to cyber attacks.
 -   [Contact Us](#) or hire a developer to upgrad any paid plans if needed.
 
 ## POST CREATION
