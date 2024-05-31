@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title')->unique();
             $table->string('slug')->unique();
             $table->text('description');
-            $table->text('body');
+            $table->longText('body');
             $table->string('thumbnail');
             $table->string('thumbnail_alt_txt');
             //post state
