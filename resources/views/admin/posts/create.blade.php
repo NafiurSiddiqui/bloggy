@@ -76,9 +76,9 @@
                 </div>
             </x-panel>
 
-            @error('body')
-                <span class="text-red-500 text-xs">{{ $message }}</span>
-            @enderror
         </form>
+        @error('body')
+            <span class="text-red-500 text-xs">{{ $message }}</span>
+        @enderror
     @endif
 </x-dashboard.dashboard-layout>

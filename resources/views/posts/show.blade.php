@@ -30,11 +30,6 @@
                         <a href="/"
                             class="transition-colors duration-300 relative inline-flex items-center text-lg hover:text-blue-500">
                             < Back to Posts </a>
-
-                                {{--                        <div class="space-x-2"> --}}
-
-                                {{--                            <x-category-button :category="$post->category" /> --}}
-                                {{--                        </div> --}}
                     </div>
 
 

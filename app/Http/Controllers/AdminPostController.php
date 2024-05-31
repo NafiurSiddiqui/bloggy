@@ -20,7 +20,7 @@ class AdminPostController extends Controller
 {
     public function index(): View
     {
-
+        // dd(request()->all());
         $posts = Post::latest()->simplePaginate(10)->withQueryString();
         $categoryFilter = request()->input('category_filter');
         $statusFilter = request()->input('status_filter');
@@ -319,6 +319,7 @@ class AdminPostController extends Controller
 
     public function create(): View
     {
+
         return view('admin.posts.create', [
             'posts' => Post::all()->sortByDesc('created_at')
         ]);
@@ -327,6 +328,7 @@ class AdminPostController extends Controller
     public function store(): RedirectResponse
     {
 
+        // dd(request('body'));
         $categoryValidator = function (string $attribute, mixed $value, Closure $fail) {
             if (!is_numeric($value)) {
                 // Allow "---" or any other non-numeric value

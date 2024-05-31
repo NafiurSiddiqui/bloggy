@@ -1,3 +1,5 @@
-<form method="post">
-    <textarea id="tinyeditor">Hello, World!</textarea>
-</form>
+<textarea id="body" name="body">
+    {!! old('body') !!}
+</textarea>
+
+<x-form.error name="body" />

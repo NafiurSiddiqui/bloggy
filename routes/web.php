@@ -44,6 +44,9 @@ Route::middleware('auth')->group(function () {
     Route::view('/admin', 'admin.dashboard')->name('admin');
     Route::get('/admin/posts', [AdminPostController::class, 'index'])->name('admin.posts');
     Route::get('/admin/post/create', [AdminPostController::class, 'create'])->name('admin.post.create');
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web']], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
     Route::post('/admin/post/store', [AdminPostController::class, 'store'])->name('admin.post.store');
     Route::delete('/admin/posts/delete-all', function () {
         //delete all posts
