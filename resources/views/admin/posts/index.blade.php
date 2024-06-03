@@ -47,8 +47,8 @@
         </a>
     @endif
 
-    @if (session()->has('emptyResult'))
-        <x-toast-notification type-message message="{{ session('emptyResult') }}" />
+    @if (session()->has('notify'))
+        <x-toast-notification type-message message="{{ session('notify') }}" />
     @endif
 
 </x-dashboard.dashboard-layout>

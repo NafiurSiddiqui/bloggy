@@ -1,5 +1,7 @@
 @props(['type-message', 'message'])
 
+
+
 @if (isset($typeMessage))
     <div x-data="{ show: true }" x-show="show"
         class="border-2 border-blue-500 shadow-lg bg-blue-500 font-semibold fixed right-3 bottom-5 p-4 rounded transition duration-300 ease-in-out flex justify-between items-center gap-4"

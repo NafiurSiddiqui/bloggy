@@ -28,7 +28,7 @@
             <x-form.input name="title" required />
             <x-form.input name="slug" placeholder="slug auto generates when submitted" />
             <x-form.textarea name="description" required />
-            {{-- <x-form.textarea name="body" required /> --}}
+
             <x-form.tinymce-editor />
 
             <x-panel class="px-2 py-3 my-8 ">
@@ -67,9 +67,8 @@
             <x-panel class="px-2 py-3 my-8">
                 <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Actions</h2>
                 <div>
-                    <x-secondary-button type="submit" name='is_draft' value='1'>Save as
-                        Draft</x-secondary-button>
-                    <x-form.button value="1">
+                    <x-secondary-button type="submit" name='is_draft' value='1'>Save as Draft</x-secondary-button>
+                    <x-form.button name="is_published" value="1">
                         Publish
                     </x-form.button>
 
