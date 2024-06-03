@@ -44,7 +44,7 @@ class AdminPostController extends Controller
             } elseif ($categoryFilter && $filteredCategory->isEmpty() && !$authorFilter && !$statusFilter) {
                 dd('the fug?');
                 //flash message
-                session()->now('emptyResult', 'No posts found in this category');
+                session()->now('notify', 'No posts found in this category');
             }
         }
 
@@ -82,7 +82,7 @@ class AdminPostController extends Controller
                 $posts = $filteredCategory;
             } elseif (($categoryFilter && $statusFilter && !$authorFilter) && $result->isEmpty() && !$authorFilter) {
                 //flash message
-                session()->now('emptyResult', 'No posts found for your query');
+                session()->now('notify', 'No posts found for your query');
             }
         }
 
@@ -102,7 +102,7 @@ class AdminPostController extends Controller
                 $posts = $result;
             } elseif ($categoryFilter && $result->isEmpty()) {
                 //flash message
-                session()->now('emptyResult', 'No posts found for this query');
+                session()->now('notify', 'No posts found for this query');
             }
         }
 
@@ -120,7 +120,7 @@ class AdminPostController extends Controller
                 $posts = $result;
             } elseif ($authorFilter && $result->isEmpty()) {
                 //flash message
-                session()->now('emptyResult', 'No posts found for this query');
+                session()->now('notify', 'No posts found for this query');
             }
         }
 
@@ -138,7 +138,7 @@ class AdminPostController extends Controller
             } elseif ($result->isEmpty()) {
                 $posts = Post::latest()->simplePaginate(10)->withQueryString();
                 //flash message
-                session()->now('emptyResult', 'No posts found for your query');
+                session()->now('notify', 'No posts found for your query');
             }
         }
 
@@ -157,7 +157,7 @@ class AdminPostController extends Controller
             } elseif ($result->isEmpty()) {
                 $posts = Post::latest()->simplePaginate(10)->withQueryString();
                 //flash message
-                session()->now('emptyResult', "Nothing found. Hope you did not search for status.Try filter then.");
+                session()->now('notify', "Nothing found. Hope you did not search for status.Try filter then.");
             }
         }
 
@@ -188,7 +188,7 @@ class AdminPostController extends Controller
                         ->allowedSorts(['title', 'updated_at'])
                         ->simplePaginate(10)
                         ->withQueryString();
-                    session()->now('emptyResult', 'Could not sort with filtered category');
+                    session()->now('notify', 'Could not sort with filtered category');
                 }
                 // dd('should be sorted with category');
             }
@@ -207,7 +207,7 @@ class AdminPostController extends Controller
                         ->allowedSorts(['title', 'updated_at'])
                         ->simplePaginate(10)
                         ->withQueryString();
-                    session()->now('emptyResult', 'Could not sort with filtered Author');
+                    session()->now('notify', 'Could not sort with filtered Author');
                 }
             }
             if ($statusFilter) {
@@ -224,7 +224,7 @@ class AdminPostController extends Controller
                         ->allowedSorts(['title', 'updated_at'])
                         ->simplePaginate(10)
                         ->withQueryString();
-                    session()->now('emptyResult', 'Could not sort with filtered Author');
+                    session()->now('notify', 'Could not sort with filtered Author');
                 }
             }
 
@@ -243,7 +243,7 @@ class AdminPostController extends Controller
                         ->allowedSorts(['title', 'updated_at'])
                         ->simplePaginate(10)
                         ->withQueryString();
-                    session()->now('emptyResult', 'Could not sort with filtered category');
+                    session()->now('notify', 'Could not sort with filtered category');
                 }
                 // dd('should be sorted with category');
             }
@@ -263,7 +263,7 @@ class AdminPostController extends Controller
                         ->allowedSorts(['title', 'updated_at'])
                         ->simplePaginate(10)
                         ->withQueryString();
-                    session()->now('emptyResult', 'Could not sort with filtered category and author');
+                    session()->now('notify', 'Could not sort with filtered category and author');
                 }
                 // dd('should be sorted with category');
             }
@@ -283,7 +283,7 @@ class AdminPostController extends Controller
                         ->allowedSorts(['title', 'updated_at'])
                         ->simplePaginate(10)
                         ->withQueryString();
-                    session()->now('emptyResult', 'Could not sort with filtered category and author');
+                    session()->now('notify', 'Could not sort with filtered category and author');
                 }
                 // dd('should be sorted with category');
             }
@@ -304,7 +304,7 @@ class AdminPostController extends Controller
                         ->allowedSorts(['title', 'updated_at'])
                         ->simplePaginate(10)
                         ->withQueryString();
-                    session()->now('emptyResult', 'Zoink! Could not sort with the filtered items.');
+                    session()->now('notify', 'Zoink! Could not sort with the filtered items.');
                 }
                 // dd('should be sorted with category');
             }
@@ -328,7 +328,7 @@ class AdminPostController extends Controller
     public function store(): RedirectResponse
     {
 
-        // dd(request('body'));
+        // dd(request()->all());
         $categoryValidator = function (string $attribute, mixed $value, Closure $fail) {
             if (!is_numeric($value)) {
                 // Allow "---" or any other non-numeric value
@@ -385,18 +385,19 @@ class AdminPostController extends Controller
         if (isset($attributes['og_thumbnail'])) {
             $attributes['og_thumbnail'] = request()->file('og_thumbnail')->store('thumbnails');
         }
-
-
-
         //auto generate title to slug
         $attributes['slug'] = request('slug') ? Str::slug(request('slug'), '-') : Str::slug($attributes['title'], '-');
-
 
         //store
         Post::create($attributes);
 
         //redirect
-        return redirect('/admin/posts')->with('success', 'Post created!');
+        if (request()->has('is_draft')) {
+
+            return redirect('/admin/posts')->with('notify', 'Post saved as draft!');
+        } else {
+            return redirect('/admin/posts')->with('success', 'Post created!');
+        }
     }
 
     public function edit(Post $post): View
