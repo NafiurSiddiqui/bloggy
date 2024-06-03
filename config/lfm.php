@@ -58,8 +58,8 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'application/pdf',
-                'text/plain',
+                // 'application/pdf',
+                // 'text/plain',
             ],
         ],
         'image' => [
@@ -151,18 +151,18 @@ return [
      */
 
     'file_type_array'          => [
-        'pdf'  => 'Adobe Acrobat',
-        'doc'  => 'Microsoft Word',
-        'docx' => 'Microsoft Word',
-        'xls'  => 'Microsoft Excel',
-        'xlsx' => 'Microsoft Excel',
-        'zip'  => 'Archive',
+        // 'pdf'  => 'Adobe Acrobat',
+        // 'doc'  => 'Microsoft Word',
+        // 'docx' => 'Microsoft Word',
+        // 'xls'  => 'Microsoft Excel',
+        // 'xlsx' => 'Microsoft Excel',
+        // 'zip'  => 'Archive',
         'gif'  => 'GIF Image',
         'jpg'  => 'JPEG Image',
         'jpeg' => 'JPEG Image',
         'png'  => 'PNG Image',
-        'ppt'  => 'Microsoft PowerPoint',
-        'pptx' => 'Microsoft PowerPoint',
+        // 'ppt'  => 'Microsoft PowerPoint',
+        // 'pptx' => 'Microsoft PowerPoint',
     ],
 
     /*
