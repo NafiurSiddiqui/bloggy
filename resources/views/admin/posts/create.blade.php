@@ -1,9 +1,7 @@
 <x-dashboard.dashboard-layout>
 
     <x-slot:heading>Create a Post</x-slot:heading>
-    <x-secondary-button class="mt-4" link href="/admin/posts">
-        Cancel
-    </x-secondary-button>
+
     @if (isset($categories_are_empty) && $categories_are_empty)
         <p class="mt-2 text-gray-600">Whoops! Categories are empty. On the first run of the application this is expected.
             No worries!</p>
@@ -61,18 +59,33 @@
                 <x-form.input name="og_thumbnail" type="file" />
                 <x-form.input name="og_title" />
             </x-panel>
+            <div x-data={open:false}>
 
 
-            <x-panel class="px-2 py-3 my-8">
-                <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Actions</h2>
-                <div>
-                    <x-secondary-button type="submit" name='is_draft' value='1'>Save as Draft</x-secondary-button>
-                    <x-form.button name="is_published" value="1">
-                        Publish
-                    </x-form.button>
+                <x-panel class="px-2 py-3 fixed bottom-0 w-full left-0 bg-slate-200">
+                    <h2 class="mb-3 font-semibold text-gray-500 border-b border-gray-300">Actions</h2>
+                    <div :class="{ 'block': open, 'hidden': !open }"
+                        class="flex flex-col border-2 rounded p-4 bg-slate-300">
 
-                </div>
-            </x-panel>
+                        <x-secondary-button type="submit" name='is_draft' value='1'>Save as
+                            Draft</x-secondary-button>
+                        <x-form.button name="is_published" value="1">
+                            Publish
+                        </x-form.button>
+
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <x-secondary-button class="mt-4" link href="/admin/posts">
+                            Cancel
+                        </x-secondary-button>
+                        <x-icons.hamburger />
+
+
+                    </div>
+                </x-panel>
+            </div>
+
 
         </form>
         @error('body')
