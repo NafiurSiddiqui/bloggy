@@ -5,7 +5,7 @@
 
 
     <div class="flex min-h-screen ">
-        <aside class="hidden lg:flex flex-col w-64 bg-gray-200 dark:bg-gray-900 text-white px-4 py-6">
+        <aside class="hidden md:flex flex-col w-64 bg-gray-200 dark:bg-gray-900 text-white px-4 py-6">
             <ul class="space-y-2">
                 <x-dashboard.nav-link route="/admin" :active="request()->is('admin')">
                     {{ __('Dashboard') }}
