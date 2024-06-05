@@ -16,7 +16,7 @@
                 @endif
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 md:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 lg:flex">
                     @guest()
                         <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('All Posts') }}
@@ -39,7 +39,7 @@
 
             @auth
                 <!-- Settings Dropdown -->
-                <div class="hidden md:flex sm:items-center sm:ms-6">
+                <div class="hidden lg:flex sm:items-center sm:ms-6">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
@@ -81,7 +81,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden">
+    <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @if (request()->routeIs('home'))
                 <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
