@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
@@ -44,9 +45,10 @@ Route::middleware('auth')->group(function () {
     Route::view('/admin', 'admin.dashboard')->name('admin');
     Route::get('/admin/posts', [AdminPostController::class, 'index'])->name('admin.posts');
     Route::get('/admin/post/create', [AdminPostController::class, 'create'])->name('admin.post.create');
-    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web']], function () {
-        \UniSharp\LaravelFilemanager\Lfm::routes();
-    });
+    Route::post('/admin/images', [ImageUploadController::class, 'store'])->name('admin.images.store');
+    // Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web']], function () {
+    //     \UniSharp\LaravelFilemanager\Lfm::routes();
+    // });
     Route::post('/admin/post/store', [AdminPostController::class, 'store'])->name('admin.post.store');
     Route::delete('/admin/posts/delete-all', function () {
         //delete all posts

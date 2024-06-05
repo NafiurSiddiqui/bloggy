@@ -29,7 +29,8 @@
             <x-form.input name="slug" placeholder="slug auto generates when submitted" />
             <x-form.textarea name="description" required />
 
-            <x-form.tinymce-editor />
+            {{-- <x-form.tinymce-editor /> --}}
+            <x-editor.ck-editor />
 
             <x-panel class="px-2 py-3 my-8 ">
                 <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Select Thumbnail</h2>

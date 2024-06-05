@@ -7,3 +7,7 @@
         @apply border border-gray-600;
     }
 }
+
+div.ck.ck-content.ck-editor__editable {
+    @apply h-[20rem];
+}
