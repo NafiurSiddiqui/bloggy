@@ -1,9 +1,7 @@
 <x-dashboard.dashboard-layout>
 
     <x-slot:heading>Edit Post: {{ $post->title }}</x-slot:heading>
-    <x-secondary-button class="mt-4" link href="/admin/posts">
-        Cancel
-    </x-secondary-button>
+
     <form action="/admin/post/{{ $post->slug }}" method="post" enctype="multipart/form-data" class="max-w-xl">
         @csrf
         @method('PATCH')
@@ -66,12 +64,45 @@
         </x-panel>
 
 
-        <x-panel class="px-2 py-3 my-8">
+        {{-- <x-panel class="px-2 py-3 my-8">
             <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Actions</h2>
 
             <x-form.action-buttons edit secondary-btn-href="#" submit-label="Update" secondary-btn-label='Save as Draft'
                 type="post" />
-        </x-panel>
+        </x-panel> --}}
+
+        <div x-data={open:false}>
+            <x-panel class="md:hidden px-2 py-3 fixed bottom-0 w-full left-0 bg-slate-200 z-[10000]">
+                <h2 class="mb-3 font-semibold text-gray-500 border-b border-gray-300 ">Actions</h2>
+                <div :class="{ 'block': open, 'hidden': !open }"
+                    class="flex flex-col border-2 rounded p-4 bg-slate-300">
+
+                    <x-secondary-button type="submit" name='is_draft' value='1'>Save as
+                        Draft</x-secondary-button>
+                    <x-secondary-button class="mt-4" type="submit" name='is_unpublished'
+                        value='1'>Unpublish</x-secondary-button>
+                    <x-form.button name="is_published" value="1">
+                        Update
+                    </x-form.button>
+                    <x-danger-button formButton x-data=""
+                        x-on:click="$dispatch('open-modal','confirm-delete')"
+                        class="mt-12 mb-4">Delete</x-danger-button>
+
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <x-secondary-button class="mt-4" link href="/admin/posts">
+                        Cancel
+                    </x-secondary-button>
+                    <x-icons.hamburger />
+
+
+                </div>
+                <x-modal-delete type="post" />
+            </x-panel>
+        </div>
+
+
 
         @error('body')
             <span class="text-red-500 text-xs">{{ $message }}</span>

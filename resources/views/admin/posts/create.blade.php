@@ -61,9 +61,8 @@
             </x-panel>
             <div x-data={open:false}>
 
-
-                <x-panel class="px-2 py-3 fixed bottom-0 w-full left-0 bg-slate-200">
-                    <h2 class="mb-3 font-semibold text-gray-500 border-b border-gray-300">Actions</h2>
+                <x-panel class="md:hidden px-2 py-3 fixed bottom-0 w-full left-0 bg-slate-200 z-[10000]">
+                    <h2 class="mb-3 font-semibold text-gray-500 border-b border-gray-300 ">Actions</h2>
                     <div :class="{ 'block': open, 'hidden': !open }"
                         class="flex flex-col border-2 rounded p-4 bg-slate-300">
 
