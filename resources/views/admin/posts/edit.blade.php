@@ -22,9 +22,9 @@
         <x-form.textarea name="description">
             {{ old('description', $post->description) }}
         </x-form.textarea>
-        <x-form.textarea name="body">
-            {{ old('body', $post->body) }}
-        </x-form.textarea>
+
+        <x-editor.ck-editor :post="$post" />
+
 
         <x-panel class="px-2 py-3 my-8 ">
             <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Select Thumbnail</h2>

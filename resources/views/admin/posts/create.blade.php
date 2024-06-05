@@ -28,8 +28,6 @@
             <x-form.input name="title" required />
             <x-form.input name="slug" placeholder="slug auto generates when submitted" />
             <x-form.textarea name="description" required />
-
-            {{-- <x-form.tinymce-editor /> --}}
             <x-editor.ck-editor />
 
             <x-panel class="px-2 py-3 my-8 ">

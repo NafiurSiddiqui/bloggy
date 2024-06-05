@@ -1,2 +1,3 @@
-{{-- <div id="editor"></div> --}}
-<textarea id="editor" name="body">{{ old('body') }}</textarea>
+@props(['post'])
+
+<textarea id="editor" name="body">{{ isset($post) ? old('body', $post->body) : old('body') }}</textarea>
