@@ -12,7 +12,12 @@
             Unpublished </span>
     @break
 
-    @default
+    @case($post->is_published)
         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
             Published </span>
+    @break
+
+    @default
+        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-slate-100 text-slate-800">
+            Bizzare </span>
 @endswitch

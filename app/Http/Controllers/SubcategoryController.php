@@ -20,6 +20,7 @@ class SubcategoryController extends Controller
 
         $subcategories = QueryBuilder::for(Subcategory::class)
             ->allowedSorts(['title', 'updated_at'])
+            ->with('category', 'posts')
             ->simplePaginate(10)
             ->withQueryString();
 
@@ -45,6 +46,7 @@ class SubcategoryController extends Controller
 
             $subcategories = QueryBuilder::for(Subcategory::class)
                 ->allowedSorts(['title', 'updated_at'])
+                > with('category', 'posts')
                 ->simplePaginate(10)
                 ->withQueryString();
         }

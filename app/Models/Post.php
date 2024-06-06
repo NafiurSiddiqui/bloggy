@@ -26,6 +26,7 @@ class Post extends Model implements HasMedia
         'category_id',
         'subcategory_id',
         'is_published',
+        'is_unpublished',
         'is_draft',
         'is_featured',
         'is_hot',

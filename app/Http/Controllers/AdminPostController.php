@@ -9,11 +9,10 @@ use App\View\Components\Dashboard\AdminFilter;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
-
+use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class AdminPostController extends Controller
@@ -21,7 +20,9 @@ class AdminPostController extends Controller
     public function index(): View
     {
         // dd(request()->all());
-        $posts = Post::latest()->simplePaginate(10)->withQueryString();
+        $posts = Post::with('author', 'category')->latest()->simplePaginate(10)->withQueryString();
+        // $posts = Post::latest()->simplePaginate(10)->withQueryString();
+
         $categoryFilter = request()->input('category_filter');
         $statusFilter = request()->input('status_filter');
         $authorFilter = request()->input('admin_filter'); //gets the id
@@ -29,6 +30,7 @@ class AdminPostController extends Controller
 
         $filteredCategory = $categoryFilter && $categoryFilter !== '' ?
             Post::where('category_id', $categoryFilter)
+            ->with('author', 'category')
             ->simplePaginate(10)
             ->withQueryString()
             : $posts;
@@ -51,6 +53,7 @@ class AdminPostController extends Controller
         //STATUS FILTER
         $posts = $statusFilter && $statusFilter != '' ?
             Post::where($statusFilter, 1)
+            ->with('author', 'category')
             ->latest()
             ->simplePaginate(10)
             ->withQueryString()
@@ -59,7 +62,7 @@ class AdminPostController extends Controller
         //ADMIN FILTER
         $filteredAuthors = $authorFilter && $authorFilter != null ?
             Post::where('user_id', $authorFilter)
-            ->with('category')
+            ->with('author', 'category')
             ->latest()
             ->simplePaginate(10)
             ->withQueryString()
@@ -70,10 +73,12 @@ class AdminPostController extends Controller
         //MULTIPLE FILTER
         if ($categoryFilter && $statusFilter && !$authorFilter) {
 
-            $result = Post::where('category_id', $categoryFilter)->where(
-                $statusFilter,
-                1
-            )->latest()
+            $result = Post::where('category_id', $categoryFilter)
+                ->with('author', 'category')
+                ->where(
+                    $statusFilter,
+                    1
+                )->latest()
                 ->simplePaginate(10)
                 ->withQueryString();
 
@@ -90,6 +95,7 @@ class AdminPostController extends Controller
 
             //query for all the posts where (category_id == categoryFilter AND  WHERE user_id == $authorFilter)
             $result = Post::where('category_id', $categoryFilter)
+                ->with('author', 'category')
                 ->where(
                     'user_id',
                     $authorFilter
@@ -110,6 +116,7 @@ class AdminPostController extends Controller
 
             //give me all the posts WHERE id === $authorFilter AND $statusFilter == 1
             $result = Post::where('user_id', $authorFilter)
+                ->with('author', 'category')
                 ->where($statusFilter, 1)
                 ->latest()
                 ->simplePaginate(10)
@@ -127,6 +134,7 @@ class AdminPostController extends Controller
         if ($categoryFilter && $statusFilter && $authorFilter) {
 
             $result = Post::where('category_id', $categoryFilter)
+                ->with('author', 'category')
                 ->where($statusFilter, 1)
                 ->where('user_id', $authorFilter)
                 ->latest()
@@ -136,7 +144,8 @@ class AdminPostController extends Controller
             if ($result->isNotEmpty()) {
                 $posts = $result;
             } elseif ($result->isEmpty()) {
-                $posts = Post::latest()->simplePaginate(10)->withQueryString();
+                // $posts = Post::latest()->simplePaginate(10)->withQueryString();
+                $posts = Post::with('author', 'category')->latest()->simplePaginate(10)->withQueryString();
                 //flash message
                 session()->now('notify', 'No posts found for your query');
             }
@@ -146,7 +155,8 @@ class AdminPostController extends Controller
         $termSearchedFor = request('search');
 
         if ($termSearchedFor) {
-            $result = Post::latest()
+            $result = Post::with('author', 'category')
+                ->latest()
                 ->filter(request(['search']))
                 ->simplePaginate(10)
                 ->withQueryString();
@@ -155,7 +165,8 @@ class AdminPostController extends Controller
             if ($result->isNotEmpty()) {
                 $posts = $result;
             } elseif ($result->isEmpty()) {
-                $posts = Post::latest()->simplePaginate(10)->withQueryString();
+                // $posts = Post::latest()->simplePaginate(10)->withQueryString();
+                $posts = Post::with('author', 'category')->latest()->simplePaginate(10)->withQueryString();
                 //flash message
                 session()->now('notify', "Nothing found. Hope you did not search for status.Try filter then.");
             }
@@ -166,10 +177,10 @@ class AdminPostController extends Controller
             // dd('Makes it to the sort');
 
             if (!$authorFilter && !$categoryFilter && !$statusFilter) {
-                dd('should execute this block');
+                // dd('no extra query');
                 $posts = QueryBuilder::for(Post::class)
                     ->allowedSorts(['title', 'updated_at'])
-                    ->where('user_id', $authorFilter)
+                    ->with('author', 'category')
                     ->simplePaginate(10)
                     ->withQueryString();
             }
@@ -177,6 +188,7 @@ class AdminPostController extends Controller
             if ($categoryFilter) {
                 $result = QueryBuilder::for(Post::class)
                     ->allowedSorts(['title', 'updated_at'])
+                    ->with('author', 'category')
                     ->where('category_id', $categoryFilter)
                     ->simplePaginate(10)
                     ->withQueryString();
@@ -186,6 +198,7 @@ class AdminPostController extends Controller
                 } elseif ($result->isEmpty()) {
                     $posts = QueryBuilder::for(Post::class)
                         ->allowedSorts(['title', 'updated_at'])
+                        ->with('author', 'category')
                         ->simplePaginate(10)
                         ->withQueryString();
                     session()->now('notify', 'Could not sort with filtered category');
@@ -196,6 +209,7 @@ class AdminPostController extends Controller
             if ($authorFilter) {
                 $result = QueryBuilder::for(Post::class)
                     ->allowedSorts(['title', 'updated_at'])
+                    ->with('author', 'category')
                     ->where('user_id', $authorFilter)
                     ->simplePaginate(10)
                     ->withQueryString();
@@ -205,14 +219,17 @@ class AdminPostController extends Controller
                 } elseif ($result->isEmpty()) {
                     $posts = QueryBuilder::for(Post::class)
                         ->allowedSorts(['title', 'updated_at'])
+                        ->with('author', 'category')
                         ->simplePaginate(10)
                         ->withQueryString();
                     session()->now('notify', 'Could not sort with filtered Author');
                 }
             }
+
             if ($statusFilter) {
                 $result = QueryBuilder::for(Post::class)
                     ->allowedSorts(['title', 'updated_at'])
+                    ->with('author', 'category')
                     ->where($statusFilter, 1)
                     ->simplePaginate(10)
                     ->withQueryString();
@@ -222,6 +239,7 @@ class AdminPostController extends Controller
                 } elseif ($result->isEmpty()) {
                     $posts = QueryBuilder::for(Post::class)
                         ->allowedSorts(['title', 'updated_at'])
+                        ->with('author', 'category')
                         ->simplePaginate(10)
                         ->withQueryString();
                     session()->now('notify', 'Could not sort with filtered Author');
@@ -231,6 +249,7 @@ class AdminPostController extends Controller
             if ($categoryFilter && $statusFilter) {
                 $result = QueryBuilder::for(Post::class)
                     ->allowedSorts(['title', 'updated_at'])
+                    ->with('author', 'category')
                     ->where('category_id', $categoryFilter)
                     ->where($statusFilter, 1)
                     ->simplePaginate(10)
@@ -241,6 +260,7 @@ class AdminPostController extends Controller
                 } elseif ($result->isEmpty()) {
                     $posts = QueryBuilder::for(Post::class)
                         ->allowedSorts(['title', 'updated_at'])
+                        ->with('author', 'category')
                         ->simplePaginate(10)
                         ->withQueryString();
                     session()->now('notify', 'Could not sort with filtered category');
@@ -261,6 +281,7 @@ class AdminPostController extends Controller
                 } elseif ($result->isEmpty()) {
                     $posts = QueryBuilder::for(Post::class)
                         ->allowedSorts(['title', 'updated_at'])
+                        ->with('author', 'category')
                         ->simplePaginate(10)
                         ->withQueryString();
                     session()->now('notify', 'Could not sort with filtered category and author');
@@ -271,6 +292,7 @@ class AdminPostController extends Controller
             if ($statusFilter && $authorFilter) {
                 $result = QueryBuilder::for(Post::class)
                     ->allowedSorts(['title', 'updated_at'])
+                    ->with('author', 'category')
                     ->where($statusFilter, 1)
                     ->where('user_id', $authorFilter)
                     ->simplePaginate(10)
@@ -281,6 +303,7 @@ class AdminPostController extends Controller
                 } elseif ($result->isEmpty()) {
                     $posts = QueryBuilder::for(Post::class)
                         ->allowedSorts(['title', 'updated_at'])
+                        ->with('author', 'category')
                         ->simplePaginate(10)
                         ->withQueryString();
                     session()->now('notify', 'Could not sort with filtered category and author');
@@ -291,6 +314,7 @@ class AdminPostController extends Controller
             if ($statusFilter && $authorFilter && $categoryFilter) {
                 $result = QueryBuilder::for(Post::class)
                     ->allowedSorts(['title', 'updated_at'])
+                    ->with('author', 'category')
                     ->where($statusFilter, 1)
                     ->where('user_id', $authorFilter)
                     ->where('category_id', $categoryFilter)
@@ -302,6 +326,7 @@ class AdminPostController extends Controller
                 } elseif ($result->isEmpty()) {
                     $posts = QueryBuilder::for(Post::class)
                         ->allowedSorts(['title', 'updated_at'])
+                        ->with('author', 'category')
                         ->simplePaginate(10)
                         ->withQueryString();
                     session()->now('notify', 'Zoink! Could not sort with the filtered items.');
@@ -320,9 +345,7 @@ class AdminPostController extends Controller
     public function create(): View
     {
 
-        return view('admin.posts.create', [
-            'posts' => Post::all()->sortByDesc('created_at')
-        ]);
+        return view('admin.posts.create');
     }
 
     public function store(): RedirectResponse
@@ -369,6 +392,8 @@ class AdminPostController extends Controller
 
         ]);
 
+
+
         //check if a category by slug 'uncategorized' exist in database
         $uncategorizedCategory = Category::where('slug', 'uncategorized')->firstOrCreate([
             'title' => 'Uncategorized',
@@ -408,8 +433,9 @@ class AdminPostController extends Controller
     }
 
 
-    public function update(Post $post)
+    public function update(Request $request, Post $post)
     {
+
 
         $categoryValidator = function (string $attribute, mixed $value, Closure $fail) {
             if (!is_numeric($value)) {
@@ -439,6 +465,9 @@ class AdminPostController extends Controller
             'thumbnail_alt_txt' => ['max:100'],
             'category_id' => ['nullable', $categoryValidator],
             'subcategory_id' => ['nullable', $subcategoryValidator],
+            'is_published' => ['boolean'],
+            'is_draft' => ['boolean'],
+            'is_unpublished' => ['boolean'],
             'is_featured' => ['nullable'],
             'is_hot' =>  ['nullable'],
             'meta_title' => ['required', 'max:255'],
@@ -447,11 +476,6 @@ class AdminPostController extends Controller
             'og_title' => ['nullable', 'max:255'],
 
         ]);
-
-        /**
-         * checkboxes when turned off, they are not included in the request payload, hence we manually set a default value if not turned on.
-         * Make sure the value is always either 'on' or 'off' for integrity.
-         */
 
         //check if a category by slug 'uncategorized' exist in database
         $uncategorizedCategory = Category::where('slug', 'uncategorized')->firstOrCreate([
@@ -462,14 +486,41 @@ class AdminPostController extends Controller
         $attributes['category_id'] = request()->input('category_id') === "---" ?   $uncategorizedCategory->id : request()->input('category_id');
 
         $attributes['subcategory_id'] = request()->input('subcategory_id') === "---" ? null : request()->input('subcategory_id');
+        /**
+         * checkboxes when turned off, they are not included in the request payload, hence we manually set a default value if not turned on.
+         * Make sure the value is always either 'on' or 'off' for integrity.
+         */
+
         $attributes['is_featured'] = request('is_featured') ? 'on' : 'off';
         $attributes['is_hot'] = request('is_hot') ? 'on' : 'off';
+
 
         if (isset($attributes['thumbnail'])) {
             $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         }
         if (isset($attributes['og_thumbnail'])) {
             $attributes['og_thumbnail'] = request()->file('og_thumbnail')->store('thumbnails');
+        }
+
+        switch (true) {
+            case request()->has('is_published'):
+                // dd('is published');
+                $attributes['is_published'] = 1;
+                $attributes['is_draft'] = 0;
+                $attributes['is_unpublished'] = 0;
+                break;
+            case request()->has('is_draft'):
+                // dd('is draft');
+                $attributes['is_published'] = 0;
+                $attributes['is_draft'] = 1;
+                $attributes['is_unpublished'] = 0;
+                break;
+            case request()->has('is_unpublished'):
+                // dd('is unpublished');
+                $attributes['is_published'] = 0;
+                $attributes['is_draft'] = 0;
+                $attributes['is_unpublished'] = 1;
+                break;
         }
 
         //store
