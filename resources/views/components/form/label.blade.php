@@ -1,5 +1,7 @@
 @props(['label-for', 'label', 'sr-only'])
 
+
+
 @if (isset($srOnly))
     <label for="{{ $labelFor }}" class="sr-only">checkbox</label>
 @else
