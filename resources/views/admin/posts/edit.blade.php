@@ -102,7 +102,33 @@
                     <x-modal-delete type="post" />
                 </x-panel>
             </div>
+            <aside class="fixed right-0 top-[25%] hidden lg:block ">
+                <x-panel class="px-2 py-3  bg-slate-200 z-[10000] min-h-[20rem]">
+                    <h2 class="mb-3 font-semibold text-gray-500 border-b border-gray-300 ">Actions</h2>
+                    <div class="flex flex-col border-2 rounded p-4 bg-slate-300">
 
+                        <x-secondary-button type="submit" name='is_draft' value='1'>Save as
+                            Draft</x-secondary-button>
+                        <x-secondary-button type="submit" name='is_unpublished' value='1'
+                            class="mt-4">Unpublish</x-secondary-button>
+                        <x-form.button name="is_published" value="1">
+                            Update
+                        </x-form.button>
+                        <x-danger-button formButton x-data=""
+                            x-on:click="$dispatch('open-modal','confirm-delete')"
+                            class="mt-12 mb-4">Delete</x-danger-button>
+
+
+                    </div>
+
+                    <div class="flex justify-between items-center mt-8">
+                        <x-secondary-button class="mt-4 w-full" link href="/admin/posts">
+                            Cancel
+                        </x-secondary-button>
+
+                    </div>
+                </x-panel>
+            </aside>
 
 
             @error('body')
@@ -116,30 +142,7 @@
             @csrf
             @method('Delete')
         </form>
+        <x-modal-delete type="post" />
 
-        <aside class="right-0 hidden fixed lg:block ">
-
-
-            <x-panel class="px-2 py-3  bg-slate-200 z-[10000]">
-                <h2 class="mb-3 font-semibold text-gray-500 border-b border-gray-300 ">Actions</h2>
-                <div class="flex flex-col border-2 rounded p-4 bg-slate-300">
-
-                    <x-secondary-button type="submit" name='is_draft' value='1'>Save as
-                        Draft</x-secondary-button>
-                    <x-form.button name="is_published" value="1">
-                        Publish
-                    </x-form.button>
-
-                </div>
-
-                <div class="flex justify-between items-center">
-                    <x-secondary-button class="mt-4 w-full" link href="/admin/posts">
-                        Cancel
-                    </x-secondary-button>
-
-                </div>
-            </x-panel>
-
-        </aside>
     </div>
 </x-dashboard.dashboard-layout>
