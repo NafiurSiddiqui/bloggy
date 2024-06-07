@@ -421,7 +421,7 @@ class AdminPostController extends Controller
 
             return redirect('/admin/posts')->with('notify', 'Post saved as draft!');
         } else {
-            return redirect('/admin/posts')->with('success', 'Post created!');
+            return redirect('/admin/posts')->with('success', 'Post published!');
         }
     }
 

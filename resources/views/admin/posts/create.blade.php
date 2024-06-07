@@ -14,16 +14,7 @@
         <div class="flex justify-between w-full">
             <form action="/admin/post/store" method="post" enctype="multipart/form-data" class="w-full lg:w-[80%] px-4">
                 @csrf
-                {{-- TODO: Remove the test errors below --}}
-                @if ($errors->any())
-                    <div class="bg-rose-400 ">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+
                 <x-form.input name="title" required />
                 <x-form.input name="slug" placeholder="slug auto generates when submitted" />
                 <x-form.textarea name="description" required />
@@ -64,7 +55,6 @@
                 </x-panel>
 
                 <div x-data={open:false}>
-
                     <x-panel class="lg:hidden px-2 py-3 fixed bottom-0 w-full left-0 bg-slate-200 z-[10000]">
                         <h2 class="mb-3 font-semibold text-gray-500 border-b border-gray-300 ">Actions</h2>
                         <div :class="{ 'block': open, 'hidden': !open, 'flex': open }"
@@ -88,31 +78,26 @@
                         </div>
                     </x-panel>
                 </div>
+                <aside class="fixed right-0 top-[25%] hidden lg:block ">
+                    <x-panel class="px-2 py-3  bg-slate-200 z-[10000]">
+                        <h2 class="mb-3 font-semibold text-gray-500 border-b border-gray-300 ">Actions</h2>
+                        <div class="flex flex-col border-2 rounded p-4 bg-slate-300">
+                            <x-secondary-button type="submit" name='is_draft' value='1'>Save as
+                                Draft</x-secondary-button>
+                            <x-form.button name="is_published" value="1">
+                                Publish
+                            </x-form.button>
+                        </div>
+
+                        <div class="flex justify-between items-center">
+                            <x-secondary-button class="mt-4 w-full" link href="/admin/posts">
+                                Cancel
+                            </x-secondary-button>
+                        </div>
+                    </x-panel>
+                </aside>
             </form>
-            <aside class="right-0 hidden fixed lg:block ">
 
-
-                <x-panel class="px-2 py-3  bg-slate-200 z-[10000]">
-                    <h2 class="mb-3 font-semibold text-gray-500 border-b border-gray-300 ">Actions</h2>
-                    <div class="flex flex-col border-2 rounded p-4 bg-slate-300">
-
-                        <x-secondary-button type="submit" name='is_draft' value='1'>Save as
-                            Draft</x-secondary-button>
-                        <x-form.button name="is_published" value="1">
-                            Publish
-                        </x-form.button>
-
-                    </div>
-
-                    <div class="flex justify-between items-center">
-                        <x-secondary-button class="mt-4 w-full" link href="/admin/posts">
-                            Cancel
-                        </x-secondary-button>
-
-                    </div>
-                </x-panel>
-
-            </aside>
         </div>
     @endif
 </x-dashboard.dashboard-layout>
