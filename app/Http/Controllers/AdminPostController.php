@@ -20,7 +20,7 @@ class AdminPostController extends Controller
     public function index(): View
     {
         // dd(request()->all());
-        $posts = Post::with('author', 'category')->latest()->simplePaginate(10)->withQueryString();
+        $posts = Post::with('author', 'category')->latest()->simplePaginate(10);
         // $posts = Post::latest()->simplePaginate(10)->withQueryString();
 
         $categoryFilter = request()->input('category_filter');
@@ -145,7 +145,7 @@ class AdminPostController extends Controller
                 $posts = $result;
             } elseif ($result->isEmpty()) {
                 // $posts = Post::latest()->simplePaginate(10)->withQueryString();
-                $posts = Post::with('author', 'category')->latest()->simplePaginate(10)->withQueryString();
+                $posts = Post::with('author', 'category')->latest()->simplePaginate(10);
                 //flash message
                 session()->now('notify', 'No posts found for your query');
             }
@@ -166,7 +166,7 @@ class AdminPostController extends Controller
                 $posts = $result;
             } elseif ($result->isEmpty()) {
                 // $posts = Post::latest()->simplePaginate(10)->withQueryString();
-                $posts = Post::with('author', 'category')->latest()->simplePaginate(10)->withQueryString();
+                $posts = Post::with('author', 'category')->latest()->simplePaginate(10);
                 //flash message
                 session()->now('notify', "Nothing found. Hope you did not search for status.Try filter then.");
             }
