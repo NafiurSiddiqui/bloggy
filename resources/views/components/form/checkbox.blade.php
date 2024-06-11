@@ -1,6 +1,6 @@
 @props(['input-name', 'label', 'post', 'checkbox-only', 'id'])
 
-{{-- $post->$name = $post . $name (e.g - $post->is_featured) this is to dynamically get the post type --}}
+{{-- $post->$name = $post . $inputName (e.g - $post->is_featured) this is to dynamically get the post type --}}
 
 @if (isset($checkboxOnly))
     <div class="flex items-center">
@@ -12,9 +12,6 @@
     </div>
 @else
     <div class="">
-        {{-- <input type="checkbox" name="{{$inputName }}" id="{{$inputName }}"
-            class="relative bg-transparent  h-6 w-6 rounded-sm border-gray-400 cursor-pointer"
-            @checked(isset($post) && $post->$name == 'on' ? old($name, $post->$name) : old($name))> --}}
         <input type="checkbox" id="{{ $id }}" name={{ $inputName }}
             {{ $attributes->merge(['class' => 'w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600']) }}
             @checked(isset($post) && $post->$inputName == 'on' ? old($inputName, $post->$inputName) : old($inputName))>
