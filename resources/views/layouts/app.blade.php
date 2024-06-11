@@ -24,6 +24,9 @@
         {{ $slot }}
     </main>
 
+
+    <x-toast.success />
+
 </body>
 
 </html>
