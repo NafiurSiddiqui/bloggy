@@ -24,14 +24,26 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        //if request->user->status == pending, return with a message 
+
+
         $request->authenticate();
-
         $request->session()->regenerate();
-        //get the user name
-        $username = Auth::user()->name;
 
-        // dd($username);
-        return redirect()->intended(route('home', absolute: false))->with('success', "Welcome $username!");
+        if (Auth::user()->status === 'pending') {
+
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            // return redirect()->route('login')->withErrors(['email' => 'Your account is pending approval.']);
+            return redirect()->route('login')->with('status', 'Your account is pending approval.');
+        } else {
+
+            //get the user name
+            $username = Auth::user()->name;
+
+            return redirect()->intended(route('home', absolute: false))->with('success', "Welcome $username!");
+        }
     }
 
     /**
