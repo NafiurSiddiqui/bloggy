@@ -4,9 +4,16 @@
         <div class="flex justify-between h-16">
             <div class="flex justify-between w-full">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center font-bold text-2xl">
-                    Bloggy
-                </div>
+                @if (request()->routeIs('home') || request()->routeIs('home.*'))
+                    <div class="shrink-0 flex items-center font-bold text-2xl">
+                        Bloggy
+                    </div>
+                @else
+                    <a class="shrink-0 text-gray-700 flex items-center font-bold text-2xl hover:text-gray-600 "
+                        href={{ route('home') }}>
+                        Bloggy
+                    </a>
+                @endif
 
                 {{--            TODO: Delete the development Admin btn below --}}
                 @if (request()->routeIs('home') || request()->routeIs('home.*'))

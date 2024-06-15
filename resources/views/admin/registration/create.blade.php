@@ -39,13 +39,11 @@
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>
 
+            {{-- Role applying for. Add more as needed --}}
             <x-form.field>
-                {{-- Role applying for --}}
-                {{-- Editor, Author, Admin --}}
                 <x-input-label for="role" :value="__('Role')" class="mb-2" />
-                {{-- <x-form.checkbox id="editor" input-name="editor" label="editor" />
-                <x-form.checkbox id="author" input-name="author" label="author" /> --}}
-                <x-form.radio id="editor" input-name="editor" label="editor" />
+
+                {{-- <x-form.radio id="editor" input-name="editor" label="editor" /> --}}
                 <x-form.radio id="author" input-name="author" label="author" />
             </x-form.field>
 
