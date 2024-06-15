@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role')->default('member');
+            $table->string('role')->default('visitor');
+            $table->string('status')->default('pending');
             $table->rememberToken();
             $table->timestamps();
         });

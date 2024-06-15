@@ -19,7 +19,7 @@ class DefaultAdminSeeder extends Seeder
             'email' => 'admin.bloggy@xyz.com',
             'password' => bcrypt('secret'),
             'role' => 'admin',
+            'status' => 'approved'
         ]);
-
     }
 }
