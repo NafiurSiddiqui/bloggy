@@ -1,11 +1,15 @@
 <?php
 
 use App\Http\Controllers\AdminPostController;
+use App\Http\Controllers\AdminRegistrationController;
+use App\Http\Controllers\AdminSessionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Middleware\UserIsAdmin;
+use App\Http\Middleware\UserIsAuthor;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Subcategory;
@@ -22,7 +26,8 @@ Route::get('/author/{author:id}/posts', function (string $id) {
         'posts' => Post::where('user_id', $id)->get()
     ]);
 });
-
+Route::get('/admin/register', [AdminRegistrationController::class, 'create'])->name('admin.register.create');
+Route::post('/admin/register/store', [AdminRegistrationController::class, 'store'])->name('admin.register.store');
 
 
 //Route::get('/admin', function () {
@@ -40,15 +45,17 @@ Route::get('/author/{author:id}/posts', function (string $id) {
 //you will have user for comments
 //you have user (admin) side.
 
-Route::middleware('auth')->group(function () {
+
+
+
+Route::middleware(['auth', 'role:admin,author'])->group(function () {
 
     Route::view('/admin', 'admin.dashboard')->name('admin');
     Route::get('/admin/posts', [AdminPostController::class, 'index'])->name('admin.posts');
-    Route::get('/admin/post/create', [AdminPostController::class, 'create'])->name('admin.post.create');
+    Route::get('/admin/post/create', [AdminPostController::class, 'create'])
+        ->name('admin.post.create')
+        ->middleware('role:admin,author');
     Route::post('/admin/images', [ImageUploadController::class, 'store'])->name('admin.images.store');
-    // Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web']], function () {
-    //     \UniSharp\LaravelFilemanager\Lfm::routes();
-    // });
     Route::post('/admin/post/store', [AdminPostController::class, 'store'])->name('admin.post.store');
     Route::delete('/admin/posts/delete-all', function () {
         //delete all posts
@@ -168,6 +175,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/subcategories/{subcategory}/edit', [SubcategoryController::class, 'edit'])->name('admin.subcategories.edit');
     Route::patch('/admin/subcategories/{subcategory}', [SubcategoryController::class, 'update'])->name('admin.subcategories.update');
     Route::delete('admin/subcategories/{subcategory}', [SubcategoryController::class, 'destroy'])->name('admin.subcategories.destroy');
+});
+
+
+Route::middleware('auth')->group(function () {
     //    PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
