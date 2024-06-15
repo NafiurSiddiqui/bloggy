@@ -34,10 +34,6 @@ class AdminRegistrationController extends Controller
 
         ]);
 
-        // event(new Registered($user));
-
-        // Auth::login($user);
-
         return redirect('/')->with('success', 'Your application has been submitted!');
     }
 }
