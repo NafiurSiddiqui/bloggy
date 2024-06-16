@@ -2,19 +2,15 @@
 
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminRegistrationController;
-use App\Http\Controllers\AdminSessionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
-use App\Http\Middleware\UserIsAdmin;
-use App\Http\Middleware\UserIsAuthor;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
@@ -96,8 +92,6 @@ Route::middleware(['auth', 'role:admin,author'])->group(function () {
             return redirect()->back()->with('error', 'No items selected for deletion');
         }
 
-
-
         if (Category::uncategorized()->exists()) {
 
 
@@ -175,6 +169,9 @@ Route::middleware(['auth', 'role:admin,author'])->group(function () {
     Route::get('/admin/subcategories/{subcategory}/edit', [SubcategoryController::class, 'edit'])->name('admin.subcategories.edit');
     Route::patch('/admin/subcategories/{subcategory}', [SubcategoryController::class, 'update'])->name('admin.subcategories.update');
     Route::delete('admin/subcategories/{subcategory}', [SubcategoryController::class, 'destroy'])->name('admin.subcategories.destroy');
+
+    // Registrations
+    Route::patch('/admin/registration/{user}', [AdminRegistrationController::class, 'approval'])->name('admin.registration.approval');
 });
 
 

@@ -36,4 +36,32 @@ class AdminRegistrationController extends Controller
 
         return redirect('/')->with('success', 'Your application has been submitted!');
     }
+
+    public function approval(Request $request, User $user): RedirectResponse
+    {
+        //get the user id and status for ensurance, check the value of the button clicked.
+        // dd($request->all());
+
+        if ($request->input('submit_type') === 'approve') {
+
+            $user->update(['status' => 'approved']);
+
+            //launch an event, email user about the status
+
+            return redirect('/admin')->with('success', 'Application approved!');
+        } elseif ($request->input('submit_type') === 'reject') {
+            $user->update(['status' => 'rejected']);
+
+            //launch an event, email user about the status
+
+            //delete user
+
+            return redirect('/admin')->with('success', 'Application rejected!');
+        } else {
+            return redirect('/admin')->with('error', 'Invalid action!');
+        }
+        //if approved, update the user status to approved, else update to rejected
+        //redirect back with a success message
+
+    }
 }
