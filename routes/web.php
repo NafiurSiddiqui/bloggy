@@ -7,11 +7,28 @@ use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
+use App\Mail\RegistrationApproved;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+
+
+//MAIL TEST
+
+Route::get('/test', function () {
+    $user = App\Models\User::find(26);
+
+    Mail::to('meow@meow.com')->send(new RegistrationApproved($user));
+
+
+    return 'done!';
+});
+
+
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
