@@ -48,7 +48,7 @@
                             'second' => 'second comment',
                         ];
                     @endphp
-                    @foreach ($comments as $comment)
+                    @foreach ($post->comments as $comment)
                         <x-post-comment :comment="$comment" />
                     @endforeach
 
