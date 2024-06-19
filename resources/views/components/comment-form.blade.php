@@ -1,6 +1,6 @@
 @auth
     <x-panel>
-        <form action="/posts/{{ $post->slug }}/comments" method="post">
+        <form action="/post/{{ $post->slug }}/comments" method="post">
             @csrf
             <header class="flex items-center">
                 <img src="https://i.pravatar.cc/60/u={{ auth()->id() }}" alt="" class="rounded-full" width="40"
@@ -8,10 +8,9 @@
                 <h3 class="font-bold text-lg ml-3">Add a comment</h3>
             </header>
 
-            <x-form.textarea />
+            <x-form.textarea name="body" required sr-only />
 
             <div class="flex justify-end">
-
                 <x-form.button>
                     Post
                 </x-form.button>

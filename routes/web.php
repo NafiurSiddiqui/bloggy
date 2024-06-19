@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminRegistrationController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -14,19 +15,6 @@ use App\Models\Subcategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-
-
-
-//MAIL TEST
-
-Route::get('/test', function () {
-    $user = App\Models\User::find(26);
-
-    Mail::to('meow@meow.com')->send(new RegistrationApproved($user));
-
-
-    return 'done!';
-});
 
 
 
@@ -193,6 +181,10 @@ Route::middleware(['auth', 'role:admin,author'])->group(function () {
 
 
 Route::middleware('auth')->group(function () {
+
+    //comments
+    Route::post('/post/{post:slug}/comments', [CommentController::class, 'store'])->name('post.store.comments');
+
     //    PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

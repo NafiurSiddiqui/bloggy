@@ -40,7 +40,7 @@
 
                 <section class="col-span-8 col-start-5 mt-10 space-y-4">
 
-                    <x-comment-form />
+                    <x-comment-form :post="$post" />
                     @php
 
                         $comments = [

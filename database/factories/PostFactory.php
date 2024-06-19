@@ -52,7 +52,8 @@ class PostFactory extends Factory
 
         return [
             'user_id' => \App\Models\User::factory([
-                'role' => 'editor'
+                'role' => 'visitor',
+                'status' => 'approved'
             ]),
             'category_id' => $category->id,
             'subcategory_id' => $subcategory->id,

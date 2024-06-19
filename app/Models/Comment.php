@@ -11,6 +11,8 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['body', 'user_id'];
+
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
@@ -20,11 +22,6 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
-    // public function visitor(): BelongsTo
-    // {
-    //     return $this->belongsTo(Visitor::class);
-    // }
 
     // public function replies(): HasMany
     // {

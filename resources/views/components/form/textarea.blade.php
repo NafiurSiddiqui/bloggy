@@ -1,11 +1,12 @@
-@props(['name' => '', 'required' => false])
+@props(['name' => '', 'required' => false, 'sr-only' => ''])
+
 
 <x-form.field>
     <x-form.label label-for="{{ $name }}"
-        class="{{ $required ? 'after:content-[\'*\'] after:text-red-500' : '' }}" />
+        class="{{ $required ? 'after:content-[\'*\'] after:text-red-500' : '' }}"{{ isset($srOnly) ? $srOnly : '' }} />
     <textarea name="{{ $name }}" rows="5"
         class="w-full p-2 text-xs border border-gray-300 focus:outline-none focus:ring rounded  dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700"
-        {{ $attributes }}>
+        {{ $attributes }} {{ $required ? 'required' : '' }}>
 
     {{ $slot ?? old($name) }}
     </textarea>
