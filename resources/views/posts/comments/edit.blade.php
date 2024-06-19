@@ -40,10 +40,12 @@
 
                 <section class="col-span-8 col-start-5 mt-10 space-y-4">
 
-                    <x-comment-form :post="$post" btn-label="Post" />
+                    <x-comment-form :post="$post" :comment="$comment" btn-label="Update" editable />
 
-                    @foreach ($post->comments as $comment)
-                        <x-post-comment :comment="$comment" :post="$post" />
+                    @foreach ($post->comments as $originalComment)
+                        @unless ($originalComment->id == $comment->id)
+                            <x-post-comment :comment="$originalComment" :post="$post" />
+                        @endunless
                     @endforeach
 
                 </section>
@@ -51,9 +53,3 @@
         </main>
     </section>
     </x-layout>
-
-
-    {{-- You can choose either way of defining your dynamic image path here
-    - the latter include full url
-    - the former include relative url
-     --}}

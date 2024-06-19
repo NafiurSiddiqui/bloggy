@@ -183,8 +183,10 @@ Route::middleware(['auth', 'role:admin,author'])->group(function () {
 Route::middleware('auth')->group(function () {
 
     //comments
-    Route::post('/post/{post:slug}/comments', [CommentController::class, 'store'])->name('post.store.comments');
-
+    Route::post('/post/{post:slug}/comments', [CommentController::class, 'store'])->name('post.comments.store');
+    Route::delete('/post/comment/{comment}/delete', [CommentController::class, 'destroy'])->name('post.comments.delete');
+    Route::get('/post/{post:slug}/comment/{comment}/edit', [CommentController::class, 'edit'])->name('post.comments.edit');
+    Route::patch('/post/{post:slug}/comments/{comment}', [CommentController::class, 'update']);
     //    PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

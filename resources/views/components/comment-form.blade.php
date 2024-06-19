@@ -1,18 +1,28 @@
+@props(['comment', 'post', 'btn-label', 'editable'])
 @auth
     <x-panel>
-        <form action="/post/{{ $post->slug }}/comments" method="post">
+        <form action="/post/{{ $post->slug }}/comments/{{ isset($editable) ? $comment->id : '' }}" method="post">
             @csrf
+            @if (isset($editable))
+                @method('PATCH')
+            @endif
             <header class="flex items-center">
                 <img src="https://i.pravatar.cc/60/u={{ auth()->id() }}" alt="" class="rounded-full" width="40"
                     height="40">
                 <h3 class="font-bold text-lg ml-3">Add a comment</h3>
             </header>
 
-            <x-form.textarea name="body" required sr-only />
+            @if (isset($comment))
+                <x-form.textarea name="body" required sr-only>
+                    {{ $comment->body }}
+                </x-form.textarea>
+            @else
+                <x-form.textarea name="body" required sr-only />
+            @endif
 
             <div class="flex justify-end">
                 <x-form.button>
-                    Post
+                    {{ $btnLabel }}
                 </x-form.button>
             </div>
         </form>
