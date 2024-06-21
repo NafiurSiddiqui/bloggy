@@ -7,6 +7,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\SubcategoryController;
 use App\Mail\RegistrationApproved;
 use App\Models\Category;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [PostController::class, 'index'])->name('home');
-Route::get('/posts/{post:slug}', [PostController::class, 'show']);
+Route::get('/post/{post:slug}', [PostController::class, 'show']);
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category');
 Route::get('/categories/{category:slug}/{subcategory:slug}', [SubcategoryController::class, 'show'])->name('subcategory');
 Route::get('/author/{author:id}/posts', function (string $id) {
@@ -184,9 +185,17 @@ Route::middleware('auth')->group(function () {
 
     //comments
     Route::post('/post/{post:slug}/comments', [CommentController::class, 'store'])->name('post.comments.store');
+
     Route::delete('/post/comment/{comment}/delete', [CommentController::class, 'destroy'])->name('post.comments.delete');
     Route::get('/post/{post:slug}/comment/{comment}/edit', [CommentController::class, 'edit'])->name('post.comments.edit');
     Route::patch('/post/{post:slug}/comments/{comment}', [CommentController::class, 'update']);
+    // replies
+    Route::post('/post/{post:slug}/comments/{comment}/reply', [ReplyController::class, 'store'])->name('post.comments.reply.store');
+
+    Route::get('/post/{post:slug}/comment/{comment}/reply/{reply}/edit', [ReplyController::class, 'edit'])->name('post.comments.reply.edit');
+
+    Route::patch('/post/{post:slug}/comments/{comment}/reply/{reply}/edit', [ReplyController::class, 'update']);
+    Route::delete('/post/comment/reply/{reply}/delete', [ReplyController::class, 'destroy']);
     //    PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

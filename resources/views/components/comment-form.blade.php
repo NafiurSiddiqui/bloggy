@@ -9,7 +9,7 @@
             <header class="flex items-center">
                 <img src="https://i.pravatar.cc/60/u={{ auth()->id() }}" alt="" class="rounded-full" width="40"
                     height="40">
-                <h3 class="font-bold text-lg ml-3">Add a comment</h3>
+                <h3 class="font-bold text-lg ml-3">{{ isset($editable) ? 'Edit Your' : 'Add a' }} comment</h3>
             </header>
 
             @if (isset($comment))

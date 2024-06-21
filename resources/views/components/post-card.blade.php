@@ -9,14 +9,10 @@
 
         <div class="mt-8 flex flex-col justify-between">
             <header class="space-y-2">
-                {{--                                    <div class="space-x-2"> --}}
 
-                {{--                                        <x-category-button :category="$post->category" /> --}}
-
-                {{--                                    </div> --}}
 
                 <div class="mt-4 space-y-4">
-                    <a href="/posts/{{ $post->slug }}">
+                    <a href="/post/{{ $post->slug }}">
                         <h1 class="text-3xl">
                             {{ $post->title }}
                         </h1>

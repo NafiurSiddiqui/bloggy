@@ -12,7 +12,7 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = ['body', 'user_id'];
-    protected $with = ['author'];
+    protected $with = ['author', 'replies'];
 
     public function post(): BelongsTo
     {
@@ -24,8 +24,8 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // public function replies(): HasMany
-    // {
-    //     return $this->hasMany(Reply::class);
-    // }
+    public function replies(): HasMany
+    {
+        return $this->hasMany(Reply::class);
+    }
 }
