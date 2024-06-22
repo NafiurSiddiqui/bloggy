@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 ">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -80,7 +80,8 @@
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                    <div>{{ Auth::user()->name }}</div>
+                                    <x-user-avatar xs :user="Auth::user()" />
+                                    <div class="ml-2">{{ Auth::user()->name }}</div>
 
                                     <div class="ms-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -119,8 +120,8 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            @if (request()->routeIs('home'))
+        <div class="pt-2 pb-3 space-y-1 ">
+            @if (request()->routeIs('home') || request()->routeIs('profile.*'))
                 <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                     {{ __('All Posts') }}
                 </x-responsive-nav-link>
@@ -128,17 +129,20 @@
                     {{ __('category') }}
                 </x-responsive-nav-link>
             @endif
-            <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                {{ __('Login') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                {{ __('Register') }}
-            </x-responsive-nav-link>
+
+            @guest
+                <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                    {{ __('Login') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                    {{ __('Register') }}
+                </x-responsive-nav-link>
+            @endguest
         </div>
 
         @auth
             <!-- Responsive Settings Options -->
-            <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+            <div class="pt-4 pb-1 border-t border-gray-200 border-b border-b-gray-300 dark:border-gray-600">
                 <div>
                     @if (auth()->user()->role == 'admin' || auth()->user()->role == 'author')
                         <div>
@@ -161,27 +165,42 @@
                             <x-responsive-nav-link :href="route('admin.subcategories')" :active="request()->routeIs('admin.subcategories')">
                                 {{ __('Sub-categories') }}
                             </x-responsive-nav-link>
+
+                            @if (request()->routeIs('home'))
+                                {{-- <x-responsive-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
+                                {{ __('Dashboard') }}
+                            </x-responsive-nav-link> --}}
+                            @elseif(request()->routeIs('admin') || request()->routeIs('admin.*') || request()->routeIs('profile.*'))
+                                <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                                    {{ __('Client-side') }}
+                                </x-responsive-nav-link>
+                            @endif
                         </div>
                     @endif
 
-                    <div class="px-4">
-                        <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    <div class="">
+                        <a href="{{ route('profile.edit') }}"
+                            class="w-full p-4 border-l-4 border-transparent flex hover:bg-gray-50 hover:border-gray-300 group hover:text-gray-600 ">
+                            <x-user-avatar xs :user="Auth::user()" />
+                            <div class="ml-2">
+                                <div
+                                    class="font-medium text-base text-gray-800 dark:text-gray-200 group-hover:text-gray-900">
+                                    {{ Auth::user()->name }}
+                                </div>
+                                <div class="font-medium text-sm text-gray-500 group-hover:text-gray-600">
+                                    {{ Auth::user()->email }}</div>
+                            </div>
+                        </a>
                     </div>
 
                     <div class="mt-3 space-y-1">
-                        @if (request()->routeIs('home'))
-                            <x-responsive-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
-                                {{ __('Dashboard') }}
-                            </x-responsive-nav-link>
-                        @elseif(request()->routeIs('admin') || request()->routeIs('admin.*'))
-                            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                                {{ __('Client-side') }}
-                            </x-responsive-nav-link>
+
+
+                        @auth
                             <x-responsive-nav-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-responsive-nav-link>
-                        @endif
+                        @endauth
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

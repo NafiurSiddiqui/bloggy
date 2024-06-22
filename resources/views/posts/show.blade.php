@@ -18,7 +18,7 @@
 
 
                     <div class="flex items-center lg:justify-center text-sm mt-4">
-                        <x-avatar />
+                        <x-user-avatar sm :user="$post->author" />
                         <div class="ml-3 text-left">
                             <h5 class="font-bold">{{ $post->author->name }}</h5>
                         </div>

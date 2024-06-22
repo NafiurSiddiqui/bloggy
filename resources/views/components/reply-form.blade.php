@@ -10,8 +10,8 @@
                    @method('PATCH')
                @endif
                <header class="flex items-center">
-                   <img src="https://i.pravatar.cc/60/u={{ auth()->id() }}" alt="" class="rounded-full" width="40"
-                       height="40">
+
+                   <x-user-avatar xs :user="auth()->user()" />
                    <h3 class="font-bold text-lg ml-3">Reply to this thread</h3>
                </header>
 

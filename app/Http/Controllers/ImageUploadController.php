@@ -10,6 +10,7 @@ class ImageUploadController extends Controller
     //invoke
     public function store(Request $request)
     {
+        //THIS Is only to work with CK editor
         //There is no relationships here so we will
         //fake the object of a model
         //this only handles the images uploaded by the editor

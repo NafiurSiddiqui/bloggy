@@ -1,7 +1,7 @@
 @props(['label-for', 'label', 'sr-only'])
 
-
-@if (isset($srOnly))
+{{-- @dd(isset($srOnly)) --}}
+@if (isset($srOnly) && $srOnly)
     <label for="{{ $labelFor }}" class="sr-only">{{ $labelFor }}</label>
 @else
     <label for="{{ $labelFor }}"

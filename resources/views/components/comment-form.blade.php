@@ -7,8 +7,9 @@
                 @method('PATCH')
             @endif
             <header class="flex items-center">
-                <img src="https://i.pravatar.cc/60/u={{ auth()->id() }}" alt="" class="rounded-full" width="40"
-                    height="40">
+                {{-- <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="user avatar" class="rounded-full"
+                    width="40" height="40"> --}}
+                <x-user-avatar xs :user="auth()->user()" />
                 <h3 class="font-bold text-lg ml-3">{{ isset($editable) ? 'Edit Your' : 'Add a' }} comment</h3>
             </header>
 
