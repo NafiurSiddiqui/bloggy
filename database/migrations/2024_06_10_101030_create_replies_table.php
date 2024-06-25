@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('comment_id')->constrained()->onDelete('cascade');
+            $table->boolean('is_seen_by_admin')->default(false);
             $table->text('body');
         });
     }

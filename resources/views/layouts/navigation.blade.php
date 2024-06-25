@@ -58,22 +58,10 @@
 
             @auth
                 <div class="flex items-center  sm:ms-6">
-                    <div
-                        class="relative flex items-center  bg-gray-100 group hover:bg-gray-200 p-2  rounded-full cursor-pointer">
-                        {{-- ping --}}
-                        <div>
-                            <span class="sr-only">Notifications</span>
-                            <div class="absolute -top-[0.1rem] -start-[0.1rem] ">
-                                <span class="relative flex h-3 w-3">
-                                    <span
-                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-                                </span>
-                            </div>
-                        </div>
-                        {{-- icon --}}
-                        <i class="fa-solid fa-bell text-gray-400 group-hover:text-gray-500 "></i>
-                    </div>
+                    @if (auth()->user()->role === 'admin' || auth()->user()->role === 'author')
+                        <x-dashboard.notification />
+                    @endif
+
                     <!-- Settings Dropdown -->
                     <div class="hidden lg:flex sm:items-center ">
                         <x-dropdown align="right" width="48">

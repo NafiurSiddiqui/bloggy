@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\User;
+use App\Notifications\CommentNotification;
+use App\Notifications\NotificationService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+
+    public function __construct(
+        protected NotificationService $notificationService
+    ) {
+        $this->notificationService = $notificationService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -25,7 +34,7 @@ class CommentController extends Controller
     public function store(Request $request, Post $post)
     {
 
-        // dd($post);
+
 
         $request->validate([
             'body' => ['required', 'min:1']
@@ -36,7 +45,11 @@ class CommentController extends Controller
             'body' => request('body'),
         ]);
 
-        return back();
+        //My custom service provider v( ^ v ^ )v
+        //notify admin
+        $this->notificationService->notifyUserByRole('admin', new CommentNotification($post));
+
+        return redirect()->back()->with('success', 'Comment  added successfully!');
     }
 
 
@@ -66,7 +79,7 @@ class CommentController extends Controller
             'body' => request('body')
         ]);
 
-        return redirect("/posts/$post->slug")->with('success', 'Comment updated successfully');
+        return redirect("/post/$post->slug")->with('success', 'Comment updated successfully');
     }
 
     /**

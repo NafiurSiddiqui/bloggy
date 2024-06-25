@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminRegistrationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReplyController;
@@ -30,6 +31,9 @@ Route::get('/author/{author:id}/posts', function (string $id) {
 });
 Route::get('/admin/register', [AdminRegistrationController::class, 'create'])->name('admin.register.create');
 Route::post('/admin/register/store', [AdminRegistrationController::class, 'store'])->name('admin.register.store');
+//Notifications comment,replies, route
+
+Route::get('/post/{post:slug}/notification/{id}', [NotificationController::class, 'showComments']);
 
 
 //Route::get('/admin', function () {
@@ -178,6 +182,9 @@ Route::middleware(['auth', 'role:admin,author'])->group(function () {
 
     // Registrations
     Route::patch('/admin/registration/{user}', [AdminRegistrationController::class, 'approval'])->name('admin.registration.approval');
+    //Notification
+    // In web.php
+    // Route::delete('/notifications/{id}', [NotificationController::class, 'destroy']);
 });
 
 

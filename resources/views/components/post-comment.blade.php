@@ -57,10 +57,10 @@
                 @if (auth()->user()?->id === $comment->user_id || auth()->user()?->role === 'admin')
                     <div class="flex -top-4 items-start  relative" x-data="{ open: false }"
                         x-on:click.away="open = false">
-                        <div class="border flex border-gray-300  flex-col justify-center py-2 rounded 
+                        <div class="border hidden border-gray-300  flex-col justify-center py-2 rounded 
                         mt-4 mr-1"
-                            x-show="open">
-                            @if (auth()->user()->role !== 'admin')
+                            :class="{ 'flex': open, 'hidden': !open }" x-show="open">
+                            @if (auth()->user()->role !== 'admin' || auth()->user()?->id === $comment->user_id)
                                 <form action="/post/{{ $post->slug }}/comment/{{ $comment->id }}/edit" method="get"
                                     class="w-full">
                                     <button class="p-2 hover:bg-blue-50 hover:text-blue-500 w-full">Edit</button>

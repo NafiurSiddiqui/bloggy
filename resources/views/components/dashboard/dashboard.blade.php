@@ -8,7 +8,7 @@
 
         @if (isset($pending_registrations_count) && $pending_registrations_count > 0)
             <p class="mb-4">
-                You have <span class="font-semibold">{{ $pending_registrations_count }}</span> new appliations
+                You have <span class="font-semibold">{{ $pending_registrations_count }}</span> new applications
                 awaiting your decision.
             </p>
 

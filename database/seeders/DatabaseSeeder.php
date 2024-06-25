@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             'slug' => 'uncategorized'
         ]);
 
+
         Post::factory(20)->create();
     }
 }

@@ -5,12 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Reply;
+use App\Models\User;
+use App\Notifications\ReplyNotification;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use App\Notifications\NotificationService;
 
 class ReplyController extends Controller
 {
+
+
+
+    public function __construct(
+        protected NotificationService $notificationService
+    ) {
+        $this->notificationService = $notificationService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -43,6 +55,10 @@ class ReplyController extends Controller
             'comment_id' => $comment->id,
             'user_id' => auth()->id(),
         ]);
+
+        //My custom service provider v( ^ v ^ )v
+        //notify admin
+        $this->notificationService->notifyUserByRole('admin', new ReplyNotification($post));
 
         return back();
     }
