@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
             View::share('subcategories_are_empty', 'Category database is not migrated yet!');
         }
 
-        // TODO: Remove below in production.
+        // TODO: comment out the below mode in production.
         Model::shouldBeStrict();
     }
 }

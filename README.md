@@ -37,11 +37,15 @@ Made with 💚
     -   upon comment and reply
         -   right now, notification is deleted upon clicking the `<x-notification-card>`. You can alternatively use Laravels `markAsRead()` method to keep the notifications instead and filter based on the `readNotifications()` or `unreadNotifications()`, and render cards.
     -   Admin approving admin-side registration. `/admin/registration`
-    -
+
+## In development
+
+-   Turn on the `shouldBeStrict`, will help you catch `n + 1` queries faster.
 
 # In production
 
 -   change the necessary `env` variables.
+-   Turn off the `shouldBeStrict()`.
 -   By default notification system is using `mail` and `database` for comment and relply.
 -   Add the neccessary `mail` variable for your mail server.
--   Do run `sail artisan work:queue` to start the workers
+-   Do run `sail artisan work:queue` to start the workers.
