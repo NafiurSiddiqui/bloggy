@@ -26,28 +26,11 @@ class Notification extends Component
      */
     public function render(): View|Closure|string
     {
-        //get all the USERS from database whose status === pending
+        //I am using this USER query once again in the dashboard.
         $pendingRegistration = User::where('status', 'pending')->get();
-        // $newComments = Comment::where('is_seen_by_admin', false)->get();
-        // $newComments =
-        //     // DB::table('comments')
-        //     // ->where('is_seen_by_admin', false)
-        //     Comment::where('is_seen_by_admin', false)
-        //     ->get()
-        //     ->groupBy('post_id')
-        //     ->map(function ($group) {
-        //         return $group->toArray();
-        //     })
-        //     ->toArray();
 
-        $newComments = Auth::user()->notifications;
+        $commentaryNotifications = Auth::user()->notifications;
 
-
-
-        if ($newComments->isNotEmpty()) {
-            // dd($newComments);
-        }
-
-        return view('components.dashboard.notification', compact('pendingRegistration', 'newComments'));
+        return view('components.dashboard.notification', compact('pendingRegistration', 'commentaryNotifications'));
     }
 }
