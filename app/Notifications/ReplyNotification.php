@@ -36,11 +36,12 @@ class ReplyNotification extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $url = url('/post/' . $this->post->slug);
 
         return (new MailMessage)
             ->greeting('Yo,')
             ->line('You have a reply to a comment on a post.')
-            ->action('View Post', url("/post/" . $this->post->slug))
+            ->action('View Post', $url)
             ->line('Some one more line of texts.');
     }
 

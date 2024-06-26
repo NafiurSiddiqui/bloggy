@@ -24,7 +24,7 @@ class Dashboard extends Component
     {
         //get all the users whose status is EQUAL to pending
         $pending_registrations = User::where('status', 'pending')->get();
-        $pending_registrations_count = User::where('status', 'pending')->count();
+        $pending_registrations_count = $pending_registrations->count();
 
         return view('components.dashboard.dashboard', compact(['pending_registrations', 'pending_registrations_count']));
     }

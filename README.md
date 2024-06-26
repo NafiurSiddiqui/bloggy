@@ -27,3 +27,21 @@ Made with 💚
 
 -   You can either manually create slug or leave it up to bloggy. Bloggy generates slug for you based on your title. If you are to manually set your slug please do use `-` hyphen separated slug only.
 -
+
+## features
+
+-   You can CRUD post, categories, subcategories.
+-   Separate admin dashboard only for admins and allowed roles.
+-   Commentary and reply system
+-   Notfication system (queued jobs)
+    -   upon comment and reply
+        -   right now, notification is deleted upon clicking the `<x-notification-card>`. You can alternatively use Laravels `markAsRead()` method to keep the notifications instead and filter based on the `readNotifications()` or `unreadNotifications()`, and render cards.
+    -   Admin approving admin-side registration. `/admin/registration`
+    -
+
+# In production
+
+-   change the necessary `env` variables.
+-   By default notification system is using `mail` and `database` for comment and relply.
+-   Add the neccessary `mail` variable for your mail server.
+-   Do run `sail artisan work:queue` to start the workers

@@ -37,6 +37,8 @@ class AdminRegistrationController extends Controller
 
         ]);
 
+        //Notify admin
+
         return redirect('/')->with('success', 'Your application has been submitted!');
     }
 

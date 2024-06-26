@@ -8,7 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Log;
+
 
 class CommentNotification extends Notification implements ShouldQueue
 {
@@ -20,11 +20,9 @@ class CommentNotification extends Notification implements ShouldQueue
 
     public function __construct(
         protected Post $post,
-        // protected string $postSlug
+
     ) {
         $this->post = $post;
-        $this->postSlug = $this->post->slug;
-        // dd($this->post->slug);
     }
 
     /**
@@ -42,12 +40,12 @@ class CommentNotification extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $url = '/post/' . $this->post->slug;
 
+        $url = url('/post/' . $this->post->slug);
         return (new MailMessage)
             ->greeting('Yo,')
             ->line('You have a new comment on a post.')
-            ->action('View Post', url($url))
+            ->action('View Post', $url)
             ->line('Some one more line of texts.');
     }
 
