@@ -15,6 +15,8 @@ class Post extends Model implements HasMedia
 
     //    protected $guarded = [];
 
+    protected $with = ['category', 'subcategory', 'author'];
+
     protected $fillable = [
         'user_id',
         'title',
