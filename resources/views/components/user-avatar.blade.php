@@ -1,8 +1,5 @@
 @props(['user', 'lg' => false, 'sm' => false, 'xs' => false])
 
-
-
-
 @if ($user->avatar)
 
     @if ($lg)

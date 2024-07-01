@@ -33,7 +33,7 @@
                                 class="post-delete-checkbox" value="{{ $post->id }}" checkbox-only />
                         </x-td>
                         <x-td>
-                            <x-text-link href="/posts/{{ $post->slug }}">
+                            <x-text-link href="/post/{{ $post->slug }}">
                                 {{ $post->title }}
                             </x-text-link>
                         </x-td>

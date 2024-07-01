@@ -17,14 +17,14 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        $featuredPosts = Post::where('is_featured', 'on')->latest()->take(2)->get();
-        $hot = Post::where('is_hot', 'on')->latest()->take(2)->get();
-        $posts =  Post::with('author', 'category', 'subcategory')->latest()->get();
+        $featuredPosts = Post::where('is_featured', 'on')->where('is_published', 1)->latest()->get();
+        $hot = Post::where('is_hot', 'on')->where('is_published', 1)->latest()->get();
+        $posts =  Post::with('author', 'category', 'subcategory')->where('is_published', 1)->latest()->get();
 
         return view('index', [
             'posts' => $posts->isEmpty() ? null : $posts,
             'post_count' => Post::count(),
-            'featured' =>  $featuredPosts->isEmpty() ? null : $featuredPosts,
+            'featured_posts' =>  $featuredPosts->isEmpty() ? null : $featuredPosts,
             'hot' =>  $hot->isEmpty() ? null : $hot,
 
         ]);

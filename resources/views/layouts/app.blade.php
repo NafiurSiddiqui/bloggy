@@ -18,13 +18,8 @@
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50 overflow-x-clip">
     @include('layouts.navigation')
-    @php
-        $user = auth()->user();
-        // $role = Illuminate\Http\Request;
-    @endphp
-    <div>
-        Usr role: {{ $user?->role }}
 
+    <div class="flex flex-col items-center">
         {{ $slot }}
         <x-toast.success />
     </div>

@@ -1,6 +1,6 @@
 <x-app-layout>
-{{--    @dd($subcategory)--}}
-    <h1>{{$category->name}}/{{ $subcategory->name }}</h1>
+    {{--    @dd($subcategory) --}}
+    <h1>{{ $category->title }}/{{ $subcategory->title }}</h1>
 
-    {{$subcategory}}
+    {{ $subcategory }}
 </x-app-layout>
