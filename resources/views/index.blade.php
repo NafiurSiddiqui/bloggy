@@ -21,7 +21,7 @@
         @endif
         @if (isset($posts) && $posts)
             <section>
-                <div class="mt-6 bg-white shadow-sm rounded-lg space-y-4">
+                <div class="mt-6 bg-white shadow-sm rounded-lg space-y-4 gap-2 md:px-8 lg:px-0 lg:grid grid-cols-2">
                     <h1 class="text-2xl font-bold">All Posts</h1>
                     <p>There are {{ $post_count }} posts here</p>
                     @foreach ($posts as $post)
