@@ -1,20 +1,19 @@
 @props(['post'])
 
 
-<x-post-cards.layout>
-    <div class="flex flex-col md:flex-row">
-        <div class="">
-            <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->thumbnail_alt_txt }}"
-                class="w-full h-full  aspect-[16/12] object-cover">
-        </div>
+<x-post-cards.layout class="!p-0 w-full">
+    <div class="flex relative flex-col md:flex-row bg-center bg-cover h-[60vh] lg:h-[80vh] bg-no-repeat rounded-md"
+        style="background-image: url({{ asset('storage/' . $post->thumbnail) }})">
+        <div class="w-full h-full absolute start-0  rounded-md bg-gradient-to-b from-neutral-200/40 to-[#595959]" />
 
-        <div class="mt-8 flex flex-col justify-between">
+        <div class="h-full flex flex-col justify-end items-center p-8">
             <x-post-cards.header>
+                <div class="mb-4 flex justify-center space-x-4">
+                    <x-labels.category :category="$post->category" />
+                    <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" />
+                </div>
                 <x-post-cards.heading :post="$post" />
-                <x-labels.category :category="$post->category" />
-                <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" />
             </x-post-cards.header>
-            <x-post-cards.description :post="$post" />
             <x-post-cards.author :post="$post" />
         </div>
 
