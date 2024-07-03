@@ -1,24 +1,23 @@
 <x-app-layout>
-    <main class="borderTest p-4 md:px-6 ">
+    <main class=" p-4 md:px-6 ">
         @if (isset($featured_posts) && $featured_posts)
-            <section class="h-screen">
+            <section>
                 <h1 class="text-2xl text-zinc-600 font-bold mb-3">Featured</h1>
-                <div class="flex flex-col lg:flex-row gap-3">
 
-                    <div class="lg:hidden space-y-4">
-                        @foreach ($featured_posts as $post)
-                            <x-post-cards.featured :post="$post" />
+                <div class="flex flex-col lg:flex-row gap-3 w-full ">
+                    <x-post-cards.featured :post="$featured_posts[0]" />
+                    <div class="w-full lg:w-3/5 flex flex-col gap-2 relative">
+                        @foreach ($featured_posts->skip(1) as $post)
+                            <x-post-cards.featured-sm :post="$post" />
                         @endforeach
                     </div>
-
-                    <div class="hidden lg:flex gap-3 w-full ">
-                        <x-post-cards.featured :post="$featured_posts[0]" />
-                        <div class="w-full lg:w-3/5 flex flex-col gap-2 relative">
-                            @foreach ($featured_posts->skip(1) as $post)
-                                <x-post-cards.featured-sm :post="$post" />
-                            @endforeach
-                        </div>
-                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="{{ route('posts.featured') }}"
+                        class="text-zinc-600 hover:text text-xl
+                    -zinc-800 font-semibold hover:underline italic">
+                        💫 Explore Exclusive Featured Content 💫
+                    </a>
                 </div>
             </section>
         @endif

@@ -1,10 +1,11 @@
 @props(['post'])
 
 
-<x-post-cards.layout class="!p-0 w-full h-[50%] flex-1 ">
+<x-post-cards.layout class="!p-0 w-full  lg:h-[50%] flex-1 ">
     <div class="flex relative flex-col md:flex-row bg-center bg-cover h-full bg-no-repeat rounded-md"
         style="background-image: url({{ asset('storage/' . $post->thumbnail) }})">
-        <div class="w-full h-full absolute start-0  rounded-md bg-gradient-to-b from-neutral-200/40 to-[#595959]" />
+
+        <x-post-cards.featured-overlay class="h-[60vh] lg:h-full" />
 
         <div class="h-full flex flex-col justify-end items-center p-2 pb-8 space-y-4 ml-4">
             <x-post-cards.header class="w-full">
