@@ -18,13 +18,15 @@ class PostController extends Controller
     public function index(): View
     {
         $featuredPosts = Post::where('is_featured', 'on')->where('is_published', 1)
-            ->take(3)
             ->latest()
             ->get();
+
         $hot = Post::where('is_hot', 'on')->where('is_published', 1)
             ->latest()
             ->get();
-        $posts =  Post::with('author', 'category', 'subcategory')->where('is_published', 1)->latest()->get();
+        $posts =  Post::where('is_published', 1)
+            ->latest()
+            ->get();
 
         return view('index', [
             'posts' => $posts->isEmpty() ? null : $posts,
@@ -40,5 +42,26 @@ class PostController extends Controller
         return view('posts.show', [
             'post' => $post,
         ]);
+    }
+
+    public function showFeaturedPosts(): View
+    {
+        $featuredPosts = Post::where('is_featured', 'on')
+            ->where('is_published', 1)
+            ->latest()
+            ->simplePaginate(20);
+        return view('posts.featured', compact('featuredPosts'));
+    }
+
+    public function showHotPosts(): View
+    {
+        $hotPosts = Post::where('is_hot', 'on')->latest()->simplePaginate(20);
+        return view('posts.hot', compact('hotPosts'));
+    }
+
+    public function showAllPosts(): View
+    {
+        $allPosts = Post::latest()->simplePaginate(20);
+        return view('posts.all', compact('allPosts'));
     }
 }

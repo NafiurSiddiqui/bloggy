@@ -13,18 +13,14 @@ use App\Http\Controllers\SubcategoryController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Subcategory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-
-
 Route::get('/', [PostController::class, 'index'])->name('home');
-Route::get('/posts/featured', function (): View {
-    #
-    $featuredPosts = Post::where('is_featured', 'on')->latest()->simplePaginate();
-    return view('posts.featured', compact('featuredPosts'));
-})->name('posts.featured');
+Route::get('/posts/featured', [PostController::class, 'showFeaturedPosts'])->name('posts.featured');
+Route::get('/posts/hot', [PostController::class, 'showHotPosts'])->name('posts.hot');
+Route::get('/posts/all-posts', [PostController::class, 'showAllPosts'])->name('posts.all');
+
 Route::get('/post/{post:slug}', [PostController::class, 'show']);
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category');
 Route::get('/categories/{category:slug}/{subcategory:slug}', [SubcategoryController::class, 'show'])->name('subcategory');
@@ -33,7 +29,6 @@ Route::get('/author/{author:id}/posts', function (string $id) {
         'posts' => Post::where('user_id', $id)->get()
     ]);
 });
-
 
 Route::get('/admin/register', [AdminRegistrationController::class, 'create'])->name('admin.register.create');
 Route::post('/admin/register/store', [AdminRegistrationController::class, 'store'])->name('admin.register.store');
