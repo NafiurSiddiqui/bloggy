@@ -13,7 +13,7 @@
                     <x-labels.category :category="$post->category" sm />
                     <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" sm />
                 </div>
-                <x-post-cards.heading :post="$post" class="!text-2xl mt-2" />
+                <x-post-cards.heading :post="$post" class="!text-2xl text-center mt-2" />
             </x-post-cards.header>
             <x-post-cards.author class="mt-0 w-full" :post="$post" />
         </div>
