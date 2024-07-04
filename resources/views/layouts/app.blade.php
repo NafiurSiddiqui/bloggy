@@ -16,13 +16,16 @@
 
 </head>
 
-<body class="font-sans antialiased dark:bg-black dark:text-white/50 overflow-x-clip">
+<body class="font-sans antialiased bg-[#F8F7F5] dark:bg-black dark:text-white/50 overflow-x-clip">
     @include('layouts.navigation')
 
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center min-h-screen">
         {{ $slot }}
         <x-toast.success />
     </div>
+    <footer class="borderTest">
+        The footer
+    </footer>
 
 </body>
 

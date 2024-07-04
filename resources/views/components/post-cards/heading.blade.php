@@ -1,9 +1,9 @@
 @props(['post'])
 
 <a href="/post/{{ $post->slug }}">
-    <h1 {{ $attributes->merge([
-        'class' => 'text-4xl font-bold text-gray-800',
+    <h3 {{ $attributes->merge([
+        'class' => 'text-4xl text-center font-bold text-gray-800',
     ]) }}>
         {{ $post->title }}
-    </h1>
+    </h3>
 </a>

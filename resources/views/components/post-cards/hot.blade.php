@@ -1,19 +1,16 @@
 @props(['post'])
 
 
-<x-post-cards.layout class="">
+<x-post-cards.layout class="bg-zinc-50">
 
-    <div class="flex flex-col justify-between">
+    <div class="flex  flex-col justify-between">
         <x-post-cards.header>
             <x-post-cards.heading :post="$post" />
-            <div>
+            <div class="relative">
                 <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->thumbnail_alt_txt }}"
-                    class="w-full h-full aspect-[16/10] object-cover">
+                    class="w-full h-full rounded-md aspect-[16/10] object-cover">
+                <x-post-cards.img-overlay />
             </div>
-            {{-- <div class="w-full h-56 bg-center bg-no-repeat bg-cover"
-                    style="background-image: url({{ asset('storage/' . $post->thumbnail) }})" role="img">
-
-                </div> --}}
 
             <x-labels.category :category="$post->category" />
             <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" />

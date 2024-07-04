@@ -1,6 +1,6 @@
 @props(['post'])
 <footer {{ $attributes->merge([
-    'class' => 'flex justify-between items-center mt-8',
+    'class' => 'flex justify-between items-center mt-6',
 ]) }}>
     <div class="flex items-center text-sm">
         <x-user-avatar sm :user="$post->author" />
