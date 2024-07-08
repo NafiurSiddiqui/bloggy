@@ -7,8 +7,7 @@
                 @method('PATCH')
             @endif
             <header class="flex items-center">
-                {{-- <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="user avatar" class="rounded-full"
-                    width="40" height="40"> --}}
+
                 <x-user-avatar xs :user="auth()->user()" />
                 <h3 class="font-bold text-lg ml-3">{{ isset($editable) ? 'Edit Your' : 'Add a' }} comment</h3>
             </header>
@@ -21,7 +20,12 @@
                 <x-form.textarea name="body" required sr-only />
             @endif
 
-            <div class="flex justify-end">
+            <div class="flex justify-end items-end">
+                @if (isset($editable))
+                    <x-secondary-button class="!py-3  mr-3" link href="{{ url()->previous() }}">
+                        Cancel
+                    </x-secondary-button>
+                @endif
                 <x-form.button>
                     {{ $btnLabel }}
                 </x-form.button>

@@ -23,10 +23,11 @@
 <x-form.field>
     <x-form.label label-for="{{ $name }}" class="{{ $requiredClasses }}" sr-only="{{ isset($srOnly) }}" />
     <textarea name="{{ $name }}" rows="5"
-        class="w-full  text-xs border border-gray-300 focus:outline-none focus:ring rounded  dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700"
+        class="w-full border border-gray-300 focus:outline-none focus:ring focus:ring-blue-300 rounded p-2 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700"
         {{ $attributes }} {{ $required ? 'required' : '' }}>
 
     {{ $slot ?? old($name) }}
     </textarea>
+
     <x-form.error name="{{ $name }}" />
 </x-form.field>

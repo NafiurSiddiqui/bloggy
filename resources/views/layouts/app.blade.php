@@ -23,7 +23,7 @@
         {{ $slot }}
         <x-toast.success />
     </div>
-    <footer class="borderTest">
+    <footer class=" h-[20vh] bg-zinc-300">
         The footer
     </footer>
 
