@@ -1,4 +1,12 @@
 <x-app-layout>
+
+    @if (request()->routeIs('admin.post.create') || request()->routeIs('admin.post.edit'))
+        <x-slot:head>
+            <x-editor.ck-editor-config />
+        </x-slot:head>
+    @endif
+
+
     <x-slot:title>
         {{ __('Dashboard') }}
     </x-slot:title>

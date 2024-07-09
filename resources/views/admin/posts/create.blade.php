@@ -1,5 +1,6 @@
 <x-dashboard.dashboard-layout>
 
+
     <x-slot:heading>Create a Post</x-slot:heading>
 
     @if (isset($categories_are_empty) && $categories_are_empty)
