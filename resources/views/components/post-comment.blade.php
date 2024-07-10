@@ -30,10 +30,19 @@
                             {{ $comment->body }}
                         </p>
                         <div class="flex w-full">
-                            <button class="reply-btn px-2 py-1 rounded-sm hover:bg-gray-100 text-xs"
-                                data-comment-id="{{ $comment->id }}" @click="reply = !reply">
-                                Reply
-                            </button>
+                            @auth
+                                <button class="reply-btn px-2 py-1 rounded-sm hover:bg-gray-100 text-xs"
+                                    data-comment-id="{{ $comment->id }}" @click="reply = !reply">
+                                    Reply
+                                </button>
+                            @endauth
+                            @guest
+                                <a href="{{ route('login') }}"
+                                    class="reply-btn px-2 py-1 rounded-sm hover:bg-gray-100 text-xs">
+                                    Reply
+                                </a>
+
+                            @endguest
                             @if ($hasReplies)
                                 <div class="flex  justify-between w-full items-center">
                                     <div class="w-full h-[1px] bg-gray-200 mr-1 "></div>
@@ -67,7 +76,8 @@
                                 </form>
                             @endif
                             <div class="p-2">
-                                <form id="form-delete" action="/post/comment/{{ $comment->id }}/delete" method="post">
+                                <form id="form-delete" action="/post/comment/{{ $comment->id }}/delete"
+                                    method="post">
                                     @csrf
                                     @method('DELETE')
                                     <x-danger-button x-data=""
@@ -94,7 +104,6 @@
     {{-- replies --}}
     <section class="space-y-4" x-show="replies">
         @if ($comment->replies)
-
             @foreach ($comment->replies as $reply)
                 @unless (isset($onEditPage) && auth()->user()->id == $reply->commentator->id)
                     <x-panel class="rounded-l-none">
@@ -167,6 +176,5 @@
     @endif
 
 </section>
-
 </div>
 </div>

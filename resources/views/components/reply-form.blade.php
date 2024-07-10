@@ -33,9 +33,9 @@
                <span class="text-red-500 text-xs">{{ $message }}</span>
            @enderror
        </x-panel>
-   @else
+       {{-- @else
        <p>
            <a href="/register" class="text-blue-500 hover:text-blue-600">Register</a> or
            <a href="/login" class="text-blue-500 hover:text-blue-600"">Login</a> to add comments.
-       </p>
+       </p> --}}
    @endauth
