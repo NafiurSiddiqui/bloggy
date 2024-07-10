@@ -39,9 +39,14 @@ class PostController extends Controller
 
     public function show(Post $post): View
     {
-        return view('posts.show', [
-            'post' => $post,
-        ]);
+        // get the immediate next post
+        $nextPost = Post::where('id', '>', $post->id)->where('is_published', 1)->first();
+        // get the immediate previous post
+        $previousPost = Post::where('id', '<', $post->id)->where('is_published', 1)->get()->last();
+        // dd($post->id, $nextPost);
+
+        // dd($previousPost);
+        return view('posts.show', compact('post', 'nextPost', 'previousPost'));
     }
 
     public function showFeaturedPosts(): View
