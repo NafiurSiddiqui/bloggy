@@ -1,5 +1,9 @@
 <x-app-layout>
-
+    <x-slot:head>
+        <title>{{ $post->title }}</title>
+        <meta name="description"
+            content="{{ $post->description ?? 'Get the latest news on web3, cybersecurity, programming!' }}">
+    </x-slot:head>
     <section class="p-6 mb-10 sm:px-16 max-w-6xl space-y-6 flex flex-col justify-center items-center lg:px-20">
         <article class="mt-12 lg:w-4/5">
             <div class="space-y-4">
@@ -78,14 +82,18 @@
 
                     <div class="flex justify-between items-center w-3/5 lg:w-[15rem]">
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/post/' . $post->slug) }}"
-                            target="_blank" rel="noopener noreferrer" class="group">
+                            target="_blank" rel="noopener noreferrer nofollow" class="group">
                             <x-icons.facebook class="group-hover:fill-zinc-500 transition-colors" />
+
                         </a>
 
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="group">
+                        <a href="https://twitter.com/intent/tweet?url={{ url('/post/' . $post->slug) }}" target="_blank"
+                            rel="noopener noreferrer nofollow" class="group">
                             <x-icons.twitter-x class="group-hover:fill-zinc-500 transition-colors" />
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="group">
+                        <a href="https://www.linkedin.com/shareArticle?url= {{ url('/post/' . $post->slug) }}"
+                            target="_blank" rel="noopener noreferrer nofollow" class="group">
+
                             <x-icons.linkedin class="group-hover:fill-zinc-500 transition-colors" />
                         </a>
 
