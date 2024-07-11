@@ -44,9 +44,16 @@ class PostController extends Controller
         // get the immediate previous post
         $previousPost = Post::where('id', '<', $post->id)->where('is_published', 1)->get()->last();
         // dd($post->id, $nextPost);
+        $recentPosts =
+            $posts =  Post::where('is_published', 1)
+            ->latest()
+            ->take(8)
+            ->get();
 
-        // dd($previousPost);
-        return view('posts.show', compact('post', 'nextPost', 'previousPost'));
+        $categories = Category::orderBy('title', 'asc')->get();
+
+
+        return view('posts.show', compact('post', 'nextPost', 'previousPost', 'recentPosts', 'categories'));
     }
 
     public function showFeaturedPosts(): View

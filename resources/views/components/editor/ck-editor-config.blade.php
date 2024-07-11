@@ -1,17 +1,26 @@
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+{{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script> --}}
 
-{{-- <script type="importmap">
+<script type="importmap">
         {
             "imports": {
                 "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.0/ckeditor5.js",
                 "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.0/"
             }
         }
-    </script> --}}
+    </script>
 
 
 
-<script>
+<script type="module">
+    import {
+        ClassicEditor,
+        Bold,
+    } from 'ckeditor5';
+
+    // import {
+    //     FileRepository
+    // } from '{{ asset('vendor/ckeditor5/build/ckeditor.js') }}'
+    // https://github.com/ckeditor/ckeditor5/issues/16705
     document.addEventListener('DOMContentLoaded', function() {
         class MyUploadAdapter {
             constructor(loader) {
@@ -120,7 +129,8 @@
 
         ClassicEditor
             .create(document.querySelector('#editor'), {
-                // toolbar: ['strikethrough'],
+                plugins: [Bold],
+                toolbar: ['bold'],
                 extraPlugins: [MyCustomUploadAdapterPlugin],
             })
             .catch(error => {

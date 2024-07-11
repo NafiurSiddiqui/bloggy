@@ -1,4 +1,6 @@
 <x-app-layout>
+
+
     <main class=" p-4 md:px-6 2xl:w-4/5">
         @if (isset($featured_posts) && $featured_posts)
             <section>

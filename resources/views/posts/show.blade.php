@@ -23,62 +23,120 @@
                 </div>
             </div>
 
+            <div class="text-lg my-8">
+                {!! $post->body !!}
+            </div>
 
+        </article>
 
+        <div class="flex flex-col lg:w-4/5 ">
+            <div class="my-8">
+                <ul class="flex justify-between">
+                    <li class="box-border  w-1/2 lg:w-2/5 p-1 mr-2 group">
+                        @if ($previousPost)
+                            <a href="/post/{{ $previousPost->slug }}">
+                                {{-- fontawesome previous btn --}}
+                                <div class="italic mb-2 text-sm text-left text-zinc-600 group-hover:text-zinc-700">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                    Previous
+                                </div>
+                                <span class="font-semibold text-zinc-600 group-hover:text-zinc-800 text-left">Some
+                                    Long ass Post title that goes on forever and ever
+                                </span>
+                            </a>
+                        @endif
+                    </li>
+                    <li class="box-border w-1/2 lg:w-2/5 p-1 group">
+                        @if ($nextPost)
+                            <a href="/post/{{ $nextPost->slug }}">
 
-            <div class="flex flex-col ">
-                <div class="text-lg my-8">
-                    {!! $post->body !!}
+                                <div class="italic mb-2 text-sm text-right text-zinc-600 group-hover:text-zinc-700">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                    Next
+                                </div>
+                                <span
+                                    class="font-semibold text-zinc-600 group-hover:text-zinc-800 inline-block text-right">Some
+                                    Long ass Post title that goes on forever and ever
+                                </span>
+                            </a>
+                        @endif
+                    </li>
+                </ul>
+            </div>
+
+            <div class="py-4 my-5 ">
+                <div>
+                    <div class="flex items-end ">
+                        <span class="font-bold text-zinc-600 text-lg">Share</span>
+                        <div class="">
+                            <x-icons.share-icon class="opacity-90" />
+                        </div>
+                    </div>
+                    <x-hr class="bg-gray-400" />
                 </div>
+                <div class="flex items-center justify-center">
 
-                <div class="">
-                    <ul class="flex justify-between">
-                        <li class="box-border  w-1/2 lg:w-2/5 p-1 mr-2 group">
-                            @if ($previousPost)
-                                <a href="/post/{{ $previousPost->slug }}">
-                                    {{-- fontawesome previous btn --}}
-                                    <div class="italic mb-2 text-sm text-left text-zinc-600 group-hover:text-zinc-700">
-                                        <i class="fa-solid fa-chevron-left"></i>
-                                        Previous
-                                    </div>
-                                    <span class="font-semibold text-zinc-600 group-hover:text-zinc-800 text-left">Some
-                                        Long ass Post title that goes on forever and ever
-                                    </span>
-                                </a>
-                            @endif
-                        </li>
-                        <li class="box-border w-1/2 lg:w-2/5 p-1 group">
-                            @if ($nextPost)
-                                <a href="/post/{{ $nextPost->slug }}">
+                    <div class="flex justify-between items-center w-3/5 lg:w-[15rem]">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/post/' . $post->slug) }}"
+                            target="_blank" rel="noopener noreferrer" class="group">
+                            <x-icons.facebook class="group-hover:fill-zinc-500 transition-colors" />
+                        </a>
 
-                                    <div class="italic mb-2 text-sm text-right text-zinc-600 group-hover:text-zinc-700">
-                                        <i class="fa-solid fa-chevron-right"></i>
-                                        Next
-                                    </div>
-                                    <span
-                                        class="font-semibold text-zinc-600 group-hover:text-zinc-800 inline-block text-right">Some
-                                        Long ass Post title that goes on forever and ever
-                                    </span>
-                                </a>
-                            @endif
-                        </li>
-                    </ul>
-                </div>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="group">
+                            <x-icons.twitter-x class="group-hover:fill-zinc-500 transition-colors" />
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="group">
+                            <x-icons.linkedin class="group-hover:fill-zinc-500 transition-colors" />
+                        </a>
 
-
-                <section class="flex flex-col justify-center mt-10 space-y-4 w-full h-full">
-
-                    <div class="w-full md:w-4/5 space-y-4 lg:w-3/5">
-                        <x-comment-form :post="$post" btn-label="Post" />
-
-                        @foreach ($post->comments as $comment)
-                            <x-post-comment :comment="$comment" :post="$post" />
-                        @endforeach
                     </div>
 
-                </section>
+                </div>
             </div>
-        </article>
+
+            <section class="flex flex-col justify-center mt-10 space-y-4 w-full h-full">
+
+                <div class="w-full md:w-4/5 lg:w-3/5 space-y-4 ">
+                    <x-comment-form :post="$post" btn-label="Post" />
+
+                    @foreach ($post->comments as $comment)
+                        <x-post-comment :comment="$comment" :post="$post" />
+                    @endforeach
+                </div>
+
+            </section>
+
+            {{-- take 8 recent posts and browse by category --}}
+            <section class="flex flex-col justify-center mt-10 space-y-4 w-full">
+                <div class="w-full space-y-4  bg-white px-1 py-4 rounded-xl">
+                    <div class="flex flex-col justify-center items-center">
+                        <h1 class="text-2xl font-bold text-zinc-600">Browse by Category
+                        </h1>
+                        <x-hr class="bg-gray-400" />
+                    </div>
+
+                    @if ($categories->isNotEmpty())
+                        @foreach ($categories as $category)
+                            <x-labels.category :category="$category" />
+                        @endforeach
+                    @endif
+
+                </div>
+                <div class="w-full  space-y-4 ">
+                    <div class="flex flex-col justify-center items-center">
+                        <h1 class="text-2xl font-bold text-zinc-600">Recent Posts
+                        </h1>
+                        <x-hr class="bg-gray-400" />
+                    </div>
+
+                    @foreach ($recentPosts as $post)
+                        <x-post-cards.card-x :post="$post" />
+                    @endforeach
+
+                </div>
+
+            </section>
+        </div>
 
     </section>
     </x-layout>
