@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="text-lg my-8">
+            <div class="post-body text-lg my-8">
                 {!! $post->body !!}
             </div>
 
@@ -148,3 +148,47 @@
 
     </section>
     </x-layout>
+
+
+    <script>
+        // Table of Content generator
+        const postBody = document.querySelector('.post-body');
+        let postBodyContents = postBody.children;
+        let headings = [];
+        let headingCounter = 0;
+
+
+        // generate table of content
+        // set a Table of contents on postBody
+        let toc = document.createElement('div');
+        toc.classList.add('table-of-contents', 'border', 'py-4', 'mb-8', 'bg-biege-100', 'rounded-md', 'px-3', 'w-fit',
+            'text-zinc-700');
+        toc.innerHTML = '<p class="underline font-semibold text-gray-600">Table of Contents</p>';
+        postBody.prepend(toc);
+        // set a <ul> on toc
+        let tocList = document.createElement('ul');
+        toc.appendChild(tocList);
+
+        //Set Ids on each h3s
+        for (let index = 0; index < postBodyContents.length; index++) {
+            let isHeading = postBodyContents[index].tagName == 'H3';
+
+            if (isHeading) {
+                headingCounter++;
+                postBodyContents[index].setAttribute('id', `heading-${headingCounter}`);
+                // set a <li> on tocList
+                let tocListItem = document.createElement('li');
+                tocList.appendChild(tocListItem);
+                // set a <a> on tocListItem
+                let tocListItemAnchor = document.createElement('a');
+                tocListItemAnchor.setAttribute('href', `#heading-${headingCounter}`);
+                tocListItemAnchor.innerHTML = `${postBodyContents[index].innerHTML}`;
+                tocListItem.appendChild(tocListItemAnchor);
+
+            }
+        }
+        console.log(headingCounter);
+        if (headingCounter === 0) {
+            toc.remove();
+        }
+    </script>
