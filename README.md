@@ -37,6 +37,7 @@ Made with 💚
     -   upon comment and reply
         -   right now, notification is deleted upon clicking the `<x-notification-card>`. You can alternatively use Laravels `markAsRead()` method to keep the notifications instead and filter based on the `readNotifications()` or `unreadNotifications()`, and render cards.
     -   Admin approving admin-side registration. `/admin/registration`
+    -   Table of Content generator (You MUST set `<h3>` for each title for parapraphs for this to work)
 
 ## In development
 
