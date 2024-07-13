@@ -21,7 +21,6 @@ class AdminPostController extends Controller
     {
         // dd(request()->all());
         $posts = Post::with('author', 'category')->latest()->simplePaginate(10);
-        // $posts = Post::latest()->simplePaginate(10)->withQueryString();
 
         $categoryFilter = request()->input('category_filter');
         $statusFilter = request()->input('status_filter');
@@ -401,10 +400,10 @@ class AdminPostController extends Controller
         ]);
 
         $attributes['category_id'] = request()->input('category_id') === "---" ?   $uncategorizedCategory->id : request()->input('category_id');
+        $attributes['subcategory_id'] = request()->input('subcategory_id') === "---" ? null : request()->input('subcategory_id');
 
 
         //associate user_id and store file
-        $attributes['subcategory_id'] = request()->input('subcategory_id') === "---" ? null : request()->input('subcategory_id');
         $attributes['user_id'] = auth()->id();
         $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         if (isset($attributes['og_thumbnail'])) {
@@ -458,7 +457,8 @@ class AdminPostController extends Controller
         //validate
         $attributes = request()->validate([
             'title' => ['required', 'max:255',  Rule::unique('posts', 'title')->ignore($post->id)],
-            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],
+            'slug' => ['nullable', Rule::unique('posts', 'slug')->ignore($post->id)],
+            // 'slug' => ['nullable', 'unique:posts'],
             'description' => ['required', 'max:255'],
             'body' => 'required',
             'thumbnail' => ['image'],
@@ -476,6 +476,13 @@ class AdminPostController extends Controller
             'og_title' => ['nullable', 'max:255'],
 
         ]);
+
+
+        //Slug check
+        if (is_null(request('slug'))) {
+            //auto generate title to slug
+            $attributes['slug'] = Str::slug($attributes['title'], '-');
+        }
 
         //check if a category by slug 'uncategorized' exist in database
         $uncategorizedCategory = Category::where('slug', 'uncategorized')->firstOrCreate([
