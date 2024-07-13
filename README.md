@@ -50,3 +50,8 @@ Made with 💚
 -   By default notification system is using `mail` and `database` for comment and relply.
 -   Add the neccessary `mail` variable for your mail server.
 -   Do run `sail artisan work:queue` to start the workers.
+
+# Variables used for layouts (UI)
+
+-   `$heading` is used as a reference to the major heading of the page. Use it to set your `admin` side headings. Found inside [`dashboard-layout.blade.php`](resources/views/components/dashboard/dashboard-layout.blade.php).(Admin side only)
+-   `$head` is used as the `<head>` slots where you can pass all the HTML tags like `<meta>` tags for the head on each page.(Globally available)
