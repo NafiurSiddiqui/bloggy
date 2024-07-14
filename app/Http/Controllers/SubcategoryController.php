@@ -93,11 +93,9 @@ class SubcategoryController extends Controller
      */
     public function show(Category $category, Subcategory $subcategory): View
     {
+        $posts = $subcategory->posts;
 
-        return view('subcategories.show', [
-            'category' => $category,
-            'subcategory' => $subcategory
-        ]);
+        return view('subcategories.show', compact('category', 'subcategory', 'posts'));
     }
 
     /**

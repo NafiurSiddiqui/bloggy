@@ -40,7 +40,7 @@
                     @auth
 
                         @if (auth()->user()->role == 'admin' || auth()->user()->role == 'author')
-                            @if (request()->is('/'))
+                            @if (!request()->routeIs('admin'))
                                 <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                                     {{ __('Dashboard') }}
                                 </x-nav-link>

@@ -2,7 +2,6 @@
 
     @if ($posts->isNotEmpty())
         <main class=" p-4 md:px-6 2xl:w-4/5">
-
             <section>
                 <x-h2>Category: {{ $category->title }} <span
                         class="!text-gray-500 !text-lg">({{ $category->posts->count() }}
