@@ -23,8 +23,14 @@
         {{ $slot }}
         <x-toast.success />
     </div>
-    <footer class=" h-[20vh] bg-zinc-300">
-        The footer
+    <footer class="h-[20vh] bg-gray-200 flex justify-center items-center">
+
+        <p class="text-center text-gray-600 dark:text-gray-400">©
+            {{ date('Y') }}
+            <span class="text-gray-800 dark:text-gray-200">Bloggy</span>
+            . All rights reserved.
+        </p>
+
     </footer>
 
 </body>
