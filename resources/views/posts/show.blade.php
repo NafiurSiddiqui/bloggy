@@ -8,7 +8,6 @@
             content="{{ $post->description ?? 'Get the latest news on web3, cybersecurity, programming!' }}">
         <meta property="og:image" content="{{ is_null($post->og_thumbnail) ? $post->thumbnail : $post->og_thumbnail }}" />
         <meta property="og:url" content="{{ url('/post/' . $post->slug) }}" />
-        {{-- <meta property="og:image:secure_url" content="https://secure.example.com/ogp.jpg" /> --}}
         <meta property="og:type" content="article" />
         <meta property="og:image:width" content="400" />
         <meta property="og:image:height" content="300" />
