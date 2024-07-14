@@ -1,5 +1,5 @@
-@props(['post'])
-
+@props(['post', 'no-href'])
+{{-- setting no-href will prevents make the category labels plain labels without links --}}
 
 <x-post-cards.layout class=" lg:h-[25rem]  bg-zinc-50 !p-0 border">
 
@@ -14,7 +14,7 @@
                     <x-post-cards.img-overlay />
 
                 </div>
-                <x-labels.category :category="$post->category" sm />
+                <x-labels.category :category="$post->category" sm no-href="{{ $noHref }}" />
                 <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" sm />
             </x-post-cards.header>
 

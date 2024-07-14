@@ -10,7 +10,7 @@
 
                 <div class="space-y-4 lg:space-y-0 gap-2 lg:gap-4 md:px-8 xl:px-0 xl:grid grid-cols-2">
                     @foreach ($category->posts as $post)
-                        <x-post-cards.card-x :post="$post" />
+                        <x-post-cards.card-x no-href :post="$post" />
                     @endforeach
                 </div>
 
