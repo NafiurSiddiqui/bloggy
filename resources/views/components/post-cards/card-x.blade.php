@@ -14,7 +14,7 @@
                     <x-post-cards.img-overlay />
 
                 </div>
-                <x-labels.category :category="$post->category" sm no-href="{{ $noHref }}" />
+                <x-labels.category :category="$post->category" sm no-href="{{ isset($noHref) }}" />
                 <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" sm />
             </x-post-cards.header>
 
