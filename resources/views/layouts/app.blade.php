@@ -27,7 +27,7 @@
 
         <p class="text-center text-gray-600 dark:text-gray-400">©
             {{ date('Y') }}
-            <span class="text-gray-800 dark:text-gray-200">Bloggy</span>
+            <span class="text-gray-800 dark:text-gray-200">{{ env('APP_NAME') }}</span>
             . All rights reserved.
         </p>
 

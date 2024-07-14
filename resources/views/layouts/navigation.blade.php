@@ -6,12 +6,12 @@
                 <!-- Logo -->
                 @if (request()->routeIs('home') || request()->routeIs('home.*'))
                     <div class="shrink-0 flex items-center font-bold text-2xl">
-                        Bloggy
+                        {{ env('APP_NAME') }}
                     </div>
                 @else
                     <a class="shrink-0 text-gray-700 flex items-center font-bold text-2xl hover:text-gray-600 "
                         href={{ route('home') }}>
-                        Bloggy
+                        {{ env('APP_NAME') }}
                     </a>
                 @endif
 
