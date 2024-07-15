@@ -113,7 +113,7 @@
                 <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                     {{ __('All Posts') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('category', ['category' => 'test'])" :active="request()->routeIs('category.*')">
+                <x-responsive-nav-link :href="route('category.show', ['category' => 'test'])" :active="request()->routeIs('category.*')">
                     {{ __('category') }}
                 </x-responsive-nav-link>
             @endif
