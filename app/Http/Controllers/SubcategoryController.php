@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\Subcategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Spatie\QueryBuilder\QueryBuilder;
+use function App\Helpers\slugConverter;
 
 class SubcategoryController extends Controller
 {
@@ -78,9 +80,10 @@ class SubcategoryController extends Controller
         $attributes = request()->validate([
             'category_id' => ['required', 'exists:categories,id'],
             'title' => ['required', 'max:255', 'unique:subcategories,title'],
-            'slug' => ['required', 'max:255', 'unique:subcategories,slug'],
+            'slug' => ['nullable', 'max:255', 'unique:subcategories,slug'],
         ]);
 
+        $attributes['slug'] = slugConverter($attributes);
 
         //store
         Subcategory::create($attributes);
@@ -91,11 +94,10 @@ class SubcategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category, Subcategory $subcategory): View
+    public function show(string $categorySlug, Subcategory $subcategory): View
     {
         $posts = $subcategory->posts;
-
-        return view('subcategories.show', compact('category', 'subcategory', 'posts'));
+        return view('subcategories.show', compact('subcategory', 'posts'));
     }
 
     /**
@@ -118,10 +120,10 @@ class SubcategoryController extends Controller
         $attributes = request()->validate([
             'category_id' => ['required', 'exists:categories,id'],
             'title' => ['required', 'max:255', Rule::unique('subcategories', 'title')->ignore($subcategory->id)],
-            'slug' => ['required', 'max:255', Rule::unique('subcategories', 'slug')->ignore($subcategory->id)],
+            'slug' => ['nullable', 'max:255', Rule::unique('subcategories', 'slug')->ignore($subcategory->id)],
         ]);
 
-
+        $attributes['slug'] = slugConverter($attributes);
         $subcategory->update($attributes);
 
         return redirect('/admin/subcategories')->with('success', 'Subcategory updated!');
@@ -134,5 +136,10 @@ class SubcategoryController extends Controller
     {
         $subcategory->delete();
         return redirect('/admin/subcategories')->with('success', 'Subcategory deleted!');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

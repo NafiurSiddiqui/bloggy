@@ -21,9 +21,11 @@ Route::get('/posts/featured', [PostController::class, 'showFeaturedPosts'])->nam
 Route::get('/posts/hot', [PostController::class, 'showHotPosts'])->name('posts.hot');
 Route::get('/posts/all-posts', [PostController::class, 'showAllPosts'])->name('posts.all');
 
+Route::get('/category/{categorySlug}/{subcategory:slug}', [SubcategoryController::class, 'show'])
+    ->name('subcategory.show');
+
 Route::get('/post/{post:slug}', [PostController::class, 'show']);
-Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category');
-Route::get('/categories/{category:slug}/{subcategory:slug}', [SubcategoryController::class, 'show'])->name('subcategory');
+Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/author/{author:id}/posts', function (string $id) {
     return view('posts.author.index', [
         'posts' => Post::where('user_id', $id)->get()

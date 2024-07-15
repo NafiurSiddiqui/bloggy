@@ -3,7 +3,10 @@
 
 @if (isset($subcategory) && isset($category) && ($category !== null && $subcategory !== null))
     <x-labels.layout
-        url="{{ http_build_query(request()->except('categories', 'page')) }}/categories/{{ $category->slug }}/{{ $subcategory->slug }}"
+        url="{{ route('subcategory.show', [
+            'categorySlug' => $category->slug,
+            'subcategory' => $subcategory->slug,
+        ]) }}"
         :sm="$sm">
         {{ $subcategory->title }}
     </x-labels.layout>

@@ -56,7 +56,7 @@
                 @endif
             </section>
         @else
-            <p>No posts yet. stay tuned for upcoming posts.</p>
+            <p class="text-gray-600 text-2xl mt-28 text-center"> Saucy stuff is cooking. Coming soon!</p>
         @endif
 
 
