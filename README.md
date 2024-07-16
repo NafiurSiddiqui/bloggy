@@ -55,3 +55,4 @@ Made with 💚
 
 -   `$heading` is used as a reference to the major heading of the page. Use it to set your `admin` side headings. Found inside [`dashboard-layout.blade.php`](resources/views/components/dashboard/dashboard-layout.blade.php).(Admin side only)
 -   `$head` is used as the `<head>` slots where you can pass all the HTML tags like `<meta>` tags for the head on each page.(Globally available)
+-   `env('APP_NAME')` is used in several places, like title, footer and other important places where it makes sense. Just change the `APP_NAME` tailored to your business or leave it as the default CMS name.
