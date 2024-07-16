@@ -2,7 +2,7 @@
 
 
 @if (isset($category) && $category != null)
-    <x-labels.layout url="categories/{{ $category->slug }}" :sm="$sm" no-href="{{ isset($noHref) }}">
+    <x-labels.layout url="/categories/{{ $category->slug }}" :sm="$sm" :no-href="isset($noHref) && $noHref">
         {{ $category->title }}
     </x-labels.layout>
 @endif

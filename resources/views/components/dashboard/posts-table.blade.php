@@ -52,7 +52,10 @@
                         </x-td>
 
                         <x-td>
-                            <x-text-link href="/author/{{ $post->author->id }}/posts">
+                            <x-text-link
+                                href="{{ route('author.show.posts', [
+                                    'author' => $post->author,
+                                ]) }}">
                                 {{ $post->author->name }}
                             </x-text-link>
 

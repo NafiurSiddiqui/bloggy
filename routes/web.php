@@ -26,11 +26,11 @@ Route::get('/category/{categorySlug}/{subcategory:slug}', [SubcategoryController
 
 Route::get('/post/{post:slug}', [PostController::class, 'show']);
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category.show');
-Route::get('/author/{author:id}/posts', function (string $id) {
-    return view('posts.author.index', [
-        'posts' => Post::where('user_id', $id)->get()
-    ]);
-});
+Route::get('/author/{author:name}/posts', [
+    PostController::class, 'showPostsbyAuthor'
+])->name('author.show.posts');
+
+
 
 Route::get('/admin/register', [AdminRegistrationController::class, 'create'])->name('admin.register.create');
 Route::post('/admin/register/store', [AdminRegistrationController::class, 'store'])->name('admin.register.store');

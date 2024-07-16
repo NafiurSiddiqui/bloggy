@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,5 +76,14 @@ class PostController extends Controller
     {
         $allPosts = Post::latest()->simplePaginate(20);
         return view('posts.all', compact('allPosts'));
+    }
+
+    public function showPostsbyAuthor(User $author): View
+    {
+
+
+        $posts = $author->posts;
+
+        return view('posts.author.index', compact('posts', 'author'));
     }
 }

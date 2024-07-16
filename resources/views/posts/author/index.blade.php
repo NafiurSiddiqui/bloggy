@@ -1,6 +1,3 @@
 <x-app-layout>
-    <h1>Posts by: {{ $posts[0]->author->name }}</h1>
-    @foreach ($posts as $post)
-        <p>{{ $post->title }}</p>
-    @endforeach
+    <x-show-posts :posts="$posts" header="author" :title="$author->name" no-href-author />
 </x-app-layout>
