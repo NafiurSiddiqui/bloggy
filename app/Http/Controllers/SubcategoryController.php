@@ -97,7 +97,7 @@ class SubcategoryController extends Controller
     public function show(string $categorySlug, Subcategory $subcategory): View
     {
         $posts = $subcategory->posts;
-        return view('subcategories.show', compact('subcategory', 'posts'));
+        return view('posts.subcategories.index', compact('subcategory', 'posts'));
     }
 
     /**

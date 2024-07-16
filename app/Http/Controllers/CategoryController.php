@@ -75,7 +75,7 @@ class CategoryController extends Controller
 
         // $posts->reverse(); //NOT WORKING
 
-        return view('categories.show', compact('posts', 'category'));
+        return view('posts.categories.index', compact('posts', 'category'));
     }
 
     /**
