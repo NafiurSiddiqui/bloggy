@@ -1,5 +1,20 @@
 <x-app-layout>
 
+    <x-slot:head>
+        <title>Home - {{ env('APP_NAME') }} - Find Featured, Hot, & All Blog Posts </title>
+        <meta name="description"
+            content="All things Web3, cybersecurity, programming - Explore our featured content, hot topics, and browse through all our engaging blog posts.">
+        {{-- essential social media og tags --}}
+        <meta property="og:title" content="Home - {{ env('APP_NAME') }} - Find Featured, Hot, & All Blog Posts">
+        <meta property="og:description"
+            content="All things Web3, cybersecurity, programming - Explore our featured content, hot topics, and browse through all our engaging blog posts.">
+        {{-- <meta property="og:image" content="" /> --}}
+        {{-- <meta property="og:image:alt" content="" /> --}}
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="300" />
+        <meta property="og:url" content="{{ url('/') }}" />
+    </x-slot:head>
+
 
     <main class=" p-4 md:px-6 2xl:w-4/5">
         @if (isset($featured_posts) && $featured_posts)
