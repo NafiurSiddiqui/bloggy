@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 
-class Post extends Model implements HasMedia
+class Post extends Model implements HasMedia, Sitemapable
 {
     use HasFactory, InteractsWithMedia;
 
@@ -86,5 +89,14 @@ class Post extends Model implements HasMedia
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function toSitemapTag(): Url|string|array
+    {
+        // Return with fine-grained control:
+        return Url::create(route('posts.all', $this))
+            ->setLastModificationDate(Carbon::create($this->updated_at))
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+            ->setPriority(0.1);;
     }
 }
