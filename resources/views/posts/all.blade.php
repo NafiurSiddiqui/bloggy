@@ -14,5 +14,4 @@
 
     <x-show-posts :posts="$posts" header="All Posts" :pagination-items="$posts" />
 
-
 </x-app-layout>

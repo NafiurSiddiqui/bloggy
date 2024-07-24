@@ -1,6 +1,4 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    {{-- <x-auth-sessions-status class="mb-4" :status="session('status')" /> --}}
     <x-toast.status />
 
 
@@ -45,8 +43,10 @@
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
-            <a href="{{ route('register') }}">Create an account</a>
 
         </div>
     </form>
+    <div class="py-4 mt-8 text-right text-gray-500 text-sm">
+        <a href="{{ route('register') }}" class="underline hover:text-gray-700">Create an account</a>
+    </div>
 </x-guest-layout>
