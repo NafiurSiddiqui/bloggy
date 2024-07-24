@@ -21,11 +21,11 @@ Route::get('/posts/featured', [PostController::class, 'showFeaturedPosts'])->nam
 Route::get('/posts/hot', [PostController::class, 'showHotPosts'])->name('posts.hot');
 Route::get('/posts/all-posts', [PostController::class, 'showAllPosts'])->name('posts.all');
 
+Route::get('/post/{post:slug}', [PostController::class, 'show']);
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.all');
+Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/category/{categorySlug}/{subcategory:slug}', [SubcategoryController::class, 'show'])
     ->name('subcategory.show');
-
-Route::get('/post/{post:slug}', [PostController::class, 'show']);
-Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/author/{author:name}/posts', [
     PostController::class, 'showPostsbyAuthor'
 ])->name('author.show.posts');
@@ -89,7 +89,7 @@ Route::middleware(['auth', 'role:admin,author'])->group(function () {
     Route::delete('/admin/post/{post:slug}', [AdminPostController::class, 'destroy'])->name('admin.post.delete');
 
     //    CATEGORIES
-    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
+    Route::get('/admin/categories', [CategoryController::class, 'adminIndex'])->name('admin.categories');
     Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
     Route::post('/admin/categories/store', [CategoryController::class, 'store'])->name('admin.categories.store');
     Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
@@ -106,10 +106,6 @@ Route::middleware(['auth', 'role:admin,author'])->group(function () {
         }
 
         if (Category::uncategorized()->exists()) {
-
-
-            // //find the id of the 'uncategorized' cat
-            // $uncategorizedId = Category::where('title', 'uncategorized')->first()->id;
 
             //update the posts related to these selected IDs to category_slug = 'uncategorized'
             Post::whereIn('category_id', $selectedIds)
