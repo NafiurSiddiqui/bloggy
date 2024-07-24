@@ -53,8 +53,8 @@
                                     <i class="fa-solid fa-chevron-left"></i>
                                     Previous
                                 </div>
-                                <span class="font-semibold text-zinc-600 group-hover:text-zinc-800 text-left">Some
-                                    Long ass Post title that goes on forever and ever
+                                <span
+                                    class="font-semibold text-zinc-600 group-hover:text-zinc-800 text-left">{{ $previousPost->title }}
                                 </span>
                             </a>
                         @endif
@@ -68,8 +68,7 @@
                                     Next
                                 </div>
                                 <span
-                                    class="font-semibold text-zinc-600 group-hover:text-zinc-800 inline-block text-right">Some
-                                    Long ass Post title that goes on forever and ever
+                                    class="font-semibold text-zinc-600 group-hover:text-zinc-800 inline-block text-right">{{ $nextPost->title }}
                                 </span>
                             </a>
                         @endif
