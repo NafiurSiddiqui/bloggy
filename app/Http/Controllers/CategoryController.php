@@ -11,10 +11,33 @@ use Spatie\QueryBuilder\QueryBuilder;
 class CategoryController extends Controller
 {
 
-
-
-
     public function index(): View
+    {
+        $categories = QueryBuilder::for(Category::class)
+            ->allowedSorts(['title', 'updated_at'])
+            ->with('subcategories', 'posts')
+            ->simplePaginate(50);
+
+        $sortCategoryDesc = request('dir') == 'desc';
+
+
+        if ($sortCategoryDesc) {
+
+            $categories = QueryBuilder::for(Category::class)
+                ->allowedSorts(request('sort'))
+                ->with('subcategories', 'posts')
+                ->simplePaginate(10);
+        }
+
+
+
+        return view('posts.categories.index', [
+
+            'categories' => $categories
+        ]);
+    }
+
+    public function adminIndex(): View
     {
         $categories = QueryBuilder::for(Category::class)
             ->allowedSorts(['title', 'updated_at'])
@@ -73,9 +96,8 @@ class CategoryController extends Controller
     {
         $posts = $category->posts;
 
-        // $posts->reverse(); //NOT WORKING
 
-        return view('posts.categories.index', compact('posts', 'category'));
+        return view('posts.categories.show', compact('posts', 'category'));
     }
 
     /**
