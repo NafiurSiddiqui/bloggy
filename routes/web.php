@@ -16,10 +16,10 @@ use App\Models\Subcategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PostController::class, 'index'])->name('home');
+Route::get('/', [PostController::class, 'home'])->name('home');
 Route::get('/posts/featured', [PostController::class, 'showFeaturedPosts'])->name('posts.featured');
 Route::get('/posts/hot', [PostController::class, 'showHotPosts'])->name('posts.hot');
-Route::get('/posts/all-posts', [PostController::class, 'showAllPosts'])->name('posts.all');
+Route::get('/posts/all-posts', [PostController::class, 'index'])->name('posts.all');
 
 Route::get('/post/{post:slug}', [PostController::class, 'show']);
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.all');
