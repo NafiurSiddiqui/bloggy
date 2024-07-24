@@ -24,10 +24,13 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 lg:flex">
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                        {{ __('All Posts') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('categories.all')" :active="request()->routeIs('categories')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
                     @guest()
-                        <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                            {{ __('All Posts') }}
-                        </x-nav-link>
                         <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                             {{ __('Login') }}
                         </x-nav-link>
@@ -109,14 +112,14 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
         <div class="pt-2 pb-3 space-y-1 ">
-            @if (request()->routeIs('home') || request()->routeIs('profile.*'))
-                <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                    {{ __('All Posts') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('category.show', ['category' => 'test'])" :active="request()->routeIs('category.*')">
-                    {{ __('category') }}
-                </x-responsive-nav-link>
-            @endif
+            {{-- @if (request()->routeIs('home') || request()->routeIs('profile.*')) --}}
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                {{ __('All Posts') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('categories.all')" :active="request()->routeIs('category.*')">
+                {{ __('Categories') }}
+            </x-responsive-nav-link>
+            {{-- @endif --}}
 
             @guest
                 <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
