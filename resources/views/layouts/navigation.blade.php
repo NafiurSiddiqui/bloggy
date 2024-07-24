@@ -16,15 +16,15 @@
                 @endif
 
                 {{--            TODO: Delete the development Admin btn below --}}
-                @if (request()->routeIs('home') || request()->routeIs('home.*'))
+                {{-- @if (request()->routeIs('home') || request()->routeIs('home.*'))
                     <a class="border-2 px-4 py-1 content-center h-8 " href={{ route('admin') }}>
                         Go to Admin
                     </a>
-                @endif
+                @endif --}}
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 lg:flex">
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('posts.all')" :active="request()->routeIs('posts.all')">
                         {{ __('All Posts') }}
                     </x-nav-link>
                     <x-nav-link :href="route('categories.all')" :active="request()->routeIs('categories')">
@@ -113,7 +113,8 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
         <div class="pt-2 pb-3 space-y-1 ">
             {{-- @if (request()->routeIs('home') || request()->routeIs('profile.*')) --}}
-            <x-responsive-nav-link :href="route('posts.all')" :active="request()->routeIs('home')">
+
+            <x-responsive-nav-link :href="route('posts.all')" :active="request()->routeIs('posts.all')">
                 {{ __('All Posts') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('categories.all')" :active="request()->routeIs('category.*')">
