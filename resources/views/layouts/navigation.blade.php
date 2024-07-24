@@ -113,7 +113,7 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
         <div class="pt-2 pb-3 space-y-1 ">
             {{-- @if (request()->routeIs('home') || request()->routeIs('profile.*')) --}}
-            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+            <x-responsive-nav-link :href="route('posts.all')" :active="request()->routeIs('home')">
                 {{ __('All Posts') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('categories.all')" :active="request()->routeIs('category.*')">
