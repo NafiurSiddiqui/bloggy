@@ -1,7 +1,6 @@
 <x-app-layout>
-    All posts!
 
-    @foreach ($allPosts as $post)
-        <div>{{ $post->title }}</div>
-    @endforeach
+    <x-show-posts :posts="$posts" header="All Posts" :pagination-items="$posts" />
+    {{-- <x-paginaton-holder :item="$posts" /> --}}
+
 </x-app-layout>
