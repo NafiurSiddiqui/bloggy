@@ -8,6 +8,7 @@
     'title' => false,
     'no-href-author',
     'no-href-category',
+    'paginationItems' => false,
 ])
 
 
@@ -36,6 +37,9 @@
                     <x-post-cards.card-x :no-href-author="isset($noHrefAuthor)" :no-href-category="isset($noHrefCategory)" :post="$post" />
                 @endforeach
             </div>
+            @if (isset($paginationItems) && $paginationItems)
+                <x-pagination-holder :item="$paginationItems" />
+            @endif
         </section>
     @else
         <p>No posts yet. stay tuned for upcoming posts.</p>

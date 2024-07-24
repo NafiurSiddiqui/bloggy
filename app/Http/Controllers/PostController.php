@@ -18,6 +18,12 @@ class PostController extends Controller
      */
     public function index(): View
     {
+        $posts = Post::latest()->simplePaginate(20);
+        return view('posts.all', compact('posts'));
+    }
+
+    public function home(): View
+    {
         $featuredPosts = Post::where('is_featured', 'on')->where('is_published', 1)
             ->latest()
             ->get();
@@ -70,12 +76,6 @@ class PostController extends Controller
     {
         $hotPosts = Post::where('is_hot', 'on')->latest()->simplePaginate(20);
         return view('posts.hot', compact('hotPosts'));
-    }
-
-    public function showAllPosts(): View
-    {
-        $allPosts = Post::latest()->simplePaginate(20);
-        return view('posts.all', compact('allPosts'));
     }
 
     public function showPostsbyAuthor(User $author): View
