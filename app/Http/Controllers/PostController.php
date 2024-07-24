@@ -24,6 +24,7 @@ class PostController extends Controller
 
     public function home(): View
     {
+
         $featuredPosts = Post::where('is_featured', 'on')->where('is_published', 1)
             ->latest()
             ->get();
