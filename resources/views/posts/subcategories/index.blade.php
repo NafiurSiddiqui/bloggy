@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <x-slot:head>
-        <title>{{ $subcategory->title }}- {{ env('APP_NAME') }} - Posts </title>
+        <x-slot:title>{{ $subcategory->title }} </x-slot:title>
         <meta name="description" content="Latest news on {{ $subcategory->title }}.">
         {{-- essential social media og tags --}}
         <meta property="og:title" content="{{ $subcategory->title }}- {{ env('APP_NAME') }} - Posts">

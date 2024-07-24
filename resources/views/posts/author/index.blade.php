@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot:head>
-        <title>All posts by {{ $author->name }}- {{ env('APP_NAME') }} - Posts </title>
+        <x-slot:title>All posts by - {{ $author->name }} </x-slot:title>
         <meta name="description" content="Latest news on {{ $author->name }}.">
         {{-- essential social media og tags --}}
         <meta property="og:title" content="{{ $author->name }}- {{ env('APP_NAME') }} - Posts">
