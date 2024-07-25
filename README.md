@@ -10,6 +10,11 @@ Made with 💚
 
 [Moz SEO guide](https://moz.com/beginners-guide-to-seo)
 
+## Default Authentication
+
+-   `email` - admin.bloggy@xyz.com
+-   `pass` - secret
+
 ## Must Do
 
 -   Seed the `initAppSeeder`
@@ -50,6 +55,7 @@ Made with 💚
 -   By default notification system is using `mail` and `database` for comment and relply.
 -   Add the neccessary `mail` variable for your mail server.
 -   Do run `sail artisan work:queue` to start the workers.
+-   `sitemap.xml` either run it through custom `sitemap:generate` or set schedule this task if not found built-in out-of-the-box.
 
 # Variables used for layouts (UI)
 
