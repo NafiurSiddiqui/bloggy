@@ -11,7 +11,6 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     {{ $head ?? null }}
     <title>{{ $title ?? 'Welcome' }}- {{ config('app.name', 'Bloggy') }}</title>
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
@@ -27,7 +26,7 @@
 
         <p class="text-center text-gray-600 dark:text-gray-400">©
             {{ date('Y') }}
-            <span class="text-gray-800 dark:text-gray-200">{{ env('APP_NAME') }}</span>
+            <span class="text-gray-800  dark:text-gray-200">{{ env('APP_NAME') }}</span>
             . All rights reserved.
         </p>
     </footer>

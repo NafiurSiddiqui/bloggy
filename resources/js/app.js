@@ -408,5 +408,3 @@ if (
 window.Alpine = Alpine;
 
 Alpine.start();
-
-// export { AccessibilityHelp };

@@ -1,7 +1,5 @@
 <x-guest-layout>
     <x-toast.status />
-
-
     <form method="POST" action="{{ route('login') }}">
         @csrf
         <!-- Email Address -->

@@ -5,13 +5,11 @@
             <div class="flex items-center justify-between w-full">
                 <!-- Logo -->
                 @if (request()->routeIs('home') || request()->routeIs('home.*'))
-                    <div class="shrink-0 flex items-center font-bold text-2xl">
-                        {{ env('APP_NAME') }}
-                    </div>
+                    <x-icons.logo />
                 @else
                     <a class="shrink-0 text-gray-700 flex items-center font-bold text-2xl hover:text-gray-600 "
                         href={{ route('home') }}>
-                        {{ env('APP_NAME') }}
+                        <x-icons.logo />
                     </a>
                 @endif
 
