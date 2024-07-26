@@ -1,7 +1,18 @@
 <x-app-layout>
-    All the hot posts!
+    <x-slot:head>
+        <x-slot:title>Hot posts</x-slot:title>
+        <meta name="description" content="Hot posts - web3, cybersecurity, programming.">
+        {{-- essential social media og tags --}}
+        <meta property="og:title" content="Hot posts from {{ env('APP_NAME') }} - web3, cybersecurity, programming">
+        <meta property="og:description" content="Hot posts - web3, cybersecurity, programming.">
+        {{-- <meta property="og:image" content="" /> --}}
+        {{-- <meta property="og:url" content="{{ url('/posts/all-posts'}}" /> --}}
+        {{-- <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="300" />
+        <meta property="og:image:alt" content="" /> --}}
+    </x-slot:head>
 
-    @foreach ($hotPosts as $post)
-        <div>{{ $post->title }}</div>
-    @endforeach
+    <x-show-posts :posts="$hotPosts" header="hot Posts" :pagination-items="$hotPosts" />
+
+
 </x-app-layout>

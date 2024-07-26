@@ -57,8 +57,8 @@
 
         @if (isset($posts) && $posts)
             <section>
-                <div class="space-y-4 gap-2 md:px-8 xl:px-0  xl:grid grid-cols-2">
-                    <x-h2>All Posts</x-h2>
+                <x-h2>All Posts</x-h2>
+                <div class="space-y-4 lg:space-y-0 gap-2 md:px-8 xl:px-0  xl:grid grid-cols-2">
 
                     @foreach ($posts->take(8) as $post)
                         <x-post-cards.card-x :post="$post" />
@@ -71,7 +71,7 @@
                 @endif
             </section>
         @else
-            <p class="text-gray-600 text-2xl mt-28 text-center"> Saucy stuff is cooking. Coming soon!</p>
+            <p class="text-gray-600 text-2xl mt-28 text-center"> New saucy stuff is cooking. Coming soon!</p>
         @endif
 
 
