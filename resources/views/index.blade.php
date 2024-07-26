@@ -59,7 +59,7 @@
             <section>
                 <div class="space-y-4 gap-2 md:px-8 xl:px-0  xl:grid grid-cols-2">
                     <x-h2>All Posts</x-h2>
-                    <p>There are {{ $post_count }} posts here</p>
+
                     @foreach ($posts->take(8) as $post)
                         <x-post-cards.card-x :post="$post" />
                     @endforeach
