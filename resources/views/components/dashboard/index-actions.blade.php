@@ -35,15 +35,12 @@
     document.addEventListener("DOMContentLoaded", function() {
         const categoriesTable = document.getElementById('categories_table')?.querySelectorAll(
             'table > tbody > tr');
-        // const subcateogories = document.getElementById('subcategories_table')?.querySelectorAll(
-        //     'table > tbody > tr');
+
         const uncategorizedRow = document.getElementById("table-row-uncategorized");
         const deleteAllContainer = document.querySelector('.delete-all-container');
 
 
         categoriesTable?.length === 1 && uncategorizedRow ? deleteAllContainer.classList.add('hidden') : null;
-
-        // subcateogories?.length === 1 && uncategorizedRow ? deleteAllContainer.classList.add('hidden') : null;
 
     });
 </script>

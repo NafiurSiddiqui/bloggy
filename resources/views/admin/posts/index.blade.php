@@ -18,7 +18,7 @@
                 </fieldset>
 
 
-                <div class="mt-4 border py-2">
+                <div class="mt-4 rounded-sm py-2">
                     <x-secondary-button type="submit">Filter</x-secondary-button>
                     <x-secondary-button link href="/admin/posts">Reset</x-secondary-button>
                 </div>
@@ -30,7 +30,7 @@
             multiple-delete-form-action-path="delete-multiple-posts" delete-form-action-route="admin.posts.delete.all"
             path-to-creation="/admin/post/create" />
         <x-dashboard.posts-table :posts="$posts" />
-        {{-- <x-pagination-holder :item="$filteredPagination ?? $posts" /> --}}
+
         <x-pagination-holder :item="$posts" />
     @elseif(isset($categories_are_empty) && $categories_are_empty)
         <p class="mt-2 text-gray-600">No posts yet.</p>
