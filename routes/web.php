@@ -169,8 +169,6 @@ Route::middleware(['auth', 'role:admin,author'])->group(function () {
         return redirect()->back()->with('success', 'Selected subcategories deleted successfully');
     })->name('admin.subcategories.delete.selected');
     Route::delete('/admin/subcategories', function () {
-
-
         //delete all categories
         DB::table('subcategories')->truncate();
         return redirect('/admin/subcategories')->with('success', 'All subcategories have been deleted!');
@@ -178,7 +176,6 @@ Route::middleware(['auth', 'role:admin,author'])->group(function () {
     Route::get('/admin/subcategories/{subcategory}/edit', [SubcategoryController::class, 'edit'])->name('admin.subcategories.edit');
     Route::patch('/admin/subcategories/{subcategory}', [SubcategoryController::class, 'update'])->name('admin.subcategories.update');
     Route::delete('admin/subcategories/{subcategory}', [SubcategoryController::class, 'destroy'])->name('admin.subcategories.destroy');
-
     // Registrations
     Route::patch('/admin/registration/{user}', [AdminRegistrationController::class, 'approval'])->name('admin.registration.approval');
     //Notification
@@ -191,15 +188,12 @@ Route::middleware('auth')->group(function () {
 
     //comments
     Route::post('/post/{post:slug}/comments', [CommentController::class, 'store'])->name('post.comments.store');
-
     Route::delete('/post/comment/{comment}/delete', [CommentController::class, 'destroy'])->name('post.comments.delete');
     Route::get('/post/{post:slug}/comment/{comment}/edit', [CommentController::class, 'edit'])->name('post.comments.edit');
     Route::patch('/post/{post:slug}/comments/{comment}', [CommentController::class, 'update']);
     // replies
     Route::post('/post/{post:slug}/comments/{comment}/reply', [ReplyController::class, 'store'])->name('post.comments.reply.store');
-
     Route::get('/post/{post:slug}/comment/{comment}/reply/{reply}/edit', [ReplyController::class, 'edit'])->name('post.comments.reply.edit');
-
     Route::patch('/post/{post:slug}/comments/{comment}/reply/{reply}/edit', [ReplyController::class, 'update']);
     Route::delete('/post/comment/reply/{reply}/delete', [ReplyController::class, 'destroy']);
     //    PROFILE

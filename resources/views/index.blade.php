@@ -3,7 +3,7 @@
     <x-slot:head>
         <title>Home - {{ env('APP_NAME') }} - Find Featured, Hot, & All Blog Posts </title>
         <meta name="description"
-            content="All things Web3, cybersecurity, programming - Explore our featured content, hot topics, and browse through all our engaging blog posts.">
+            content="All things Web3, Cybersecurity, Programming - Explore our featured content, hot topics, and browse through all our engaging blog posts.">
         {{-- essential social media og tags --}}
         <meta property="og:title" content="Home - {{ env('APP_NAME') }} - Find Featured, Hot, & All Blog Posts">
         <meta property="og:description"
@@ -59,7 +59,6 @@
             <section>
                 <x-h2>All Posts</x-h2>
                 <div class="space-y-4 lg:space-y-0 gap-2 md:px-8 xl:px-0  xl:grid grid-cols-2">
-
                     @foreach ($posts->take(8) as $post)
                         <x-post-cards.card-x :post="$post" />
                     @endforeach

@@ -26,7 +26,6 @@ class AuthenticatedSessionController extends Controller
     {
         //if request->user->status == pending, return with a message 
 
-
         $request->authenticate();
         $request->session()->regenerate();
 
@@ -35,7 +34,6 @@ class AuthenticatedSessionController extends Controller
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-            // return redirect()->route('login')->withErrors(['email' => 'Your account is pending approval.']);
             return redirect()->route('login')->with('status', 'Your account is pending approval.');
         } else {
 
