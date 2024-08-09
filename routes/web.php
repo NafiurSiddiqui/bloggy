@@ -13,6 +13,8 @@ use App\Http\Controllers\SubcategoryController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Subcategory;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -20,21 +22,20 @@ Route::get('/', [PostController::class, 'home'])->name('home');
 Route::get('/posts/featured', [PostController::class, 'showFeaturedPosts'])->name('posts.featured');
 Route::get('/posts/hot', [PostController::class, 'showHotPosts'])->name('posts.hot');
 Route::get('/posts/all-posts', [PostController::class, 'index'])->name('posts.all');
-
 Route::get('/post/{post:slug}', [PostController::class, 'show']);
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.all');
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/category/{categorySlug}/{subcategory:slug}', [SubcategoryController::class, 'show'])
     ->name('subcategory.show');
 Route::get('/author/{author:name}/posts', [
-    PostController::class, 'showPostsbyAuthor'
+    PostController::class,
+    'showPostsbyAuthor'
 ])->name('author.show.posts');
 
 
 
 Route::get('/admin/register', [AdminRegistrationController::class, 'create'])->name('admin.register.create');
 Route::post('/admin/register/store', [AdminRegistrationController::class, 'store'])->name('admin.register.store');
-
 
 Route::get('/post/{post:slug}/notification/{id}', [NotificationController::class, 'showComments']);
 
@@ -49,12 +50,9 @@ Route::get('/post/{post:slug}/notification/{id}', [NotificationController::class
 //    })->name('dashboard');
 //});
 
-
 //you have a situation here
 //you will have user for comments
 //you have user (admin) side.
-
-
 
 
 Route::middleware(['auth', 'role:admin,author'])->group(function () {
@@ -184,7 +182,7 @@ Route::middleware(['auth', 'role:admin,author'])->group(function () {
 });
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     //comments
     Route::post('/post/{post:slug}/comments', [CommentController::class, 'store'])->name('post.comments.store');
@@ -200,6 +198,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+Route::middleware('auth')->group(function () {
+    //email verification
+    Route::get('/email/verify', function () {
+        return view('auth.verify-email');
+    })->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect('/');
+    })->middleware('signed')->name('verification.verify');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('message', 'Verification link sent!');
+    })->middleware('throttle:6,1')->name('verification.send');
 });
 
 require __DIR__ . '/auth.php';
