@@ -10,6 +10,10 @@ Made with 💚
 
 [Moz SEO guide](https://moz.com/beginners-guide-to-seo)
 
+## Registration
+
+-   New users whether admin or commentators need to verify email upon registration.
+
 ## Default Authentication
 
 -   `email` - admin.bloggy@xyz.com
@@ -23,10 +27,7 @@ Made with 💚
 
 ## EDITOR
 
--   [TinyMce](https://www.tiny.cloud/) Ediotr's free plan is used. Which allows you to load the editor 1,000 times per month.
--   `TinyMce` editor also allows you to use plugins. [visit](https://www.tiny.cloud/docs/tinymce/latest/plugins/) here in order to take a look a the number of plugins they offer.
--   We have used freemium open-source [image](https://www.tiny.cloud/docs/tinymce/latest/image/) plugin to enable image upload. **DO NOT** upload svgs, since they are vulnerable to cyber attacks.
--   [Contact Us](#) or hire a developer to upgrad any paid plans if needed.
+-   Ckeditor5 is used for the editor. All of the free features are in use. If you wish, you can use the premium features for convenience. You can reach out to me or integrate them as you wish.
 
 ## POST CREATION
 
@@ -40,7 +41,7 @@ Made with 💚
 -   Commentary and reply system
 -   Notfication system (queued jobs)
     -   upon comment and reply
-        -   right now, notification is deleted upon clicking the `<x-notification-card>`. You can alternatively use Laravels `markAsRead()` method to keep the notifications instead and filter based on the `readNotifications()` or `unreadNotifications()`, and render cards.
+        -   Right now, notification is deleted upon clicking the `<x-notification-card>`. You can alternatively use Laravels `markAsRead()` method to keep the notifications instead and filter based on the `readNotifications()` or `unreadNotifications()`, and render cards.
     -   Admin approving admin-side registration. `/admin/registration`
     -   Table of Content generator (You MUST set `<h3>` for each title for parapraphs for this to work)
 
