@@ -5,7 +5,7 @@
 
     <div class="flex  h-full">
         <div
-            class="w-full rounded-l-xl p-6 xl:p-8 bg-gradient-to-r from-zinc-200 to-amber-100 sm:via-zinc-100 sm:via-50% sm:to-amber-50  relative sm:p-12">
+            class="w-full rounded-l-xl p-6 xl:p-8 bg-gradient-to-r from-zinc-200 to-amber-100 sm:via-zinc-100 sm:via-50% sm:to-amber-50  relative ">
             <x-post-cards.header>
                 <x-post-cards.heading :post="$post" class="text-xl md:text-2xl md:text-left leading-5" />
                 <div class="relative w-full sm:hidden">
