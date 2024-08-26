@@ -14,7 +14,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
-                logo: ['"Playwrite DK Uloopet"', "cursive"],
+                logo: ["Audiowide", "sans-serif"],
             },
         },
     },
