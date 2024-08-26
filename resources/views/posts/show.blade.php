@@ -195,7 +195,7 @@
 
             }
         }
-        console.log(headingCounter);
+
         if (headingCounter === 0) {
             toc.remove();
         }
