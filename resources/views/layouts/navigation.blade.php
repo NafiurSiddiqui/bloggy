@@ -1,40 +1,31 @@
 <nav x-data="{ open: false }" class="dark:bg-darkNavFooter bg-lightNavFooter">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+    {{-- <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> --}}
+    <div class="">
+        <div class=" flex justify-center w-full absolute top-4">
+            <!-- Logo -->
+            @if (request()->routeIs('home') || request()->routeIs('home.*'))
+                <x-icons.logo />
+            @else
+                <x-icons.logo link />
+            @endif
+        </div>
+        <div class="flex justify-between items-center h-16">
             <div class="flex items-center justify-between w-full">
-                <!-- Logo -->
-                @if (request()->routeIs('home') || request()->routeIs('home.*'))
-                    <x-icons.logo />
-                @else
-                    <a class="shrink-0 text-gray-700 flex items-center font-bold text-2xl hover:text-gray-600 "
-                        href={{ route('home') }}>
-                        <x-icons.logo />
-                    </a>
-                @endif
-
-                <div>
-                    <x-toggle-theme-btn />
-                </div>
-
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 lg:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-5 lg:flex  flex-shrink-0">
                     <x-nav-link :href="route('posts.all')" :active="request()->routeIs('posts.all')">
                         {{ __('All Posts') }}
                     </x-nav-link>
                     <x-nav-link :href="route('categories.all')" :active="request()->routeIs('categories')">
                         {{ __('Categories') }}
                     </x-nav-link>
-                    @guest()
-                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                            {{ __('Login') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                            {{ __('Register') }}
-                        </x-nav-link>
-                    @endguest
-
-
+                    <x-nav-link :href="route('categories.all')" :active="request()->routeIs('categories')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('categories.all')" :active="request()->routeIs('categories')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
                     @auth
 
                         @if (auth()->user()->role == 'admin' || auth()->user()->role == 'author')
@@ -51,7 +42,26 @@
                     @endauth
 
                 </div>
+                <!-- Hamburger -->
+                <x-icons.hamburger />
 
+                <div class="flex items-center  ">
+                    <div class="flex mr-4">
+                        <x-toggle-theme-btn />
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:me-5 lg:flex ">
+                        @guest()
+                            <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                                {{ __('Login') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                                {{ __('Register') }}
+                            </x-nav-link>
+                        @endguest
+                    </div>
+
+                </div>
             </div>
 
             @auth
@@ -99,8 +109,7 @@
                     </div>
                 </div>
             @endauth
-            <!-- Hamburger -->
-            <x-icons.hamburger />
+
         </div>
     </div>
 

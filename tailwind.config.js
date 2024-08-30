@@ -19,7 +19,12 @@ export default {
                 darkNavFooter: "#0F1311 ",
                 darkPage: "#181B1A",
                 logoColor: "#29F191 ",
-                sectionHeader: "#A0A9B4",
+                darkSectionHeader: "#8fbaa5",
+                darkTextHeader: {
+                    100: "#dbffed",
+                    200: "#c7f5d8",
+                    300: "#c5edd4",
+                },
                 darkLabel: "#54625D",
                 darkToggleBtn: "#080A09",
                 darkToggleSwitch: "#191D1B",

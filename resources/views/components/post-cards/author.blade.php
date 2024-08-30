@@ -7,7 +7,7 @@
     <div class="flex items-center text-sm">
         <x-user-avatar sm :user="$post->author" />
         <div class="ml-3">
-            <h5 class="font-bold text-zinc-700">
+            <h5 class="font-bold text-zinc-700 dark:text-darkTextHeader-100">
                 @if (isset($noHref) && $noHref)
                     <div>
                         {{ $post->author->name }}
@@ -22,7 +22,7 @@
                 @endif
             </h5>
 
-            <div class="mt-1 block text-zinc-600 text-xs">
+            <div class="mt-1 block text-zinc-600 dark:text-darkTextHeader-300 text-xs">
                 <time>{{ $post->created_at->diffForHumans() }}</time>
             </div>
         </div>
