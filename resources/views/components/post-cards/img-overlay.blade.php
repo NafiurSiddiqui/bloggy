@@ -1,4 +1,4 @@
-{{-- Must set css - relative on parent element --}}
+{{-- Must set css position relative on parent element --}}
 
 <div
     {{ $attributes->merge([

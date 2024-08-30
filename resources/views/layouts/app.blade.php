@@ -15,16 +15,16 @@
 
 </head>
 
-<body class="font-sans antialiased bg-[#F8F7F5] dark:bg-black dark:text-white/50 overflow-x-clip">
+<body class="font-sans antialiased bg-[#F8F7F5] dark:bg-darkPage dark:text-white/50 overflow-x-clip">
     @include('layouts.navigation')
 
     <div class="flex flex-col items-center min-h-screen">
         {{ $slot }}
         <x-toast.success />
     </div>
-    <footer class="h-[20vh] mt-20 bg-stone-200 flex justify-center items-center">
+    <footer class="h-[30vh] mt-20 bg-stone-200 flex justify-center items-center dark:bg-darkNavFooter">
 
-        <p class="text-center text-gray-600 dark:text-gray-400 flex items-end">©
+        <p class="text-center text-gray-600  dark:text-gray-400 flex items-end">©
             {{ date('Y') }}
             <x-icons.logo />
             . All rights reserved.

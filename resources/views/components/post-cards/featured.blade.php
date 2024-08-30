@@ -2,9 +2,9 @@
 
 
 <x-post-cards.layout class="!p-0 w-full">
-    <div class="flex relative flex-col md:flex-row bg-center bg-cover h-[60vh] lg:h-[80vh] bg-no-repeat rounded-md"
+    <div class="flex relative flex-col md:flex-row bg-center bg-cover h-[60vh] lg:h-[80vh] bg-no-repeat"
         style="background-image: url({{ asset('storage/' . $post->thumbnail) }})">
-        {{-- <div class="w-full h-full absolute start-0  rounded-md bg-gradient-to-b from-neutral-200/40 to-[#595959]" />  --}}
+
         <x-post-cards.featured-overlay class="h-full" />
         <div class="h-full flex flex-col justify-end items-center p-8">
             <x-post-cards.header>

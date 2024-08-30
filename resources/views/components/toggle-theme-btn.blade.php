@@ -1,11 +1,11 @@
 <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
 <button type="button"
-    class="toggle-btn bg-gray-600 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-gray-700 rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none "
+    class="toggle-btn dark:bg-darkToggleBtn bg-lightToggleBtn relative inline-flex flex-shrink-0 h-6 w-11  rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none items-center "
     role="switch" aria-checked="false">
     <span class="sr-only">Use setting</span>
     <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
     <span
-        class="switch-panel translate-x-0 pointer-events-none relative inline-block h-5 w-5 rounded-full bg-gray-800 shadow transform ring-0 transition ease-in-out duration-200 ">
+        class="switch-panel translate-x-0 pointer-events-none relative inline-block h-5 w-5 rounded-full dark:bg-darkToggleSwitch bg-lightToggleSwitch shadow transform ring-0 transition ease-in-out duration-200 ">
         <!-- Enabled: "opacity-0 ease-out duration-100", Not Enabled: "opacity-100 ease-in duration-200" -->
         <span
             class="dark-switch opacity-100 ease-in duration-200 absolute inset-0 h-full w-full flex items-center justify-center transition-opacity p-[2px]"
@@ -57,22 +57,21 @@
         }
 
 
-        if (toggleBtn.classList.contains('bg-gray-600')) {
-            toggleBtn.classList.remove('bg-gray-600', 'border-gray-700');
-            toggleBtn.classList.add('bg-gray-100', 'border-gray-200');
-            console.log(true);
-        } else {
-            console.log(false);
-            toggleBtn.classList.remove('bg-gray-100', 'border-gray-200');
-            toggleBtn.classList.add('bg-gray-600', 'border-gray-700');
-        }
+        // if (toggleBtn.classList.contains('dark:bg-darkToggleBtn')) {
+        //     toggleBtn.classList.remove('dark:bg-darkToggleBtn');
+        //     toggleBtn.classList.add('lightTogglebtn');
+
+        // } else {
+        //     toggleBtn.classList.remove('lightTogglebtn');
+        //     toggleBtn.classList.add('dark:bg-darkToggleBtn');
+        // }
 
         if (switchPanel.classList.contains('translate-x-0')) {
-            switchPanel.classList.remove('translate-x-0', 'bg-gray-800');
-            switchPanel.classList.add('translate-x-5', 'bg-gray-50');
+            switchPanel.classList.remove('translate-x-0');
+            switchPanel.classList.add('translate-x-5');
         } else {
-            switchPanel.classList.remove('translate-x-5', 'bg-gray-50');
-            switchPanel.classList.add('translate-x-0', 'bg-gray-800');
+            switchPanel.classList.remove('translate-x-5');
+            switchPanel.classList.add('translate-x-0');
         }
 
         if (darkSwitch.classList.contains('opacity-100')) {
