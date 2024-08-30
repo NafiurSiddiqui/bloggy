@@ -24,9 +24,9 @@
     </div>
     <footer class="h-[20vh] mt-20 bg-stone-200 flex justify-center items-center">
 
-        <p class="text-center text-gray-600 dark:text-gray-400">©
+        <p class="text-center text-gray-600 dark:text-gray-400 flex items-end">©
             {{ date('Y') }}
-            <span class="text-gray-800  dark:text-gray-200">{{ env('APP_NAME') }}</span>
+            <x-icons.logo />
             . All rights reserved.
         </p>
     </footer>
