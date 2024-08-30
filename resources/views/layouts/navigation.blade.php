@@ -20,27 +20,6 @@
                     <x-nav-link :href="route('categories.all')" :active="request()->routeIs('categories')">
                         {{ __('Categories') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('categories.all')" :active="request()->routeIs('categories')">
-                        {{ __('Categories') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('categories.all')" :active="request()->routeIs('categories')">
-                        {{ __('Categories') }}
-                    </x-nav-link>
-                    @auth
-
-                        @if (auth()->user()->role == 'admin' || auth()->user()->role == 'author')
-                            @if (!request()->routeIs('admin'))
-                                <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
-                                    {{ __('Dashboard') }}
-                                </x-nav-link>
-                            @elseif(request()->routeIs('admin') || request()->routeIs('admin.*'))
-                                <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                                    {{ __('Client-side') }}
-                                </x-nav-link>
-                            @endif
-                        @endif
-                    @endauth
-
                 </div>
                 <!-- Hamburger -->
                 <x-icons.hamburger />
@@ -59,6 +38,21 @@
                                 {{ __('Register') }}
                             </x-nav-link>
                         @endguest
+
+                        @auth
+
+                            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'author')
+                                @if (!request()->routeIs('admin'))
+                                    <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
+                                        {{ __('Dashboard') }}
+                                    </x-nav-link>
+                                @elseif(request()->routeIs('admin') || request()->routeIs('admin.*'))
+                                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                                        {{ __('Client-side') }}
+                                    </x-nav-link>
+                                @endif
+                            @endif
+                        @endauth
                     </div>
 
                 </div>
