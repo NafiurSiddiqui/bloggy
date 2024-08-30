@@ -9,7 +9,6 @@ export default {
         "./resources/views/**/*.blade.php",
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
     ],
-
     theme: {
         extend: {
             fontFamily: {
@@ -18,6 +17,6 @@ export default {
             },
         },
     },
-
+    darkMode: "selector",
     plugins: [forms],
 };
