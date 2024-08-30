@@ -13,12 +13,9 @@
                     </a>
                 @endif
 
-                {{--            TODO: Delete the development Admin btn below --}}
-                {{-- @if (request()->routeIs('home') || request()->routeIs('home.*'))
-                    <a class="border-2 px-4 py-1 content-center h-8 " href={{ route('admin') }}>
-                        Go to Admin
-                    </a>
-                @endif --}}
+                <div>
+                    <x-toggle-theme-btn />
+                </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 lg:flex">
