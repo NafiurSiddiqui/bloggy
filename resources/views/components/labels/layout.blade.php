@@ -1,7 +1,5 @@
 @props(['url', 'sm' => false, 'no-href' => false])
 
-
-
 @if (isset($noHref) && $noHref)
     <div
         class="inline-block bg-zinc-50/80 text-center text-slate-700 font-semibold {{ $sm ? 'text-xs px-2' : 'text-sm px-4' }}  py-1 min-w-4 ">

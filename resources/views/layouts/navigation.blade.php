@@ -1,5 +1,5 @@
-<div class="dark:bg-darkNavFooter bg-lightNavFooter py-2">
-    <div class=" flex items-center">
+<div class="dark:bg-darkNavFooter bg-lightNavFooter py-2 lg:p-4">
+    <div class=" flex items-center mt-1 mb-2 lg:mb-3 ">
         <div class=" flex justify-center w-full">
             <!-- Logo -->
             @if (request()->routeIs('home') || request()->routeIs('home.*'))
@@ -12,9 +12,9 @@
             <x-toggle-theme-btn />
         </div>
     </div>
-    <nav x-data="{ open: false }" class="dark:bg-darkPage m-2">
+    <nav x-data="{ open: false }" class="dark:bg-darkPage m-2 py-1 lg:py-4">
         {{-- <div class=""> --}}
-        <div class="flex justify-between items-center py-1">
+        <div class="flex justify-between items-center">
             <div class="flex items-center justify-between w-full">
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-5 lg:flex  flex-shrink-0">
@@ -28,14 +28,20 @@
                 <!-- Hamburger -->
                 <x-icons.hamburger />
 
+                {{-- gaming btn --}}
+
+                <x-form.gamer-btn :route="route('login')" />
+
+
+
                 <div class="flex items-center  ">
                     <div class="hidden space-x-8 sm:-my-px sm:me-5 lg:flex ">
                         @guest()
-                            <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                                {{ __('Login') }}
-                            </x-nav-link>
                             <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
                                 {{ __('Register') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                                {{ __('Login') }}
                             </x-nav-link>
                         @endguest
 
@@ -120,11 +126,11 @@
                 {{-- @endif --}}
 
                 @guest
-                    <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                        {{ __('Login') }}
-                    </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
                         {{ __('Register') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        {{ __('Login') }}
                     </x-responsive-nav-link>
                 @endguest
             </div>
@@ -207,3 +213,4 @@
     </nav>
 
 </div>
+{{-- -right-8 relative --}}
