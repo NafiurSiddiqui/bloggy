@@ -1,6 +1,6 @@
 @props(['post', 'no-href'])
 
-{{-- @dd($noHref) --}}
+
 <footer {{ $attributes->merge([
     'class' => 'flex justify-between items-center mt-6',
 ]) }}>
@@ -23,7 +23,7 @@
             </h5>
 
             <div class="mt-1 block text-zinc-600 dark:text-darkTextHeader-300 text-xs">
-                <time>{{ $post->created_at->diffForHumans() }}</time>
+                <time>{{ \Carbon\Carbon::parse($post->created_at)->format('M D,Y') }}</time>
             </div>
         </div>
     </div>
