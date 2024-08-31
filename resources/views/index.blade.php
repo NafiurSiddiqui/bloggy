@@ -32,9 +32,7 @@
                     </div>
                 </div>
                 @if ($featured_posts->count() > 3)
-                    <x-post-cards.section-cta link="posts.featured">
-                        💫 Explore More 💫
-                    </x-post-cards.section-cta>
+                    <x-post-cards.section-cta link="posts.featured" />
                 @endif
             </section>
         @endif
@@ -48,9 +46,7 @@
                 </div>
 
                 @if ($hot->count() > 3)
-                    <x-post-cards.section-cta link="posts.hot">
-                        💫 Explore More 💫
-                    </x-post-cards.section-cta>
+                    <x-post-cards.section-cta link="posts.hot" />
                 @endif
             </section>
         @endif
@@ -64,9 +60,7 @@
                     @endforeach
                 </div>
                 @if ($posts->count() > 8)
-                    <x-post-cards.section-cta link="posts.all">
-                        💫 See All Posts 💫
-                    </x-post-cards.section-cta>
+                    <x-post-cards.section-cta link="posts.all" />
                 @endif
             </section>
         @else

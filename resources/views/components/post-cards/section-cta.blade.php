@@ -1,7 +1,5 @@
 @props(['link'])
 
-<div class="text-center mt-4">
-    <a href="{{ route($link) }}" class="text-zinc-600 text-xl hover:text-zinc-700 font-semibold underline italic">
-        {{ $slot }}
-    </a>
+<div class="flex justify-center mt-8">
+    <x-form.sci-fi-btn route="{{ route($link) }}" text="Explore More" lg />
 </div>

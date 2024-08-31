@@ -34,7 +34,7 @@
                             <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
                                 {{ __('Register') }}
                             </x-nav-link>
-                            <x-form.gamer-btn :route="route('login')" />
+                            <x-form.sci-fi-btn :route="route('login')" />
                         @endguest
 
                         @auth
