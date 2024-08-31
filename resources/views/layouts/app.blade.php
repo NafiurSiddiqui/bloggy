@@ -16,6 +16,7 @@
 </head>
 
 <body class="font-sans antialiased bg-[#F8F7F5] dark:bg-darkPage dark:text-white/50 overflow-x-clip">
+
     @include('layouts.navigation')
 
     <div class="flex flex-col items-center min-h-screen">
