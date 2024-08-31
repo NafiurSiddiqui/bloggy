@@ -6,13 +6,13 @@
         style="background-image: url({{ asset('storage/' . $post->thumbnail) }})">
 
         <x-post-cards.featured-overlay class="h-[60vh] lg:h-full" />
+        <div class="flex flex-wrap items-baseline justify-end space-y-1 space-x-4 absolute right-4 top-4">
+            <x-labels.category :category="$post->category" />
+            <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" />
+        </div>
 
         <div class="h-full flex flex-col justify-end items-center p-2 pb-8 space-y-4 ml-4">
             <x-post-cards.header class="w-full">
-                <div class="flex justify-center space-x-4">
-                    <x-labels.category :category="$post->category" sm />
-                    <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" sm />
-                </div>
                 <x-post-cards.heading :post="$post" class="!text-2xl text-center mt-2" />
             </x-post-cards.header>
             <x-post-cards.author class="mt-0 w-full" :post="$post" />
