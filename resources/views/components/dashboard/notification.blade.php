@@ -2,14 +2,16 @@
     <x-slot:trigger>
         <div class="h-16 flex items-center" ">
             <button type="button"
-                class="flex relative items-center  bg-gray-100 group hover:bg-gray-200 p-2  rounded-full cursor-pointer"
+                class="flex relative items-center  bg-gray-100 dark:bg-darkPostCard 
+                border dark:border-zinc-800 dark:hover:border-darkNavFooter
+                dark:hover:bg-darkNavFooter group hover:bg-gray-200 p-2  rounded-full cursor-pointer"
                >
                 {{-- ping --}}
-                  @if (
-                      (isset($commentaryNotifications) &&
-                          $commentaryNotifications->isNotEmpty() &&
-                          (isset($pendingRegistration) && $pendingRegistration->isNotEmpty())) ||
-                          ($commentaryNotifications->isNotEmpty() || $pendingRegistration->isNotEmpty()))
+                                                    @if (
+                                                        (isset($commentaryNotifications) &&
+                                                            $commentaryNotifications->isNotEmpty() &&
+                                                            (isset($pendingRegistration) && $pendingRegistration->isNotEmpty())) ||
+                                                            ($commentaryNotifications->isNotEmpty() || $pendingRegistration->isNotEmpty()))
             <div x-show="ping">
                 <span class="sr-only">Notifications</span>
                 <div class="absolute -top-[0.1rem] -start-[0.1rem] ">
@@ -22,7 +24,7 @@
             </div>
             @endif
             {{-- icon --}}
-            <i class="fa-solid fa-bell text-gray-400 group-hover:text-gray-500 "></i>
+            <i class="fa-solid fa-bell text-zinc-400 dark:text-zinc-600 group-hover:text-emerald-100/60 "></i>
 
             </button>
         </div>

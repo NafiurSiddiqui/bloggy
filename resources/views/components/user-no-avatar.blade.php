@@ -1,7 +1,7 @@
-@props(['lg' => false, 'sm' => false, 'featured' => false])
+@props(['lg' => false, 'sm' => false, 'featured' => false, 'noBorder' => false])
 
 <div class =
-        'rounded-full border-2 {{ $featured ? 'dark:bg-darkHotCard/40' : 'dark:bg-darkHotCard' }} dark:border-zinc-700/30 w-10 h-10 flex justify-center items-center',
+        'rounded-full {{ $noBorder ? 'border-none' : 'border-2 dark:border-zinc-700/30' }}  {{ $featured ? 'dark:bg-darkPostCard/40' : 'dark:bg-darkPostCard' }}  w-10 h-10 flex justify-center items-center',
     aria-label="user avatar">
     @if ($lg)
         <i class="fa-solid fa-user text-emerald-100/30 w-full h-full"></i>

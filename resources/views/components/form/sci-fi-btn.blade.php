@@ -10,7 +10,8 @@
             d="M1 17.9072V43C1 43.5523 1.44772 44 2 44H121.15C121.496 44 121.817 43.8213 121.999 43.5274L132.85 26.05C132.948 25.8916 133 25.7089 133 25.5225V2C133 1.44772 132.552 1 132 1H15.5788C15.2862 1 15.0082 1.12818 14.8182 1.35075L1.23942 17.258C1.08489 17.439 1 17.6692 1 17.9072Z"
             fill="#181B1A" stroke="#474E4B" class="group-hover:fill-logoColor transition-colors duration-100 ease-in" />
         <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#14E785"
-            class="group-hover:fill-[#0C0C0C] " font-size="16px" font-family="Arial, sans-serif">
+            class="group-hover:fill-[#0C0C0C] group-active:fill-[#0C0C0C] group-focus:fill-[#0C0C0C] " font-size="16px"
+            font-family="Arial, sans-serif">
             {{ $text }}
         </text>
     </svg>
