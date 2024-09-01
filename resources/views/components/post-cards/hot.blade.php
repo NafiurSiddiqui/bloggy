@@ -6,7 +6,7 @@
     <div class="flex  flex-col justify-between">
         <x-post-cards.header>
             <x-post-cards.heading :post="$post" />
-            <div class="relative">
+            <div class="relative ">
                 <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->thumbnail_alt_txt }}"
                     class="w-full h-full rounded-md aspect-[16/10] object-cover">
                 <x-post-cards.img-overlay />

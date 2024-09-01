@@ -1,4 +1,4 @@
-@props(['user', 'lg' => false, 'sm' => false, 'xs' => false])
+@props(['user', 'lg' => false, 'sm' => false, 'xs' => false, 'featured' => false])
 
 @if ($user->avatar)
 
@@ -15,18 +15,12 @@
             style="background-image: url({{ asset('storage/' . $user->avatar) }})" aria-label="user avatar">
         </div>
     @endif
-    {{-- @else
+@else
     @if ($lg)
-        <div class="rounded-full border-2 w-36 h-36 flex justify-center items-center" aria-label="user avatar">
-            <i class="fa-solid fa-user text-gray-500 w-full h-full"></i>
-        </div>
+        <x-user-no-avatar :featured="$featured" lg />
     @elseif($sm)
-        <div class="rounded-full border-2 w-12 h-12 flex justify-center items-center" aria-label="user avatar">
-            <i class="fa-solid fa-user text-gray-500 w-12 h-6"></i>
-        </div>
+        <x-user-no-avatar :featured="$featured" sm />
     @else
-        <div class="rounded-full border-2 w-10 h-10 flex justify-center items-center" aria-label="user avatar">
-            <i class="fa-solid fa-user text-gray-500"></i>
-        </div>
-    @endif --}}
+        <x-user-no-avatar :featured="$featured" />
+    @endif
 @endif

@@ -20,14 +20,21 @@ export default {
                 darkPage: "#181B1A",
                 logoColor: "#29F191 ",
                 darkSectionHeader: "#8fbaa5",
-                darkTextHeader: {
+                darkText: {
                     100: "#dbffed",
                     200: "#c7f5d8",
                     300: "#c5edd4",
                 },
+                darkTextHover: {
+                    100: "#e7fff3",
+                    600: "#6de7aa",
+                },
                 darkLabel: "#54625D",
+                darkLabelHover: "#35584c",
                 darkToggleBtn: "#080A09",
                 darkToggleSwitch: "#191D1B",
+                darkHotCard: "#1F2120",
+                darkHotCardHover: "#131715",
                 lightToggleBtn: "#E9E9E9",
                 lightToggleSwitch: "#F8FFFD",
                 lightNavFooter: "#F4F4F4",

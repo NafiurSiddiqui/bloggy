@@ -1,13 +1,13 @@
-@props(['post', 'no-href'])
+@props(['post', 'no-href', 'featured' => false])
 
 
 <footer {{ $attributes->merge([
     'class' => 'flex justify-between items-center mt-6',
 ]) }}>
     <div class="flex items-center text-sm">
-        <x-user-avatar sm :user="$post->author" />
+        <x-user-avatar sm :user="$post->author" featured="{{ $featured }}" />
         <div class="ml-3">
-            <h5 class="font-bold text-zinc-700 dark:text-darkTextHeader-100">
+            <h5 class="font-bold text-zinc-700 dark:text-darkText-100 dark:hover:text-darkTextHover-600">
                 @if (isset($noHref) && $noHref)
                     <div>
                         {{ $post->author->name }}
@@ -22,7 +22,7 @@
                 @endif
             </h5>
 
-            <div class="mt-1 block text-zinc-600 dark:text-darkTextHeader-300 text-xs">
+            <div class="mt-1 block text-zinc-600 dark:text-darkText-300 text-xs">
                 <time>{{ \Carbon\Carbon::parse($post->created_at)->format('M D,Y') }}</time>
             </div>
         </div>
