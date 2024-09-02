@@ -12,7 +12,7 @@
             <x-toggle-theme-btn />
         </div>
     </div>
-    <nav x-data="{ open: false }" class="dark:bg-darkPage m-2 py-1 lg:py-4">
+    <nav x-data="{ open: false }" class="dark:bg-darkPage m-2 py-1">
         {{-- <div class=""> --}}
         <div class="flex justify-between items-center">
             <div class="flex items-center justify-between w-full">
@@ -67,7 +67,7 @@
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                    <x-user-avatar noBorder xs :user="Auth::user()" />
+                                    <x-user-avatar noBorder sm :user="Auth::user()" />
                                     <div class="ml-2">{{ Auth::user()->name }}</div>
 
                                     <div class="ms-1">
