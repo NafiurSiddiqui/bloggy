@@ -119,7 +119,6 @@
 
                 <div class="w-full md:w-4/5 lg:w-3/5 space-y-4 ">
                     <x-comment-form :post="$post" btn-label="Post" />
-
                     @foreach ($post->comments as $comment)
                         <x-post-comment :comment="$comment" :post="$post" />
                     @endforeach

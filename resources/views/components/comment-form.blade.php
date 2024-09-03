@@ -26,14 +26,12 @@
                         Cancel
                     </x-secondary-button>
                 @endif
-                <x-form.button>
-                    {{ $btnLabel }}
-                </x-form.button>
+
+                <div class="w-full mt-6 flex justify-end">
+                    <x-form.sci-fi-btn submit text="{{ $btnLabel }}" />
+                </div>
             </div>
         </form>
-        @error('body')
-            <span class="text-red-500 text-xs">{{ $message }}</span>
-        @enderror
     </x-panel>
 @else
     <p class="text-zinc-400">
