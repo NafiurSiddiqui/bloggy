@@ -1,7 +1,7 @@
 @props(['comment', 'post', 'btn-label', 'editable'])
 @auth
     <x-panel>
-        <form action="/post/{{ $post->slug }}/comments/{{ isset($editable) ? $comment->id : '' }}" method="post">
+        <form action="/post/{{ $post->slug }}/comments/{{ isset($editable) ? $comment?->id : '' }}" method="post">
             @csrf
             @if (isset($editable))
                 @method('PATCH')
@@ -21,7 +21,8 @@
             @endif
 
             <div class="flex justify-between items-center mt-6">
-                @if (isset($editable))
+
+                @if (isset($editable) && $editable)
                     <x-secondary-button class="!py-3  mr-3" link href="{{ url()->previous() }}">
                         Cancel
                     </x-secondary-button>
