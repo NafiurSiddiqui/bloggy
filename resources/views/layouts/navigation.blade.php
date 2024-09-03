@@ -12,7 +12,7 @@
             <x-toggle-theme-btn />
         </div>
     </div>
-    <nav x-data="{ open: false }" class="dark:bg-darkPage m-2 py-1">
+    <nav x-data="{ open: false }" class="dark:bg-darkPage m-2 ">
         {{-- <div class=""> --}}
         <div class="flex justify-between items-center">
             <div class="flex items-center justify-between w-full">
@@ -62,11 +62,13 @@
                     @endif
 
                     <!-- Settings Dropdown -->
-                    <div class="hidden lg:flex sm:items-center ">
+                    <div class="hidden lg:flex sm:items-center mx-2">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 
+                                    hover:dark:bg-darkNavFooter
+                                    dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                     <x-user-avatar noBorder sm :user="Auth::user()" />
                                     <div class="ml-2">{{ Auth::user()->name }}</div>
 
@@ -102,7 +104,7 @@
             @endauth
 
         </div>
-        {{-- </div> --}}
+
 
         <!-- Responsive Navigation Menu -->
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
@@ -110,7 +112,7 @@
                 {{-- @if (request()->routeIs('home') || request()->routeIs('profile.*')) --}}
 
                 <x-responsive-nav-link :href="route('posts.all')" :active="request()->routeIs('posts.all')">
-                    {{ __('All Posts') }}
+                    {{ __('Posts') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('categories.all')" :active="request()->routeIs('category.*')">
                     {{ __('Categories') }}
@@ -129,7 +131,7 @@
 
             @auth
                 <!-- Responsive Settings Options -->
-                <div class="pt-4 pb-1 border-t border-gray-200 border-b border-b-gray-300 dark:border-gray-600">
+                <div class="pt-4 pb-1 border-t border-gray-200   dark:border-darkDivider">
                     <div>
                         @if (auth()->user()->role == 'admin' || auth()->user()->role == 'author')
                             <div>
@@ -165,9 +167,8 @@
                             </div>
                         @endif
 
-                        <div class="">
-                            <a href="{{ route('profile.edit') }}"
-                                class="w-full p-4 border-l-4 border-transparent flex hover:bg-gray-50 hover:border-gray-300 group hover:text-gray-600 ">
+                        <div class="border-t dark:border-darkDivider">
+                            <div class="w-full p-4  border border-zinc-900 flex ">
                                 <x-user-avatar xs :user="Auth::user()" />
                                 <div class="ml-2">
                                     <div
@@ -177,28 +178,27 @@
                                     <div class="font-medium text-sm text-gray-500 group-hover:text-gray-600">
                                         {{ Auth::user()->email }}</div>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                            <div class="mt-3 space-y-1">
+                                @auth
+                                    <x-responsive-nav-link :href="route('profile.edit')">
+                                        {{ __('Profile') }}
+                                    </x-responsive-nav-link>
+                                @endauth
+                                <!-- Authentication -->
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
 
-                        <div class="mt-3 space-y-1">
-
-
-                            @auth
-                                <x-responsive-nav-link :href="route('profile.edit')">
-                                    {{ __('Profile') }}
-                                </x-responsive-nav-link>
-                            @endauth
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-
-                                <x-responsive-nav-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                    <x-responsive-nav-link :href="route('logout')"
+                                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-responsive-nav-link>
-                            </form>
+                                        {{ __('Log Out') }}
+                                    </x-responsive-nav-link>
+                                </form>
+                            </div>
                         </div>
+
+
                     </div>
                 @endauth
             </div>

@@ -33,6 +33,7 @@ export default {
                 darkLabelHover: "#35584c",
                 darkToggleBtn: "#080A09",
                 darkToggleSwitch: "#191D1B",
+                darkDivider: "#1f2421",
                 darkPostCard: "#1F2120",
                 lightToggleBtn: "#E9E9E9",
                 lightToggleSwitch: "#F8FFFD",
