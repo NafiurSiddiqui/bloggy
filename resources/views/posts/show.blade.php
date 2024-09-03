@@ -17,7 +17,7 @@
         <article class="mt-12 lg:w-4/5">
             <div class="space-y-4">
                 <div class="mb-10">
-                    <h1 class="font-bold text-3xl lg:text-4xl ">
+                    <h1 class="font-bold text-3xl lg:text-4xl dark:text-zinc-200 ">
                         {{ $post->title }}
                     </h1>
                     <div class="mt-4">
@@ -29,14 +29,14 @@
                 </div>
 
 
-                <div class="max-w-full md:h-[70vh] relative">
+                <div class="max-w-full md:h-[70vh] aspect-[16/9] relative">
                     <img src="/storage/{{ $post->thumbnail }}" alt="{{ $post->thumbnail_alt_txt }}"
-                        class="rounded-xl w-full h-full  md:object-cover">
+                        class=" w-full h-full  object-cover">
                     <x-post-cards.img-overlay />
                 </div>
             </div>
 
-            <div class="post-body text-lg my-8">
+            <div class="post-body text-lg my-8 dark:text-zinc-200">
                 {!! $post->body !!}
             </div>
 
@@ -49,12 +49,13 @@
                         @if ($previousPost)
                             <a href="/post/{{ $previousPost->slug }}">
                                 {{-- fontawesome previous btn --}}
-                                <div class="italic mb-2 text-sm text-left text-zinc-600 group-hover:text-zinc-700">
+                                <div
+                                    class="italic mb-2 text-sm text-left dark:text-darkText-100/70 dark:hover:text-darkTextHover-600  transition-all duration-200 ease-in-out">
                                     <i class="fa-solid fa-chevron-left"></i>
                                     Previous
                                 </div>
                                 <span
-                                    class="font-semibold text-zinc-600 group-hover:text-zinc-800 text-left">{{ $previousPost->title }}
+                                    class="font-semibold dark:text-darkText-100/70 dark:hover:text-darkTextHover-600  transition-all duration-200 ease-in-out text-left">{{ $previousPost->title }}
                                 </span>
                             </a>
                         @endif
@@ -63,12 +64,13 @@
                         @if ($nextPost)
                             <a href="/post/{{ $nextPost->slug }}">
 
-                                <div class="italic mb-2 text-sm text-right text-zinc-600 group-hover:text-zinc-700">
+                                <div
+                                    class="italic mb-2 text-sm text-right dark:text-darkText-100/70 dark:hover:text-darkTextHover-600  transition-all duration-200 ease-in-out">
                                     <i class="fa-solid fa-chevron-right"></i>
                                     Next
                                 </div>
                                 <span
-                                    class="font-semibold text-zinc-600 group-hover:text-zinc-800 inline-block text-right">{{ $nextPost->title }}
+                                    class="font-semibold dark:text-darkText-100/70 dark:hover:text-darkTextHover-600  transition-all duration-200 ease-in-out inline-block text-right">{{ $nextPost->title }}
                                 </span>
                             </a>
                         @endif
@@ -79,7 +81,7 @@
             <div class="py-4 my-5 ">
                 <div>
                     <div class="flex items-end ">
-                        <span class="font-bold text-zinc-600 text-lg">Share</span>
+                        <span class="font-bold text-emerald-100 text-lg">Share</span>
                         <div class="">
                             <x-icons.share-icon class="opacity-90" />
                         </div>
@@ -91,18 +93,21 @@
                     <div class="flex justify-between items-center w-3/5 lg:w-[15rem]">
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/post/' . $post->slug) }}"
                             target="_blank" rel="noopener noreferrer nofollow" class="group">
-                            <x-icons.facebook class="group-hover:fill-zinc-500 transition-colors" />
+                            <x-icons.facebook
+                                class="transition-colors dark:fill-darkText-100/50 dark:group-hover:fill-darkTextHover-600" />
 
                         </a>
-
+                        {{-- dark:text-darkText-100/70 dark:hover:text-darkTextHover-600 --}}
                         <a href="https://twitter.com/intent/tweet?url={{ url('/post/' . $post->slug) }}"
                             target="_blank" rel="noopener noreferrer nofollow" class="group">
-                            <x-icons.twitter-x class="group-hover:fill-zinc-500 transition-colors" />
+                            <x-icons.twitter-x
+                                class="transition-colors dark:fill-darkText-100/50 dark:group-hover:fill-darkTextHover-600" />
                         </a>
                         <a href="https://www.linkedin.com/shareArticle?url= {{ url('/post/' . $post->slug) }}"
                             target="_blank" rel="noopener noreferrer nofollow" class="group">
 
-                            <x-icons.linkedin class="group-hover:fill-zinc-500 transition-colors" />
+                            <x-icons.linkedin
+                                class="transition-colors dark:fill-darkText-100/50 dark:group-hover:fill-darkTextHover-600" />
                         </a>
 
                     </div>

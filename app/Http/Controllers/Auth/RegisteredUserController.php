@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -19,6 +20,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
+        //set the redirect url which is used after login redirect
+        Redirect::setIntendedUrl(url()->previous());
         return view('auth.register');
     }
 
@@ -47,7 +50,6 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
-        return redirect('/')->with('success', 'Welcome to Bloggy!');
+        return redirect()->intended()->with('success', 'Welcome to Bloggy!');
     }
 }

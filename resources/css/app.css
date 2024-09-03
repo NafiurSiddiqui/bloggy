@@ -28,11 +28,10 @@ div.ck.ck-content.ck-editor__editable {
     word-break: break-word;
 }
 
-.editor-container_classic-editor .editor-container__editor {
-    /* min-width: 795px;
-    max-width: 795px; */
+.dark-link-text-color {
+    @apply dark:text-darkText-100;
 }
 
-.editor-container_include-block-toolbar {
-    /* margin-left: 42px; */
+.dark-link-text-color-hover {
+    @apply dark:hover:text-darkTextHover-600;
 }

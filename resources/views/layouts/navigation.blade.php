@@ -14,7 +14,7 @@
     </div>
     <nav x-data="{ open: false }" class="dark:bg-darkPage m-2 ">
         {{-- <div class=""> --}}
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center py-2">
             <div class="flex items-center justify-between w-full">
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-5 lg:flex  flex-shrink-0">

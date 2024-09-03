@@ -36,8 +36,8 @@
         @enderror
     </x-panel>
 @else
-    <p>
-        <a href="/register" class="text-blue-500 hover:text-blue-600">Register</a> or
-        <a href="/login" class="text-blue-500 hover:text-blue-600"">Login</a> to add comments.
+    <p class="text-zinc-400">
+        <a href="/register" class="dark-link-text-color dark-link-text-color-hover">Register</a> or
+        <a href="/login" class="dark-link-text-color dark-link-text-color-hover"">Login</a> to add comments.
     </p>
 @endauth
