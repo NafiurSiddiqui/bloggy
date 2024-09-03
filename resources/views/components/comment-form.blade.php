@@ -9,7 +9,7 @@
             <header class="flex items-center">
 
                 <x-user-avatar xs :user="auth()->user()" />
-                <h3 class="font-bold text-lg ml-3">{{ isset($editable) ? 'Edit Your' : 'Add a' }} comment</h3>
+                <h3 class="font-bold text-zinc-300 text-lg ml-3">{{ isset($editable) ? 'Edit Your' : 'Add a' }} comment</h3>
             </header>
 
             @if (isset($comment))
@@ -20,16 +20,18 @@
                 <x-form.textarea name="body" required sr-only />
             @endif
 
-            <div class="flex justify-end items-end">
+            <div class="flex justify-between items-center mt-6">
                 @if (isset($editable))
                     <x-secondary-button class="!py-3  mr-3" link href="{{ url()->previous() }}">
                         Cancel
                     </x-secondary-button>
                 @endif
 
-                <div class="w-full mt-6 flex justify-end">
+
+                <div class="w-full flex justify-end">
                     <x-form.sci-fi-btn submit text="{{ $btnLabel }}" />
                 </div>
+
             </div>
         </form>
     </x-panel>

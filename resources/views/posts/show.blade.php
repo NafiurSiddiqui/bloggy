@@ -43,6 +43,7 @@
         </article>
 
         <div class="flex flex-col lg:w-4/5 ">
+            {{-- Pagination --}}
             <div class="my-8">
                 <ul class="flex justify-between">
                     <li class="box-border  w-1/2 lg:w-2/5 p-1 mr-2 group">
@@ -77,7 +78,7 @@
                     </li>
                 </ul>
             </div>
-
+            {{-- Share --}}
             <div class="py-4 my-5 ">
                 <div>
                     <div class="flex items-end ">
@@ -114,23 +115,21 @@
 
                 </div>
             </div>
-
+            {{-- Comments --}}
             <section class="flex flex-col justify-center mt-10 space-y-4 w-full h-full">
-
                 <div class="w-full md:w-4/5 lg:w-3/5 space-y-4 ">
                     <x-comment-form :post="$post" btn-label="Post" />
                     @foreach ($post->comments as $comment)
                         <x-post-comment :comment="$comment" :post="$post" />
                     @endforeach
                 </div>
-
             </section>
 
             {{-- take 8 recent posts and browse by category --}}
             <section class="flex flex-col justify-center mt-10 space-y-4 w-full">
-                <div class="w-full space-y-4  bg-white px-1 py-4 rounded-xl">
+                <div class="w-full space-y-4 px-2 bg-white dark:bg-darkPostCard py-4 rounded-xl">
                     <div class="flex flex-col justify-center items-center">
-                        <h1 class="text-2xl font-bold text-zinc-600">Browse by Category
+                        <h1 class="text-2xl font-bold dark:text-zinc-300">Browse by Category
                         </h1>
                         <x-hr class="bg-gray-400" />
                     </div>
@@ -144,7 +143,7 @@
                 </div>
                 <div class="w-full  space-y-4 ">
                     <div class="flex flex-col justify-center items-center">
-                        <h1 class="text-2xl font-bold text-zinc-600">Recent Posts
+                        <h1 class="text-2xl font-bold text-zinc-600 dark:text-zinc-300">Recent Posts
                         </h1>
                         <x-hr class="bg-gray-400" />
                     </div>

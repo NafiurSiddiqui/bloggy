@@ -26,8 +26,9 @@
 
 
 
-            <div class="flex flex-col ">
-                <div class="text-lg my-8">
+            <div class="flex flex-col">
+                <div class="text-lg my-8 dark:text-zinc-200">
+                    <x-form.back-to-post-btn :post="$post" />
                     {!! $post->body !!}
                 </div>
 
@@ -50,17 +51,3 @@
 
     </section>
     </x-layout>
-
-
-    {{-- 
-     <section class="col-span-8 col-start-5 mt-10 space-y-4">
-
-                    <x-comment-form :post="$post" :comment="$comment" btn-label="Update" editable />
-
-                    @foreach ($post->comments as $originalComment)
-                        @unless ($originalComment->id == $comment->id)
-                            <x-post-comment :comment="$originalComment" :post="$post" />
-                        @endunless
-                    @endforeach
-
-                </section> --}}

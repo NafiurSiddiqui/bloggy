@@ -33,5 +33,5 @@ div.ck.ck-content.ck-editor__editable {
 }
 
 .dark-link-text-color-hover {
-    @apply dark:hover:text-darkTextHover-600;
+    @apply text-darkTextHover-600;
 }

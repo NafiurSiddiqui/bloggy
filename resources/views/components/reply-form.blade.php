@@ -23,19 +23,21 @@
                    <x-form.textarea name="body" required sr-only />
                @endif
 
-               <div class="flex justify-end">
-                   <x-form.button>
-                       {{ isset($editable) ? 'Update' : 'Post' }}
-                   </x-form.button>
+               <div class="flex justify-between items-center mt-6">
+                   @if (isset($editable))
+                       <x-secondary-button class="!py-3  mr-3" link href="{{ url()->previous() }}">
+                           Cancel
+                       </x-secondary-button>
+                   @endif
+                   <div class="w-full flex justify-end">
+
+                       <x-form.sci-fi-btn submit text="{{ isset($editable) ? 'Update' : 'Post' }}" />
+                   </div>
                </div>
            </form>
            @error('body')
                <span class="text-red-500 text-xs">{{ $message }}</span>
            @enderror
        </x-panel>
-       {{-- @else
-       <p>
-           <a href="/register" class="text-blue-500 hover:text-blue-600">Register</a> or
-           <a href="/login" class="text-blue-500 hover:text-blue-600"">Login</a> to add comments.
-       </p> --}}
+
    @endauth
