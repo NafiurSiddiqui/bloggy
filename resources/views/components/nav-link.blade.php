@@ -16,6 +16,3 @@
 <a {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
 </a>
-{{-- dark:bg-darkPostCard 
-                border dark:border-zinc-800 dark:hover:border-darkNavFooter
-                dark:hover:bg-darkNavFooter --}}

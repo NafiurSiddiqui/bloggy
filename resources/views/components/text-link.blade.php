@@ -1,6 +1,6 @@
 @props(['href'])
 
 <a href="{{ isset($href) ? $href : '#' }}"
-    class="text-sm text-gray-900 hover:text-blue-500 hover:underline dark:text-gray-300">
+    class="dark:text-zinc-400 text-sm transition-colors duration-75 p-0 underline dark:hover:text-darkTextHover-600">
     {{ $slot }}
 </a>

@@ -64,13 +64,11 @@
                 @endif
                 {!! $post->body !!}
             </div>
-
         </article>
 
 
         <div class="flex flex-col lg:w-4/5 ">
             {{-- Pagination --}}
-
             @if (!$editPage)
                 <div class="my-8">
                     <ul class="flex justify-between">
@@ -109,8 +107,6 @@
 
                 {{-- Share --}}
                 {{-- if NOT edit page --}}
-
-
                 <div class="py-4 my-5 ">
                     <div>
                         <div class="flex items-end ">
