@@ -17,7 +17,7 @@
 
 @endphp
 
-<li class="flex text-sm border text-gray-700 bg-slate-100 border-gray-100 items-center p-4 w-[14rem] hover:bg-gray-50"
+<li class="flex text-sm border text-gray-700 bg-slate-100 border-gray-100 items-center p-4 w-[14rem] hover:bg-gray-50 dark:border-zinc-800 dark:bg-darkPage dark:text-zinc-300 dark:hover:bg-darkNavFooter dark:hover:text-zinc-200"
     {{ isset($commentary) ? 'id="' . $commentary->id . '"' : '' }}>
     <a href="{{ url($link) }}" role="link" class="notification-link"
         {{ isset($commentary) ? 'data-id="' . $commentary->id . '"' : '' }}>

@@ -29,7 +29,7 @@ div.ck.ck-content.ck-editor__editable {
 }
 
 .dark-link-text-color {
-    @apply dark:text-darkText-100;
+    @apply text-darkText-100;
 }
 
 .dark-link-text-color-hover {
