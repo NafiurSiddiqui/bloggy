@@ -24,13 +24,15 @@
                     <span class="text-red-500 text-xs">{{ $message }}</span>
                 @enderror
                 <x-panel class="px-2 py-3 my-8 ">
-                    <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Select Thumbnail</h2>
+                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-gray-400 border-b border-gray-200">Select
+                        Thumbnail</h2>
                     <x-form.input name="thumbnail" type="file" required />
                     <x-form.input name="thumbnail_alt_txt" label="Alt Txt" required />
                 </x-panel>
 
                 <x-panel class="px-2 py-3 my-8">
-                    <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Select Categories</h2>
+                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-gray-400 border-b border-gray-200">Select
+                        Categories</h2>
 
                     <div class="flex justify-start space-x-4">
                         <x-dashboard.category-dropdown />
@@ -40,7 +42,8 @@
 
 
                 <x-panel class="px-2 py-3 my-8 ">
-                    <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Post Type</h2>
+                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-gray-400 border-b border-gray-200">Post Type
+                    </h2>
                     <div class="flex space-x-4">
                         <x-form.checkbox input-name="is_featured" id="is_featured" label="Featured" />
                         <x-form.checkbox input-name="is_hot" id="is_hot" label="Hot" />
@@ -48,28 +51,35 @@
                 </x-panel>
                 {{-- SEO --}}
                 <x-panel class="px-2 py-3 my-8 ">
-                    <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">SEO fields</h2>
+                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-gray-400 border-b border-gray-200">SEO
+                        fields</h2>
                     <x-form.input name="meta_title" required />
                     <x-form.input name="meta_description" required />
                     <x-form.input name="og_thumbnail" type="file" />
                     <x-form.input name="og_title" />
                 </x-panel>
 
-                <x-dashboard.action-panel-sm>
-                    <x-secondary-button type="submit" name='is_draft' value='1'>Save as
-                        Draft</x-secondary-button>
-                    <x-form.button name="is_published" value="1">
+                <x-dashboard.action-panel screenSm>
+                    <div class="flex justify-between items-center">
+                        <x-secondary-button type="submit" name='is_draft' value='1' class="py-3">Save as
+                            Draft</x-secondary-button>
+                        {{-- <x-form.button name="is_published" value="1">
                         Publish
-                    </x-form.button>
-                </x-dashboard.action-panel-sm>
+                    </x-form.button> --}}
 
-                <x-dashboard.action-panel-lg>
+                        <x-form.sci-fi-btn submit name="is_published" value="1" label="Publish" />
+                    </div>
+
+                </x-dashboard.action-panel>
+
+                <x-dashboard.action-panel>
                     <x-secondary-button type="submit" name='is_draft' value='1'>Save as
                         Draft</x-secondary-button>
-                    <x-form.button name="is_published" value="1">
+                    {{-- <x-form.button name="is_published" value="1">
                         Publish
-                    </x-form.button>
-                </x-dashboard.action-panel-lg>
+                    </x-form.button> --}}
+                    <x-form.sci-fi-btn submit name="is_published" value="1" label="Publish" class="mt-2" lg />
+                </x-dashboard.action-panel>
             </form>
 
         </div>

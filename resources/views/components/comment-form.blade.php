@@ -31,7 +31,7 @@
 
 
                 <div class="w-full flex justify-end">
-                    <x-form.sci-fi-btn submit text="{{ $btnLabel }}" />
+                    <x-form.sci-fi-btn submit label="{{ $btnLabel }}" />
                 </div>
 
             </div>

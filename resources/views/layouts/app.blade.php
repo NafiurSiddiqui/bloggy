@@ -23,7 +23,7 @@
         {{ $slot }}
         <x-toast.success />
     </div>
-    <footer class="h-[30vh] mt-20 bg-stone-200 flex justify-center items-center dark:bg-darkNavFooter">
+    <footer class="h-[50vh] lg:h-[30vh]  bg-stone-200 flex justify-center items-center dark:bg-darkNavFooter">
 
         <p class="text-center text-gray-600  dark:text-gray-400 flex items-end">©
             {{ date('Y') }}

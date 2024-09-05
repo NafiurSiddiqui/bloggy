@@ -11,8 +11,8 @@
 
 
 @if ($categories->isEmpty())
-    <div class=" dark:bg-gray-800 dark:text-gray-200">
-        <p class="mt-4 mb-2 text-sm font-semibold text-gray-400">No Categories yet</p>
+    <div class=" dark:bg-zinc-800 dark:text-zinc-300">
+        <p class="mt-4 mb-2 text-sm font-semibold text-zinc-400">No Categories yet</p>
         <x-secondary-button link href="/admin/categories/create">Create a Category</x-secondary-button>
     </div>
 @else
