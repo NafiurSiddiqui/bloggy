@@ -11,113 +11,108 @@
     }
 }
 
-@layer components {
-    div.ck.ck-content.ck-editor__editable {
-        @apply h-[20rem];
-    }
+div.ck.ck-content.ck-editor__editable {
+    @apply h-[20rem];
+}
 
-    .ck.ck-reset.ck-list {
-        @apply dark:bg-zinc-800;
-    }
-    .ck.ck-list__item > .ck-button:hover:not(.ck-disabled) {
-        @apply dark:hover:bg-zinc-900 dark:hover:text-zinc-200;
-    }
+.ck.ck-reset.ck-list {
+    @apply dark:bg-zinc-800;
+}
+.ck.ck-list__item > .ck-button:hover:not(.ck-disabled) {
+    @apply dark:hover:bg-zinc-900 dark:hover:text-zinc-200;
+}
 
-    .ck.ck-menu-bar__menu
-        .ck-button.ck-menu-bar__menu__item__button:focus:not(.ck-on) {
-        @apply dark:focus:bg-zinc-900 dark:focus:text-zinc-300;
-    }
+.ck.ck-menu-bar__menu
+    .ck-button.ck-menu-bar__menu__item__button:focus:not(.ck-on) {
+    @apply dark:focus:bg-zinc-900 dark:focus:text-zinc-300;
+}
 
-    div.ck.ck-menu-bar__menu > .ck.ck-menu-bar__menu__panel {
-        @apply dark:border-zinc-500;
-    }
+div.ck.ck-menu-bar__menu > .ck.ck-menu-bar__menu__panel {
+    @apply dark:border-zinc-500;
+}
 
-    div.ck.ck-menu-bar {
-        @apply dark:bg-zinc-800;
-    }
+div.ck.ck-menu-bar {
+    @apply dark:bg-zinc-800;
+}
 
-    li.ck.ck-list__separator {
-        @apply dark:bg-zinc-500;
-    }
+li.ck.ck-list__separator {
+    @apply dark:bg-zinc-500;
+}
 
-    button.ck.ck-button.ck-off {
-        @apply dark:text-zinc-300 dark:hover:text-zinc-200 dark:hover:bg-zinc-900 cursor-pointer;
-    }
-    button.ck.ck-button.ck-on {
-        @apply dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900;
-    }
-    button.ck.ck-button.ck-on:hover {
-        @apply dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900;
-    }
-    button.ck.ck-button:active,
-    a.ck.ck-button:active,
-    button.ck.ck-button:focus,
-    a.ck.ck-button:focus {
-        @apply dark:focus:border-emerald-500;
-    }
-    .ck.ck-menu-bar__menu:not(.ck-menu-bar__menu_top-level)
-        .ck-menu-bar__menu__button:focus:not(.ck-on) {
-        @apply dark:focus:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900;
-    }
-    div.ck.ck-toolbar.ck-toolbar_grouping {
-        @apply dark:bg-zinc-800 dark:text-zinc-300;
-    }
+button.ck.ck-button.ck-off {
+    @apply dark:text-zinc-300 dark:hover:text-zinc-200 dark:hover:bg-zinc-900 cursor-pointer;
+}
+button.ck.ck-button.ck-on {
+    @apply dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900;
+}
+button.ck.ck-button.ck-on:hover {
+    @apply dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900;
+}
+button.ck.ck-button:active,
+a.ck.ck-button:active,
+button.ck.ck-button:focus,
+a.ck.ck-button:focus {
+    @apply dark:focus:border-emerald-500;
+}
+.ck.ck-menu-bar__menu:not(.ck-menu-bar__menu_top-level)
+    .ck-menu-bar__menu__button:focus:not(.ck-on) {
+    @apply dark:focus:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900;
+}
+div.ck.ck-toolbar.ck-toolbar_grouping {
+    @apply dark:bg-zinc-800 dark:text-zinc-300;
+}
 
-    div.ck.ck-reset.ck-menu-bar__menu__panel.ck-menu-bar__menu__panel_position_es {
-        @apply dark:bg-zinc-800;
-    }
+div.ck.ck-reset.ck-menu-bar__menu__panel.ck-menu-bar__menu__panel_position_es {
+    @apply dark:bg-zinc-800;
+}
 
-    button.ck.ck-insert-table-dropdown-grid-box.ck-on {
-        @apply dark:border-emerald-400;
-    }
-    button.ck.ck-insert-table-dropdown-grid-box.ck-on:hover {
-        @apply dark:border-emerald-400;
-    }
+button.ck.ck-insert-table-dropdown-grid-box.ck-on {
+    @apply dark:border-emerald-400;
+}
+button.ck.ck-insert-table-dropdown-grid-box.ck-on:hover {
+    @apply dark:border-emerald-400;
+}
 
-    div.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred {
-        @apply dark:bg-zinc-800 dark:text-zinc-200;
-    }
+div.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred {
+    @apply dark:bg-zinc-800 dark:text-zinc-200;
+}
 
-    div.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-focused {
-        @apply dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-600;
-    }
-    div.ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
-        @apply dark:border-zinc-700;
-    }
-    div.ck.ck-list-styles-list {
-        @apply dark:bg-zinc-800;
-    }
+div.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-focused {
+    @apply dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-600;
+}
+div.ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+    @apply dark:border-zinc-700;
+}
+div.ck.ck-list-styles-list {
+    @apply dark:bg-zinc-800;
+}
 
-    div.ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content {
-        @apply dark:border-zinc-600;
-    }
+div.ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content {
+    @apply dark:border-zinc-600;
+}
 
-    div.ck.ck-toolbar {
-        @apply dark:bg-zinc-800;
-    }
+div.ck.ck-toolbar {
+    @apply dark:bg-zinc-800;
+}
 
-    div.ck.ck-dropdown__panel {
-        @apply dark:border-zinc-500;
-    }
+div.ck.ck-dropdown__panel {
+    @apply dark:border-zinc-500;
+}
 
-    div.ck.ck-editor__top
-        .ck-sticky-panel
-        .ck-sticky-panel__content
-        .ck-menu-bar {
-        @apply dark:border-b-zinc-600;
-    }
-    .main-container {
-        font-family: "Lato";
-        /* width: fit-content; */
-        margin-left: auto;
-        margin-right: auto;
-    }
+div.ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content .ck-menu-bar {
+    @apply dark:border-b-zinc-600;
+}
+.main-container {
+    font-family: "Lato";
+    /* width: fit-content; */
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    .ck-content {
-        font-family: "Lato";
-        line-height: 1.6;
-        word-break: break-word;
-    }
+.ck-content {
+    font-family: "Lato";
+    line-height: 1.6;
+    word-break: break-word;
 }
 
 .dark-link-text-color {

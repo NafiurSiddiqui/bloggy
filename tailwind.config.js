@@ -29,6 +29,7 @@ export default {
                     100: "#e7fff3",
                     600: "#6de7aa",
                 },
+                primaryBtnBg: "#14E785",
                 darkLabel: "#54625D",
                 darkLabelHover: "#35584c",
                 darkToggleBtn: "#080A09",

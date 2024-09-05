@@ -15,14 +15,16 @@
         <div class="flex justify-between w-full">
             <form action="/admin/post/store" method="post" enctype="multipart/form-data" class="w-full lg:w-[80%] px-4">
                 @csrf
-
                 <x-form.input name="title" required />
                 <x-form.input name="slug" placeholder="slug auto generates when submitted" />
                 <x-form.textarea name="description" required />
-                <x-editor.ck-editor />
-                @error('body')
-                    <span class="text-red-500 text-xs">{{ $message }}</span>
-                @enderror
+                <div class="mt-8">
+                    <x-form.label label-for="editor" />
+                    <x-editor.ck-editor />
+                    @error('body')
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
                 <x-panel class="px-2 py-3 my-8 ">
                     <h2 class="mb-3 dark:border-zinc-700 font-semibold text-gray-400 border-b border-gray-200">Select
                         Thumbnail</h2>
@@ -61,13 +63,12 @@
 
                 <x-dashboard.action-panel screenSm>
                     <div class="flex justify-between items-center">
-                        <x-secondary-button type="submit" name='is_draft' value='1' class="py-3">Save as
+                        <x-secondary-button type="submit" name='is_draft' value='1'>Save as
                             Draft</x-secondary-button>
-                        {{-- <x-form.button name="is_published" value="1">
-                        Publish
-                    </x-form.button> --}}
+                        <x-form.button name="is_published" value="1" class="!mt-0">
+                            Publish
+                        </x-form.button>
 
-                        <x-form.sci-fi-btn submit name="is_published" value="1" label="Publish" />
                     </div>
 
                 </x-dashboard.action-panel>
@@ -75,10 +76,10 @@
                 <x-dashboard.action-panel>
                     <x-secondary-button type="submit" name='is_draft' value='1'>Save as
                         Draft</x-secondary-button>
-                    {{-- <x-form.button name="is_published" value="1">
+                    <x-form.button name="is_published" value="1">
                         Publish
-                    </x-form.button> --}}
-                    <x-form.sci-fi-btn submit name="is_published" value="1" label="Publish" class="mt-2" lg />
+                    </x-form.button>
+
                 </x-dashboard.action-panel>
             </form>
 
