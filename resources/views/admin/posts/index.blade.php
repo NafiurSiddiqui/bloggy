@@ -3,12 +3,14 @@
 
     <x-panel>
         <div class="flex flex-col gap-2 ">
-            <form action="/admin/posts">
+            <form action="/admin/posts" class="mb-4">
 
-                <x-searchbar />
+                {{-- <x-searchbar /> --}}
+                <x-form.input type="search" name="search" id="search" placeholder="search..." sr-only />
             </form>
 
-            <form action="/admin/posts" method="get" class="border border-gray-200 rounded p-2">
+            <form action="/admin/posts" method="get"
+                class="border border-gray-200 rounded-sm p-2 dark:border-zinc-800 dark:bg-darkNavFooter/20">
                 <fieldset class="flex flex-wrap gap-4">
                     <legend class="text-gray-400 font-semibold">Filter by -</legend>
 
