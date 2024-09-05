@@ -106,7 +106,6 @@
                 </div>
 
                 {{-- Share --}}
-                {{-- if NOT edit page --}}
                 <div class="py-4 my-5 ">
                     <div>
                         <div class="flex items-end ">
