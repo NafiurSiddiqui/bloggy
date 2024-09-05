@@ -12,7 +12,6 @@
                 awaiting your decision.
             </p>
 
-
             <div x-data="{ show: false }">
                 <h3 id="accordion-collapse-heading-1">
                     <button type="button"
@@ -27,7 +26,7 @@
                     </button>
                 </h3>
                 <div id="accordion-collapse-body-1" :class="{ hidden: show }"
-                    aria-labelledby="accordion-collapse-heading-1" {{-- class="hidden" --}}>
+                    aria-labelledby="accordion-collapse-heading-1">
                     @foreach ($pending_registrations as $application)
                         <form action="/admin/registration/{{ $application->id }}" method="post">
                             @csrf
@@ -49,9 +48,11 @@
 
                                 <div class="mt-4">
                                     <button type="submit" name="submit_type" value="approve"
-                                        class="text-emerald-600 hover:text-emerald-700 border border-emerald-400 hover:border-emerald-300 hover:bg-emerald-100 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-sm text-xs px-2 py-2 text-center me-2 mb-2 dark:border-emerald-500 dark:text-emerald-500 dark:hover:text-white dark:hover:bg-emerald-600 dark:focus:ring-emerald-800">Approve</button>
-                                    <button type="submit" name="submit_type" value="reject"
-                                        class="text-rose-600 hover:text-rose-700 border border-rose-300 hover:bg-rose-100 hover:border-rose-200 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-sm text-xs px-2 py-2 text-center me-2 mb-2 dark:border-rose-500 dark:text-rose-500 dark:hover:text-white dark:hover:bg-rose-600 dark:focus:ring-rose-900">Reject</button>
+                                        class="border border-emerald-200 dark:text-emerald-400 text-sm hover:text-emerald-600 ms-3 py-1 px-4  text-emerald-400 dark:border-emerald-300  rounded-sm dark:focus:bg-emerald-700 focus:ring-2 dark:focus:ring-emerald-400
+                                    dark:hover:text-white dark:hover:bg-emerald-600 dark:hover:border-emerald-400
+                                        text-center ">Approve</button>
+                                    <x-danger-button submit name="submit_type" value="reject" label="Reject" sm
+                                        noFormId />
                                 </div>
                             </article>
                         </form>

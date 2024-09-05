@@ -1,9 +1,10 @@
 @props(['comment', 'post', 'btn-label', 'editable'])
+{{-- @dd($editable) --}}
 @auth
     <x-panel>
         <form action="/post/{{ $post->slug }}/comments/{{ isset($editable) ? $comment?->id : '' }}" method="post">
             @csrf
-            @if (isset($editable))
+            @if (isset($editable) && $editable)
                 @method('PATCH')
             @endif
             <header class="flex items-center">

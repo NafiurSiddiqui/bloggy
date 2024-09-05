@@ -6,14 +6,15 @@
                 border dark:border-zinc-800 dark:hover:border-darkNavFooter
                 dark:hover:bg-darkNavFooter group hover:bg-gray-200 p-2  rounded-full cursor-pointer mr-2 lg:mr-0"
                >
-            
+     
                 {{-- ping --}}
-                      @if (
-                          (isset($commentaryNotifications) &&
-                              $commentaryNotifications->isNotEmpty() &&
-                              (isset($pendingRegistration) && $pendingRegistration->isNotEmpty())) ||
-                              ($commentaryNotifications->isNotEmpty() || $pendingRegistration->isNotEmpty()))
-            <div x-show="ping">
+                                   @if (
+                                       (isset($commentaryNotifications) &&
+                                           $commentaryNotifications->isNotEmpty() &&
+                                           (isset($pendingRegistration) && $pendingRegistration->isNotEmpty())) ||
+                                           ($commentaryNotifications->isNotEmpty() || $pendingRegistration->isNotEmpty()))
+            {{-- <div x-show="ping"> --}}
+            <div>
                 <span class="sr-only">Notifications</span>
                 <div class="absolute -top-[0.1rem] -start-[0.1rem] ">
                     <span class="relative flex h-3 w-3">
