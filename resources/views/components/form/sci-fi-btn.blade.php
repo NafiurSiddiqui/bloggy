@@ -1,7 +1,9 @@
-@props(['route', 'text' => 'Login', 'lg' => false, 'submit' => false])
+@props(['route', 'label' => 'Login', 'lg' => false, 'submit' => false])
 
 @if ($submit)
-    <button type="submit" class="block">
+    <button type="submit" {{ $attributes->merge([
+        'class' => 'block',
+    ]) }}>
         <svg width="{{ $lg ? '180' : '140' }}" height="{{ $lg ? '80' : '50' }}" viewBox="0 0 134 50" fill="none"
             xmlns="http://www.w3.org/2000/svg" class="group">
             <path
@@ -15,12 +17,14 @@
             <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#14E785"
                 class="group-hover:fill-[#0C0C0C] group-active:fill-[#0C0C0C] group-focus:fill-[#0C0C0C] "
                 font-size="16px" font-family="Arial, sans-serif">
-                {{ $text }}
+                {{ $label }}
             </text>
         </svg>
     </button>
 @else
-    <a href="{{ $route }}" class="w-[180px] block">
+    <a href="{{ $route }}" {{ $attributes->merge([
+        'class' => 'w-[180px] block',
+    ]) }}>
         <svg width="{{ $lg ? '180' : '140' }}" height="{{ $lg ? '80' : '50' }}" viewBox="0 0 134 50" fill="none"
             xmlns="http://www.w3.org/2000/svg" class="group">
             <path
@@ -34,7 +38,7 @@
             <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#14E785"
                 class="group-hover:fill-[#0C0C0C] group-active:fill-[#0C0C0C] group-focus:fill-[#0C0C0C] "
                 font-size="16px" font-family="Arial, sans-serif">
-                {{ $text }}
+                {{ $label }}
             </text>
         </svg>
     </a>
