@@ -1,9 +1,6 @@
 <section>
     <header>
-
         <div class="mb-4">
-
-
             <x-user-avatar lg :user="$user" />
         </div>
         <div>

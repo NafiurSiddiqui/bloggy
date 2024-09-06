@@ -1,9 +1,8 @@
 @props(['user', 'lg' => false, 'sm' => false, 'xs' => false, 'featured' => false, 'noBorder' => false])
 
 @if ($user->avatar)
-
     @if ($lg)
-        <div class="rounded-full border-2 w-36 h-36 bg-center bg-no-repeat bg-cover "
+        <div class="rounded-full border-2 w-36 h-36 bg-center bg-no-repeat bg-cover"
             style="background-image: url({{ asset('storage/' . $user->avatar) }})" aria-label="user avatar">
         </div>
     @elseif($sm)

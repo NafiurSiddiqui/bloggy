@@ -11,8 +11,8 @@
         <meta property="og:image:height" content="300" />
         <meta property="og:url" content="{{ url('/categories/') }}" />
     </x-slot:head>
-    <div class="sm:w-4/5 mt-8 px-2 ">
-        <div class="w-full space-y-4  bg-white px-4 py-8 rounded-xl lg:px-8 lg:py-16">
+    <div class="sm:w-4/5 lg:w-3/5 mt-8 px-2 ">
+        {{-- <div class="w-full space-y-4  bg-white px-4 py-8 rounded-xl lg:px-8 lg:py-16">
             <div class="flex flex-col justify-center items-center">
                 <h1 class="text-2xl font-bold text-zinc-600 w-full text-left">Browse by Category
                 </h1>
@@ -27,6 +27,7 @@
                 @endforeach
             @endif
 
-        </div>
+        </div> --}}
+        <x-browse-by-categories :categories="$categories" />
     </div>
 </x-app-layout>
