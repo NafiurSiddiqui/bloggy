@@ -16,7 +16,7 @@
     </x-slot:head>
 
 
-    <main class=" p-4 md:px-6 2xl:w-4/5">
+    <main class=" p-4 md:px-6 2xl:w-4/5 dark:bg-darkPage">
         @if (isset($featured_posts) && $featured_posts)
             <section>
                 <x-h2>Featured </x-h2>

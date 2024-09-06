@@ -53,8 +53,7 @@
                         </x-td>
                         <x-td>
                             @unless ($category->slug == 'uncategorized')
-                                <a href="/{{ $editHref }}/{{ $category->id }}/edit"
-                                    class=" font-medium w-full text-blue-600 dark:text-blue-500 hover:underline hover:text-blue-600">Edit</a>
+                                <x-text-link href="/{{ $editHref }}/{{ $category->id }}/edit">Edit</x-text-link>
                             @endunless
 
                         </x-td>

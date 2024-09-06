@@ -16,7 +16,7 @@ export default {
                 logo: ["Audiowide", "sans-serif"],
             },
             colors: {
-                darkNavFooter: "#0F1311 ",
+                darkBlack: "#0F1311 ",
                 darkPage: "#181B1A",
                 logoColor: "#29F191 ",
                 darkSectionHeader: "#8fbaa5",

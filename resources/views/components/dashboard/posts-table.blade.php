@@ -23,7 +23,7 @@
             @csrf
             @method('DELETE')
 
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody class="bg-white divide-y divide-zinc-200 dark:bg-darkPostCard dark:divide-zinc-700 ">
 
                 @foreach ($posts as $post)
                     <x-tr>
@@ -67,8 +67,10 @@
                             {{ $post->updated_at->diffForHumans() }}
                         </x-td>
                         <x-td>
-                            <a href="/admin/post/{{ $post->slug }}/edit"
-                                class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                            <x-text-link href="admin/post/{{ $post->slug }}/edit">
+                                Edit
+
+                            </x-text-link>
                         </x-td>
                     </x-tr>
                 @endforeach

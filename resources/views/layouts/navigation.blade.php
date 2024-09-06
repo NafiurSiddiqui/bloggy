@@ -1,4 +1,4 @@
-<div class="dark:bg-darkNavFooter bg-lightNavFooter py-2 lg:p-4">
+<div class="dark:bg-darkBlack bg-lightNavFooter py-2 lg:p-4">
     <div class=" flex items-center mt-1 mb-2 lg:mb-3 ">
         <div class=" flex justify-center w-full -right-8 relative">
             <!-- Logo -->
@@ -67,7 +67,7 @@
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 
-                                    hover:dark:bg-darkNavFooter
+                                    hover:dark:bg-darkBlack
                                     dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                     <x-user-avatar noBorder sm :user="Auth::user()" />
                                     <div class="ml-2">{{ Auth::user()->name }}</div>

@@ -1,4 +1,4 @@
 <tr
-    {{ $attributes->merge(['class' => 'bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/90']) }}>
+    {{ $attributes->merge(['class' => 'bg-white border-b dark:bg-darkPostCard dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-darkBlack']) }}>
     {{ $slot }}
 </tr>

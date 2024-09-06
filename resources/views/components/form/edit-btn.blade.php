@@ -10,7 +10,7 @@
                     <button
                         class="p-2 hover:bg-blue-50 hover:text-blue-500 
                                         dark:hover:text-darkTextHover-600 
-                                        dark:hover:bg-darkNavFooter w-full">Edit</button>
+                                        dark:hover:bg-darkBlack w-full">Edit</button>
                 </form>
             @endif
 
@@ -19,13 +19,12 @@
                     @csrf
                     @method('DELETE')
                     <x-danger-button x-data="" x-on:click="$dispatch('open-modal','confirm-delete')"
-                        label="Delete" class="h-full w-full inline dark:hover:bg-darkNavFooter p-2" />
+                        label="Delete" class="h-full w-full inline dark:hover:bg-darkBlack p-2" />
                 </form>
                 <x-modal-delete message="You sure want to delete this comment?" />
             </div>
         </div>
-        <div
-            class="relative flex rounded text-gray-400  hover:bg-gray-100 dark:hover:bg-darkNavFooter hover:text-gray-500">
+        <div class="relative flex rounded text-gray-400  hover:bg-gray-100 dark:hover:bg-darkBlack hover:text-gray-500">
             <button class=" py-1 px-2 text-xl !leading-none" @click="open = true">
                 <i class="fa-solid fa-ellipsis"></i>
             </button>

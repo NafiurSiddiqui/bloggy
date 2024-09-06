@@ -24,22 +24,19 @@
         <x-modal-delete message="You sure want to delete these {{ $pluralType }}?"
             form-id="{{ $multipleDeleteFormActionPath }}" />
     </div>
-    <x-secondary-button link href="{{ $pathToCreation }}">
+
+    <x-form.button link href="{{ $pathToCreation }}" class="!mt-0" sm>
         Create a {{ $singularType }}
-    </x-secondary-button>
+    </x-form.button>
 </div>
 
 <script>
     //Disable delete all if only uncategoriezed category exists
-
     document.addEventListener("DOMContentLoaded", function() {
         const categoriesTable = document.getElementById('categories_table')?.querySelectorAll(
             'table > tbody > tr');
-
         const uncategorizedRow = document.getElementById("table-row-uncategorized");
         const deleteAllContainer = document.querySelector('.delete-all-container');
-
-
         categoriesTable?.length === 1 && uncategorizedRow ? deleteAllContainer.classList.add('hidden') : null;
 
     });

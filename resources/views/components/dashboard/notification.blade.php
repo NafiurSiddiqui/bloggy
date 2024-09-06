@@ -3,16 +3,16 @@
         <div class="h-16 flex items-center" ">
             <button type="button"
                 class="flex relative items-center  bg-gray-100 dark:bg-darkPostCard 
-                border dark:border-zinc-800 dark:hover:border-darkNavFooter
-                dark:hover:bg-darkNavFooter group hover:bg-gray-200 p-2  rounded-full cursor-pointer mr-2 lg:mr-0"
+                border dark:border-zinc-800 dark:hover:border-darkBlack
+                dark:hover:bg-darkBlack group hover:bg-gray-200 p-2  rounded-full cursor-pointer mr-2 lg:mr-0"
                >
      
                 {{-- ping --}}
-                                   @if (
-                                       (isset($commentaryNotifications) &&
-                                           $commentaryNotifications->isNotEmpty() &&
-                                           (isset($pendingRegistration) && $pendingRegistration->isNotEmpty())) ||
-                                           ($commentaryNotifications->isNotEmpty() || $pendingRegistration->isNotEmpty()))
+                                    @if (
+                                        (isset($commentaryNotifications) &&
+                                            $commentaryNotifications->isNotEmpty() &&
+                                            (isset($pendingRegistration) && $pendingRegistration->isNotEmpty())) ||
+                                            ($commentaryNotifications->isNotEmpty() || $pendingRegistration->isNotEmpty()))
             {{-- <div x-show="ping"> --}}
             <div>
                 <span class="sr-only">Notifications</span>

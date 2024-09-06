@@ -14,7 +14,7 @@
     @else
         <div class="flex items-end gap-2 ">
             <x-category-filter formAction="/admin/subcategories" />
-            <x-secondary-button link href="/admin/subcategories">Reset Filter</x-secondary-button>
+            <x-secondary-button link href="/admin/subcategories" class="py-[0.7rem]">Reset Filter</x-secondary-button>
         </div>
         <x-dashboard.index-actions singular-type="subcategory" plural-type="subcategories"
             multiple-delete-form-action-path="delete-multiple-subcategories"

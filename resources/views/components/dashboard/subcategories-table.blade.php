@@ -26,7 +26,6 @@
                 @foreach ($subcategories as $subcategory)
                     <x-tr>
                         <x-td>
-
                             @if ($subcategory->title == 'Uncategorized')
                                 <x-form.checkbox input-name="bulk_delete_selection" id="bulk_delete_selection"
                                     class="subcategory-delete-checkbox    !cursor-auto" checkbox-only disabled />
@@ -55,14 +54,12 @@
                         </x-td>
                         <x-td>
                             @unless ($subcategory->slug == 'uncategorized')
-                                <a href="/{{ $editHref }}/{{ $subcategory->id }}/edit"
-                                    class=" font-medium w-full text-blue-600 dark:text-blue-500 hover:underline hover:text-blue-600">Edit</a>
+                                <x-text-link href="/{{ $editHref }}/{{ $subcategory->id }}/edit">Edit</x-text-link>
                             @endunless
 
                         </x-td>
                     </x-tr>
                 @endforeach
-                {{-- @endif --}}
             </tbody>
         </form>
     </x-table>

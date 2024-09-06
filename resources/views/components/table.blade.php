@@ -1,5 +1,6 @@
-<table {{ $attributes->merge(['class' => 'w-full divide-y divide-gray-200 dark:divide-gray-700']) }}>
-    <thead class="bg-gray-50 dark:bg-gray-800 ">
+<table
+    {{ $attributes->merge(['class' => 'w-full divide-y divide-zinc-200 dark:divide-zinc-700 dark:bg-darkPostCard dark:text-gray-200 dark:border-zinc-700']) }}>
+    <thead class="bg-gray-50 dark:bg-darkPostCard dark:text-gray-200 dark:border-zinc-700">
         {{ $thead }}
     </thead>
     {{ $slot }}

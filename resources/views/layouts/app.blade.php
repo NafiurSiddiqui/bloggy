@@ -15,7 +15,7 @@
 
 </head>
 
-<body class="font-sans antialiased bg-[#F8F7F5] dark:bg-darkPage dark:text-white/50 overflow-x-clip">
+<body class="font-sans antialiased bg-[#F8F7F5] dark:bg-darkBlack dark:text-white/50 overflow-x-clip">
 
     @include('layouts.navigation')
 
@@ -23,7 +23,7 @@
         {{ $slot }}
         <x-toast.success />
     </div>
-    <footer class="h-[50vh] lg:h-[30vh]  bg-stone-200 flex justify-center items-center dark:bg-darkNavFooter">
+    <footer class="h-[50vh] lg:h-[30vh]  bg-stone-200 flex justify-center items-center dark:bg-darkBlack">
 
         <p class="text-center text-gray-600  dark:text-gray-400 flex items-end">©
             {{ date('Y') }}
