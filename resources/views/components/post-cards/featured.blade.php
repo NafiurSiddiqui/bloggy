@@ -1,8 +1,6 @@
 @props(['post'])
 
 <x-post-cards.layout class="!p-0 w-full">
-    {{-- <div class="flex relative flex-col md:flex-row bg-center bg-cover h-[60vh] lg:h-[80vh] bg-no-repeat"
-        style="background-image: url({{ asset('storage/' . $post->thumbnail) }})"> --}}
     <div class="flex relative flex-col md:flex-row bg-center bg-cover h-[400px] lg:h-[600px] bg-no-repeat"
         style="background-image: url({{ asset('storage/' . $post->thumbnail) }})">
 
