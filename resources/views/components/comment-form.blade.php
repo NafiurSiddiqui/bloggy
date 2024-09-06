@@ -39,7 +39,11 @@
     </x-panel>
 @else
     <p class="text-zinc-400">
-        <a href="/register" class="dark:dark-link-text-color dark:hover:dark-link-text-color-hover">Register</a> or
-        <a href="/login" class="dark-link-text-color dark-link-text-color-hover"">Login</a> to add comments.
+
+        <x-text-link href="/register" class="!text-lg" noUnderline highlight>
+            Register
+        </x-text-link>
+        or
+        <x-text-link href="/login" class="!text-lg" noUnderline highlight>Login</x-text-link> to add comments.
     </p>
 @endauth
