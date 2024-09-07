@@ -17,7 +17,9 @@ export default {
             },
             colors: {
                 darkBlack: "#0F1311 ",
+                lightWhite: "#ffff",
                 darkPage: "#181B1A",
+                lightPage: "#F1F9F5",
                 logoColor: "#29F191 ",
                 darkSectionHeader: "#8fbaa5",
                 darkText: {

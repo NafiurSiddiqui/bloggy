@@ -1,4 +1,4 @@
-<div class="dark:bg-darkBlack bg-lightNavFooter py-2 lg:p-4">
+<div class="dark:bg-darkBlack bg-lightWhite py-2 lg:p-4">
     <div class=" flex items-center mt-1 mb-2 lg:mb-3 ">
         <div class=" flex justify-center w-full -right-8 relative">
             <!-- Logo -->
@@ -12,7 +12,7 @@
             <x-toggle-theme-btn />
         </div>
     </div>
-    <nav x-data="{ open: false }" class="dark:bg-darkPage m-2 ">
+    <nav x-data="{ open: false }" class="bg-lightPage dark:bg-darkPage m-2">
 
         <div class="flex justify-between items-center py-2">
             <div class="flex items-center justify-between w-full">

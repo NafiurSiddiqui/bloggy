@@ -15,7 +15,7 @@
 
 </head>
 
-<body class="font-sans antialiased bg-[#F8F7F5] dark:bg-darkBlack dark:text-white/50 overflow-x-clip">
+<body class="font-sans antialiased bg-lightPage dark:bg-darkBlack dark:text-white/50 overflow-x-clip">
 
     @include('layouts.navigation')
 
