@@ -48,51 +48,47 @@
     const lightSwitch = document.querySelector('.light-switch');
     const htmlDOM = document.querySelector('html');
 
-    toggleBtn.addEventListener('click', () => {
+    const turnOnlightMode = () => {
+        htmlDOM.classList.remove('dark');
+        switchPanel.classList.remove('translate-x-0');
+        switchPanel.classList.add('translate-x-5');
+        darkSwitch.classList.remove('opacity-100', 'ease-in', 'duration-200');
+        darkSwitch.classList.add('opacity-0', 'ease-out', 'duration-100');
+        lightSwitch.classList.add('opacity-100', 'ease-in', 'duration-200');
+        lightSwitch.classList.remove('opacity-0', 'ease-out', 'duration-100');
+    };
 
-        if (htmlDOM.classList.contains('dark')) {
-            htmlDOM.classList.remove('dark');
-        } else {
-            htmlDOM.classList.add('dark');
-        }
-
-
-        // if (toggleBtn.classList.contains('dark:bg-darkToggleBtn')) {
-        //     toggleBtn.classList.remove('dark:bg-darkToggleBtn');
-        //     toggleBtn.classList.add('lightTogglebtn');
-
-        // } else {
-        //     toggleBtn.classList.remove('lightTogglebtn');
-        //     toggleBtn.classList.add('dark:bg-darkToggleBtn');
-        // }
-
-        if (switchPanel.classList.contains('translate-x-0')) {
-            switchPanel.classList.remove('translate-x-0');
-            switchPanel.classList.add('translate-x-5');
-        } else {
-            switchPanel.classList.remove('translate-x-5');
-            switchPanel.classList.add('translate-x-0');
-        }
-
-        if (darkSwitch.classList.contains('opacity-100')) {
-
-            darkSwitch.classList.remove('opacity-100', 'ease-in', 'duration-200');
-            darkSwitch.classList.add('opacity-0', 'ease-out', 'duration-100');
-
-        } else {
-            darkSwitch.classList.remove('opacity-0', 'ease-out', 'duration-100');
-            darkSwitch.classList.add('opacity-100', 'ease-in', 'duration-200');
-
-        }
-
-        if (lightSwitch.classList.contains('opacity-100')) {
-            lightSwitch.classList.remove('opacity-100', 'ease-in', 'duration-200');
-            lightSwitch.classList.add('opacity-0', 'ease-out', 'duration-100');
-        } else {
-            lightSwitch.classList.add('opacity-100', 'ease-in', 'duration-200');
-            lightSwitch.classList.remove('opacity-0', 'ease-out', 'duration-100');
-        }
+    const turnOffLightMode = () => {
+        htmlDOM.classList.add('dark');
+        switchPanel.classList.remove('translate-x-5');
+        switchPanel.classList.add('translate-x-0');
+        darkSwitch.classList.remove('opacity-0', 'ease-out', 'duration-100');
+        darkSwitch.classList.add('opacity-100', 'ease-in', 'duration-200');
+        lightSwitch.classList.remove('opacity-100', 'ease-in', 'duration-200');
+        lightSwitch.classList.add('opacity-0', 'ease-out', 'duration-100');
+    }
 
 
-    });
+    try {
+        const userPreferlightMode = localStorage.getItem('isLightMode') === 'true';
+
+        userPreferlightMode ? turnOnlightMode() : turnOffLightMode();
+
+        toggleBtn.addEventListener('click', () => {
+
+            if (!userPreferlightMode) {
+                localStorage.setItem('isLightMode', true);
+                turnOnlightMode();
+            } else {
+                localStorage.setItem('isLightMode', false);
+                turnOffLightMode();
+            }
+        })
+    } catch (error) {
+
+        toggleBtn.addEventListener('click', () => {
+            htmlDOM.classList.contains('dark') ? turnOnlightMode() : turnOffLightMode()
+        })
+
+    }
 </script>
