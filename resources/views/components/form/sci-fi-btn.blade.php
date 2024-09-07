@@ -23,7 +23,7 @@
     </button>
 @else
     <a href="{{ $route }}" {{ $attributes->merge([
-        'class' => 'w-[180px] block',
+        'class' => ' block',
     ]) }}>
         <svg width="{{ $lg ? '180' : '140' }}" height="{{ $lg ? '80' : '50' }}" viewBox="0 0 134 50" fill="none"
             xmlns="http://www.w3.org/2000/svg" class="group">

@@ -13,7 +13,7 @@
         </div>
     </div>
     <nav x-data="{ open: false }" class="dark:bg-darkPage m-2 ">
-        {{-- <div class=""> --}}
+
         <div class="flex justify-between items-center py-2">
             <div class="flex items-center justify-between w-full">
                 <!-- Navigation Links -->
@@ -28,8 +28,8 @@
                 <!-- Hamburger -->
                 <x-icons.hamburger />
 
-                <div class="flex items-center  ">
-                    <div class="hidden space-x-8 sm:-my-px sm:me-5 lg:flex ">
+                <div class="flex items-center">
+                    <div class="hidden space-x-8 sm:-my-px lg:flex lg:mr-2">
                         @guest()
                             <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
                                 {{ __('Register') }}
