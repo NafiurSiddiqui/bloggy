@@ -2,7 +2,7 @@
 
 @if ($screenSm)
     {{-- used for smaller screens --}}
-    <div x-data={open:false}>
+    <div x-data="{ open: false }">
         <x-panel class="lg:hidden px-2 py-3 fixed bottom-0 w-full left-0 bg-stone-200 z-[10000]">
             <h2
                 class="mb-3 font-semibold text-zinc-500 border-b dark:border-zinc-700 border-zinc-300 dark:text-zinc-300 ">
