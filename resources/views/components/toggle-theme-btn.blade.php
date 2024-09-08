@@ -75,13 +75,17 @@
         userPreferlightMode ? turnOnlightMode() : turnOffLightMode();
 
         toggleBtn.addEventListener('click', () => {
+            const userPreferlightMode = localStorage.getItem('isLightMode') === 'true';
 
-            if (!userPreferlightMode) {
-                localStorage.setItem('isLightMode', true);
-                turnOnlightMode();
-            } else {
+            if (userPreferlightMode) {
                 localStorage.setItem('isLightMode', false);
                 turnOffLightMode();
+                console.log(2);
+            } else {
+
+                localStorage.setItem('isLightMode', true);
+                turnOnlightMode();
+                console.log(1);
             }
         })
     } catch (error) {
@@ -89,6 +93,6 @@
         toggleBtn.addEventListener('click', () => {
             htmlDOM.classList.contains('dark') ? turnOnlightMode() : turnOffLightMode()
         })
-
+        console.log(error);
     }
 </script>
