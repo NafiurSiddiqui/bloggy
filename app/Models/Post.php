@@ -16,8 +16,6 @@ class Post extends Model implements HasMedia, Sitemapable
 {
     use HasFactory, InteractsWithMedia;
 
-    //    protected $guarded = [];
-
     protected $with = ['category', 'subcategory', 'author'];
 
     protected $fillable = [
@@ -45,9 +43,9 @@ class Post extends Model implements HasMedia, Sitemapable
     {
         $query->when(
             $filters['search'] ?? false,
-            fn ($query, $search) =>
+            fn($query, $search) =>
             $query->where(
-                fn ($query) =>
+                fn($query) =>
                 $query->where('title', 'like', '%' . $search . '%')
                     ->orWhere('body', 'like', '%' . $search . '%')
             )
@@ -55,7 +53,7 @@ class Post extends Model implements HasMedia, Sitemapable
 
         $query->when(
             $filters['search'] ?? false,
-            fn ($query, $search) =>
+            fn($query, $search) =>
             $query->orWhereHas('author', function ($query) use ($search) {
                 $query->where('name', 'like', '%' . $search . '%');
             })
@@ -64,7 +62,7 @@ class Post extends Model implements HasMedia, Sitemapable
 
         $query->when(
             $filters['search'] ?? false,
-            fn ($query, $search) =>
+            fn($query, $search) =>
             $query->orWhereHas('category', function ($query) use ($search) {
                 $query->where('title', $search);
             })

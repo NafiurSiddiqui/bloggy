@@ -66,10 +66,11 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 
-                                    hover:dark:bg-darkBlack
-                                    dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                    <x-user-avatar noBorder sm :user="Auth::user()" />
+                                    class="group inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-zinc-500 dark:text-zinc-400
+                                    hover:bg-lightWhite hover:text-zinc-700 
+                                    dark:hover:bg-darkBlack
+                                    dark:hover:text-zinc-300 focus:outline-none transition ease-in-out duration-150">
+                                    <x-user-avatar sm :user="Auth::user()" />
                                     <div class="ml-2">{{ Auth::user()->name }}</div>
 
                                     <div class="ms-1">
@@ -131,7 +132,7 @@
 
             @auth
                 <!-- Responsive Settings Options -->
-                <div class="pt-4 pb-1 border-t border-gray-200   dark:border-darkDivider">
+                <div class="pt-4 pb-1 border-t border-zinc-200   dark:border-darkDivider">
                     <div>
                         @if (auth()->user()->role == 'admin' || auth()->user()->role == 'author')
                             <div>
@@ -167,15 +168,15 @@
                             </div>
                         @endif
 
-                        <div class="border-t dark:border-darkDivider">
-                            <div class="w-full p-4  border border-zinc-900 flex ">
+                        <div class="border-lightDivider dark:border-darkDivider">
+                            <div class="w-full p-4 border border-lightDivider dark:border-zinc-900 flex ">
                                 <x-user-avatar xs :user="Auth::user()" />
                                 <div class="ml-2">
                                     <div
-                                        class="font-medium text-base text-gray-800 dark:text-gray-200 group-hover:text-gray-900">
+                                        class="font-medium text-base text-zinc-800 dark:text-zinc-200 group-hover:text-zinc-900">
                                         {{ Auth::user()->name }}
                                     </div>
-                                    <div class="font-medium text-sm text-gray-500 group-hover:text-gray-600">
+                                    <div class="font-medium text-sm text-zinc-500 group-hover:text-zinc-600">
                                         {{ Auth::user()->email }}</div>
                                 </div>
                             </div>

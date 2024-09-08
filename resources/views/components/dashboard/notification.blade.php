@@ -2,17 +2,17 @@
     <x-slot:trigger>
         <div class="h-16 flex items-center" ">
             <button type="button"
-                class="flex relative items-center  bg-gray-100 dark:bg-darkPostCard 
+                class="flex relative items-center  bg-transparent dark:bg-darkPostCard 
                 border dark:border-zinc-800 dark:hover:border-darkBlack
-                dark:hover:bg-darkBlack group hover:bg-gray-200 p-2  rounded-full cursor-pointer mr-2 lg:mr-0"
+                dark:hover:bg-darkBlack group hover:bg-lightWhite p-2  rounded-full cursor-pointer mr-2 lg:mr-0"
                >
      
                 {{-- ping --}}
-                                    @if (
-                                        (isset($commentaryNotifications) &&
-                                            $commentaryNotifications->isNotEmpty() &&
-                                            (isset($pendingRegistration) && $pendingRegistration->isNotEmpty())) ||
-                                            ($commentaryNotifications->isNotEmpty() || $pendingRegistration->isNotEmpty()))
+                                                            @if (
+                                                                (isset($commentaryNotifications) &&
+                                                                    $commentaryNotifications->isNotEmpty() &&
+                                                                    (isset($pendingRegistration) && $pendingRegistration->isNotEmpty())) ||
+                                                                    ($commentaryNotifications->isNotEmpty() || $pendingRegistration->isNotEmpty()))
             {{-- <div x-show="ping"> --}}
             <div>
                 <span class="sr-only">Notifications</span>
@@ -26,7 +26,8 @@
             </div>
             @endif
             {{-- icon --}}
-            <i class="fa-solid fa-bell text-zinc-400 dark:text-zinc-600 group-hover:text-emerald-100/60 "></i>
+            <i
+                class="fa-solid fa-bell text-zinc-300 dark:text-zinc-600 group-hover:text-zinc-400 dark:group-hover:text-emerald-100/60 "></i>
 
             </button>
         </div>

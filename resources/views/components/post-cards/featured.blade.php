@@ -1,9 +1,10 @@
 @props(['post'])
 
+
+
 <x-post-cards.layout class="!p-0 w-full">
     <div class="flex relative flex-col md:flex-row bg-center bg-cover h-[400px] lg:h-[600px] bg-no-repeat"
         style="background-image: url({{ asset('storage/' . $post->thumbnail) }})">
-
         <x-post-cards.featured-overlay class="h-full" />
         <div class="flex flex-wrap items-baseline justify-end space-y-1 space-x-4 absolute right-4 top-4">
             <x-labels.category :category="$post->category" />

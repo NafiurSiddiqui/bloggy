@@ -22,6 +22,7 @@ export default {
                 lightPage: "#F1F9F5",
                 logoColor: "#29F191 ",
                 darkSectionHeader: "#8fbaa5",
+                lightSectionHeader: "#676A68",
                 darkText: {
                     100: "#dbffed",
                     200: "#c7f5d8",
@@ -37,6 +38,7 @@ export default {
                 darkToggleBtn: "#080A09",
                 darkToggleSwitch: "#191D1B",
                 darkDivider: "#1f2421",
+                lightDivider: "#CDDED6",
                 darkPostCard: "#1F2120",
                 lightToggleBtn: "#E9E9E9",
                 lightToggleSwitch: "#F8FFFD",
