@@ -21,7 +21,7 @@
                     <x-nav-link :href="route('posts.all')" :active="request()->routeIs('posts.all')">
                         {{ __('All Posts') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('categories.all')" :active="request()->routeIs('categories')">
+                    <x-nav-link :href="route('categories.all')" :active="request()->routeIs('categories.all')">
                         {{ __('Categories') }}
                     </x-nav-link>
                 </div>
@@ -110,12 +110,10 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
             <div class="pt-2 pb-3 space-y-1 ">
-                {{-- @if (request()->routeIs('home') || request()->routeIs('profile.*')) --}}
-
                 <x-responsive-nav-link :href="route('posts.all')" :active="request()->routeIs('posts.all')">
                     {{ __('Posts') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('categories.all')" :active="request()->routeIs('category.*')">
+                <x-responsive-nav-link :href="route('categories.all')" :active="request()->routeIs('categories.*')">
                     {{ __('Categories') }}
                 </x-responsive-nav-link>
                 {{-- @endif --}}

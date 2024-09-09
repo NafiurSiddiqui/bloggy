@@ -2,9 +2,9 @@
     <x-slot:heading>Dashboard</x-slot:heading>
     {{-- Here you need to notify if there is any application pending --}}
     {{-- render table of applications with approve or reject actions --}}
-    <div class="my-4 leading-6 border dark:border-zinc-700 px-2 py-4 rounded-sm ">
-
-        <h2 class="font-bold text-zinc-500 text-lg dark:text-zinc-400">Notifications</h2>
+    {{-- <div class="my-4 leading-6 border dark:border-zinc-700 px-2 py-4 rounded-sm "> --}}
+    <x-panel>
+        <h2 class="font-bold text-zinc-500 text-lg dark:text-lightText-200">Notifications</h2>
 
         @if (isset($pending_registrations_count) && $pending_registrations_count > 0)
             <p class="mb-4 dark:text-zinc-300 ">
@@ -62,8 +62,10 @@
 
             </div>
         @else
-            <p class="text-zinc-600 text-sm">No Notifications</p>
+            <p class="text-zinc-600 dark:text-lightText-300 text-sm">No Notifications</p>
         @endif
-    </div>
+    </x-panel>
+
+    {{-- </div> --}}
 
 </div>

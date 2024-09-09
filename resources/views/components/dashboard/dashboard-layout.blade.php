@@ -7,10 +7,10 @@
 
     <div class="flex min-h-screen w-full">
         <aside
-            class="hidden lg:flex flex-col w-64 bg-stone-100 
+            class="hidden lg:flex flex-col w-64 bg-lightWhite 
             dark:bg-darkBlack 
             dark:border-r dark:border-zinc-800 text-white px-4 pl-6">
-            <ul class="space-y-2  dark:bg-darkPostCard ">
+            <ul class="space-y-2 bg-lightPage  dark:bg-darkPostCard ">
                 <x-responsive-nav-link href="/admin" :active="request()->is('admin')">
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
@@ -35,7 +35,7 @@
             </ul>
         </aside>
         <section class="flex-grow p-4 relative w-full md:mr-6 dark:bg-darkPage">
-            <h1 class="font-semibold text-xl mb-4 text-gray-500 dark:text-zinc-300">
+            <h1 class="font-semibold text-xl text-gray-500 dark:text-zinc-300">
                 {{ $heading ?? 'Default heading' }}
             </h1>
             {{ $slot }}

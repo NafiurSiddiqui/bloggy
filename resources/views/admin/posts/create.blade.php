@@ -4,7 +4,7 @@
     <x-slot:heading>Create a Post</x-slot:heading>
 
     @if (isset($categories_are_empty) && $categories_are_empty)
-        <p class="mt-2 text-gray-600">Whoops! Categories are empty. On the first run of the application this is expected.
+        <p class="mt-2 text-zinc-600">Whoops! Categories are empty. On the first run of the application this is expected.
             No worries!</p>
         <a href="/admin/categories" class="underline hover:text-blue-500 my-4 block">Let's quickly create a category and
             subcategory first</a>
@@ -26,14 +26,14 @@
                     @enderror
                 </div>
                 <x-panel class="px-2 py-3 my-8 ">
-                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-gray-400 border-b border-gray-200">Select
+                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-zinc-400 border-b border-zinc-200">Select
                         Thumbnail</h2>
                     <x-form.input name="thumbnail" type="file" required />
                     <x-form.input name="thumbnail_alt_txt" label="Alt Txt" required />
                 </x-panel>
 
                 <x-panel class="px-2 py-3 my-8">
-                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-gray-400 border-b border-gray-200">Select
+                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-zinc-400 border-b border-zinc-200">Select
                         Categories</h2>
 
                     <div class="flex justify-start space-x-4">
@@ -44,7 +44,7 @@
 
 
                 <x-panel class="px-2 py-3 my-8 ">
-                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-gray-400 border-b border-gray-200">Post Type
+                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-zinc-400 border-b border-zinc-200">Post Type
                     </h2>
                     <div class="flex space-x-4">
                         <x-form.checkbox input-name="is_featured" id="is_featured" label="Featured" />
@@ -53,7 +53,7 @@
                 </x-panel>
                 {{-- SEO --}}
                 <x-panel class="px-2 py-3 my-8 ">
-                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-gray-400 border-b border-gray-200">SEO
+                    <h2 class="mb-3 dark:border-zinc-700 font-semibold text-zinc-400 border-b border-zinc-200">SEO
                         fields</h2>
                     <x-form.input name="meta_title" required />
                     <x-form.input name="meta_description" required />

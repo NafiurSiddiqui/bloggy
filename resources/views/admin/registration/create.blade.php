@@ -51,7 +51,7 @@
                 <x-text-link href="{{ route('login') }}">
                     Sign In
                 </x-text-link>
-                <x-form.sci-fi-btn submit text="Register" />
+                <x-form.sci-fi-btn submit label="Register" />
             </div>
         </form>
     </x-guest-layout>

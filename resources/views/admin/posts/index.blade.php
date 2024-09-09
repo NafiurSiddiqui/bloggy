@@ -37,7 +37,7 @@
         <x-pagination-holder :item="$posts" />
     @elseif(isset($categories_are_empty) && $categories_are_empty)
         <p class="mt-2 text-gray-600">No posts yet.</p>
-        <a href="/admin/categories" class="underline hover:text-blue-500 my-4 block">Let's quickly create a category
+        <a href="/admin/categories" class="underline hover:text-emerald-500 my-4 block">Let's quickly create a category
             and
             subcategory first</a>
         <x-panel>
@@ -46,7 +46,7 @@
     @elseif(request()->query() > 0)
         <p class="rounded mt-4 text-center py-4 font-semibold text-gray-500 border-2"> Nothing found </p>
     @else
-        <a href="/admin/post/create" class="underline hover:text-blue-500 my-4 block">Let's create a fresh post!
+        <a href="/admin/post/create" class="underline hover:text-emerald-500 my-4 block">Let's create a fresh post!
         </a>
     @endif
 

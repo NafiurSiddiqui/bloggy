@@ -1,7 +1,7 @@
 @props(['comment', 'post', 'btn-label', 'editable'])
 {{-- @dd($editable) --}}
 @auth
-    <x-panel>
+    <x-panel class="">
         <form action="/post/{{ $post->slug }}/comments/{{ isset($editable) ? $comment?->id : '' }}" method="post">
             @csrf
             @if (isset($editable) && $editable)
@@ -10,7 +10,8 @@
             <header class="flex items-center">
                 <x-user-avatar xs :user="auth()->user()" />
                 <h3 class="font-bold text-lightText-600 dark:text-zinc-300 text-lg ml-3">
-                    {{ isset($editable) ? 'Edit Your' : 'Add a' }} comment
+
+                    {{ isset($editable) && $editable ? 'Edit Your' : 'Add a' }} comment
                 </h3>
             </header>
 

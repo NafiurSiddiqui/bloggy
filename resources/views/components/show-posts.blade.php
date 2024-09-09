@@ -18,15 +18,15 @@
             @if (isset($subcategory))
                 <x-h2>
                     <a href="/categories/{{ $subcategory->category->slug }}"
-                        class="hover:text-gray-700 hover:underline">{{ $subcategory->category->title }}</a>/
+                        class="hover:text-zinc-700 hover:underline">{{ $subcategory->category->title }}</a>/
                     {{ $subcategory->title }}
-                    <span class="!text-gray-500 !text-lg">({{ $posts->count() }}
+                    <span class="!text-zinc-500 !text-lg">({{ $posts->count() }}
                         posts)</span>
                 </x-h2>
             @else
                 <x-h2>{{ $header ? ucwords($header) : 'Header here' }}:
                     {{ isset($title) ? $title : 'Title here' }} <span
-                        class="!text-gray-500 !text-lg">({{ $posts->count() }}
+                        class="!text-zinc-500 !text-lg">({{ $posts->count() }}
                         posts)</span></x-h2>
             @endif
 
@@ -42,6 +42,9 @@
             @endif
         </section>
     @else
-        <p>No posts yet. stay tuned for upcoming posts.</p>
+        <x-panel>
+            <p class="m-4 font-semibold text-lightText-600 dark:text-lightText-400">No posts yet. stay tuned for upcoming
+                posts.</p>
+        </x-panel>
 @endif
 </main>

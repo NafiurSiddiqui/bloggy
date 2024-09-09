@@ -145,8 +145,8 @@
                 </div>
             @endif
             {{-- Comments --}}
-            <section class="flex flex-col justify-center mt-10 space-y-4 w-full h-full">
-                <div class="w-full md:w-4/5 lg:w-3/5 space-y-4 ">
+            <section class="flex flex-col justify-center mt-10  w-full h-full">
+                <div class="w-full md:w-4/5 lg:w-3/5 ">
                     @if ($reply)
                         <x-reply-form :post="$post" :comment="$comment" :reply="$reply" editable />
                     @else

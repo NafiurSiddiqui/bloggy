@@ -8,7 +8,7 @@
 
 
 <div x-data="{ reply: false, replies: {{ isset($onEditPage) ? 'true' : 'false' }} }">
-    <x-panel>
+    <x-panel class="!my-0">
         <article class="relative">
             <div class="flex  justify-between ">
                 <div class="flex space-x-2 w-full">
@@ -108,8 +108,8 @@
     <div class="ml-4 pt-4 dark:border-zinc-700" :class="{ 'border-l-2': (replies || reply) }">
         {{-- reply form --}}
         {{-- replies --}}
+        <x-reply-form :post="$post" :comment="$comment" />
         <section class="space-y-4" x-show="replies">
-            <x-reply-form :post="$post" :comment="$comment" />
             @if ($comment->replies)
                 @foreach ($comment->replies as $reply)
                     @unless (isset($onEditPage) && auth()->user()->id == $reply->commentator->id)

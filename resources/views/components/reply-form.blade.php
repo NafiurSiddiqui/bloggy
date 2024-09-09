@@ -1,7 +1,7 @@
    @props(['comment', 'post', 'reply', 'btn-label', 'editable'])
 
    @auth
-       <x-panel class="rounded-l-none" x-show="reply">
+       <x-panel class="rounded-l-none !my-0" x-show="reply">
            <form
                action="/post/{{ $post->slug }}/comments/{{ $comment->id }}/reply/{{ isset($editable) ? "$reply->id/edit" : '' }}"
                method="post">
@@ -30,8 +30,7 @@
                        </x-secondary-button>
                    @endif
                    <div class="w-full flex justify-end">
-
-                       <x-form.sci-fi-btn submit text="{{ isset($editable) ? 'Update' : 'Post' }}" />
+                       <x-form.sci-fi-btn submit label="{{ isset($editable) ? 'Update' : 'Post' }}" />
                    </div>
                </div>
            </form>

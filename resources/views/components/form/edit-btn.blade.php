@@ -5,7 +5,7 @@
         <div class="border hidden border-gray-300 dark:border-zinc-700 flex-col justify-center space-y-1 py-2 rounded 
                         mt-4 mr-1"
             :class="{ 'flex': open, 'hidden': !open }" x-show="open">
-            @if (auth()->user()->role !== 'admin' || auth()->user()?->id === $comment->user_id)
+            @if (auth()->user()->role !== 'admin' || auth()->user()?->id === ($comment ? $comment->user_id : $reply->user_id))
                 <form action="{{ $editRoute }}" method="get" class="w-full">
                     <button
                         class="p-2 hover:bg-blue-50 hover:text-blue-500 

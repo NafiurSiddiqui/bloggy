@@ -23,11 +23,10 @@
         {{ $slot }}
         <x-toast.success />
     </div>
-    <footer class="h-[50vh] lg:h-[30vh]  bg-stone-200 flex justify-center items-center dark:bg-darkBlack">
+    <footer class="h-[50vh] lg:h-[30vh] bg-lightWhite flex justify-center items-center dark:bg-darkBlack">
 
-        <p class="text-center text-gray-600  dark:text-gray-400 flex items-end">©
-            {{ date('Y') }}
-            <x-icons.logo />
+        <p class="text-center text-gray-600  dark:text-gray-400 flex items-end">
+            ©{{ date('Y') }} <x-icons.logo />
             . All rights reserved.
         </p>
     </footer>
