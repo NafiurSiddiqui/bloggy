@@ -67,9 +67,8 @@
                             {{ $post->updated_at->diffForHumans() }}
                         </x-td>
                         <x-td>
-                            <x-text-link href="admin/post/{{ $post->slug }}/edit">
+                            <x-text-link href="/admin/post/{{ $post->slug }}/edit">
                                 Edit
-
                             </x-text-link>
                         </x-td>
                     </x-tr>

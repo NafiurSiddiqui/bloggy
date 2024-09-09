@@ -64,7 +64,7 @@
                 <x-form.input name="og_title" :value="old('og_title', $post->og_title)" />
             </x-panel>
 
-            <x-dashboard.action-panel-sm>
+            <x-dashboard.action-panel>
                 <x-secondary-button type="submit" name='is_draft' value='1'>Save as
                     Draft</x-secondary-button>
                 <x-secondary-button type="submit" name='is_unpublished' value='1'
@@ -74,9 +74,9 @@
                 </x-form.button>
                 <x-danger-button formButton x-data=""
                     x-on:click="$dispatch('open-modal','confirm-delete')" class="mt-12 mb-4">Delete</x-danger-button>
-            </x-dashboard.action-panel-sm>
+            </x-dashboard.action-panel>
 
-            <x-dashboard.action-panel-lg>
+            <x-dashboard.action-panel screenSm>
                 <x-secondary-button type="submit" name='is_draft' value='1'>Save as
                     Draft</x-secondary-button>
                 <x-secondary-button type="submit" name='is_unpublished' value='1'
@@ -86,7 +86,7 @@
                 </x-form.button>
                 <x-danger-button formButton x-data=""
                     x-on:click="$dispatch('open-modal','confirm-delete')" class="mt-12 mb-4">Delete</x-danger-button>
-            </x-dashboard.action-panel-lg>
+            </x-dashboard.action-panel>
             @error('body')
                 <span class="text-red-500 text-xs">{{ $message }}</span>
             @enderror
