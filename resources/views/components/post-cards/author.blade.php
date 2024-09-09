@@ -9,7 +9,7 @@
         <div class="ml-3">
             <h5
                 class="font-bold text-lightText
-             hover:underline hover:text-lightTextHover hoverTextEffect dark:text-darkText-100 dark:hover:text-darkTextHover-600">
+             hover:underline hover:text-emerald-500 hoverTextEffect dark:text-darkText-100 dark:hover:text-darkTextHover-600">
                 @if (isset($noHref) && $noHref)
                     <div>
                         {{ $post->author->name }}

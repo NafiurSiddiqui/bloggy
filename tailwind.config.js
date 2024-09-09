@@ -33,7 +33,7 @@ export default {
                     600: "#6de7aa",
                 },
                 lightText: "#38433E",
-                lightTextHover: "#2a5c45",
+                lightTextHover: "#5d8472",
                 primaryBtnBg: "#14E785",
                 darkLabel: "#54625D",
                 darkLabelHover: "#35584c",
