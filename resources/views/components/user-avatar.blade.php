@@ -1,4 +1,12 @@
-@props(['user', 'lg' => false, 'sm' => false, 'xs' => false, 'featured' => false, 'noBorder' => false])
+@props([
+    'user',
+    'lg' => false,
+    'sm' => false,
+    'xs' => false,
+    'featured' => false,
+    'noBorder' => false,
+    'attributes' => [],
+])
 
 @if ($user->avatar)
     @if ($lg)
@@ -16,10 +24,10 @@
     @endif
 @else
     @if ($lg)
-        <x-user-no-avatar :featured="$featured" :noBorder="$noBorder" lg />
+        <x-user-no-avatar :featured="$featured" :noBorder="$noBorder" lg {{ $attributes }} />
     @elseif($sm)
-        <x-user-no-avatar :featured="$featured" :noBorder="$noBorder" sm />
+        <x-user-no-avatar :featured="$featured" :noBorder="$noBorder" sm {{ $attributes }} />
     @else
-        <x-user-no-avatar :featured="$featured" :noBorder="$noBorder" />
+        <x-user-no-avatar :featured="$featured" :noBorder="$noBorder" {{ $attributes }} />
     @endif
 @endif

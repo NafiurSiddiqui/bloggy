@@ -122,3 +122,7 @@ div.ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content .ck-menu-bar {
 .dark-link-text-color-hover {
     @apply text-darkTextHover-600;
 }
+
+.hoverTextEffect {
+    @apply hover:tracking-[0.1px];
+}

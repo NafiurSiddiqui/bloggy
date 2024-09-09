@@ -70,7 +70,7 @@
                                     hover:bg-lightWhite hover:text-zinc-700 
                                     dark:hover:bg-darkBlack
                                     dark:hover:text-zinc-300 focus:outline-none transition ease-in-out duration-150">
-                                    <x-user-avatar sm :user="Auth::user()" />
+                                    <x-user-avatar sm :user="Auth::user()" class="opacity-30 group-hover:opacity-80" />
                                     <div class="ml-2">{{ Auth::user()->name }}</div>
 
                                     <div class="ms-1">

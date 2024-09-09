@@ -7,7 +7,9 @@
     <div class="flex items-center text-sm">
         <x-user-avatar sm :user="$post->author" featured="{{ $featured }}" />
         <div class="ml-3">
-            <h5 class="font-bold text-zinc-700 dark:text-darkText-100 dark:hover:text-darkTextHover-600">
+            <h5
+                class="font-bold text-lightText
+             hover:underline hover:text-lightTextHover hoverTextEffect dark:text-darkText-100 dark:hover:text-darkTextHover-600">
                 @if (isset($noHref) && $noHref)
                     <div>
                         {{ $post->author->name }}
