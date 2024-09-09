@@ -5,7 +5,7 @@
 
     <div class="flex flex-col justify-between">
         <div>
-            <x-post-cards.header>
+            <x-post-cards.header-layout>
                 <x-post-cards.heading :post="$post" />
                 <div class="relative ">
                     <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->thumbnail_alt_txt }}"
@@ -15,7 +15,7 @@
 
                 <x-labels.category :category="$post->category" />
                 <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" />
-            </x-post-cards.header>
+            </x-post-cards.header-layout>
             <x-post-cards.description :post="$post" />
         </div>
         <x-post-cards.author :post="$post" />
