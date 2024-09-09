@@ -1,7 +1,7 @@
 @props(['post', 'no-href-author', 'no-href-category'])
 {{-- setting no-href will prevents make the category labels plain labels without links --}}
 
-<x-post-cards.layout class="!p-0 ">
+<x-post-cards.layout class="!p-0">
 
     <div class="flex h-full">
         <div class="flex flex-col justify-between w-full h-full p-6 xl:p-8 relative ">
