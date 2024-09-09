@@ -36,7 +36,7 @@
         <article class="mt-12 lg:w-4/5">
             <div class="space-y-4">
                 <div class="mb-10">
-                    <h1 class="font-bold text-3xl lg:text-4xl dark:text-zinc-200 ">
+                    <h1 class="font-bold text-3xl text-lightText-700 lg:text-4xl dark:text-zinc-200 ">
                         {{ $post->title }}
                     </h1>
                     <div class="mt-4">
@@ -73,31 +73,33 @@
                 <div class="my-8">
                     <ul class="flex justify-between">
                         <li class="box-border  w-1/2 lg:w-2/5 p-1 mr-2 group">
+                            {{-- @dd($previousPost) --}}
                             @if ($previousPost)
-                                <a href="/post/{{ $previousPost->slug }}">
+                                <a href="/post/{{ $previousPost->slug }}" class="opacity-70 hover:opacity-100">
                                     {{-- fontawesome previous btn --}}
                                     <div
-                                        class="italic mb-2 text-sm text-left dark:text-darkText-100/70 dark:hover:text-darkTextHover-600  transition-all duration-200 ease-in-out">
-                                        <i class="fa-solid fa-chevron-left"></i>
+                                        class="italic mb-2 text-sm text-left dark:text-darkText-100/70 dark:hover:text-darkTextHover-600 text-lightText transition-all duration-200 ease-in-out">
+                                        <i class="fa-solid fa-chevron-left text-lightText-600"></i>
                                         Previous
                                     </div>
                                     <span
-                                        class="font-semibold dark:text-darkText-100/70 dark:hover:text-darkTextHover-600  transition-all duration-200 ease-in-out text-left">{{ $previousPost->title }}
+                                        class="font-semibold dark:text-darkText-100/70 dark:hover:text-darkTextHover-600 hover:text-emerald-500 hoverTextEffect hover:underline text-lightText-700   transition-all duration-200 ease-in-out text-left">{{ $previousPost->title }}
                                     </span>
                                 </a>
                             @endif
                         </li>
                         <li class="box-border w-1/2 lg:w-2/5 p-1 group">
                             @if ($nextPost)
-                                <a href="/post/{{ $nextPost->slug }}">
+                                <a href="/post/{{ $nextPost->slug }}" class="opacity-70 hover:opacity-100">
 
                                     <div
-                                        class="italic mb-2 text-sm text-right dark:text-darkText-100/70 dark:hover:text-darkTextHover-600  transition-all duration-200 ease-in-out">
-                                        <i class="fa-solid fa-chevron-right"></i>
+                                        class="italic mb-2 text-sm text-right dark:text-darkText-100/70 text-lightText  dark:hover:text-darkTextHover-600
+                                         transition-all duration-200 ease-in-out">
+                                        <i class="fa-solid fa-chevron-right text-lightText-600"></i>
                                         Next
                                     </div>
                                     <span
-                                        class="font-semibold dark:text-darkText-100/70 dark:hover:text-darkTextHover-600  transition-all duration-200 ease-in-out inline-block text-right">{{ $nextPost->title }}
+                                        class="font-semibold dark:text-darkText-100/70 dark:hover:text-darkTextHover-600 hover:text-emerald-500 hoverTextEffect hover:underline text-lightText-700 transition-all duration-200 ease-in-out block text-right">{{ $nextPost->title }}
                                     </span>
                                 </a>
                             @endif
@@ -106,35 +108,35 @@
                 </div>
 
                 {{-- Share --}}
-                <div class="py-4 my-5 ">
+                <div class="py-4 my-5">
                     <div>
                         <div class="flex items-end ">
-                            <span class="font-bold text-emerald-100 text-lg">Share</span>
+                            <span class="font-bold text-lightText-500 dark:text-emerald-100 text-lg">Share</span>
                             <div class="">
                                 <x-icons.share-icon class="opacity-90" />
                             </div>
                         </div>
-                        <x-hr class="bg-gray-400" />
+                        <x-hr />
                     </div>
                     <div class="flex items-center justify-center">
                         <div class="flex justify-between items-center w-3/5 lg:w-[15rem]">
                             <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/post/' . $post->slug) }}"
                                 target="_blank" rel="noopener noreferrer nofollow" class="group">
                                 <x-icons.facebook
-                                    class="transition-colors dark:fill-darkText-100/50 dark:group-hover:fill-darkTextHover-600" />
+                                    class="transition-colors dark:fill-darkText-100/50 dark:group-hover:fill-darkTextHover-600 fill-lightText-400 group-hover:fill-emerald-400 " />
 
                             </a>
 
                             <a href="https://twitter.com/intent/tweet?url={{ url('/post/' . $post->slug) }}"
                                 target="_blank" rel="noopener noreferrer nofollow" class="group">
                                 <x-icons.twitter-x
-                                    class="transition-colors dark:fill-darkText-100/50 dark:group-hover:fill-darkTextHover-600" />
+                                    class="transition-colors dark:fill-darkText-100/50 dark:group-hover:fill-darkTextHover-600 fill-lightText-400 group-hover:fill-emerald-400" />
                             </a>
                             <a href="https://www.linkedin.com/shareArticle?url= {{ url('/post/' . $post->slug) }}"
                                 target="_blank" rel="noopener noreferrer nofollow" class="group">
 
                                 <x-icons.linkedin
-                                    class="transition-colors dark:fill-darkText-100/50 dark:group-hover:fill-darkTextHover-600" />
+                                    class="transition-colors dark:fill-darkText-100/50 dark:group-hover:fill-darkTextHover-600 fill-lightText-400 group-hover:fill-emerald-400" />
                             </a>
 
                         </div>

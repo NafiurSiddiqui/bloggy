@@ -5,10 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -51,7 +47,7 @@ class PostController extends Controller
         $nextPost = Post::where('id', '>', $post->id)->where('is_published', 1)->first();
         // get the immediate previous post
         $previousPost = Post::where('id', '<', $post->id)->where('is_published', 1)->get()->last();
-        // dd($post->id, $nextPost);
+        // dd($post->id, $previousPost);
         $recentPosts =
             $posts =  Post::where('is_published', 1)
             ->latest()
