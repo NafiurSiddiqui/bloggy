@@ -5,16 +5,7 @@
         <form action="/admin/post/{{ $post->slug }}" method="post" enctype="multipart/form-data" class="max-w-xl">
             @csrf
             @method('PATCH')
-            {{-- TODO: Remove the test errors below --}}
-            @if ($errors->any())
-                <div class="bg-rose-400 ">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
             <x-form.input name="title" :value="old('title', $post->title)" />
             <x-form.input name="slug" :value="old('slug', $post->slug)" />
             <x-form.textarea name="description">
