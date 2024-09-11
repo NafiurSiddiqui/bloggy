@@ -19,7 +19,7 @@
                     Create post
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link href="/admin/posts" :active="request()->is('admin.posts')">
+                <x-responsive-nav-link href="/admin/posts" :active="request()->is('admin/posts')">
                     All Posts
                 </x-responsive-nav-link>
 
