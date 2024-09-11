@@ -27,7 +27,7 @@ class CategoryFilter extends Component
         $filter = request('category_filter');
 
         return view('components.category-filter', [
-            'categories' => \App\Models\Category::all(),
+            'categories' => Category::all()->sortBy('title'),
             'currentCategory' => isset($filter) ? Category::firstWhere('id', $filter) : null
         ]);
     }

@@ -1,7 +1,5 @@
 @props(['formAction', 'isPostsPage' => false])
 
-
-
 @if (isset($formAction))
 
     <form x-data="{ selectedOption: '' }" action="{{ $formAction }}" id="filterByCategory" name="filterByCategory" method="get"

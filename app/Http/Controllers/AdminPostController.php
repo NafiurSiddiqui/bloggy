@@ -18,322 +18,325 @@ class AdminPostController extends Controller
     public function index(): View
     {
         // dd(request()->all());
-        $posts = Post::with('author', 'category')->latest()->simplePaginate(10);
+        // $posts = Post::with('author', 'category')->latest()->simplePaginate(10);
 
-        $categoryFilter = request()->input('category_filter');
-        $statusFilter = request()->input('status_filter');
-        $authorFilter = request()->input('admin_filter'); //gets the id
-        $sortable = request('sort');
+        // $categoryFilter = request()->input('category_filter');
+        // $statusFilter = request()->input('status_filter');
+        // $authorFilter = request()->input('admin_filter'); //gets the id
+        // $sortable = request('sort');
 
-        $filteredCategory = $categoryFilter && $categoryFilter !== '' ?
-            Post::where('category_id', $categoryFilter)
-            ->with('author', 'category')
+        // $filteredCategory = $categoryFilter && $categoryFilter !== '' ?
+        //     Post::where('category_id', $categoryFilter)
+        //     ->with('author', 'category')
+        //     ->simplePaginate(10)
+        //     ->withQueryString()
+        //     : $posts;
+
+
+
+        // //CATEGORY FILTER
+        // if ((!$authorFilter && !$statusFilter) && $filteredCategory) {
+
+        //     if ($categoryFilter && $filteredCategory->isNotEmpty()) {
+
+        //         $posts = $filteredCategory;
+        //     } elseif ($categoryFilter && $filteredCategory->isEmpty() && !$authorFilter && !$statusFilter) {
+
+        //         //flash message
+        //         session()->now('notify', 'No posts found in this category');
+        //     }
+        // }
+
+        // //STATUS FILTER
+        // $posts = $statusFilter && $statusFilter != '' ?
+        //     Post::where($statusFilter, 1)
+        //     ->with('author', 'category')
+        //     ->latest()
+        //     ->simplePaginate(10)
+        //     ->withQueryString()
+        //     : $posts;
+
+        // //ADMIN FILTER
+        // $filteredAuthors = $authorFilter && $authorFilter != null ?
+        //     Post::where('user_id', $authorFilter)
+        //     ->with('author', 'category')
+        //     ->latest()
+        //     ->simplePaginate(10)
+        //     ->withQueryString()
+        //     : $posts;
+
+        // $posts = ($authorFilter && $filteredAuthors->isNotEmpty()) ? $filteredAuthors : $posts;
+
+        // //MULTIPLE FILTER
+        // if ($categoryFilter && $statusFilter && !$authorFilter) {
+
+        //     $result = Post::where('category_id', $categoryFilter)
+        //         ->with('author', 'category')
+        //         ->where(
+        //             $statusFilter,
+        //             1
+        //         )->latest()
+        //         ->simplePaginate(10)
+        //         ->withQueryString();
+
+        //     if (($categoryFilter && $statusFilter) && $result->isNotEmpty()) {
+
+        //         $posts = $filteredCategory;
+        //     } elseif (($categoryFilter && $statusFilter && !$authorFilter) && $result->isEmpty() && !$authorFilter) {
+        //         //flash message
+        //         session()->now('notify', 'No posts found for your query');
+        //     }
+        // }
+
+        // if ($categoryFilter && $authorFilter && !$statusFilter) {
+
+        //     //query for all the posts where (category_id == categoryFilter AND  WHERE user_id == $authorFilter)
+        //     $result = Post::where('category_id', $categoryFilter)
+        //         ->with('author', 'category')
+        //         ->where(
+        //             'user_id',
+        //             $authorFilter
+        //         )->latest()
+        //         ->simplePaginate(10)
+        //         ->withQueryString();
+
+        //     if ($categoryFilter && $result->isNotEmpty()) {
+
+        //         $posts = $result;
+        //     } elseif ($categoryFilter && $result->isEmpty()) {
+        //         //flash message
+        //         session()->now('notify', 'No posts found for this query');
+        //     }
+        // }
+
+        // if ($authorFilter && $statusFilter && !$categoryFilter) {
+
+        //     //give me all the posts WHERE id === $authorFilter AND $statusFilter == 1
+        //     $result = Post::where('user_id', $authorFilter)
+        //         ->with('author', 'category')
+        //         ->where($statusFilter, 1)
+        //         ->latest()
+        //         ->simplePaginate(10)
+        //         ->withQueryString();
+
+        //     if ($authorFilter && $result->isNotEmpty()) {
+
+        //         $posts = $result;
+        //     } elseif ($authorFilter && $result->isEmpty()) {
+        //         //flash message
+        //         session()->now('notify', 'No posts found for this query');
+        //     }
+        // }
+
+        // if ($categoryFilter && $statusFilter && $authorFilter) {
+
+        //     $result = Post::where('category_id', $categoryFilter)
+        //         ->with('author', 'category')
+        //         ->where($statusFilter, 1)
+        //         ->where('user_id', $authorFilter)
+        //         ->latest()
+        //         ->simplePaginate(10)
+        //         ->withQueryString();
+
+        //     if ($result->isNotEmpty()) {
+        //         $posts = $result;
+        //     } elseif ($result->isEmpty()) {
+        //         // $posts = Post::latest()->simplePaginate(10)->withQueryString();
+        //         $posts = Post::with('author', 'category')->latest()->simplePaginate(10);
+        //         //flash message
+        //         session()->now('notify', 'No posts found for your query');
+        //     }
+        // }
+
+        // //SEARCH ENGINE
+        // $termSearchedFor = request('search');
+
+        // if ($termSearchedFor) {
+        //     $result = Post::with('author', 'category')
+        //         ->latest()
+        //         ->filter(request(['search']))
+        //         ->simplePaginate(10)
+        //         ->withQueryString();
+
+
+        //     if ($result->isNotEmpty()) {
+        //         $posts = $result;
+        //     } elseif ($result->isEmpty()) {
+        //         // $posts = Post::latest()->simplePaginate(10)->withQueryString();
+        //         $posts = Post::with('author', 'category')->latest()->simplePaginate(10);
+        //         //flash message
+        //         session()->now('notify', "Nothing found. Hope you did not search for status.Try filter then.");
+        //     }
+        // }
+
+        // //SORTING
+        // if ($sortable) {
+        //     // dd('Makes it to the sort');
+
+        //     if (!$authorFilter && !$categoryFilter && !$statusFilter) {
+        //         // dd('no extra query');
+        //         $posts = QueryBuilder::for(Post::class)
+        //             ->allowedSorts(['title', 'updated_at'])
+        //             ->with('author', 'category')
+        //             ->simplePaginate(10)
+        //             ->withQueryString();
+        //     }
+
+        //     if ($categoryFilter) {
+        //         $result = QueryBuilder::for(Post::class)
+        //             ->allowedSorts(['title', 'updated_at'])
+        //             ->with('author', 'category')
+        //             ->where('category_id', $categoryFilter)
+        //             ->simplePaginate(10)
+        //             ->withQueryString();
+
+        //         if ($result->isNotEmpty()) {
+        //             $posts = $result;
+        //         } elseif ($result->isEmpty()) {
+        //             $posts = QueryBuilder::for(Post::class)
+        //                 ->allowedSorts(['title', 'updated_at'])
+        //                 ->with('author', 'category')
+        //                 ->simplePaginate(10)
+        //                 ->withQueryString();
+        //             session()->now('notify', 'Could not sort with filtered category');
+        //         }
+        //         // dd('should be sorted with category');
+        //     }
+
+        //     if ($authorFilter) {
+        //         $result = QueryBuilder::for(Post::class)
+        //             ->allowedSorts(['title', 'updated_at'])
+        //             ->with('author', 'category')
+        //             ->where('user_id', $authorFilter)
+        //             ->simplePaginate(10)
+        //             ->withQueryString();
+
+        //         if ($result->isNotEmpty()) {
+        //             $posts = $result;
+        //         } elseif ($result->isEmpty()) {
+        //             $posts = QueryBuilder::for(Post::class)
+        //                 ->allowedSorts(['title', 'updated_at'])
+        //                 ->with('author', 'category')
+        //                 ->simplePaginate(10)
+        //                 ->withQueryString();
+        //             session()->now('notify', 'Could not sort with filtered Author');
+        //         }
+        //     }
+
+        //     if ($statusFilter) {
+        //         $result = QueryBuilder::for(Post::class)
+        //             ->allowedSorts(['title', 'updated_at'])
+        //             ->with('author', 'category')
+        //             ->where($statusFilter, 1)
+        //             ->simplePaginate(10)
+        //             ->withQueryString();
+
+        //         if ($result->isNotEmpty()) {
+        //             $posts = $result;
+        //         } elseif ($result->isEmpty()) {
+        //             $posts = QueryBuilder::for(Post::class)
+        //                 ->allowedSorts(['title', 'updated_at'])
+        //                 ->with('author', 'category')
+        //                 ->simplePaginate(10)
+        //                 ->withQueryString();
+        //             session()->now('notify', 'Could not sort with filtered Author');
+        //         }
+        //     }
+
+        //     if ($categoryFilter && $statusFilter) {
+        //         $result = QueryBuilder::for(Post::class)
+        //             ->allowedSorts(['title', 'updated_at'])
+        //             ->with('author', 'category')
+        //             ->where('category_id', $categoryFilter)
+        //             ->where($statusFilter, 1)
+        //             ->simplePaginate(10)
+        //             ->withQueryString();
+
+        //         if ($result->isNotEmpty()) {
+        //             $posts = $result;
+        //         } elseif ($result->isEmpty()) {
+        //             $posts = QueryBuilder::for(Post::class)
+        //                 ->allowedSorts(['title', 'updated_at'])
+        //                 ->with('author', 'category')
+        //                 ->simplePaginate(10)
+        //                 ->withQueryString();
+        //             session()->now('notify', 'Could not sort with filtered category');
+        //         }
+        //         // dd('should be sorted with category');
+        //     }
+
+        //     if ($categoryFilter && $authorFilter) {
+        //         $result = QueryBuilder::for(Post::class)
+        //             ->allowedSorts(['title', 'updated_at'])
+        //             ->where('category_id', $categoryFilter)
+        //             ->where('user_id', $authorFilter)
+        //             ->simplePaginate(10)
+        //             ->withQueryString();
+
+        //         if ($result->isNotEmpty()) {
+        //             $posts = $result;
+        //         } elseif ($result->isEmpty()) {
+        //             $posts = QueryBuilder::for(Post::class)
+        //                 ->allowedSorts(['title', 'updated_at'])
+        //                 ->with('author', 'category')
+        //                 ->simplePaginate(10)
+        //                 ->withQueryString();
+        //             session()->now('notify', 'Could not sort with filtered category and author');
+        //         }
+        //         // dd('should be sorted with category');
+        //     }
+
+        //     if ($statusFilter && $authorFilter) {
+        //         $result = QueryBuilder::for(Post::class)
+        //             ->allowedSorts(['title', 'updated_at'])
+        //             ->with('author', 'category')
+        //             ->where($statusFilter, 1)
+        //             ->where('user_id', $authorFilter)
+        //             ->simplePaginate(10)
+        //             ->withQueryString();
+
+        //         if ($result->isNotEmpty()) {
+        //             $posts = $result;
+        //         } elseif ($result->isEmpty()) {
+        //             $posts = QueryBuilder::for(Post::class)
+        //                 ->allowedSorts(['title', 'updated_at'])
+        //                 ->with('author', 'category')
+        //                 ->simplePaginate(10)
+        //                 ->withQueryString();
+        //             session()->now('notify', 'Could not sort with filtered category and author');
+        //         }
+        //         // dd('should be sorted with category');
+        //     }
+
+        //     if ($statusFilter && $authorFilter && $categoryFilter) {
+        //         $result = QueryBuilder::for(Post::class)
+        //             ->allowedSorts(['title', 'updated_at'])
+        //             ->with('author', 'category')
+        //             ->where($statusFilter, 1)
+        //             ->where('user_id', $authorFilter)
+        //             ->where('category_id', $categoryFilter)
+        //             ->simplePaginate(10)
+        //             ->withQueryString();
+
+        //         if ($result->isNotEmpty()) {
+        //             $posts = $result;
+        //         } elseif ($result->isEmpty()) {
+        //             $posts = QueryBuilder::for(Post::class)
+        //                 ->allowedSorts(['title', 'updated_at'])
+        //                 ->with('author', 'category')
+        //                 ->simplePaginate(10)
+        //                 ->withQueryString();
+        //             session()->now('notify', 'Zoink! Could not sort with the filtered items.');
+        //         }
+        //         // dd('should be sorted with category');
+        //     }
+        // }
+        $posts = Post::latest()
+            ->filter(request(['search', 'category_filter', 'status_filter', 'admin_filter']))
             ->simplePaginate(10)
-            ->withQueryString()
-            : $posts;
-
-
-
-        //CATEGORY FILTER
-        if ((!$authorFilter && !$statusFilter) && $filteredCategory) {
-
-            if ($categoryFilter && $filteredCategory->isNotEmpty()) {
-
-                $posts = $filteredCategory;
-            } elseif ($categoryFilter && $filteredCategory->isEmpty() && !$authorFilter && !$statusFilter) {
-
-                //flash message
-                session()->now('notify', 'No posts found in this category');
-            }
-        }
-
-        //STATUS FILTER
-        $posts = $statusFilter && $statusFilter != '' ?
-            Post::where($statusFilter, 1)
-            ->with('author', 'category')
-            ->latest()
-            ->simplePaginate(10)
-            ->withQueryString()
-            : $posts;
-
-        //ADMIN FILTER
-        $filteredAuthors = $authorFilter && $authorFilter != null ?
-            Post::where('user_id', $authorFilter)
-            ->with('author', 'category')
-            ->latest()
-            ->simplePaginate(10)
-            ->withQueryString()
-            : $posts;
-
-        $posts = ($authorFilter && $filteredAuthors->isNotEmpty()) ? $filteredAuthors : $posts;
-
-        //MULTIPLE FILTER
-        if ($categoryFilter && $statusFilter && !$authorFilter) {
-
-            $result = Post::where('category_id', $categoryFilter)
-                ->with('author', 'category')
-                ->where(
-                    $statusFilter,
-                    1
-                )->latest()
-                ->simplePaginate(10)
-                ->withQueryString();
-
-            if (($categoryFilter && $statusFilter) && $result->isNotEmpty()) {
-
-                $posts = $filteredCategory;
-            } elseif (($categoryFilter && $statusFilter && !$authorFilter) && $result->isEmpty() && !$authorFilter) {
-                //flash message
-                session()->now('notify', 'No posts found for your query');
-            }
-        }
-
-        if ($categoryFilter && $authorFilter && !$statusFilter) {
-
-            //query for all the posts where (category_id == categoryFilter AND  WHERE user_id == $authorFilter)
-            $result = Post::where('category_id', $categoryFilter)
-                ->with('author', 'category')
-                ->where(
-                    'user_id',
-                    $authorFilter
-                )->latest()
-                ->simplePaginate(10)
-                ->withQueryString();
-
-            if ($categoryFilter && $result->isNotEmpty()) {
-
-                $posts = $result;
-            } elseif ($categoryFilter && $result->isEmpty()) {
-                //flash message
-                session()->now('notify', 'No posts found for this query');
-            }
-        }
-
-        if ($authorFilter && $statusFilter && !$categoryFilter) {
-
-            //give me all the posts WHERE id === $authorFilter AND $statusFilter == 1
-            $result = Post::where('user_id', $authorFilter)
-                ->with('author', 'category')
-                ->where($statusFilter, 1)
-                ->latest()
-                ->simplePaginate(10)
-                ->withQueryString();
-
-            if ($authorFilter && $result->isNotEmpty()) {
-
-                $posts = $result;
-            } elseif ($authorFilter && $result->isEmpty()) {
-                //flash message
-                session()->now('notify', 'No posts found for this query');
-            }
-        }
-
-        if ($categoryFilter && $statusFilter && $authorFilter) {
-
-            $result = Post::where('category_id', $categoryFilter)
-                ->with('author', 'category')
-                ->where($statusFilter, 1)
-                ->where('user_id', $authorFilter)
-                ->latest()
-                ->simplePaginate(10)
-                ->withQueryString();
-
-            if ($result->isNotEmpty()) {
-                $posts = $result;
-            } elseif ($result->isEmpty()) {
-                // $posts = Post::latest()->simplePaginate(10)->withQueryString();
-                $posts = Post::with('author', 'category')->latest()->simplePaginate(10);
-                //flash message
-                session()->now('notify', 'No posts found for your query');
-            }
-        }
-
-        //SEARCH ENGINE
-        $termSearchedFor = request('search');
-
-        if ($termSearchedFor) {
-            $result = Post::with('author', 'category')
-                ->latest()
-                ->filter(request(['search']))
-                ->simplePaginate(10)
-                ->withQueryString();
-
-
-            if ($result->isNotEmpty()) {
-                $posts = $result;
-            } elseif ($result->isEmpty()) {
-                // $posts = Post::latest()->simplePaginate(10)->withQueryString();
-                $posts = Post::with('author', 'category')->latest()->simplePaginate(10);
-                //flash message
-                session()->now('notify', "Nothing found. Hope you did not search for status.Try filter then.");
-            }
-        }
-
-        //SORTING
-        if ($sortable) {
-            // dd('Makes it to the sort');
-
-            if (!$authorFilter && !$categoryFilter && !$statusFilter) {
-                // dd('no extra query');
-                $posts = QueryBuilder::for(Post::class)
-                    ->allowedSorts(['title', 'updated_at'])
-                    ->with('author', 'category')
-                    ->simplePaginate(10)
-                    ->withQueryString();
-            }
-
-            if ($categoryFilter) {
-                $result = QueryBuilder::for(Post::class)
-                    ->allowedSorts(['title', 'updated_at'])
-                    ->with('author', 'category')
-                    ->where('category_id', $categoryFilter)
-                    ->simplePaginate(10)
-                    ->withQueryString();
-
-                if ($result->isNotEmpty()) {
-                    $posts = $result;
-                } elseif ($result->isEmpty()) {
-                    $posts = QueryBuilder::for(Post::class)
-                        ->allowedSorts(['title', 'updated_at'])
-                        ->with('author', 'category')
-                        ->simplePaginate(10)
-                        ->withQueryString();
-                    session()->now('notify', 'Could not sort with filtered category');
-                }
-                // dd('should be sorted with category');
-            }
-
-            if ($authorFilter) {
-                $result = QueryBuilder::for(Post::class)
-                    ->allowedSorts(['title', 'updated_at'])
-                    ->with('author', 'category')
-                    ->where('user_id', $authorFilter)
-                    ->simplePaginate(10)
-                    ->withQueryString();
-
-                if ($result->isNotEmpty()) {
-                    $posts = $result;
-                } elseif ($result->isEmpty()) {
-                    $posts = QueryBuilder::for(Post::class)
-                        ->allowedSorts(['title', 'updated_at'])
-                        ->with('author', 'category')
-                        ->simplePaginate(10)
-                        ->withQueryString();
-                    session()->now('notify', 'Could not sort with filtered Author');
-                }
-            }
-
-            if ($statusFilter) {
-                $result = QueryBuilder::for(Post::class)
-                    ->allowedSorts(['title', 'updated_at'])
-                    ->with('author', 'category')
-                    ->where($statusFilter, 1)
-                    ->simplePaginate(10)
-                    ->withQueryString();
-
-                if ($result->isNotEmpty()) {
-                    $posts = $result;
-                } elseif ($result->isEmpty()) {
-                    $posts = QueryBuilder::for(Post::class)
-                        ->allowedSorts(['title', 'updated_at'])
-                        ->with('author', 'category')
-                        ->simplePaginate(10)
-                        ->withQueryString();
-                    session()->now('notify', 'Could not sort with filtered Author');
-                }
-            }
-
-            if ($categoryFilter && $statusFilter) {
-                $result = QueryBuilder::for(Post::class)
-                    ->allowedSorts(['title', 'updated_at'])
-                    ->with('author', 'category')
-                    ->where('category_id', $categoryFilter)
-                    ->where($statusFilter, 1)
-                    ->simplePaginate(10)
-                    ->withQueryString();
-
-                if ($result->isNotEmpty()) {
-                    $posts = $result;
-                } elseif ($result->isEmpty()) {
-                    $posts = QueryBuilder::for(Post::class)
-                        ->allowedSorts(['title', 'updated_at'])
-                        ->with('author', 'category')
-                        ->simplePaginate(10)
-                        ->withQueryString();
-                    session()->now('notify', 'Could not sort with filtered category');
-                }
-                // dd('should be sorted with category');
-            }
-
-            if ($categoryFilter && $authorFilter) {
-                $result = QueryBuilder::for(Post::class)
-                    ->allowedSorts(['title', 'updated_at'])
-                    ->where('category_id', $categoryFilter)
-                    ->where('user_id', $authorFilter)
-                    ->simplePaginate(10)
-                    ->withQueryString();
-
-                if ($result->isNotEmpty()) {
-                    $posts = $result;
-                } elseif ($result->isEmpty()) {
-                    $posts = QueryBuilder::for(Post::class)
-                        ->allowedSorts(['title', 'updated_at'])
-                        ->with('author', 'category')
-                        ->simplePaginate(10)
-                        ->withQueryString();
-                    session()->now('notify', 'Could not sort with filtered category and author');
-                }
-                // dd('should be sorted with category');
-            }
-
-            if ($statusFilter && $authorFilter) {
-                $result = QueryBuilder::for(Post::class)
-                    ->allowedSorts(['title', 'updated_at'])
-                    ->with('author', 'category')
-                    ->where($statusFilter, 1)
-                    ->where('user_id', $authorFilter)
-                    ->simplePaginate(10)
-                    ->withQueryString();
-
-                if ($result->isNotEmpty()) {
-                    $posts = $result;
-                } elseif ($result->isEmpty()) {
-                    $posts = QueryBuilder::for(Post::class)
-                        ->allowedSorts(['title', 'updated_at'])
-                        ->with('author', 'category')
-                        ->simplePaginate(10)
-                        ->withQueryString();
-                    session()->now('notify', 'Could not sort with filtered category and author');
-                }
-                // dd('should be sorted with category');
-            }
-
-            if ($statusFilter && $authorFilter && $categoryFilter) {
-                $result = QueryBuilder::for(Post::class)
-                    ->allowedSorts(['title', 'updated_at'])
-                    ->with('author', 'category')
-                    ->where($statusFilter, 1)
-                    ->where('user_id', $authorFilter)
-                    ->where('category_id', $categoryFilter)
-                    ->simplePaginate(10)
-                    ->withQueryString();
-
-                if ($result->isNotEmpty()) {
-                    $posts = $result;
-                } elseif ($result->isEmpty()) {
-                    $posts = QueryBuilder::for(Post::class)
-                        ->allowedSorts(['title', 'updated_at'])
-                        ->with('author', 'category')
-                        ->simplePaginate(10)
-                        ->withQueryString();
-                    session()->now('notify', 'Zoink! Could not sort with the filtered items.');
-                }
-                // dd('should be sorted with category');
-            }
-        }
-
+            ->withQueryString();
         return view('admin.posts.index', [
-            // 'posts' => Post::latest()->filter(['search'])->get(),
+            // 'posts' => Post::latest()->filter(request(['search', 'category_filter', 'status_filter', 'admin_filter']))->simplePaginate(10)->withQueryString(),
             'posts' => $posts,
 
         ]);

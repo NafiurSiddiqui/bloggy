@@ -35,9 +35,8 @@
             </ul>
         </aside>
         <section class="flex-grow p-4 relative w-full md:mr-6 dark:bg-darkPage">
-            <h1 class="font-semibold text-xl text-gray-500 dark:text-zinc-300">
-                {{ $heading ?? 'Default heading' }}
-            </h1>
+
+            <x-h2>{{ $heading ?? 'Default heading' }}</x-h2>
             {{ $slot }}
         </section>
     </div>

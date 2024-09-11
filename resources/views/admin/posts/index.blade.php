@@ -1,33 +1,31 @@
 <x-dashboard.dashboard-layout>
     <x-slot:heading>All Posts</x-slot:heading>
 
-    <x-panel>
-        <div class="flex flex-col gap-2 ">
-            <form action="/admin/posts" class="mb-4">
+    {{-- <x-panel> --}}
+    <form action="/admin/posts/" method="get"
+        class="border border-gray-200 rounded-sm my-4 px-4 pb-4 dark:border-zinc-800 dark:bg-darkBlack bg-lightWhite w-fit">
 
-                {{-- <x-searchbar /> --}}
-                <x-form.input type="search" name="search" id="search" placeholder="search..." sr-only />
-            </form>
-
-            <form action="/admin/posts" method="get"
-                class="border border-gray-200 rounded-sm p-2 dark:border-zinc-800 dark:bg-darkBlack/20">
-                <fieldset class="flex flex-wrap gap-4">
-                    <legend class="text-gray-400 font-semibold mb-4 border-b dark:border-b-zinc-700 w-full">Filter by -
-                    </legend>
-
-                    <x-category-filter />
-                    <x-dashboard.status-filter />
-                    <x-dashboard.admin-filter />
-                </fieldset>
-
-
-                <div class="mt-4 rounded-sm py-2">
-                    <x-secondary-button type="submit">Filter</x-secondary-button>
-                    <x-secondary-button link href="/admin/posts">Reset</x-secondary-button>
-                </div>
-            </form>
+        <div class="mb-2">
+            <x-form.input type="search" name="search" id="search" placeholder="search..."
+                value="{{ request('search') }}" sr-only />
         </div>
-    </x-panel>
+        <fieldset class="flex flex-wrap gap-4">
+            <legend class="text-gray-400 font-semibold mb-4 border-b dark:border-b-zinc-700 w-full">Filter by -
+            </legend>
+
+            <x-category-filter />
+            <x-dashboard.status-filter />
+            <x-dashboard.admin-filter />
+        </fieldset>
+
+
+        <div class="mt-4 rounded-sm py-2 flex space-x-2 justify-end">
+            <x-secondary-button type="submit">Filter</x-secondary-button>
+            <x-danger-button link url="/admin/posts" label="Reset" />
+        </div>
+    </form>
+
+    {{-- </x-panel> --}}
     @if (isset($posts) && count($posts) > 0)
         <x-dashboard.index-actions singular-type="post" plural-type="posts"
             multiple-delete-form-action-path="delete-multiple-posts" delete-form-action-route="admin.posts.delete.all"

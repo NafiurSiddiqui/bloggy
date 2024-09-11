@@ -23,7 +23,7 @@ class AdminFilter extends Component
     public function render(): View|Closure|string
     {
         return view('components.dashboard.admin-filter', [
-            'authors' => User::all()
+            'authors' => User::all()->sortBy('name')
         ]);
     }
 }

@@ -39,7 +39,7 @@ class Post extends Model implements HasMedia, Sitemapable
         'og_title'
     ];
 
-    public function scopeFilter($query, array $filters): void //
+    public function scopeFilter($query, array $filters)
     {
         $query->when(
             $filters['search'] ?? false,
@@ -52,20 +52,24 @@ class Post extends Model implements HasMedia, Sitemapable
         );
 
         $query->when(
-            $filters['search'] ?? false,
-            fn($query, $search) =>
-            $query->orWhereHas('author', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
-            })
+            $filters['category_filter'] ?? false,
+            fn($query, $category_filter) =>
+            $query->where('category_id', $category_filter)
+                ->latest()
         );
 
+        $query->when(
+            $filters['status_filter'] ?? false,
+            fn($query, $status_filter) =>
+            $query->where($status_filter, 1)
+                ->latest()
+        );
 
         $query->when(
-            $filters['search'] ?? false,
-            fn($query, $search) =>
-            $query->orWhereHas('category', function ($query) use ($search) {
-                $query->where('title', $search);
-            })
+            $filters['admin_filter'] ?? false,
+            fn($query, $admin_filter) =>
+            $query->where('user_id', $admin_filter)
+                ->latest()
         );
     }
 

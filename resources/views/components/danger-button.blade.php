@@ -6,6 +6,8 @@
     'formButton' => false,
     'sm' => false,
     'noFormId' => false,
+    'link' => false,
+    'url' => '#',
 ])
 
 @php
@@ -25,6 +27,10 @@
     <button type="{{ isset($submit) ? 'submit' : 'button' }}"
         @if (!$noFormId) form="{{ $formId ?? 'form-delete' }}" @endif
         {{ $attributes->merge(['class' => $btnClass]) }}>{{ $label ?? 'Delete' }}</button>
+@elseif($link)
+    <a href="{{ $url }}" {{ $attributes->merge(['class' => $btnClass]) }}>
+        {{ $label ?? 'Delete' }}
+    </a>
 @else
     <span {{ $attributes->merge(['class' => $modalButtonClass]) }} x-data=""
         x-on:click="$dispatch('open-modal','confirm-delete')">{{ $label ?? 'Delete' }}</span>

@@ -24,16 +24,16 @@ class StatusFilter extends Component
         return view('components.dashboard.status-filter', [
 
             'status' => [
-                'published' => [
-                    'title' => 'Published',
-                    'slug' => 'is_published'
-                ],
                 'draft' => [
                     'title' => 'Draft',
                     'slug' => 'is_draft'
                 ],
+                'published' => [
+                    'title' => 'Published',
+                    'slug' => 'is_published'
+                ],
                 'unpublished' => [
-                    'title' => 'unpublished',
+                    'title' => 'Unpublished',
                     'slug' => 'is_unpublished'
                 ]
             ]
