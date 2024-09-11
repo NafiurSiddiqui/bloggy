@@ -169,7 +169,7 @@ class AdminPostController extends Controller
         //     }
         // }
 
-        // //SORTING
+        //SORTING
         // if ($sortable) {
         //     // dd('Makes it to the sort');
 
@@ -331,8 +331,8 @@ class AdminPostController extends Controller
         //         // dd('should be sorted with category');
         //     }
         // }
-        $posts = Post::latest()
-            ->filter(request(['search', 'category_filter', 'status_filter', 'admin_filter']))
+        $posts = Post::filter(request(['search', 'category_filter', 'status_filter', 'admin_filter']))
+            ->sort(request(['sort', 'dir']))
             ->simplePaginate(10)
             ->withQueryString();
         return view('admin.posts.index', [

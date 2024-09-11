@@ -73,6 +73,17 @@ class Post extends Model implements HasMedia, Sitemapable
         );
     }
 
+    public function scopeSort($query, array $sort)
+    {
+        $query->when(
+            $sort['sort']  ?? false,
+            fn($query) => $query->orderBy($sort['sort'], $sort['dir'])
+
+        );
+    }
+
+
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
