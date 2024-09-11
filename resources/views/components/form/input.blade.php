@@ -11,7 +11,7 @@
         @endif
     </div>
     <input name="{{ $name }}" id="{{ $name }}"
-        class="block w-full  border-zinc-300 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 focus:border-emerald-500 dark:focus:border-emerald-500 focus:ring-emerald-300 dark:focus:ring-emerald-500 shadow-sm dark:caret-zinc-300"
+        class="block w-full  border-zinc-300 dark:bg-zinc-800 text-lightText-500 dark:text-lightText-200 dark:border-lightText-700 focus:border-emerald-500 dark:focus:border-emerald-500 focus:ring-emerald-300 dark:focus:ring-emerald-500 shadow-sm dark:caret-zinc-300"
         {{ $attributes(['value' => old($name)]) }}>
     <x-form.error name="{{ $name }}" />
 
