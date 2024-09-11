@@ -7,8 +7,9 @@
     'recentPosts' => null,
     'comment' => null,
     'reply' => null,
+    // 'cameFromCategoriesURL' => false,
 ])
-{{-- @dd($comment) --}}
+
 {{-- This layout is shared between - show-post, edit-comment, edit-reply --}}
 
 <x-app-layout>
@@ -66,6 +67,7 @@
             </div>
         </article>
 
+        {{-- {{ die(request()->session()->get('cameFromCategoriesURL')) }} --}}
 
         <div class="flex flex-col lg:w-4/5 ">
             {{-- Pagination --}}
@@ -74,8 +76,22 @@
                     <ul class="flex justify-between">
                         <li class="box-border  w-1/2 lg:w-2/5 p-1 mr-2 group">
                             {{-- @dd($previousPost) --}}
+
                             @if ($previousPost)
-                                <a href="/post/{{ $previousPost->slug }}" class="opacity-70 hover:opacity-100">
+                                @php
+                                    $previousPostUrl = "/post/{$previousPost->slug}/";
+
+                                    if (session()->has('cameFromCategoriesURL')) {
+                                        $previousPostUrl = $previousPostUrl . "?category={$post->category->slug}";
+                                    }
+
+                                    if (session()->has('cameFromSubCategoriesURL')) {
+                                        $previousPostUrl = $previousPostUrl . "?subcategory={$post->subcategory->slug}";
+                                    }
+
+                                @endphp
+
+                                <a href="{{ $previousPostUrl }}" class="opacity-70 hover:opacity-100">
                                     {{-- fontawesome previous btn --}}
                                     <div
                                         class="italic mb-2 text-sm text-left dark:text-darkText-100/70 dark:hover:text-darkTextHover-600 text-lightText transition-all duration-200 ease-in-out">
@@ -90,7 +106,19 @@
                         </li>
                         <li class="box-border w-1/2 lg:w-2/5 p-1 group">
                             @if ($nextPost)
-                                <a href="/post/{{ $nextPost->slug }}" class="opacity-70 hover:opacity-100">
+                                @php
+                                    $nextPostUrl = "/post/{$nextPost->slug}/";
+
+                                    if (session()->has('cameFromCategoriesURL')) {
+                                        $nextPostUrl = $nextPostUrl . "?category={$post->category->slug}";
+                                    }
+
+                                    if (session()->has('cameFromSubCategoriesURL')) {
+                                        $nextPostUrl = $nextPostUrl . "?subcategory={$post->subcategory->slug}";
+                                    }
+
+                                @endphp
+                                <a href="{{ $nextPostUrl }}" class="opacity-70 hover:opacity-100">
 
                                     <div
                                         class="italic mb-2 text-sm text-right dark:text-darkText-100/70 text-lightText  dark:hover:text-darkTextHover-600

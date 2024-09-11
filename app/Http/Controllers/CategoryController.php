@@ -22,7 +22,6 @@ class CategoryController extends Controller
 
 
         if ($sortCategoryDesc) {
-
             $categories = QueryBuilder::for(Category::class)
                 ->allowedSorts(request('sort'))
                 ->with('subcategories', 'posts')
@@ -94,7 +93,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category): View
     {
-        $posts = $category->posts;
+        $posts = $category->posts->filter(function ($post) {
+            return $post->is_published === 1;
+        });
 
 
         return view('posts.categories.show', compact('posts', 'category'));

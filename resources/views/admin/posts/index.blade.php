@@ -12,7 +12,7 @@
             <form action="/admin/posts" method="get"
                 class="border border-gray-200 rounded-sm p-2 dark:border-zinc-800 dark:bg-darkBlack/20">
                 <fieldset class="flex flex-wrap gap-4">
-                    <legend class="text-gray-400 font-semibold mb-4 border-b dark:border-b-zinc-700">Filter by -
+                    <legend class="text-gray-400 font-semibold mb-4 border-b dark:border-b-zinc-700 w-full">Filter by -
                     </legend>
 
                     <x-category-filter />

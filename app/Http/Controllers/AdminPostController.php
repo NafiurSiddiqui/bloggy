@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\User;
-use App\View\Components\Dashboard\AdminFilter;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
@@ -43,7 +41,7 @@ class AdminPostController extends Controller
 
                 $posts = $filteredCategory;
             } elseif ($categoryFilter && $filteredCategory->isEmpty() && !$authorFilter && !$statusFilter) {
-                dd('the fug?');
+
                 //flash message
                 session()->now('notify', 'No posts found in this category');
             }

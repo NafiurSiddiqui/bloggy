@@ -96,7 +96,11 @@ class SubcategoryController extends Controller
      */
     public function show(string $categorySlug, Subcategory $subcategory): View
     {
-        $posts = $subcategory->posts;
+        $posts = $subcategory->posts->filter(function (Post $post) {
+            return $post->is_published === 1;
+        });
+
+
         return view('posts.subcategories.index', compact('subcategory', 'posts'));
     }
 
