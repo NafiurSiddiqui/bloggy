@@ -9,8 +9,8 @@
                 <x-post-cards.header-layout>
                     <x-post-cards.heading :post="$post" class="text-xl md:text-2xl md:text-left leading-5 !mb-1" />
                     <div class="relative w-full sm:hidden">
-                        <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->thumbnail_alt_txt }}"
-                            class="w-full h-[10rem] rounded-md object-cover ">
+                        {{ $post->getFirstMedia('thumbnails')
+                            ?->img()->attributes(['alt' => "$post->thumbnail_alt_txt", 'class' => 'w-full h-[10rem] rounded-md object-cover ']) }}
                         <x-post-cards.img-overlay />
 
                     </div>

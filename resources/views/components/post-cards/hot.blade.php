@@ -8,8 +8,11 @@
             <x-post-cards.header-layout>
                 <x-post-cards.heading :post="$post" />
                 <div class="relative ">
-                    <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->thumbnail_alt_txt }}"
-                        class="w-full h-full rounded-md aspect-[16/10] object-cover">
+                    {{-- <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->thumbnail_alt_txt }}"
+                        class="w-full h-full rounded-md aspect-[16/10] object-cover"> --}}
+                    <div class="w-full h-full rounded-md aspect-[16/10] object-cover">
+                        {{ $post->getFirstMedia('thumbnails')?->img()->attributes(['alt' => "$post->thumbnail_alt_txt"]) }}
+                    </div>
                     <x-post-cards.img-overlay />
                 </div>
 

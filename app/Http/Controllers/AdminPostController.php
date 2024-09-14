@@ -39,7 +39,7 @@ class AdminPostController extends Controller
     public function store(): RedirectResponse
     {
 
-        // dd(request()->all());
+
         $categoryValidator = function (string $attribute, mixed $value, Closure $fail) {
             if (!is_numeric($value)) {
                 // Allow "---" or any other non-numeric value
@@ -94,7 +94,7 @@ class AdminPostController extends Controller
 
         //associate user_id and store file
         $attributes['user_id'] = auth()->id();
-        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+
         if (isset($attributes['og_thumbnail'])) {
             $attributes['og_thumbnail'] = request()->file('og_thumbnail')->store('thumbnails');
         }
@@ -102,7 +102,11 @@ class AdminPostController extends Controller
         $attributes['slug'] = request('slug') ? Str::slug(request('slug'), '-') : Str::slug($attributes['title'], '-');
 
         //store
-        Post::create($attributes);
+        Post::create($attributes)
+            ->addMediaFromRequest('thumbnail')
+            ->withResponsiveImages()
+            ->attributes(['alt' => request('thumbnail_alt_txt')])
+            ->toMediaCollection('thumbnails');
 
         //redirect
         if (request()->has('is_draft')) {
@@ -121,9 +125,8 @@ class AdminPostController extends Controller
     }
 
 
-    public function update(Request $request, Post $post)
+    public function update(Post $post)
     {
-
 
         $categoryValidator = function (string $attribute, mixed $value, Closure $fail) {
             if (!is_numeric($value)) {
@@ -192,27 +195,31 @@ class AdminPostController extends Controller
 
 
         if (isset($attributes['thumbnail'])) {
-            $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+
+            $post->clearMediaCollection('thumbnails');
+
+            $post->addMediaFromRequest('thumbnail')
+                ->withResponsiveImages()
+                ->attributes(['alt' => request('thumbnail_alt_txt')])
+                ->toMediaCollection('thumbnails');
         }
+
         if (isset($attributes['og_thumbnail'])) {
             $attributes['og_thumbnail'] = request()->file('og_thumbnail')->store('thumbnails');
         }
 
         switch (true) {
             case request()->has('is_published'):
-                // dd('is published');
                 $attributes['is_published'] = 1;
                 $attributes['is_draft'] = 0;
                 $attributes['is_unpublished'] = 0;
                 break;
             case request()->has('is_draft'):
-                // dd('is draft');
                 $attributes['is_published'] = 0;
                 $attributes['is_draft'] = 1;
                 $attributes['is_unpublished'] = 0;
                 break;
             case request()->has('is_unpublished'):
-                // dd('is unpublished');
                 $attributes['is_published'] = 0;
                 $attributes['is_draft'] = 0;
                 $attributes['is_unpublished'] = 1;
@@ -220,6 +227,7 @@ class AdminPostController extends Controller
         }
 
         //store
+
         $post->update($attributes);
 
         //redirect

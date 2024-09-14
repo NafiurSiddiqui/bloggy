@@ -17,8 +17,11 @@
 
             <x-panel class="px-2 py-3 my-8 ">
                 <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Select Thumbnail</h2>
-                <img src="{{ asset('storage/' . $post->thumbnail) }}"
-                    alt="{{ $post->thumbnail_alt_txt ?? 'Thumbnail' }}">
+                {{-- <img src="{{ asset('storage/' . $post->thumbnail) }}"
+                    alt="{{ $post->thumbnail_alt_txt ?? 'Thumbnail' }}"> --}}
+                <div class="w-52">
+                    {{ $post->getFirstMedia('thumbnails') }}
+                </div>
                 <x-form.input name="thumbnail" type="file" :value="old('thumbnail', $post->thumbnail)" />
                 <x-form.input name="thumbnail_alt_txt" label="Alt Txt" requried :value="old('thumbnail_alt_txt', $post->thumbnail_alt_txt)" />
             </x-panel>

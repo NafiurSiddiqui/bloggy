@@ -4,4 +4,5 @@
             <x-post-comment :comment="$comment" :post="$post" />
         @endforeach
     </x-slot:postComment>
+
 </x-post-content>

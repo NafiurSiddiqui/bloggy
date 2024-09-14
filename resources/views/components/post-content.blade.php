@@ -45,13 +45,23 @@
                         <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" />
                     </div>
 
-                    <x-post-cards.author :post="$post" />
+                    <div class="flex justify-between items-center">
+                        <x-post-cards.author :post="$post" />
+
+                        @if (Auth::user()?->role === 'admin')
+                            <x-text-link href="/admin/post/{{ $post->slug }}/edit" class="font-semibold text-lg">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </x-text-link>
+                        @endif
+                    </div>
                 </div>
 
 
                 <div class="max-w-full md:h-[70vh] aspect-[16/9] relative">
-                    <img src="/storage/{{ $post->thumbnail }}" alt="{{ $post->thumbnail_alt_txt }}"
-                        class=" w-full h-full  object-cover">
+                    <div>
+                        {{ $post->getFirstMedia('thumbnails')->img()->attributes(['alt' => "$post->thumbnail_alt_txt"]) }}
+                    </div>
                     <x-post-cards.img-overlay />
                 </div>
             </div>

@@ -23,6 +23,7 @@ class PostController extends Controller
     public function home(): View
     {
 
+
         $featuredPosts = Post::where('is_featured', 'on')->where('is_published', 1)
             ->latest()
             ->get();
@@ -124,9 +125,9 @@ class PostController extends Controller
         }
 
         $categories = Category::orderBy('title', 'asc')->get();
+        $image = $post->getMedia('thumbnails');
 
-
-        return view('posts.show', compact('post', 'nextPost', 'previousPost', 'recentPosts', 'categories',));
+        return view('posts.show', compact('post', 'nextPost', 'previousPost', 'recentPosts', 'categories', 'image'));
     }
 
     public function showFeaturedPosts(): View
