@@ -12,7 +12,7 @@
         </div>
         <div class="h-full flex flex-col justify-end items-center p-8">
             <x-post-cards.header-layout>
-                <x-post-cards.heading :post="$post" class="mb-0" />
+                <x-post-cards.heading :post="$post" />
             </x-post-cards.header-layout>
             <x-post-cards.author class="w-full" :post="$post" featured />
         </div>

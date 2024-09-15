@@ -15,10 +15,7 @@
         <meta property="og:url" content="{{ url('/') }}" />
     </x-slot:head>
 
-
-
-
-    <main class=" p-4 md:px-6 2xl:w-4/5 dark:bg-darkPage">
+    <main class=" p-4 md:px-6 dark:bg-darkPage bg-lightPage">
         @if (isset($featured_posts) && $featured_posts)
             <section>
                 <x-h2>Featured </x-h2>
@@ -41,7 +38,7 @@
         @if (isset($hot) && $hot)
             <section class="my-8 md:px-4">
                 <x-h2>Hot</x-h2>
-                <div class="lg:grid grid-cols-2 gap-4 space-y-4 md:space-y-0">
+                <div class="lg:grid grid-cols-2 gap-4 space-y-4 lg:space-y-0">
                     @foreach ($hot->take(4) as $post)
                         <x-post-cards.hot :post="$post" />
                     @endforeach

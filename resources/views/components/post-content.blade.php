@@ -7,7 +7,6 @@
     'recentPosts' => null,
     'comment' => null,
     'reply' => null,
-    // 'cameFromCategoriesURL' => false,
 ])
 
 {{-- This layout is shared between - show-post, edit-comment, edit-reply --}}
@@ -31,16 +30,16 @@
             <meta property="og:image:alt" content="{{ $post->thumbnail_alt_txt }}" />
         </x-slot:head>
     @endif
-
     {{-- endif --}}
-    <section class="p-6 mb-10 sm:px-16 max-w-6xl space-y-6 flex flex-col justify-center items-center lg:px-20">
-        <article class="mt-12 lg:w-4/5">
+    <section class="space-y-6 flex flex-col justify-center items-center lg:px-20">
+        <article class="my-4 lg:w-4/5">
             <div class="space-y-4">
                 <div class="mb-10">
                     <h1 class="font-bold text-3xl text-lightText-700 lg:text-4xl dark:text-zinc-200 ">
                         {{ $post->title }}
                     </h1>
-                    <div class="mt-4">
+                    <div class="mt-1 mb-4 flex space-x-2 space-y-2 items-end flex-wrap">
+                        <x-labels.category :category="$post->category" />
                         <x-labels.category :category="$post->category" />
                         <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" />
                     </div>
@@ -60,7 +59,7 @@
 
                 <div class="max-w-full md:h-[70vh] aspect-[16/9] relative">
                     <div>
-                        {{ $post->getFirstMedia('thumbnails')->img()->attributes(['alt' => "$post->thumbnail_alt_txt"]) }}
+                        {{ $post->getFirstMedia('thumbnails')?->img()->attributes(['alt' => "$post->thumbnail_alt_txt"]) }}
                     </div>
                     <x-post-cards.img-overlay />
                 </div>

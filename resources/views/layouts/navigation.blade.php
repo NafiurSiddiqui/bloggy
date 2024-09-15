@@ -1,4 +1,4 @@
-<div class="dark:bg-darkBlack bg-lightWhite py-2 lg:p-4">
+<div class="dark:bg-darkBlack bg-lightWhite py-2 mb-3">
     <div class=" flex items-center mt-1 mb-2 lg:mb-3 ">
         <div class=" flex justify-center w-full -right-8 relative">
             <!-- Logo -->
@@ -8,11 +8,11 @@
                 <x-icons.logo link />
             @endif
         </div>
-        <div class="flex mr-2 lg:mr-5">
+        <div class="flex mr-2 ml-4 sm:ml-0 lg:mr-5">
             <x-toggle-theme-btn />
         </div>
     </div>
-    <nav x-data="{ open: false }" class="bg-lightPage dark:bg-darkPage m-2">
+    <nav x-data="{ open: false }" class="bg-lightPage dark:bg-darkPage ">
 
         <div class="flex justify-between items-center py-2">
             <div class="flex items-center justify-between w-full">

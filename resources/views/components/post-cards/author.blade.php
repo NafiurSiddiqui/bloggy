@@ -2,7 +2,7 @@
 
 
 <footer {{ $attributes->merge([
-    'class' => 'flex justify-between items-center mt-6',
+    'class' => 'flex justify-between items-center',
 ]) }}>
     <div class="flex items-center text-sm">
         <x-user-avatar sm :user="$post->author" featured="{{ $featured }}" />

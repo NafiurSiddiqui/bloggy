@@ -11,11 +11,11 @@
             <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" />
         </div>
 
-        <div class="h-full flex flex-col justify-end items-center p-2 pb-8 space-y-4 ml-4">
+        <div class="h-full flex flex-col justify-end items-center p-2 pb-8  ml-4">
             <x-post-cards.header-layout class="w-full">
-                <x-post-cards.heading :post="$post" class="!text-2xl mt-2 mb-0 " />
+                <x-post-cards.heading :post="$post" class="lg:!text-2xl" />
                 </x-post-cards.header-layo>
-                <x-post-cards.author class="mt-0 w-full" :post="$post" featured />
+                <x-post-cards.author class="w-full" :post="$post" featured />
         </div>
 
     </div>

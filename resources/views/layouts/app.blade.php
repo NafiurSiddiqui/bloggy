@@ -15,22 +15,28 @@
 
 </head>
 
-<body class="font-sans antialiased bg-lightPage dark:bg-darkBlack dark:text-white/50 overflow-x-clip">
+<body
+    class="font-sans antialiased bg-lighWhite mx-2 md:mx-4 dark:bg-darkBlack dark:text-white/50 overflow-x-clip flex flex-col items-center">
 
-    @include('layouts.navigation')
+    <div class="2xl:w-[80rem]">
+        @include('layouts.navigation')
 
-    <div class="flex flex-col items-center min-h-screen">
-        {{ $slot }}
-        <x-toast.success />
+        {{-- <div class="flex flex-col items-center min-h-screen"> --}}
+        <main class="p-4 md:px-6 dark:bg-darkPage bg-lightPage flex flex-col items-center min-h-screen">
+            {{ $slot }}
+            <x-toast.success />
+        </main>
+        {{-- </div> --}}
+        <footer class="h-[50vh] lg:h-[30vh] bg-lightWhite flex justify-center items-center dark:bg-darkBlack">
+            <div class="flex justify-center flex-wrap items-center">
+                <p class="text-center text-xs sm:text-sm md:text-lg text-gray-600  dark:text-gray-400 flex items-end">
+                    ©{{ date('Y') }} <span class="mx-1"><x-icons.logo /></span>
+                </p>
+                <p>All rights reserved.</p>
+            </div>
+        </footer>
+
     </div>
-    <footer class="h-[50vh] lg:h-[30vh] bg-lightWhite flex justify-center items-center dark:bg-darkBlack">
-
-        <p class="text-center text-gray-600  dark:text-gray-400 flex items-end">
-            ©{{ date('Y') }} <x-icons.logo />
-            . All rights reserved.
-        </p>
-    </footer>
-
 </body>
 
 </html>
