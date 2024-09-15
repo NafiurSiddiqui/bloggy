@@ -1,7 +1,7 @@
  @props(['type' => '', 'message', 'form-id' => ''])
 
 
- <x-modal name="confirm-delete">
+ <x-modal name="confirm-delete" aria-roledescription="modal for confirming deletion">
      <p>{{ $message ?? "You sure want to delete the  $type" }} </p>
      <div class="flex justify-end items-center space-x-3 mt-4">
          <x-secondary-button @click="$dispatch('close-modal','confirm-delete')">
