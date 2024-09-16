@@ -21,6 +21,7 @@ class SubcategoryController extends Controller
     {
 
         $subcategories = QueryBuilder::for(Subcategory::class)
+            ->defaultSort('title')
             ->allowedSorts(['title', 'updated_at'])
             ->with('category', 'posts')
             ->simplePaginate(10)
@@ -46,6 +47,7 @@ class SubcategoryController extends Controller
         if (isset($filter) && $filter['slug'] == null) {
 
             $subcategories = QueryBuilder::for(Subcategory::class)
+                ->defaultSort('title')
                 ->allowedSorts(['title', 'updated_at'])
                 ->with('category', 'posts')
                 ->simplePaginate(10)
@@ -64,7 +66,7 @@ class SubcategoryController extends Controller
 
         return view('admin.subcategories.index', [
 
-            // 'subcategories' => Subcategory::filter(request('filter') != null && request('filter')['slug']),
+            // 'subcategories' => Subcategory::filter(request('filter')['slug'] ?? null),
             'subcategories' => $subcategories,
             'paginationFilter' => $paginationFilter
 

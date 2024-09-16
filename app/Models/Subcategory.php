@@ -18,20 +18,8 @@ class Subcategory extends Model
 
     public function scopeFilter(Builder $query, string |null $slug)
     {
-        if (!$slug) {
-            return QueryBuilder::for(Subcategory::class)
-                ->allowedSorts(['title', 'updated_at'])
-                ->with('category', 'posts')
-                ->simplePaginate(10)
-                ->withQueryString();
-        } else {
-            return QueryBuilder::for(Category::class)
-                ->allowedFilters(['slug'])
-                ->with('subcategories')
-                ->latest()
-                ->simplePaginate(10)
-                ->withQueryString();
-        }
+
+
 
         // dd($slug);
         // $query->when(
@@ -48,7 +36,6 @@ class Subcategory extends Model
         // ->simplePaginate(10)
         // ->withQueryString(),
 
-        // fn() =>  $query->with('category', 'posts')->get()
         // );
 
         // $query->when(

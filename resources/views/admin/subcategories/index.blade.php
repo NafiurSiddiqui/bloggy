@@ -38,10 +38,8 @@
 
         if (anyChecked && someAreChecked) {
             submitBtn.classList.remove('hidden');
-            console.log('says checked');
         } else {
             submitBtn.classList.add('hidden');
-            console.log('the fuck!');
             sessionStorage.removeItem(SUBCATEGORIES_SESSION_ITEM);
         }
 
