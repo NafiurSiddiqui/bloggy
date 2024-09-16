@@ -18,11 +18,12 @@
 <body
     class="font-sans antialiased bg-lighWhite mx-2 md:mx-4 dark:bg-darkBlack dark:text-white/50 overflow-x-clip flex flex-col items-center">
 
-    <div class="2xl:w-[80rem]">
+    <div class="w-full 2xl:w-[80rem]">
         @include('layouts.navigation')
 
         {{-- <div class="flex flex-col items-center min-h-screen"> --}}
-        <main class="p-4 md:px-6 dark:bg-darkPage bg-lightPage flex flex-col items-center min-h-screen">
+        <main
+            class="{{ request()->routeIs('admin') || request()->routeIs('admin.*') ? 'p-0' : 'p-4 md:px-6' }} dark:bg-darkPage bg-lightPage flex flex-col items-center min-h-screen">
             {{ $slot }}
             <x-toast.success />
         </main>

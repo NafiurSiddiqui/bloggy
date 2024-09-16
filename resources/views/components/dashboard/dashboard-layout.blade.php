@@ -7,9 +7,7 @@
 
     <div class="flex min-h-screen w-full">
         <aside
-            class="hidden lg:flex flex-col w-64 bg-lightWhite 
-            dark:bg-darkBlack 
-            dark:border-r dark:border-zinc-800 text-white px-4 pl-6">
+            class="hidden lg:flex flex-col w-64 bg-lightWhite dark:bg-darkBlack dark:border-r dark:border-zinc-800 text-white px-4 pl-6">
             <ul class="space-y-2 bg-lightPage  dark:bg-darkPostCard ">
                 <x-responsive-nav-link href="/admin" :active="request()->is('admin')">
                     {{ __('Dashboard') }}
