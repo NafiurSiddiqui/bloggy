@@ -1,4 +1,4 @@
-<div class="dark:bg-darkBlack bg-lightWhite py-2 mb-3">
+<div class="dark:bg-darkBlack bg-lightWhite py-2 mb-3 transition-colors">
     <div class=" flex items-center mt-1 mb-2 lg:mb-3 ">
         <div class=" flex justify-center w-full -right-8 relative">
             <!-- Logo -->
@@ -12,9 +12,9 @@
             <x-toggle-theme-btn />
         </div>
     </div>
-    <nav x-data="{ open: false }" class="bg-lightPage dark:bg-darkPage ">
+    <nav x-data="{ open: false }" class="bg-lightPage dark:bg-darkPage transition-colors">
 
-        <div class="flex justify-between items-center py-2">
+        <div class="flex justify-between items-center py-3">
             <div class="flex items-center justify-between w-full">
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-5 lg:flex  flex-shrink-0">

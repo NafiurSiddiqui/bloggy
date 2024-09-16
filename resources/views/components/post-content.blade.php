@@ -35,11 +35,11 @@
         <div class="md:w-[90%] lg:w-4/5">
             <article class="my-4 ">
                 <div class="space-y-4">
-                    <div class="mb-10">
-                        <h1 class="font-bold text-3xl text-lightText-700 lg:text-4xl dark:text-zinc-200 ">
+                    <div class="mb-10 mt-6">
+                        <h1 class="font-semibold text-3xl text-lightText-700 lg:text-4xl dark:text-zinc-200 font-text">
                             {{ $post->title }}
                         </h1>
-                        <div class="mt-1 mb-4 flex space-x-2 space-y-2 items-end flex-wrap">
+                        <div class="mt-6 mb-4 flex space-x-2 space-y-2 items-end flex-wrap">
                             <x-labels.category :category="$post->category" />
                             <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" />
                         </div>
@@ -65,9 +65,9 @@
                         <x-post-cards.img-overlay />
                     </div>
                 </div>
-                <div class="post-body text-lg text-lightText-800 my-8 dark:text-zinc-200">
+                <div class="post-body font-text text-lg text-lightText-800 my-8 dark:text-zinc-200">
                     @if ($editPage)
-                        <div class="text-lg my-8 dark:text-zinc-200">
+                        <div class="text-lg my-8 dark:text-zinc-200 ">
                             <x-form.back-to-post-btn :post="$post" />
                             {!! $post->body !!}
                         </div>

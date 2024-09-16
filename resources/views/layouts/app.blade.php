@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{--    NEED FAVICON --}}
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     {{ $head ?? null }}
@@ -16,12 +14,12 @@
 </head>
 
 <body
-    class="font-sans antialiased bg-lighWhite mx-2 md:mx-4 dark:bg-darkBlack dark:text-white/50 overflow-x-clip flex flex-col items-center">
+    class="font-text antialiased bg-lighWhite mx-2 md:mx-4 dark:bg-darkBlack dark:text-white/50 overflow-x-clip flex flex-col items-center transition-colors">
 
     <div class="w-full 2xl:w-[80rem]">
         @include('layouts.navigation')
         <main
-            class="{{ request()->routeIs('admin') || request()->routeIs('admin.*') ? 'p-0' : 'p-4 md:px-6' }} dark:bg-darkPage bg-lightPage flex flex-col items-center min-h-screen">
+            class="{{ request()->routeIs('admin') || request()->routeIs('admin.*') ? 'p-0' : 'p-4 md:px-6' }} dark:bg-darkPage bg-lightPage flex flex-col items-center min-h-screen transition-colors">
             {{ $slot }}
             <x-toast.success />
         </main>

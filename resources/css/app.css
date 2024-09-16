@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -102,6 +103,7 @@ div.ck.ck-dropdown__panel {
 div.ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content .ck-menu-bar {
     @apply dark:border-b-zinc-600;
 }
+
 .main-container {
     font-family: "Lato";
     /* width: fit-content; */

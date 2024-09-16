@@ -1,5 +1,6 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import forms from "@tailwindcss/forms";
+import { text } from "@fortawesome/fontawesome-svg-core";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -13,7 +14,8 @@ export default {
         extend: {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
-                logo: ["Audiowide", "sans-serif"],
+                header: ["Orbitron", "sans-serif"],
+                text: ["Poppins", "sans-serif"],
             },
             colors: {
                 darkBlack: "#0F1311 ",
