@@ -35,7 +35,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Helpers/slugConverter.php"
+            "app/Helpers/slugConverter.php",
+            "app/Helpers/postPaginator.php"
         ]
     },
     "autoload-dev": {
