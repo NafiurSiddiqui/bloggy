@@ -18,6 +18,9 @@ class AdminPostController extends Controller
     public function index(): View
     {
 
+        $hasSort = request()->has('sort');
+
+
         $posts = Post::filter(request(['search', 'category_filter', 'status_filter', 'admin_filter']))
             ->sort(request(['sort', 'dir']))
             ->simplePaginate(10)

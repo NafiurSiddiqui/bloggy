@@ -79,7 +79,8 @@ class Post extends Model implements HasMedia, Sitemapable
     {
         $query->when(
             $sort['sort']  ?? false,
-            fn($query) => $query->orderBy($sort['sort'], $sort['dir'])
+            fn($query) => $query->orderBy($sort['sort'], $sort['dir']),
+            fn($query) => $query->latest()
 
         );
     }
