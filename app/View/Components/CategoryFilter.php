@@ -24,11 +24,11 @@ class CategoryFilter extends Component
     {
 
 
-        $filter = request('category_filter');
+        $filter = request('filter');
 
         return view('components.category-filter', [
             'categories' => Category::all()->sortBy('title'),
-            'currentCategory' => isset($filter) ? Category::firstWhere('id', $filter) : null
+            'currentCategory' => isset($filter) ? Category::firstWhere('slug', $filter['slug']) : null
         ]);
     }
 }

@@ -1,6 +1,6 @@
 @props(['subcategories', 'category', 'edit-href' => ''])
 
-
+{{-- {{ dd($subcategories) }} --}}
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg rounded-md">
     <x-table id="subcategories_table">

@@ -7,9 +7,12 @@
         <x-form.label label-for="filter[slug]" label="Category" />
         <x-select for-name="filter[slug]" for-id="filter[slug]" for-title="filter by categories"
             x-on:change="submitForm()">
+
             <option value="">
                 All
             </option>
+
+            {{-- {{ dd($currentCategory) }} --}}
 
             @foreach ($categories as $category)
                 <option value="{{ $category?->slug }}"

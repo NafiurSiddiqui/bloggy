@@ -26,13 +26,12 @@ class SubcategoryController extends Controller
             ->simplePaginate(10)
             ->withQueryString();
 
-        $filter = request()->has('filter');
-
+        $filter = request('filter');
 
 
         $paginationFilter = null;
         //for filter
-        if ($filter) {
+        if (isset($filter) && $filter['slug'] !== null) {
             $filteredResponse = QueryBuilder::for(Category::class)
                 ->allowedFilters(['slug'])
                 ->with('subcategories')
@@ -44,18 +43,28 @@ class SubcategoryController extends Controller
             $paginationFilter = $filteredResponse;
             $subcategories = $filteredResponse[0]->subcategories;
         }
-        if ($filter && request('filter')['slug'] == null) {
+        if (isset($filter) && $filter['slug'] == null) {
 
             $subcategories = QueryBuilder::for(Subcategory::class)
                 ->allowedSorts(['title', 'updated_at'])
-                > with('category', 'posts')
+                ->with('category', 'posts')
+                ->simplePaginate(10)
+                ->withQueryString();
+        }
+
+        if (request('sort')) {
+            $subcategories = Subcategory::orderBy(request('sort'), request('dir'))
+                ->with('category', 'posts')
                 ->simplePaginate(10)
                 ->withQueryString();
         }
 
 
+
+
         return view('admin.subcategories.index', [
 
+            // 'subcategories' => Subcategory::filter(request('filter') != null && request('filter')['slug']),
             'subcategories' => $subcategories,
             'paginationFilter' => $paginationFilter
 

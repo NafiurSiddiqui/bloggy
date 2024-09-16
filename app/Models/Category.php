@@ -20,10 +20,22 @@ class Category extends Model implements Sitemapable
      */
     protected $fillable = ['title', 'slug'];
 
+
     public function scopeUncategorized(Builder $query)
     {
         $query->where('slug', 'uncategorized');
     }
+
+    public function scopeSort($query, array $sort)
+    {
+        $query->when(
+            $sort['sort']  ?? false,
+            fn($query) => $query->orderBy($sort['sort'], $sort['dir']),
+            fn($query) => $query
+                ->orderBy('title')
+        );
+    }
+
 
 
     public function posts(): HasMany

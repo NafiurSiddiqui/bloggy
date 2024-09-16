@@ -13,52 +13,36 @@ class CategoryController extends Controller
 
     public function index(): View
     {
-        $categories = QueryBuilder::for(Category::class)
-            ->allowedSorts(['title', 'updated_at'])
-            ->with('subcategories', 'posts')
-            ->simplePaginate(50);
 
-        $sortCategoryDesc = request('dir') == 'desc';
-
-
-        if ($sortCategoryDesc) {
-            $categories = QueryBuilder::for(Category::class)
-                ->allowedSorts(request('sort'))
-                ->with('subcategories', 'posts')
-                ->simplePaginate(10);
-        }
-
-
-
-        return view('posts.categories.index', [
-
-            'categories' => $categories
-        ]);
+        return view('posts.categories.index');
     }
 
     public function adminIndex(): View
     {
-        $categories = QueryBuilder::for(Category::class)
-            ->allowedSorts(['title', 'updated_at'])
-            ->with('subcategories', 'posts')
-            ->simplePaginate(10);
+        // $categories = QueryBuilder::for(Category::class)
+        //     ->defaultSort('title')
+        //     ->allowedSorts(['title', 'updated_at'])
+        //     ->with('subcategories', 'posts')
+        //     ->simplePaginate(10);
 
-        $sortCategoryDesc = request('dir') == 'desc';
+        // $sortCategoryDesc = request('dir') == 'desc';
 
+        // if ($sortCategoryDesc) {
+        //     // dd($sortCategoryDesc);
 
-        if ($sortCategoryDesc) {
-
-            $categories = QueryBuilder::for(Category::class)
-                ->allowedSorts(request('sort'))
-                ->with('subcategories', 'posts')
-                ->simplePaginate(10);
-        }
+        //     $categories = QueryBuilder::for(Category::class)
+        //         ->allowedSorts(request('sort'))
+        //         ->with('subcategories', 'posts')
+        //         ->simplePaginate(10);
+        // }
 
 
 
         return view('admin.categories.index', [
 
-            'categories' => $categories
+            'categories' => Category::sort(request(['sort', 'dir']))
+                ->with('subcategories', 'posts')
+                ->simplePaginate(10)
         ]);
     }
 
