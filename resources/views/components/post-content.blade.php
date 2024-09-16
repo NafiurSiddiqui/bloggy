@@ -3,7 +3,7 @@
     'editPage' => false,
     'previousPost' => null,
     'nextPost' => null,
-    'categories' => null,
+    // 'categories' => null,
     'recentPosts' => null,
     'comment' => null,
     'reply' => null,
@@ -66,8 +66,7 @@
                         <x-post-cards.img-overlay />
                     </div>
                 </div>
-
-                <div class="post-body text-lg my-8 dark:text-zinc-200">
+                <div class="post-body text-lg text-lightText-800 my-8 dark:text-zinc-200">
                     @if ($editPage)
                         <div class="text-lg my-8 dark:text-zinc-200">
                             <x-form.back-to-post-btn :post="$post" />
@@ -196,7 +195,7 @@
                     {{-- take 8 recent posts and browse by category --}}
                     <section class="flex flex-col justify-center mt-10 space-y-4 w-full"
                         aria-label="Browse by categories">
-                        <x-browse-by-categories :categories="$categories" />
+                        <x-browse-by-category />
                     </section>
 
                     <section aria-label="Recent Posts">
