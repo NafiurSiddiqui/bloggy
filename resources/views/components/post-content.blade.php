@@ -41,7 +41,6 @@
                         </h1>
                         <div class="mt-1 mb-4 flex space-x-2 space-y-2 items-end flex-wrap">
                             <x-labels.category :category="$post->category" />
-                            <x-labels.category :category="$post->category" />
                             <x-labels.subcategory :category="$post->category" :subcategory="$post->subcategory" />
                         </div>
 

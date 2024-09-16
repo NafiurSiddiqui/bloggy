@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
+
 
 
 class AdminPostController extends Controller
