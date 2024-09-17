@@ -12,8 +12,21 @@
             This is to ensure data integrity of the posts and their relationships.
         </x-panel>
     @else
-        <div class="flex justify-between w-full">
-            <form action="/admin/post/store" method="post" enctype="multipart/form-data" class="w-full lg:w-[80%] px-4">
+        <div class="flex flex-col justify-between w-full">
+            <div
+                class="text-lightText-600 dark:text-lightText-400  my-4 text-sm sm:w-[25rem] border dark:border-zinc-700 p-2">
+                Convert images here to smaller sizes: <x-text-link class="font-semibold" href="https://tinypng.com/"
+                    target="_blank">TinyPNG</x-text-link>
+
+                <x-toast.info>
+                    <p><span class="text-lightText-500 dark:text-lightText-400 font-semibold">Thumbnail image:</span> max
+                        size 512kb</p>
+                    <p><span class="text-lightText-500 dark:text-lightText-400 font-semibold">Og (open graph)
+                            image:</span> max size 100kb</p>
+                </x-toast.info>
+            </div>
+            <form action="/admin/post/store" method="post" enctype="multipart/form-data"
+                class="w-full lg:w-[80%] px-4">
                 @csrf
                 @if ($errors->any())
                     <x-toast.error lists :errorBag="$errors" />
