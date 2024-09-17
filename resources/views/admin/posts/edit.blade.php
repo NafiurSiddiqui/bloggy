@@ -5,20 +5,22 @@
         <form action="/admin/post/{{ $post->slug }}" method="post" enctype="multipart/form-data" class="max-w-xl">
             @csrf
             @method('PATCH')
-
+            @if ($errors->any())
+                <x-toast.error lists :errorBag="$errors" />
+            @endif
             <x-form.input name="title" :value="old('title', $post->title)" />
             <x-form.input name="slug" :value="old('slug', $post->slug)" />
             <x-form.textarea name="description">
                 {{ old('description', $post->description) }}
             </x-form.textarea>
 
-            <x-editor.ck-editor :post="$post" />
+            <div class="my-4">
+                <x-editor.ck-editor :post="$post" />
+            </div>
 
 
             <x-panel class="px-2 py-3 my-8 ">
                 <h2 class="mb-3 font-semibold text-gray-400 border-b border-gray-200">Select Thumbnail</h2>
-                {{-- <img src="{{ asset('storage/' . $post->thumbnail) }}"
-                    alt="{{ $post->thumbnail_alt_txt ?? 'Thumbnail' }}"> --}}
                 <div class="w-52">
                     {{ $post->getFirstMedia('thumbnails') }}
                 </div>
@@ -52,9 +54,11 @@
                 {{-- @dd($post->og_thumbnail) --}}
                 @if ($post->og_thumbnail)
                     <img src="{{ asset('storage/' . $post->og_thumbnail) }}"
-                        alt="{{ $post->thumbnail_alt_txt ?? 'thumbnail' }}" class="my-8">
+                        alt="{{ $post->thumbnail_alt_txt ?? 'thumbnail' }}"
+                        class="my-8 w-[200px] h-[200px] object-contain border dark:border-zinc-700">
                 @endif
-                <x-form.input name="og_thumbnail" type="file" />
+                <x-form.input name="og_thumbnail" type="file"
+                    value="{{ old('og_thumbnail', $post->og_thumbnail) }}" />
                 <x-form.input name="og_title" :value="old('og_title', $post->og_title)" />
             </x-panel>
 
@@ -81,9 +85,9 @@
                 <x-danger-button formButton x-data=""
                     x-on:click="$dispatch('open-modal','confirm-delete')" class="mt-12 mb-4">Delete</x-danger-button>
             </x-dashboard.action-panel>
-            @error('body')
+            {{-- @error('body')
                 <span class="text-red-500 text-xs">{{ $message }}</span>
-            @enderror
+            @enderror --}}
         </form>
 
 

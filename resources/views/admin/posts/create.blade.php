@@ -15,6 +15,9 @@
         <div class="flex justify-between w-full">
             <form action="/admin/post/store" method="post" enctype="multipart/form-data" class="w-full lg:w-[80%] px-4">
                 @csrf
+                @if ($errors->any())
+                    <x-toast.error lists :errorBag="$errors" />
+                @endif
                 <x-form.input name="title" required />
                 <x-form.input name="slug" placeholder="slug auto generates when submitted" />
                 <x-form.textarea name="description" required />
@@ -28,7 +31,8 @@
                 <x-panel class="px-2 py-3 my-8 ">
                     <h2 class="mb-3 dark:border-zinc-700 font-semibold text-zinc-400 border-b border-zinc-200">Select
                         Thumbnail</h2>
-                    <x-form.input name="thumbnail" type="file" required />
+
+                    <x-form.input name="thumbnail" type="file" required value="{{ old('thumbnail') }}" />
                     <x-form.input name="thumbnail_alt_txt" label="Alt Txt" required />
                 </x-panel>
 
@@ -57,7 +61,7 @@
                         fields</h2>
                     <x-form.input name="meta_title" required />
                     <x-form.input name="meta_description" required />
-                    <x-form.input name="og_thumbnail" type="file" />
+                    <x-form.input name="og_thumbnail" type="file" value="{{ old('og_thumbnail') }}" />
                     <x-form.input name="og_title" />
                 </x-panel>
 
