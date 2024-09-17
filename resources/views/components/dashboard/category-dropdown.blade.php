@@ -19,7 +19,8 @@
     <div class="my-4">
         <x-form.label label-for="category" />
 
-        <x-select for-name="category_id" for-id="category_id" for-title="Select a category">
+        <x-select for-name="category_id" for-id="category_id" for-title="Select a category"
+            class="@error('category_id') border border-rose-500 @enderror">
             <option value="---">---</option>
             @foreach ($categories as $category)
                 @if (isset($post))

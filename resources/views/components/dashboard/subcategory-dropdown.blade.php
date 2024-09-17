@@ -9,7 +9,8 @@
 @else
     <div class="my-4">
         <x-form.label label-for="subcategory" />
-        <x-select for-name="subcategory_id" for-id="subcategory_id" for-title="Select a subcategory">
+        <x-select for-name="subcategory_id" for-id="subcategory_id" for-title="Select a subcategory"
+            class="@error('category_id') border border-rose-500 @enderror">
 
             <option value="---">---</option>
             @foreach ($subcategories as $subcategory)
@@ -24,7 +25,6 @@
                 @endif
             @endforeach
         </x-select>
-
         <x-form.error name="subcategory_id" />
     </div>
 @endif
