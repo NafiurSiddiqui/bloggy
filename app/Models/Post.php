@@ -115,12 +115,4 @@ class Post extends Model implements HasMedia, Sitemapable
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
             ->setPriority(0.1);;
     }
-
-    // public function registerMediaConversions(?Media $media = null): void
-    // {
-    //     $this
-    //         ->addMediaConversion('preview')
-    //         ->fit(Fit::Contain, 300, 300)
-    //         ->nonQueued();
-    // }
 }
