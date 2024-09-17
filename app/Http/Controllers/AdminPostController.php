@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Rules\EditorBodyCheck;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Number;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
-
+use function App\Helpers\slugConverter;
 
 class AdminPostController extends Controller
 {
@@ -62,8 +64,8 @@ class AdminPostController extends Controller
             'title' => ['required', 'max:255', 'unique:posts'],
             'slug' => ['nullable', 'unique:posts'],
             'description' => ['required', 'max:255'],
-            'body' => 'required',
-            'thumbnail' => ['required', 'image'],
+            'body' => ['required', new EditorBodyCheck],
+            'thumbnail' => ['required', 'image', 'max:512'],
             'thumbnail_alt_txt' => ['required', 'max:100'],
             'category_id' => ['nullable', $categoryValidator],
             'subcategory_id' => ['nullable', $subcategoryValidator],
@@ -73,37 +75,36 @@ class AdminPostController extends Controller
             'is_hot' =>  ['nullable'],
             'meta_title' => ['required', 'max:255'],
             'meta_description' => ['required', 'max:255'],
-            'og_thumbnail' => ['nullable', 'image'],
+            'og_thumbnail' => ['nullable', 'image', 'max:100'],
             'og_title' => ['nullable', 'max:255'],
 
         ]);
-
-
 
         //check if a category by slug 'uncategorized' exist in database
         $uncategorizedCategory = Category::where('slug', 'uncategorized')->firstOrCreate([
             'title' => 'Uncategorized',
             'slug' => 'uncategorized'
         ]);
-
         $attributes['category_id'] = request()->input('category_id') === "---" ?   $uncategorizedCategory->id : request()->input('category_id');
         $attributes['subcategory_id'] = request()->input('subcategory_id') === "---" ? null : request()->input('subcategory_id');
-
 
         //associate user_id and store file
         $attributes['user_id'] = auth()->id();
 
-        if (isset($attributes['og_thumbnail'])) {
-            $attributes['og_thumbnail'] = request()->file('og_thumbnail')->store('thumbnails');
-        }
         //auto generate title to slug
-        $attributes['slug'] = request('slug') ? Str::slug(request('slug'), '-') : Str::slug($attributes['title'], '-');
+        $attributes['slug'] = slugConverter($attributes);
 
+        if (isset($attributes['og_thumbnail'])) {
+
+            $attributes['og_thumbnail'] = request()->file('og_thumbnail')->store('og_thumbnails');
+        } else {
+
+            $attributes['og_thumbnail'] = request()->file('thumbnail')->store('og_thumbnails');
+        }
         //store
         Post::create($attributes)
             ->addMediaFromRequest('thumbnail')
             ->withResponsiveImages()
-            ->attributes(['alt' => request('thumbnail_alt_txt')])
             ->toMediaCollection('thumbnails');
 
         //redirect
@@ -150,8 +151,8 @@ class AdminPostController extends Controller
             'slug' => ['nullable', Rule::unique('posts', 'slug')->ignore($post->id)],
             // 'slug' => ['nullable', 'unique:posts'],
             'description' => ['required', 'max:255'],
-            'body' => 'required',
-            'thumbnail' => ['image'],
+            'body' => ['required', new EditorBodyCheck],
+            'thumbnail' => ['image', 'max:512'],
             'thumbnail_alt_txt' => ['max:100'],
             'category_id' => ['nullable', $categoryValidator],
             'subcategory_id' => ['nullable', $subcategoryValidator],
@@ -162,7 +163,7 @@ class AdminPostController extends Controller
             'is_hot' =>  ['nullable'],
             'meta_title' => ['required', 'max:255'],
             'meta_description' => ['required', 'max:255'],
-            'og_thumbnail' => ['nullable', 'image'],
+            'og_thumbnail' => ['nullable', 'image', 'max:100'],
             'og_title' => ['nullable', 'max:255'],
 
         ]);
@@ -198,7 +199,6 @@ class AdminPostController extends Controller
 
             $post->addMediaFromRequest('thumbnail')
                 ->withResponsiveImages()
-                ->attributes(['alt' => request('thumbnail_alt_txt')])
                 ->toMediaCollection('thumbnails');
         }
 
