@@ -1,4 +1,4 @@
-# Bloggy
+# Inky
 
 A micro blogging platform 💫 with Laravel and Blade.
 
@@ -13,6 +13,7 @@ Made with 💚
 ## Registration
 
 -   New users whether admin or commentators need to verify email upon registration.
+-   admin side registration requires approval.
 
 ## Default Authentication
 
@@ -69,3 +70,7 @@ Made with 💚
 
 -   `localStorage` is used to save user theme preference. Blocked to the access won't save the preference.
 -   `localStorage` is used to mark selection on the admin panel. For instanc, selecting multiple posts to delete. requires localStorage.
+
+# Email Server
+
+-   By default, `gmail` is setup.
