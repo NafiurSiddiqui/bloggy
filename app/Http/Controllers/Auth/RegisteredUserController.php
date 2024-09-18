@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+use Illuminate\Mail\Mailable;
+
 class RegisteredUserController extends Controller
 {
     /**
