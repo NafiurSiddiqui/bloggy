@@ -19,6 +19,7 @@ Made with 💚
 
 -   `email` - admin.bloggy@xyz.com
 -   `pass` - secret
+-   ⚠️ DO Update and change your default Auth right away! ⚠️ (USER)
 
 ## Must Do
 
